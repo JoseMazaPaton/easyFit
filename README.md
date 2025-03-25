@@ -1,1 +1,1 @@
-# Welcomer our TFC project - EASYFIT
+# Welcome our TFC project - EASYFIT
