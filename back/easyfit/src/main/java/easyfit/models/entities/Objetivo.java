@@ -14,7 +14,7 @@ import lombok.*;
 @EqualsAndHashCode(of="idObjetivo")
 @Entity
 @Table(name="objetivos")
-public class Objetivos implements Serializable {
+public class Objetivo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
