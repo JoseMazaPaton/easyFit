@@ -1,16 +1,18 @@
-package easyfit.entities;
+package easyfit.models.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 
+import easyfit.models.enums.Sexo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -24,7 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-@EqualsAndHashCode(of="idUsuario")
+@EqualsAndHashCode(of="email")
 @Entity
 @Table(name="usuarios")
 public class Usuario implements Serializable{
@@ -32,17 +34,17 @@ public class Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_usuario")
-	private int idUsuario;
-	
+	@Column(name="email")
 	private String email;
+	
 	private String password;
+	
 	private String nombre;
+	
 	private int edad;
 	
 	@Enumerated(EnumType.STRING)
-	private Sexo sexo;
+	@Column(name = "sexo", nullable = false) Sexo sexo;
 	
 	private Double altura;
 	
@@ -53,6 +55,14 @@ public class Usuario implements Serializable{
 	private Rol idRol;
 
 	@Column(name="created_at")
-	private Date createdAt;
+	private LocalDate createdAt;
+	
+	// Relación muchos a muchos entre Usuario y Alimento.
+	// Representa los alimentos que un usuario ha marcado como favoritos.
+	// Esta relación se guarda en la tabla intermedia "favoritos".
+	@ManyToMany
+	@JoinTable(name = "favoritos",joinColumns = @JoinColumn(name = "email"),inverseJoinColumns = @JoinColumn(name = "id_alimento"))
+	private List<Alimento> alimentosFavoritos;
+
 
 }

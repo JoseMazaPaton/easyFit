@@ -1,4 +1,4 @@
-package easyfit.entities;
+package easyfit.models.enums;
 
 public enum Sexo {
 HOMBRE,

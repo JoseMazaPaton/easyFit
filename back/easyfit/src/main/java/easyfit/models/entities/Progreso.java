@@ -1,10 +1,14 @@
-package easyfit.entities;
+package easyfit.models.entities;
+
 import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,18 +20,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-@EqualsAndHashCode(of="idRol")
+@EqualsAndHashCode(of="idProgreso")
 @Entity
-@Table(name="roles")
-public class Rol implements Serializable{
+@Table(name="progresos")
+public class Progreso implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_rol")
-	private int idRol;
+	@Column(name = "id_progreso")
+	private int idProgreso;
 	
-	private String nombre;
+	@Column(name = "fecha_cambio")
+	private double peso;
+	
+	@ManyToOne
+	@JoinColumn(name = "email")
+	private Usuario usuario;
+	
 	
 }
