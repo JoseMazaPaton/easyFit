@@ -8,5 +8,5 @@ public interface IGenericCrud <E,ID> {
 	E findById (ID id);
 	E updateOne (E entity);
 	E insertOne (E entity);
-	E deleteOne (ID id);
+	void deleteOne (ID id);
 }

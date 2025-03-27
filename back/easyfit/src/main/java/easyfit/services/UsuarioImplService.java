@@ -3,8 +3,10 @@ package easyfit.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import easyfit.exceptions.ResourceNotFoundException;
 import easyfit.models.entities.Usuario;
 import easyfit.repositories.IUsuarioRepository;
 
@@ -42,7 +44,7 @@ public class UsuarioImplService implements IUsuarioService{
 	}
 
 	@Override
-	public Usuario deleteOne(String id) {
+	public void deleteOne(String id) {
 	    if (!usuarioRepository.existsById(id)) {
 	        throw new ResourceNotFoundException("Usuario con ID: " + id + " no existe");
 	    }
