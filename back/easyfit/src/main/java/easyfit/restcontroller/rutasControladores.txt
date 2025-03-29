@@ -1,0 +1,86 @@
+## Rutas REST para la App de Planificación de Dieta
+
+### 🔐 Controlador: `@RequestMapping("/auth")`
+
+- **POST /auth/register** — Registro completo del usuario.
+- **POST /auth/login** — Inicio de sesión.
+- **GET /auth/me** — Obtener datos del perfil actual.
+
+---
+
+### 👤 Controlador: `@RequestMapping("/usuarios")`
+
+- **PUT /usuarios/me** — Editar información del perfil.
+- **GET /usuarios/me/objetivos** — Obtener objetivos calóricos y de macronutrientes.
+- **PUT /usuarios/me/objetivos** — Modificar objetivos personalizados.
+- **GET /usuarios/me/calculo-objetivos** — Calcular TMB, GET y macros sugeridos automáticamente.
+- **PUT /usuarios/me/meta-peso** — Establecer nuevo peso objetivo.
+- **PUT /usuarios/me/nivel-actividad** — Cambiar nivel de actividad física.
+- **PUT /usuarios/me/meta-semanal** — Ajustar ritmo semanal de cambio de peso.
+- **PUT /usuarios/me/meta-objetivo** — Establecer objetivo general (perder, mantener, ganar).
+
+---
+
+### 📊 Controlador: `@RequestMapping("/dashboard")`
+
+- **GET /dashboard/resumen-diario?fecha=YYYY-MM-DD** — Devuelve kcal objetivo, consumidas y restantes del día.
+- **GET /dashboard/historial-calorias?dias=7** — Datos para el gráfico de consumo calórico.
+
+---
+
+### 📈 Controlador: `@RequestMapping("/progreso")`
+
+- **GET /progreso/peso** — Progreso de peso: inicial, actual y objetivo.
+- **POST /progreso/peso** — Registrar nuevo peso.
+
+---
+
+### 🍽️ Controlador: `@RequestMapping("/comidas")`
+
+- **GET /comidas?fecha=YYYY-MM-DD** — Listar comidas y alimentos del día.
+- **POST /comidas** — Crear una nueva comida.
+- **DELETE /comidas/{id}** — Eliminar comida.
+- **POST /comidas/{id}/alimentos** — Añadir alimento a la comida.
+- **PUT /comidas/{id}/alimentos/{idAlimento}** — Modificar cantidad de un alimento.
+- **DELETE /comidas/{id}/alimentos/{idAlimento}** — Eliminar alimento de la comida.
+- **GET /comidas/{id}/resumen** — Resumen nutricional de la comida.
+
+---
+
+### 🥦 Controlador: `@RequestMapping("/alimentos")`
+
+- **GET /alimentos?search=nombre** — Buscar alimentos por nombre.
+- **GET /alimentos/mis** — Ver alimentos propios del usuario.
+- **POST /alimentos** — Crear alimento personalizado usuario(le otorga creado\_por al alimento)
+- **PUT /alimentos/{id}** — Editar alimento (solo si el usuario es el creador).
+- **DELETE /alimentos/{id}** — Eliminar alimento (solo si el usuario es el creador).
+- **GET /alimentos/{id}/calculo?gramos=XXX** — Calcular kcal y macros según cantidad.
+
+---
+
+### 📂 Controlador: `@RequestMapping("/categorias")`
+
+- **GET /categorias** — Listar todas las categorías.
+
+---
+
+### 👨‍💼 Controlador: `@RequestMapping("/admin")`
+
+- **GET /admin/usuarios?email=&sexo=&edad=** — Filtrar usuarios por email, sexo o edad.
+- **PUT /admin/usuarios/{email}/suspender** — Suspender o reactivar cuenta de un usuario.
+- **POST /admin/categorias** — Crear nueva categoría.
+- **PUT /admin/categorias/{id}** — Modificar categoría existente.
+- **DELETE /admin/categorias/{id}** — Eliminar categoría.
+- **POST /admin/alimentos** — Crear alimento (admin).
+- **PUT /admin/alimentos/{id}** — Editar cualquier alimento.
+- **DELETE /admin/alimentos/{id}** — Eliminar cualquier alimento.
+
+---
+
+### ✅ NOTAS IMPORTANTES
+
+- Todo el onboarding (registro progresivo) se completa con un solo `POST /auth/register`.
+- El backend debe calcular kcal y macros en base a los datos ingresados.
+- Estas rutas cubren todas las vistas de tus wireframes (registro, dashboard, diario, alimentos, objetivos).
+- El usuario solo puede editar/eliminar alimentos que ha creado; el admin puede hacer CRUD completo sobre todos.
+
