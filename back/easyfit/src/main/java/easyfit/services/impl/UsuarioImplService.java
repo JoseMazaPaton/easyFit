@@ -12,10 +12,13 @@ public class UsuarioImplService extends GenericCrudServiceImpl<Usuario,String> i
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
 
+
 	// En este metodo indicamos el repositorio que usamos en el CRUD genérico que hemos extendido 
 	@Override
-	protected  IUsuarioRepository getRepository() {
+	protected IUsuarioRepository getRepository() {
 		return usuarioRepository;
 	}
-	
+
+
+
 }

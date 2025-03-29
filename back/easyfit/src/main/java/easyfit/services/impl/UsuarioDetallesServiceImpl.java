@@ -53,7 +53,7 @@ public class UsuarioDetallesServiceImpl implements UserDetailsService {
         }
 
         // Obtenemos el nombre del rol (por ejemplo "ROLE_ADMON")
-        String nombreRol = usuario.getIdRol().getNombre().name();
+        String nombreRol = usuario.getTipoRol();
 
         // Creamos la autoridad para Spring Security usando ese rol
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(nombreRol);

@@ -35,6 +35,5 @@ public class Rol implements Serializable{
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, unique = true)
 	private TipoRol nombre;
-
 	
 }

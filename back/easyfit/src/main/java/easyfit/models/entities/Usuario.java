@@ -85,12 +85,23 @@ public class Usuario implements Serializable, UserDetails{
 	private Rol idRol;
 	
 	
-	// Metodos de la clase UserDetails, clase de SpringSecurity ==================================================  
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        String nombreRol = idRol.getNombre().name(); 
-        return Collections.singletonList(new SimpleGrantedAuthority(nombreRol));
-    }
+	// METODOS PROPIOS =====================================================================================================  
+	
+	//Hemos añadido este metodo propio bastante util para sacar el nombre porque es algo recurrente y asi retulizamos codigo
+	public String getTipoRol() {
+	    return this.idRol != null ? this.idRol.getNombre().name() : null;
+	}
+
+	
+	// METODOS CLASE USERDETAILS DE SPRINGSECURIRY ==========================================================================  
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+	    String rol = getTipoRol();
+	    if (rol == null) return Collections.emptyList();
+	    return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + rol));
+	}
+
 
     @Override
     public String getUsername() {
@@ -102,24 +113,5 @@ public class Usuario implements Serializable, UserDetails{
         return this.password;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true; 
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return !this.suspendida;
-    }
 
 }
