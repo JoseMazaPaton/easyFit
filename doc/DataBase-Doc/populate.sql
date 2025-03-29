@@ -192,7 +192,7 @@ INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- Inserción corregida de objetivos
 INSERT INTO objetivos (
-    email, peso_actual, peso_objetivo, objetivo, opcion_peso, actividad, kcal_objetivo, proteinas, carbohidratos, grasas) VALUES 
+    email, peso_actual, peso_objetivo, objetivo_usuario, opcion_peso, actividad, kcal_objetivo, proteinas, carbohidratos, grasas) VALUES 
     ('laura_martinez94@gmail.com', 63.0, 58.0, 'PERDERPESO', 'KG_050', 'MODERADO', 1800, 120.0, 150.0, 50.0);
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- Inserción de progresos
