@@ -4,8 +4,22 @@ import java.io.Serializable;
 
 import easyfit.models.enums.Actividad;
 import easyfit.models.enums.AjustePeso;
-import jakarta.persistence.*;
-import lombok.*;
+import easyfit.models.enums.OpcionObjetivo;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +42,10 @@ public class Objetivo implements Serializable {
 	
 	@Column(name = "peso_objetivo")
 	private double pesoObjetivo;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "objetivo_usuario", nullable = false)
+	private OpcionObjetivo objetivoUsuario;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "opcion_peso", nullable = false)

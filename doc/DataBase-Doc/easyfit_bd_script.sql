@@ -6,6 +6,7 @@ USE easyfit_db;
 CREATE TABLE roles (
     id_rol INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL
+    CHECK(ROL IN ('ROL_ADMIN', 'ROL_USUARIO'))
 );
 
 -- Tabla de usuarios (email como PRIMARY KEY)

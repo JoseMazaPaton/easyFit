@@ -2,6 +2,6 @@ package easyfit.models.enums;
 
 public enum TipoRol {
 	
-	ROLE_ADMIN,
-	ROLE_USUARIO
+	ROL_ADMIN,
+	ROL_USUARIO
 }
