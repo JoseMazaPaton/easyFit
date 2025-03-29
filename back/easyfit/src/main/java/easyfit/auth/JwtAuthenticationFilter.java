@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import easyfit.services.impl.UsuarioDetallesServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -39,7 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	// Inyectamos el servicio que carga el usuario desde la base de datos.
     @Autowired
-    private UsuarioDetaillesServiceImpl usuarioDetallesService;
+    private UsuarioDetallesServiceImpl usuarioDetallesService;
 
     // Inyectamos la herramienta que crea y valida los tokens JWT.
     @Autowired

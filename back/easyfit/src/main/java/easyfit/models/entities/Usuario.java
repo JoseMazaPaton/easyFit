@@ -2,7 +2,13 @@ package easyfit.models.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import easyfit.models.enums.Sexo;
 import jakarta.persistence.Column;
@@ -29,7 +35,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of="email")
 @Entity
 @Table(name="usuarios")
-public class Usuario implements Serializable{
+public class Usuario implements Serializable, UserDetails{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -63,6 +69,43 @@ public class Usuario implements Serializable{
 	@ManyToMany
 	@JoinTable(name = "favoritos",joinColumns = @JoinColumn(name = "email"),inverseJoinColumns = @JoinColumn(name = "id_alimento"))
 	private List<Alimento> alimentosFavoritos;
+	
 
+	// Implementamos los métodos de la clase UserDetails que hemos implementado
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        String nombreRol = idRol.getNombre().name(); 
+        return Collections.singletonList(new SimpleGrantedAuthority(nombreRol));
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+    
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true; 
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return !this.suspendida;
+    }
 
 }
