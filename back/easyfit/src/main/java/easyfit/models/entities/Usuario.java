@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import easyfit.models.enums.Sexo;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -20,6 +21,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -54,24 +56,36 @@ public class Usuario implements Serializable, UserDetails{
 	
 	private Double altura;
 	
-	private boolean suspendida;
-	
-	@ManyToOne
-	@JoinColumn(name="idRol")
-	private Rol idRol;
+	private boolean suspendida;	
 
-	@Column(name="created_at")
-	private LocalDate createdAt;
+	@Column(name="fecha_registro", updatable = false)
+	@org.hibernate.annotations.CreationTimestamp
+	private LocalDate fechaRegistro;
 	
-	// Relación muchos a muchos entre Usuario y Alimento.
-	// Representa los alimentos que un usuario ha marcado como favoritos.
-	// Esta relación se guarda en la tabla intermedia "favoritos".
+	// ANOTACIONES RELACIONES DE USUARIO =========================================================================
+	
+	// Esta relacion es la parte inversa entre Usuario y Objetivo
+	// La FK esta en la tabla Objetivo y alli se gestiona
+	// Esta anotacion de relacion inversa en usuario la usamos para decir cual es el objetivo activo.
+	// porque un usuario solo puede tener un obetivo activo.
+	// Pero un usuario puede tener varios registros de objetivos en la bddd ( para ver el progreso que es donde se guardan)
+	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Objetivo objetivo;
+
+	// Esta relacion (N:M) hace referencia a la tabla intermedia FAVORITO de la bbdd entre Usuario y Alimento
+	// La vamos a usar para guardar alimentos favoritos de cada usuario.
 	@ManyToMany
 	@JoinTable(name = "favoritos",joinColumns = @JoinColumn(name = "email"),inverseJoinColumns = @JoinColumn(name = "id_alimento"))
 	private List<Alimento> alimentosFavoritos;
 	
-
-	// Implementamos los métodos de la clase UserDetails que hemos implementado
+	// Cada usuario tiene un rol (como admin o normal).
+	// Muchos usuarios pueden tener el mismo rol.
+	@ManyToOne
+	@JoinColumn(name="idRol")
+	private Rol idRol;
+	
+	
+	// Metodos de la clase UserDetails, clase de SpringSecurity ==================================================  
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         String nombreRol = idRol.getNombre().name(); 

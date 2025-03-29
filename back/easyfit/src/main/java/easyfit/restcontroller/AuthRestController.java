@@ -14,7 +14,7 @@ import easyfit.services.IUsuarioService;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/auth")
-public class AuthController {
+public class AuthRestController {
 
 	@Autowired
 	private IUsuarioService usuarioService;

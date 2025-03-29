@@ -26,8 +26,11 @@ public class Objetivo implements Serializable {
 	@Column(name = "peso_actual")
 	private double pesoActual;
 	
+	@Column(name = "peso_objetivo")
+	private double pesoObjetivo;
+	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "ajuste_peso", nullable = false)
+	@Column(name = "opcion_peso", nullable = false)
 	private AjustePeso opcionPeso;
 	
 	@Enumerated(EnumType.STRING)
@@ -41,6 +44,12 @@ public class Objetivo implements Serializable {
 	private double carbohidratos;
 	private double grasas;
 
+	// ANOTACIONES RELACIONES DE OBJETIVO ===========================================================================
+
+	// Esta relacion es la parte "dueña" entre Objetivo y Usuario
+	// La FK se gestiona en esta tabla en la bbdd
+	// Aunque un usuario solo tiene un objetivo activo, en la base de datos se pueden guardar varios con el tiempo
+	// Por eso usamos esta relación, para enlazar el objetivo activo con el usuario correspondiente y que no haya problemas
 	@ManyToOne
 	@JoinColumn(name = "email")
 	private Usuario usuario;
