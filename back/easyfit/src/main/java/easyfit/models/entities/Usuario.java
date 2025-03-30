@@ -61,6 +61,9 @@ public class Usuario implements Serializable, UserDetails{
 	@Column(name="fecha_registro")
 	private LocalDate fechaRegistro;
 	
+	@Column(name = "peso_objetivo")
+	private Double pesoObjetivo;
+	
 	// ANOTACIONES RELACIONES DE USUARIO =========================================================================
 	
 	// Relacion inversa entre Usuario y Objetivo (1:1)
@@ -85,13 +88,13 @@ public class Usuario implements Serializable, UserDetails{
 	
 	// METODOS PROPIOS =====================================================================================================  
 	
-	//Hemos añadido este metodo propio bastante util para sacar el nombre porque es algo recurrente y asi retulizamos codigo
+	//Hemos añadido este metodo propio bastante util para sacar el nombre porque es algo recurrente y asi reutilizamos codigo
 	public String getTipoRol() {
 	    return this.idRol != null ? this.idRol.getNombre().name() : null;
 	}
 
 	
-	// METODOS CLASE USERDETAILS DE SPRINGSECURIRY ==========================================================================  
+	// METODOS CLASE USERDETAILS DE SPRINGSECURITY ==========================================================================  
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

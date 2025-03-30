@@ -30,8 +30,8 @@
 
 ### 📈 Controlador: `@RequestMapping("/progreso")`
 
-- **GET /progreso/peso** — Progreso de peso: inicial, actual y objetivo.
-- **POST /progreso/peso** — Registrar nuevo peso.
+- **GET /progreso/pesoActual-Objetivo** — Progreso de peso: inicial, actual y objetivo.
+- **POST /progreso/nuevoPeso** — Registrar nuevo peso.
 
 ---
 
