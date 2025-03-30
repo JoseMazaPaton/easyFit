@@ -87,7 +87,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         } else {
             System.out.println("El token no es válido");
+                      
         }
+        // Si nadie fue autenticado, lo avisamos
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
+            System.out.println(" No hay usuario autenticado. Si la ruta lo requiere, se devolverá 401.");
+        }
+        
         // Seguimos con el proceso de la solicitud
         filterChain.doFilter(request, response);
     }
