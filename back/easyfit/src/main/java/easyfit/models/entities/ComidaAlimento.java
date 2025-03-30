@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Entity
-@Table(name="proyecto_con_empleados")
+@Table(name="comidas_alimentos")
 public class ComidaAlimento implements Serializable{
 
 	private static final long serialVersionUID = 1L;
