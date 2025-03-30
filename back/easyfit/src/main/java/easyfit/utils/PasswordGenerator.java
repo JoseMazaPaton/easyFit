@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 public class PasswordGenerator {
 
     /**
-     * Hemos creado este método y clase para generar una contraseña aleatoria con letras y números.
+     * Este método se ha creado por si tenemos que generar contraseñas para enviarlas por correo
+     * Por ejemplo cuando un usuario Nolvida la contraseña
+     * DE MOMENTO NO LO VAMOS A USAR, SI NOS DA TIEMPO SE IMPLEMENTARÁ
      *
      * Lo que hemos hecho paso a paso es:
      * 1. Hemos preparado una cadena con todos los caracteres que se pueden usar en la contraseña.

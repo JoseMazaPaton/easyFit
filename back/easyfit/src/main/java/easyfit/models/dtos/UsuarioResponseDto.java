@@ -15,9 +15,14 @@ import lombok.NoArgsConstructor;
 public class UsuarioResponseDto {
 
     private String nombre;
+    
     private String email;
+    
     private Sexo sexo;
+    
     private int edad;
+    
     private double altura;
+    
     private LocalDate fechaRegistro;
 }

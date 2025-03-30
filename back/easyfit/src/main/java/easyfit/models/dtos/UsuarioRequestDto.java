@@ -18,11 +18,11 @@ public class UsuarioRequestDto {
     private String nombre;
 
     @NotBlank
-    @Email
+    @Email(message = "El formato del email no es válido.")
     private String email;
 
     @NotBlank
-    @Size(min = 10)
+    @Size(min = 8)
     private String password;
 
     @NotNull

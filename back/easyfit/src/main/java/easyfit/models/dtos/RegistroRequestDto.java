@@ -1,6 +1,6 @@
 package easyfit.models.dtos;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,10 +13,13 @@ import lombok.NoArgsConstructor;
 public class RegistroRequestDto {
 	
 	//DATOS DEL USUARIO
-    @NotNull
+	@Valid // Esto es para que se validen las validaciones que llevan anidadas 
+	//*NOTA : Dentro de usuario NO hay ROL porque ya lo hemos puesto por defecto en la entidad*
     private UsuarioRequestDto usuario;
     
-    //DATOS DE LOS OBJETIVOS
-    @NotNull
-    private ObjetivoRequestDto objetivo;
+   //DATOS OBJETIVO
+    @Valid
+	private ObjetivoRequestDto objetivo;
+    
+    
 }

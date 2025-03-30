@@ -32,8 +32,9 @@ public class Rol implements Serializable{
 	@Column(name="id_rol")
 	private int idRol;
 	
+	@Builder.Default // Por defecto le agregamos ROL_USUARIO para cuando hagamos un registro
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, unique = true)
-	private TipoRol nombre;
+	private TipoRol nombre = TipoRol.ROL_USUARIO;
 	
 }

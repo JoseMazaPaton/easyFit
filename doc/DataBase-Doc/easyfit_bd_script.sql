@@ -4,7 +4,7 @@ USE easyfit_db;
 
 -- Tabla de roles
 CREATE TABLE roles (
-    id_rol INT AUTO_INCREMENT PRIMARY KEY,
+    id_rol INT PRIMARY KEY,
     nombre VARCHAR(15) NOT NULL
     CHECK(nombre IN ('ROL_ADMIN', 'ROL_USUARIO'))
 );
@@ -18,8 +18,8 @@ CREATE TABLE usuarios (
     sexo ENUM ('HOMBRE', 'MUJER') NOT NULL,
     altura DECIMAL(5,2),
     suspendida BOOLEAN,
-    id_rol INT,
-    fecha_registro DATE DEFAULT (CURRENT_DATE),
+    id_rol INT DEFAULT 1,
+    fecha_registro DATE ,
     FOREIGN KEY (id_rol) REFERENCES roles(id_rol)
 );
 
@@ -94,7 +94,7 @@ CREATE TABLE objetivos (
     peso_actual DECIMAL(5,2) NOT NULL,
     peso_objetivo DECIMAL(5,2) NOT NULL,
     objetivo_usuario ENUM('PERDERPESO', 'MANTENER', 'GANARPESO') NOT NULL,
-    opcion_peso ENUM('KG_025', 'KG_050', 'KG_075', 'KG_100'),
+    opcion_peso ENUM('LIGERO', 'MODERADO', 'INTENSO', 'AGRESIVO'),
     actividad ENUM('SEDENTARIO', 'LIGERO', 'MODERADO', 'ACTIVO', 'MUYACTIVO') NOT NULL,
     kcal_objetivo INT NOT NULL,
     proteinas DECIMAL(5,2) NOT NULL,

@@ -1,6 +1,6 @@
 package easyfit.models.enums;
 
-public enum OpcionObjetivo {
+public enum ObjetivoUsuario {
 
 	PERDERPESO,
 	MANTENER,

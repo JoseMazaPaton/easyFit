@@ -3,8 +3,8 @@ package easyfit.models.entities;
 import java.io.Serializable;
 
 import easyfit.models.enums.Actividad;
-import easyfit.models.enums.AjustePeso;
-import easyfit.models.enums.OpcionObjetivo;
+import easyfit.models.enums.ObjetivoUsuario;
+import easyfit.models.enums.OpcionPeso;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,7 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,11 +45,11 @@ public class Objetivo implements Serializable {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "objetivo_usuario", nullable = false)
-	private OpcionObjetivo objetivoUsuario;
+	private ObjetivoUsuario objetivoUsuario;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "opcion_peso", nullable = false)
-	private AjustePeso opcionPeso;
+	private OpcionPeso opcionPeso;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "actividad", nullable = false)
@@ -64,11 +64,12 @@ public class Objetivo implements Serializable {
 
 	// ANOTACIONES RELACIONES DE OBJETIVO ===========================================================================
 
-	// Esta relacion es la parte "dueña" entre Objetivo y Usuario
-	// La FK se gestiona en esta tabla en la bbdd
-	// Aunque un usuario solo tiene un objetivo activo, en la base de datos se pueden guardar varios con el tiempo
-	// Por eso usamos esta relación, para enlazar el objetivo activo con el usuario correspondiente y que no haya problemas
-	@ManyToOne
-	@JoinColumn(name = "email")
+	// Esta parte dice que cada objetivo pertenece a un solo usuario.
+	// Aquí es donde se guarda la clave (email) que conecta con el usuario.
+	// Como solo puede haber un objetivo por usuario, usamos @OneToOne ( de momento en el futuro pensaremos en cambiarlo)
+	// Esta es la parte que gestiona porque tiene la fk en la bbdd.
+	@OneToOne
+	@JoinColumn(name = "email", unique = true)
 	private Usuario usuario;
+
 }

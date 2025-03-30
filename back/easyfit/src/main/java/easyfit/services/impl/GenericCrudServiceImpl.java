@@ -1,13 +1,10 @@
 package easyfit.services.impl;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 import easyfit.services.IGenericCrud;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 /**
@@ -35,7 +32,7 @@ public abstract class GenericCrudServiceImpl<E, ID> implements IGenericCrud<E, I
         try {
             return getRepository().findAll();
         } catch (Exception e) {
-            throw new ServiceException("Error al recuperar la lista con todos", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al recuperar la lista con todos", e);
         }
     }
 
@@ -45,14 +42,17 @@ public abstract class GenericCrudServiceImpl<E, ID> implements IGenericCrud<E, I
      * Si hay algún problema con la búsqueda, también lanza una excepción.
      */
     @Override
-    public Optional<E> findById(ID id) {
+    public E findById(ID id) {
         if (id == null) {
-            throw new IllegalArgumentException("El ID no puede ser nulo");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El ID no puede ser nulo");
         }
         try {
-            return getRepository().findById(id);
+            return getRepository().findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No se encontró la entidad con el ID: " + id));
+        } catch (ResponseStatusException e) {
+            throw e; // ya es la excepción personalizada
         } catch (Exception e) {
-            throw new ServiceException("No se puede acceder a la entidad con el ID: " + id, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al buscar la entidad con el ID: " + id, e);
         }
     }
 
@@ -65,12 +65,12 @@ public abstract class GenericCrudServiceImpl<E, ID> implements IGenericCrud<E, I
     @Transactional
     public E insertOne(E entity) {
         if (entity == null) {
-            throw new IllegalArgumentException("La entidad no puede ser nula");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La entidad no puede ser nula");
         }
         try {
             return getRepository().save(entity);
         } catch (Exception e) {
-            throw new ServiceException("Fallo al intentar guardar la entidad", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Fallo al intentar guardar la entidad", e);
         }
     }
 
@@ -83,13 +83,13 @@ public abstract class GenericCrudServiceImpl<E, ID> implements IGenericCrud<E, I
     @Transactional
     public E updateOne(E entity) {
         if (entity == null) {
-            throw new IllegalArgumentException("La entidad no puede ser nula");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La entidad no puede ser nula");
         }
 
         try {
             return getRepository().save(entity);
         } catch (Exception e) {
-            throw new RuntimeException("Fallo al intentar actualizar la entidad", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Fallo al intentar actualizar la entidad", e);
         }
     }
 
@@ -102,18 +102,20 @@ public abstract class GenericCrudServiceImpl<E, ID> implements IGenericCrud<E, I
     @Transactional
     public void deleteOne(ID id) {
         if (id == null) {
-            throw new IllegalArgumentException("El ID no puede ser nulo");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El ID no puede ser nulo");
         }
 
         try {
             if (!getRepository().existsById(id)) {
-                throw new EntityNotFoundException("No se encontró la entidad con ID: " + id);
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se encontró la entidad con ID: " + id);
             }
 
             getRepository().deleteById(id);
 
+        } catch (ResponseStatusException e) {
+            throw e;
         } catch (Exception e) {
-            throw new RuntimeException("Error al eliminar la entidad con ID: " + id, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al eliminar la entidad con ID: " + id, e);
         }
     }
 }

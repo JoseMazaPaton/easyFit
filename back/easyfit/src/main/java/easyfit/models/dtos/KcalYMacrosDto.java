@@ -9,14 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RegistroResponseDto {
+public class KcalYMacrosDto {
 
-	//DATOS DEL USUARIO
-    private UsuarioResponseDto usuario;
+    private int kcalObjetivo;
     
-    //DATOS DE LOS OBJETIVOS
-    private ObjetivoResponseDto objetivo;
+    private double proteinas;
     
-    //TOKEN
-    private String token;
+    private double carbohidratos;
+    
+    private double grasas;
 }

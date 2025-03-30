@@ -58,17 +58,15 @@ public class Usuario implements Serializable, UserDetails{
 	
 	private boolean suspendida;	
 
-	@Column(name="fecha_registro", updatable = false)
-	@org.hibernate.annotations.CreationTimestamp
+	@Column(name="fecha_registro")
 	private LocalDate fechaRegistro;
 	
 	// ANOTACIONES RELACIONES DE USUARIO =========================================================================
 	
-	// Esta relacion es la parte inversa entre Usuario y Objetivo
+	// Relacion inversa entre Usuario y Objetivo (1:1)
 	// La FK esta en la tabla Objetivo y alli se gestiona
-	// Esta anotacion de relacion inversa en usuario la usamos para decir cual es el objetivo activo.
-	// porque un usuario solo puede tener un obetivo activo.
-	// Pero un usuario puede tener varios registros de objetivos en la bddd ( para ver el progreso que es donde se guardan)
+	// Al decir mappedBy, indicamos que la relación se gestiona desde Objetivo.
+	// Esta relación la vamos a usar para que desde el Usuario podamos acceder directamente a su Objetivo con usuario.getObjetivo()
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Objetivo objetivo;
 

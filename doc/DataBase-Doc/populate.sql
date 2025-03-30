@@ -6,9 +6,10 @@ USE easyfit_db;
 -- =========================
 
 -- Inserción de roles
-INSERT INTO roles (nombre) VALUES 
-('ROL_ADMIN'),
-('ROL_USUARIO');
+INSERT INTO roles (id_rol, nombre) VALUES 
+(1, 'ROL_ADMIN'),
+(2, 'ROL_USUARIO');
+
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- Inserción de usuarios (admin y cliente)
 INSERT INTO usuarios (email, password, nombre, edad, sexo, altura, suspendida, id_rol) VALUES 
@@ -193,7 +194,7 @@ INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
 -- Inserción corregida de objetivos
 INSERT INTO objetivos (
     email, peso_actual, peso_objetivo, objetivo_usuario, opcion_peso, actividad, kcal_objetivo, proteinas, carbohidratos, grasas) VALUES 
-    ('laura_martinez94@gmail.com', 63.0, 58.0, 'PERDERPESO', 'KG_050', 'MODERADO', 1800, 120.0, 150.0, 50.0);
+    ('laura_martinez94@gmail.com', 63.0, 58.0, 'PERDERPESO', 'LIGERO', 'MODERADO', 1800, 120.0, 150.0, 50.0);
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- Inserción de progresos
 INSERT INTO progresos (email, peso) VALUES 

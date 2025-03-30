@@ -1,7 +1,6 @@
 package easyfit.services;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Esta interfaz la hemos creado en grupo para tener una base común con las funciones
@@ -25,9 +24,9 @@ public interface IGenericCrud<E, ID> {
      * Busca un elemento por su ID (identificador único).
      *
      * @param id el valor con el que queremos buscar.
-     * @return un Optional que puede traer el resultado o estar vacío si no existe.
+     * @return el objeto guardado
      */
-    Optional<E> findById(ID id);
+    E findById(ID id);
 
     /**
      * Guarda un nuevo elemento en la base de datos.
