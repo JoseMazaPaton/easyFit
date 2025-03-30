@@ -61,6 +61,7 @@ public class Usuario implements Serializable, UserDetails{
 	@Column(name="fecha_registro")
 	private LocalDate fechaRegistro;
 	
+	
 	// ANOTACIONES RELACIONES DE USUARIO =========================================================================
 	
 	// Relacion inversa entre Usuario y Objetivo (1:1)
@@ -70,28 +71,23 @@ public class Usuario implements Serializable, UserDetails{
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Objetivo objetivo;
 
-	// Esta relacion (N:M) hace referencia a la tabla intermedia FAVORITO de la bbdd entre Usuario y Alimento
-	// La vamos a usar para guardar alimentos favoritos de cada usuario.
-	@ManyToMany
-	@JoinTable(name = "favoritos",joinColumns = @JoinColumn(name = "email"),inverseJoinColumns = @JoinColumn(name = "id_alimento"))
-	private List<Alimento> alimentosFavoritos;
 	
 	// Cada usuario tiene un rol (como admin o normal).
 	// Muchos usuarios pueden tener el mismo rol.
 	@ManyToOne
-	@JoinColumn(name="idRol")
+	@JoinColumn(name="id_rol")
 	private Rol idRol;
 	
 	
 	// METODOS PROPIOS =====================================================================================================  
 	
-	//Hemos añadido este metodo propio bastante util para sacar el nombre porque es algo recurrente y asi retulizamos codigo
+	//Hemos añadido este metodo propio bastante util para sacar el nombre porque es algo recurrente y asi reutilizamos codigo
 	public String getTipoRol() {
 	    return this.idRol != null ? this.idRol.getNombre().name() : null;
 	}
 
 	
-	// METODOS CLASE USERDETAILS DE SPRINGSECURIRY ==========================================================================  
+	// METODOS CLASE USERDETAILS DE SPRINGSECURITY ==========================================================================  
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

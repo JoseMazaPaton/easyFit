@@ -30,20 +30,20 @@
 
 ### 📈 Controlador: `@RequestMapping("/progreso")`
 
-- **GET /progreso/peso** — Progreso de peso: inicial, actual y objetivo.
-- **POST /progreso/peso** — Registrar nuevo peso.
+- **GET /progreso/pesoActual-Objetivo** — Progreso de peso: inicial, actual y objetivo.
+- **POST /progreso/nuevoPeso** — Registrar nuevo peso.
 
 ---
 
 ### 🍽️ Controlador: `@RequestMapping("/comidas")`
 
-- **GET /comidas?fecha=YYYY-MM-DD** — Listar comidas y alimentos del día.
+- **GET /comidas/fecha=YYYY-MM-DD** — Listar comidas y alimentos del día.
 - **POST /comidas** — Crear una nueva comida.
-- **DELETE /comidas/{id}** — Eliminar comida.
-- **POST /comidas/{id}/alimentos** — Añadir alimento a la comida.
+- **DELETE /comidas/{idComida}** — Eliminar comida.
+- **POST /comidas/{idComida}/añadirAlimento** — Añadir alimento a la comida.
 - **PUT /comidas/{id}/alimentos/{idAlimento}** — Modificar cantidad de un alimento.
-- **DELETE /comidas/{id}/alimentos/{idAlimento}** — Eliminar alimento de la comida.
-- **GET /comidas/{id}/resumen** — Resumen nutricional de la comida.
+- **DELETE /comidas/{id}/alimentos/{idAlimento}** — Eliminar alimento de la comida. 
+- **GET /comidas/{idComida}/resumen** — Resumen nutricional de la comida.
 
 ---
 
