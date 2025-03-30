@@ -1,9 +1,14 @@
 package easyfit.services.impl;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import easyfit.models.dtos.AlimentoDto;
+import easyfit.models.dtos.AlimentoEnComidaDto;
 import easyfit.models.entities.Alimento;
 import easyfit.models.entities.Categoria;
 import easyfit.models.entities.Usuario;
@@ -102,7 +107,49 @@ public class AlimentoImplService extends GenericCrudServiceImpl<Alimento, Intege
 
 		    return alimentoRepository.save(existente);
 		}
+
+	@Override
+	public List<AlimentoDto> buscarPorNombre(String nombre) {
+        List<Alimento> alimentos;
+
+        if (nombre == null || nombre.isBlank()) {
+            alimentos = alimentoRepository.findAll();
+        } else {
+            alimentos = alimentoRepository.findByNombreContainingIgnoreCase(nombre);
+        }
+
+        return alimentos.stream()
+                .map(alimento -> {
+                    AlimentoDto dto = convertirADto(alimento);
+                    return dto;
+                })
+                .collect(Collectors.toList());
+    }
 	
+	@Override
+	public List<AlimentoDto> buscarPorUsuario(String email) {
+		List<Alimento> alimentos = alimentoRepository.findByCreadoPor_Email(email);
+
+        return alimentos.stream()
+                .map(alimento -> {
+                    AlimentoDto dto = convertirADto(alimento);
+                    return dto;
+                })
+                .collect(Collectors.toList());
+	}
+	
+	
+	private AlimentoDto convertirADto(Alimento alimento) {
+        return new AlimentoDto(
+            alimento.getIdAlimento(), alimento.getNombre(), alimento.getMarca(),
+            alimento.getUnidadMedida(),
+            alimento.getKcal(), alimento.getProteinas(),
+            alimento.getCarbohidratos(), alimento.getGrasas()
+        );
+    }
+
+	
+		
 	
 	 
 }

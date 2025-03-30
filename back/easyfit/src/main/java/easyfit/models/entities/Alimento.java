@@ -3,6 +3,8 @@ package easyfit.models.entities;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import easyfit.models.dtos.AlimentoDto;
+import easyfit.models.dtos.AlimentoEnComidaDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,9 +36,6 @@ public class Alimento implements Serializable {
 	@Column(name = "unidad_medida")
 	private String unidadMedida;
 
-	//La Fecha de actualizacion se actualiza en el backend con @PreUpdate 
-	@Column(name = "fecha_actualizacion")
-	private LocalDateTime fechaActualizacion;
 
 	//EXPLICACIÓN DE ESTA RELACIÓN QUE PUEDE SER UN POCO CONFUSA:
 		// Relación con el usuario que creó este alimento.
@@ -47,6 +46,10 @@ public class Alimento implements Serializable {
 	private Usuario creadoPor;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "categoria_id", nullable = false)
+	@JoinColumn(name = "id_categoria", nullable = false)
 	private Categoria categoria;
+	
+	
+	
+	
 }

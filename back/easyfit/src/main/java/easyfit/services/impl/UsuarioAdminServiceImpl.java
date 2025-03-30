@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+
 import easyfit.models.entities.Usuario;
 import easyfit.models.enums.Sexo;
 import easyfit.repositories.IUsuarioRepository;
 import easyfit.services.IUsuarioAdminService;
-
+@Service
 public class UsuarioAdminServiceImpl extends GenericCrudServiceImpl<Usuario, String> implements IUsuarioAdminService{
 
 	@Autowired

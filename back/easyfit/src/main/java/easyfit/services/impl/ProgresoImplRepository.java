@@ -37,12 +37,12 @@ public class ProgresoImplRepository extends GenericCrudServiceImpl<Progreso,Inte
         List<Progreso> progresos = progresoRepository.findByUsuarioEmailOrderByFechaCambioDesc(emailUsuario);
         Double pesoActual = progresos.isEmpty() ? null : progresos.get(0).getPeso();
         
-        // Obtener peso objetivo (asumiendo que está en el usuario)
-        Double pesoObjetivo = usuario.getPesoObjetivo(); // Necesitarías agregar este campo en la entidad Usuario
+     //   // Obtener peso objetivo (asumiendo que está en el usuario)
+     //   Double pesoObjetivo = usuario.getPesoObjetivo(); // Necesitarías agregar este campo en la entidad Usuario
         
         Map<String, Double> resultado = new HashMap<>();
         if(pesoActual != null) resultado.put("pesoActual", pesoActual);
-        if(pesoObjetivo != null) resultado.put("pesoObjetivo", pesoObjetivo);
+      //  if(pesoObjetivo != null) resultado.put("pesoObjetivo", pesoObjetivo);
         
         return resultado;
     }

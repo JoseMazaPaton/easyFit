@@ -312,8 +312,8 @@ public class AdminRestController {
 	                        "categoria", Map.of(
 	                            "id", alimentoModificado.getCategoria().getIdCategoria(),
 	                            "nombre", alimentoModificado.getCategoria().getNombre()
-	                        ),
-	                        "fechaActualizacion", alimentoModificado.getFechaActualizacion()
+	                        )
+
 	                    )
 	                ));
 	                

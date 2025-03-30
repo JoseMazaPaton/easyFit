@@ -61,8 +61,6 @@ public class Usuario implements Serializable, UserDetails{
 	@Column(name="fecha_registro")
 	private LocalDate fechaRegistro;
 	
-	@Column(name = "peso_objetivo")
-	private Double pesoObjetivo;
 	
 	// ANOTACIONES RELACIONES DE USUARIO =========================================================================
 	
@@ -73,16 +71,11 @@ public class Usuario implements Serializable, UserDetails{
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Objetivo objetivo;
 
-	// Esta relacion (N:M) hace referencia a la tabla intermedia FAVORITO de la bbdd entre Usuario y Alimento
-	// La vamos a usar para guardar alimentos favoritos de cada usuario.
-	@ManyToMany
-	@JoinTable(name = "favoritos",joinColumns = @JoinColumn(name = "email"),inverseJoinColumns = @JoinColumn(name = "id_alimento"))
-	private List<Alimento> alimentosFavoritos;
 	
 	// Cada usuario tiene un rol (como admin o normal).
 	// Muchos usuarios pueden tener el mismo rol.
 	@ManyToOne
-	@JoinColumn(name="idRol")
+	@JoinColumn(name="id_rol")
 	private Rol idRol;
 	
 	
