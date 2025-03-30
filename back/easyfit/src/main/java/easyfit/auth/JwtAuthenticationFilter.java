@@ -1,8 +1,9 @@
 package easyfit.auth;
 
-
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,11 +36,12 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * Si el token no está bien o ha expirado, simplemente no autenticamos a nadie.
  */
-
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-	// Inyectamos el servicio que carga el usuario desde la base de datos.
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
+
+    // Inyectamos el servicio que carga el usuario desde la base de datos.
     @Autowired
     private UsuarioDetallesServiceImpl usuarioDetallesService;
 
@@ -51,8 +53,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
+        // Mostramos la ruta que entra
+        logger.info("Petición: {} {}", request.getMethod(), request.getRequestURI());
+
         // Sacamos lo que viene en el encabezado "Authorization"
-        String requestTokenHeader = request.getHeader("Authorization");
+        final String requestTokenHeader = request.getHeader("Authorization");
         String username = null;
         String jwtToken = null;
 
@@ -63,13 +68,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             try {
                 // Extraemos el nombre de usuario del token
                 username = jwtUtil.extractUsername(jwtToken);
-            } catch (ExpiredJwtException exception) {
-                System.out.println("El token ha expirado");
+                logger.debug("Token recibido correctamente. Usuario: {}", username);
+            } catch (ExpiredJwtException e) {
+                logger.warn("El token ha expirado: {}", e.getMessage());
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error("Error al extraer el token JWT", e);
             }
         } else {
-            System.out.println("Token inválido, no empieza con 'Bearer '");
+            logger.warn("Token inválido, no empieza con 'Bearer ' o está ausente");
         }
 
         // Si tenemos un nombre de usuario y no hay un usuario autenticado aún
@@ -84,10 +90,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 // Ponemos el usuario en el contexto de seguridad (lo dejamos "logueado")
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+                logger.info("Usuario autenticado: {}", username);
+            } else {
+                logger.warn("Token no válido para el usuario: {}", username);
             }
-        } else {
-            System.out.println("El token no es válido");
         }
+
+        // Si nadie fue autenticado, lo avisamos
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
+            logger.warn("No hay usuario autenticado. Si la ruta lo requiere, se devolverá 401.");
+        }
+
         // Seguimos con el proceso de la solicitud
         filterChain.doFilter(request, response);
     }
