@@ -77,12 +77,12 @@ public class SpringSecurityConfig {
             .authorizeHttpRequests(authorize -> {
             	
             //AUTH =================================================================================
-            authorize.requestMatchers(HttpMethod.POST, "/auth/login", "/auth/registro").permitAll();
+            authorize.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
             authorize.requestMatchers(HttpMethod.GET,  "/auth/me").authenticated();
             //PÚBLICO ==========================================================================================
             authorize.requestMatchers(HttpMethod.GET, "/alimentos", "/alimentos/**", "/categorias").permitAll();
             // USUARIO AUTENTICADO ======================================================================================================================
-            authorize.requestMatchers("/usuarios/**","/dashboard/**","/comidas/**","/progreso/**","/alimentos/mis","/alimentos/{id}/**").authenticated();
+            authorize.requestMatchers("/usuarios/**","/dashboard/**","/comidas/**","/progreso/**","/alimentos/mis","/alimentos/{id}/**","/auth/registro").authenticated();
             // SOLO ADMIN =========================================
             authorize.requestMatchers("/admin/**").hasRole("ADMIN");
             // POR DEFECTO ========================
