@@ -1,5 +1,6 @@
 package easyfit.services.impl;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,12 @@ public class CategoriaImplService extends GenericCrudServiceImpl<Categoria, Inte
 	    }
 	    
 	    categoriaRepository.deleteById(idCategoria);
+	}
+
+	@Override
+	public List<Categoria> obtenerTodasCategorias() {
+		// TODO Auto-generated method stub
+		return categoriaRepository.findAll();
 	}
 	
 

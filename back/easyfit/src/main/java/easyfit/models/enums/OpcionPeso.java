@@ -7,6 +7,7 @@ public enum OpcionPeso {
 
     // Opciones que representan los kg que el usuario quiere perder o ganar por semana
 	// separado en dos descripcion y kg, el int nos hace falta para calcular las kg
+	
     LIGERO("Ligero", 0.25),     // 0.25 kg por semana
     MODERADO("Moderado", 0.50), // 0.50 kg por semana
     INTENSO("Intenso", 0.75),   // 0.75 kg por semana
