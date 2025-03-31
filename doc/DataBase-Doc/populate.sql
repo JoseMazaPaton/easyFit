@@ -12,9 +12,9 @@ INSERT INTO roles (id_rol, nombre) VALUES
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- Inserción de usuarios (admin y cliente)
-INSERT INTO usuarios (email, password, nombre, edad, sexo, altura, suspendida, id_rol) VALUES 
-('admin@easyfit.com', '$2a$12$zOJTAIhfyPI7Eq9FPqYW2usvjQvgoHKWyLBmqLXcsdI36cfiaXKOK', 'Pablo Prieto López', 36, 'HOMBRE', 180.5, FALSE, 1), -- CONTRASEÑA: Admin1234
-('laura_martinez94@gmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Laura Martínez Ruiz', 28, 'MUJER', 165.2, FALSE, 2); -- CONTRASEÑA: Usuario1234
+INSERT INTO usuarios (email, password, nombre, edad, sexo, altura, suspendida, id_rol, fecha_registro) VALUES 
+('admin@easyfit.com', '$2a$12$zOJTAIhfyPI7Eq9FPqYW2usvjQvgoHKWyLBmqLXcsdI36cfiaXKOK', 'Pablo Prieto López', 36, 'HOMBRE', 180.5, FALSE, 1,'2025-03-31'), -- CONTRASEÑA: Admin1234
+('laura_martinez94@gmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Laura Martínez Ruiz', 28, 'MUJER', 165.2, FALSE, 2,'2025-03-31'); -- CONTRASEÑA: Usuario1234
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- Inserción de categorias

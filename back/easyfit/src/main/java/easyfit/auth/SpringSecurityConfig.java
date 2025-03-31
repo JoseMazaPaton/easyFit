@@ -76,17 +76,44 @@ public class SpringSecurityConfig {
             .cors(Customizer.withDefaults()) // Usamos configuración CORS por defecto
             .authorizeHttpRequests(authorize -> {
             	
-            //AUTH =================================================================================
-            authorize.requestMatchers(HttpMethod.POST, "/auth/login","/auth/registro").permitAll();
-            authorize.requestMatchers(HttpMethod.GET,  "/auth/me").authenticated();
-            //PÚBLICO ==========================================================================================
-            authorize.requestMatchers(HttpMethod.GET, "/alimentos", "/alimentos/**", "/categorias").permitAll();
-            // USUARIO AUTENTICADO ======================================================================================================================
-            authorize.requestMatchers("/usuarios/**","/dashboard/**","/comidas/**","/progreso/**","/alimentos/mis","/alimentos/{id}/**").authenticated();
-            // SOLO ADMIN =========================================
-            authorize.requestMatchers("/admin/**").hasRole("ADMIN");
-            // POR DEFECTO ========================
-            authorize.anyRequest().authenticated();
+            	authorize
+            	
+                // AUTH =================================================================================
+                .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/register").permitAll()
+                .requestMatchers(HttpMethod.GET, "/auth/me").authenticated()
+
+                // PÚBLICO =================================================================================
+                .requestMatchers(HttpMethod.GET, "/alimentos", "/alimentos/**", "/categorias").permitAll()
+
+                // USUARIO AUTENTICADO =================================================================================
+                .requestMatchers(HttpMethod.GET, "/usuarios/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+
+                .requestMatchers(HttpMethod.GET, "/dashboard/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+
+                .requestMatchers(HttpMethod.GET, "/progreso/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+                .requestMatchers(HttpMethod.POST, "/progreso/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+
+                .requestMatchers(HttpMethod.GET, "/comidas/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+                .requestMatchers(HttpMethod.POST, "/comidas/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/comidas/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/comidas/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+
+                .requestMatchers(HttpMethod.GET, "/alimentos/mis").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+                .requestMatchers(HttpMethod.POST, "/alimentos").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/alimentos/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/alimentos/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+
+                // SOLO ADMIN ==========================================================================================
+                .requestMatchers(HttpMethod.GET, "/admin/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/admin/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/admin/**").hasRole("ADMIN")
+
+                // POR DEFECTO =========================================================================================
+                .anyRequest().authenticated();
+
+
         })
             .exceptionHandling(exception -> exception
                     .authenticationEntryPoint(jwtAuthenticationEntryPoint)) // Usa este manejador si falla la autenticación

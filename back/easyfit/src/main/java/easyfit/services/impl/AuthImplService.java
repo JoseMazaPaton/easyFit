@@ -22,6 +22,7 @@ import easyfit.models.dtos.LoginResponseDto;
 import easyfit.models.dtos.ObjetivoResponseDto;
 import easyfit.models.dtos.RegistroRequestDto;
 import easyfit.models.dtos.RegistroResponseDto;
+import easyfit.models.dtos.UsuarioPasswordDto;
 import easyfit.models.dtos.UsuarioResponseDto;
 import easyfit.models.entities.Objetivo;
 import easyfit.models.entities.Usuario;
@@ -142,4 +143,7 @@ public class AuthImplService extends GenericCrudServiceImpl<Usuario,String> impl
 
 	    }
 	}
+
+
+
 }

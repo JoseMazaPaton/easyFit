@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import easyfit.models.dtos.LoginRequestDto;
 import easyfit.models.dtos.LoginResponseDto;
 import easyfit.models.dtos.RegistroRequestDto;
 import easyfit.models.dtos.RegistroResponseDto;
+import easyfit.models.dtos.UsuarioResponseDto;
 import easyfit.services.IAuthService;
 import jakarta.validation.Valid;
 
@@ -57,15 +59,16 @@ public class AuthRestController {
     @PostMapping("/registro")
     public ResponseEntity<RegistroResponseDto> registroUsuario(@RequestBody @Valid RegistroRequestDto registroDto) {
     	
+    	
     	//Damos de alta el usuario,los objetivos y guardamos la respuesta con el metodo del servicio
     	//Todas las excepciones se controlan en el service tambien
     	RegistroResponseDto respuesta = authService.altaUsuario(registroDto);
-    	
-    	
+
     	
     	return ResponseEntity.ok(respuesta);
     	
     }
+
 
 
 }

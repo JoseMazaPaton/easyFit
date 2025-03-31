@@ -4,13 +4,12 @@
 
 - **POST /auth/register** — Registro completo del usuario.
 - **POST /auth/login** — Inicio de sesión.
-- **GET /auth/me** — Obtener datos del perfil actual.
 
 ---
 
 ### 👤 Controlador: `@RequestMapping("/usuarios")`
 
-- **PUT /usuarios/me** — Editar información del perfil.
+- **GET /usuarios/miperfil** — El usuario puede ver su perfil
 - **GET /usuarios/me/objetivos** — Obtener objetivos calóricos y de macronutrientes.
 - **PUT /usuarios/me/objetivos** — Modificar objetivos personalizados.
 - **GET /usuarios/me/calculo-objetivos** — Calcular TMB, GET y macros sugeridos automáticamente.
