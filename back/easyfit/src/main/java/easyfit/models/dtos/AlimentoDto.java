@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AlimentoDto {
 	
-	private int idAlimento;
     private String nombre;
     private String marca;
     private String unidadMedida;
@@ -19,4 +18,5 @@ public class AlimentoDto {
     private double proteinas;
     private double carbohidratos;
     private double grasas;
+    private int idCategoria;
 }

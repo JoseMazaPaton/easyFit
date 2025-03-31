@@ -15,6 +15,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 
@@ -76,6 +77,10 @@ public class Usuario implements Serializable, UserDetails{
 	@JoinColumn(name="id_rol")
 	private Rol idRol;
 	
+	
+	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+	private ValorNutricional valorNutricional;
+
 	
 	// METODOS PROPIOS =====================================================================================================  
 	

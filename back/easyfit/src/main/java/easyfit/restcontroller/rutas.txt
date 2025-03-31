@@ -1,3 +1,4 @@
+
 ## Rutas REST para la App de Planificación de Dieta
 
 ### 🔐 Controlador: `@RequestMapping("/auth")`
@@ -9,14 +10,20 @@
 
 ### 👤 Controlador: `@RequestMapping("/usuarios")`
 
-- **GET /usuarios/miperfil** — El usuario puede ver su perfil
-- **GET /usuarios/me/objetivos** — Obtener objetivos calóricos y de macronutrientes.
-- **PUT /usuarios/me/objetivos** — Modificar objetivos personalizados.
-- **GET /usuarios/me/calculo-objetivos** — Calcular TMB, GET y macros sugeridos automáticamente.
-- **PUT /usuarios/me/meta-peso** — Establecer nuevo peso objetivo.
-- **PUT /usuarios/me/nivel-actividad** — Cambiar nivel de actividad física.
-- **PUT /usuarios/me/meta-semanal** — Ajustar ritmo semanal de cambio de peso.
-- **PUT /usuarios/me/meta-objetivo** — Establecer objetivo general (perder, mantener, ganar).
+- **GET /usuarios/miperfil** — El usuario puede ver su perfil.
+- **PUT /usuarios/miperfil/password** — El usuario puede cambiar su contraseña.
+
+---
+
+### 🎯 Controlador: `@RequestMapping("/objetivos")`
+
+- **GET /objetivos/misobjetivos** — Obtener todos los objetivos actuales del usuario (kcal, macros, peso, objetivo, etc.).
+- **PUT /objetivos/macros** — Cambiar macros de los objetivos (proteínas, carbohidratos, grasas).
+- **PUT /objetivos/metapeso** — Cambiar el peso objetivo.
+- **PUT /objetivos/nivelactividad** — Cambiar nivel de actividad física.
+- **PUT /objetivos/metasemanal** — Ajustar ritmo semanal de cambio de peso.
+- **PUT /objetivos/metaobjetivo** — Establecer objetivo general (perder, mantener, ganar).
+- **PUT /objetivos/editar-todo** — (Opcional) Modificar todos los valores del objetivo en un solo DTO.
 
 ---
 
@@ -36,12 +43,12 @@
 
 ### 🍽️ Controlador: `@RequestMapping("/comidas")`
 
-- **GET /comidas/fecha=YYYY-MM-DD** — Listar comidas y alimentos del día.
+- **GET /comidas?fecha=YYYY-MM-DD** — Listar comidas y alimentos del día.
 - **POST /comidas** — Crear una nueva comida.
 - **DELETE /comidas/{idComida}** — Eliminar comida.
 - **POST /comidas/{idComida}/añadirAlimento** — Añadir alimento a la comida.
 - **PUT /comidas/{id}/alimentos/{idAlimento}** — Modificar cantidad de un alimento.
-- **DELETE /comidas/{id}/alimentos/{idAlimento}** — Eliminar alimento de la comida. 
+- **DELETE /comidas/{id}/alimentos/{idAlimento}** — Eliminar alimento de la comida.
 - **GET /comidas/{idComida}/resumen** — Resumen nutricional de la comida.
 
 ---
@@ -50,7 +57,7 @@
 
 - **GET /alimentos?search=nombre** — Buscar alimentos por nombre.
 - **GET /alimentos/mis** — Ver alimentos propios del usuario.
-- **POST /alimentos** — Crear alimento personalizado usuario(le otorga creado\_por al alimento)
+- **POST /alimentos** — Crear alimento personalizado (el usuario es el `creado_por`).
 - **PUT /alimentos/{id}** — Editar alimento (solo si el usuario es el creador).
 - **DELETE /alimentos/{id}** — Eliminar alimento (solo si el usuario es el creador).
 - **GET /alimentos/{id}/calculo?gramos=XXX** — Calcular kcal y macros según cantidad.
@@ -79,7 +86,6 @@
 ### ✅ NOTAS IMPORTANTES
 
 - Todo el onboarding (registro progresivo) se completa con un solo `POST /auth/register`.
-- El backend debe calcular kcal y macros en base a los datos ingresados.
+- El backend debe calcular kcal y macros automáticamente en base a los datos ingresados por el usuario.
 - Estas rutas cubren todas las vistas de tus wireframes (registro, dashboard, diario, alimentos, objetivos).
 - El usuario solo puede editar/eliminar alimentos que ha creado; el admin puede hacer CRUD completo sobre todos.
-

@@ -79,16 +79,19 @@ public class SpringSecurityConfig {
             	authorize
             	
                 // AUTH =================================================================================
-                .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/register").permitAll()
+                .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/registro").permitAll()
                 .requestMatchers(HttpMethod.GET, "/auth/me").authenticated()
 
                 // PÚBLICO =================================================================================
-                .requestMatchers(HttpMethod.GET, "/alimentos", "/alimentos/**", "/categorias").permitAll()
+                .requestMatchers(HttpMethod.GET, "/alimentos", "/alimentos/**", "/categorias/todas").permitAll()
 
                 // USUARIO AUTENTICADO =================================================================================
                 .requestMatchers(HttpMethod.GET, "/usuarios/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
 
+                .requestMatchers(HttpMethod.GET, "/objetivos/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/dashboard/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
+                
                 .requestMatchers(HttpMethod.GET, "/dashboard/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
 
                 .requestMatchers(HttpMethod.GET, "/progreso/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
