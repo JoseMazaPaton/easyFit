@@ -55,13 +55,7 @@ public class Objetivo implements Serializable {
 	@Column(name = "actividad", nullable = false)
 	private Actividad actividad;
 	
-	@Column(name = "kcal_objetivo")
-	private int kcalObjetivo;
 	
-	private double proteinas;
-	private double carbohidratos;
-	private double grasas;
-
 	// ANOTACIONES RELACIONES DE OBJETIVO ===========================================================================
 
 	// Esta parte dice que cada objetivo pertenece a un solo usuario.

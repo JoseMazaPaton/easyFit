@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ObjetivoResponseDto {
 
-	//Objetivos modificables por el usuario
     private ObjetivoUsuario objetivoUsuario;
     
     private double pesoActual;
@@ -25,7 +24,8 @@ public class ObjetivoResponseDto {
     
     private Actividad actividad;
 
-    private KcalYMacrosDto metaCalorias;
+    //Datos de calorias y macros
+    private ValorNutriconalResponseDto valores;
     
 
 }

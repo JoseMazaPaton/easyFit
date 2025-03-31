@@ -16,19 +16,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import easyfit.auth.JwtUtils;
-import easyfit.models.dtos.KcalYMacrosDto;
 import easyfit.models.dtos.LoginRequestDto;
 import easyfit.models.dtos.LoginResponseDto;
 import easyfit.models.dtos.ObjetivoResponseDto;
 import easyfit.models.dtos.RegistroRequestDto;
 import easyfit.models.dtos.RegistroResponseDto;
-import easyfit.models.dtos.UsuarioPasswordDto;
 import easyfit.models.dtos.UsuarioResponseDto;
+import easyfit.models.dtos.ValorNutriconalResponseDto;
 import easyfit.models.entities.Objetivo;
 import easyfit.models.entities.Usuario;
 import easyfit.repositories.IUsuarioRepository;
 import easyfit.services.IAuthService;
-import easyfit.services.IObjetivoService;
+import easyfit.services.ValorNutricionalService;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -39,7 +38,7 @@ public class AuthImplService extends GenericCrudServiceImpl<Usuario,String> impl
 	
 	
 	@Autowired
-	private IObjetivoService objetivoService;
+	private ValorNutricionalService objetivoService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -98,51 +97,50 @@ public class AuthImplService extends GenericCrudServiceImpl<Usuario,String> impl
 	public RegistroResponseDto altaUsuario(RegistroRequestDto registroDto) {
 	    try {
 	        if (usuarioRepository.existsById(registroDto.getUsuario().getEmail())) {
-	        	 throw new ResponseStatusException(HttpStatus.CONFLICT, "El email ya está dado de alta.");
+	            throw new ResponseStatusException(HttpStatus.CONFLICT, "El email ya está dado de alta.");
 	        }
 
-	        //Guardamos la contraseña para encriptarla
-	        //Tambien sirve en si para mas adelante si quisiera implementar la logica de enviarla por email
+	        // Guardamos la contraseña para encriptarla
+	        // También sirve en sí para más adelante si quisiera implementar la lógica de enviarla por email
 	        String contraseña = registroDto.getUsuario().getPassword();
 
-	        //Mapeamos usuario y objetivo a sus entidades
+	        // Mapeamos usuario y objetivo a sus entidades
 	        Usuario usuario = mapper.map(registroDto.getUsuario(), Usuario.class);
 	        Objetivo objetivo = mapper.map(registroDto.getObjetivo(), Objetivo.class);
-	       
-	        //Agregamos a cada entidad las relaciones (bidireccional)
-	        //Encriptamos la contraseña y la añadimos
-	        //Le añadimos la fechaDeRegistro
-	        //El rol no hace falta porque lo hemos puesto por defecto como = ROL_USUARIO en la entidad
+
+	        // Agregamos a cada entidad las relaciones (bidireccional)
+	        // Encriptamos la contraseña y la añadimos
+	        // Le añadimos la fechaDeRegistro
+	        // El rol no hace falta porque lo hemos puesto por defecto como = ROL_USUARIO en la entidad
 	        usuario.setPassword(passwordEncoder.encode(contraseña));
 	        usuario.setFechaRegistro(LocalDate.now());
 	        usuario.setObjetivo(objetivo);
 	        objetivo.setUsuario(usuario);
 
-	        //Guardamos los datos del usuario solo
+	        // Guardamos los datos del usuario (se guarda también objetivo por cascada)
 	        usuarioRepository.save(usuario);
-	        
-	        // Calculamos las Kcal y los macronutrientes con los datos que nos han llegado del registro
-	        KcalYMacrosDto calculo = objetivoService.calcularKcalYMacrosObjetivo(usuario.getEmail());
-	
-	        // Despues volvemos mapearlo en forma de respuestaDto
+
+	        // Calculamos las Kcal (los macros se calculan automáticamente por trigger en BBDD)
+	        ValorNutriconalResponseDto calculo = objetivoService.registroMacrosYKcal(usuario.getEmail());
+
+	        // Después volvemos a mapearlo en forma de respuestaDto
 	        UsuarioResponseDto usuarioDto = mapper.map(usuario, UsuarioResponseDto.class);
 	        ObjetivoResponseDto objetivoDto = mapper.map(objetivo, ObjetivoResponseDto.class);
-	        objetivoDto.setMetaCalorias(calculo);
+	        objetivoDto.setValores(calculo); // Ahora usamos un DTO más completo con kcal, macros y porcentajes
 
-	        //Generamos el token y se lo añadimos a la respuesta
-	        //ESTO ES OPCIONAL-- es por si queremos inciar sesion nada mas registrarnos
+	        // Generamos el token y se lo añadimos a la respuesta
+	        // ESTO ES OPCIONAL-- es por si queremos iniciar sesión nada más registrarnos
 	        String token = jwtUtils.generateToken(usuario);
-	        
+
 	        // Devolvemos un Dto para la respuesta del controller
-	        return new RegistroResponseDto(usuarioDto,objetivoDto,token);
-	        
+	        return new RegistroResponseDto(usuarioDto, objetivoDto, token);
+
 	    } catch (IllegalArgumentException e) {
 	        throw e;
 	    } catch (Exception e) {
-	    	throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error inesperado al registrar el usuario: " + e.getMessage());
-
+	        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error inesperado al registrar el usuario: " + e.getMessage());
 	    }
-	}
+}
 
 
 

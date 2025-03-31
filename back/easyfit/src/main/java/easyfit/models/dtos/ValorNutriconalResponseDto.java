@@ -9,13 +9,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class KcalYMacrosDto {
+public class ValorNutriconalResponseDto {
 
     private int kcalObjetivo;
     
+    // Datos en gramos
     private double proteinas;
-    
     private double carbohidratos;
-    
     private double grasas;
+    
+    // Datos en porcentajes
+    private double porcentajeProteinas;
+    private double porcentajeCarbohidratos;
+    private double porcentajeGrasas;
 }

@@ -19,8 +19,23 @@ CREATE TABLE usuarios (
     altura DECIMAL(5,2),
     suspendida BOOLEAN,
     id_rol INT DEFAULT 1,
-    fecha_registro DATE ,
+    fecha_registro DATE,
     FOREIGN KEY (id_rol) REFERENCES roles(id_rol)
+);
+
+-- Tabla de valores nutricionales (por usuario)
+CREATE TABLE valores_nutricionales (
+    id_valores INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    kcal_objetivo INT NOT NULL,
+    proteinas DECIMAL(5,2) NOT NULL,         -- gramos
+    carbohidratos DECIMAL(5,2) NOT NULL,     -- gramos
+    grasas DECIMAL(5,2) NOT NULL,            -- gramos
+    porcentaje_proteinas DECIMAL(5,2) NOT NULL DEFAULT 50,
+    porcentaje_carbohidratos DECIMAL(5,2) NOT NULL DEFAULT 30,
+    porcentaje_grasas DECIMAL(5,2) NOT NULL DEFAULT 20,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (email) REFERENCES usuarios(email) ON DELETE CASCADE
 );
 
 -- Tabla de categorías de alimentos
@@ -87,7 +102,7 @@ CREATE TABLE progresos (
     FOREIGN KEY (email) REFERENCES usuarios(email)
 );
 
--- Tabla de objetivos
+-- Tabla de objetivos (sin kcal ni macros)
 CREATE TABLE objetivos (
     id_objetivo INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(100) NOT NULL,
@@ -96,14 +111,9 @@ CREATE TABLE objetivos (
     objetivo_usuario ENUM('PERDERPESO', 'MANTENER', 'GANARPESO') NOT NULL,
     opcion_peso ENUM('LIGERO', 'MODERADO', 'INTENSO', 'AGRESIVO'),
     actividad ENUM('SEDENTARIO', 'LIGERO', 'MODERADO', 'ACTIVO', 'MUYACTIVO') NOT NULL,
-    kcal_objetivo INT NOT NULL,
-    proteinas DECIMAL(5,2) NOT NULL,
-    carbohidratos DECIMAL(5,2) NOT NULL,
-    grasas DECIMAL(5,2) NOT NULL,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (email) REFERENCES usuarios(email)
 );
-
 
 -- Tabla de favoritos
 CREATE TABLE favoritos (
@@ -173,9 +183,48 @@ AFTER UPDATE ON objetivos
 FOR EACH ROW
 BEGIN
     IF NEW.peso_actual <> OLD.peso_actual THEN
-        INSERT INTO progreso (email, fecha_cambio, peso)
-        VALUES (NEW.email, NOW(), NEW.peso_actual);
+        INSERT INTO progresos (email, peso)
+        VALUES (NEW.email, NEW.peso_actual);
     END IF;
+END$$
+
+DELIMITER ;
+DELIMITER $$
+
+-- Trigger que se ejecuta antes de insertar un nuevo registro en la tabla valores_nutricionales
+CREATE TRIGGER before_valores_insert
+BEFORE INSERT ON valores_nutricionales
+FOR EACH ROW
+BEGIN
+    -- Si la suma de los tres porcentajes es mayor que 100, lanza un error y no permite la inserción
+    IF NEW.porcentaje_proteinas + NEW.porcentaje_carbohidratos + NEW.porcentaje_grasas > 100 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La suma de los porcentajes no puede superar el 100%';
+    END IF;
+
+    -- Calcula los gramos de cada macronutriente en base a las kcal y el porcentaje indicado
+    SET NEW.proteinas = ROUND((NEW.kcal_objetivo * (NEW.porcentaje_proteinas / 100)) / 4, 2);
+    SET NEW.carbohidratos = ROUND((NEW.kcal_objetivo * (NEW.porcentaje_carbohidratos / 100)) / 4, 2);
+    SET NEW.grasas = ROUND((NEW.kcal_objetivo * (NEW.porcentaje_grasas / 100)) / 9, 2);
+END$$
+
+
+
+-- Trigger que se ejecuta antes de actualizar un registro en la tabla valores_nutricionales
+CREATE TRIGGER before_valores_update
+BEFORE UPDATE ON valores_nutricionales
+FOR EACH ROW
+BEGIN
+    -- Si la suma de los tres porcentajes es mayor que 100, lanza un error y no permite la actualización
+    IF NEW.porcentaje_proteinas + NEW.porcentaje_carbohidratos + NEW.porcentaje_grasas > 100 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La suma de los porcentajes no puede superar el 100%';
+    END IF;
+
+    -- Calcula los gramos de cada macronutriente en base a las kcal y el porcentaje indicado
+    SET NEW.proteinas = ROUND((NEW.kcal_objetivo * (NEW.porcentaje_proteinas / 100)) / 4, 2);
+    SET NEW.carbohidratos = ROUND((NEW.kcal_objetivo * (NEW.porcentaje_carbohidratos / 100)) / 4, 2);
+    SET NEW.grasas = ROUND((NEW.kcal_objetivo * (NEW.porcentaje_grasas / 100)) / 9, 2);
 END$$
 
 DELIMITER ;

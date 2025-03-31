@@ -191,14 +191,15 @@ INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
 (6, 6, 0.25);  -- 25g Almendras
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
--- Inserción corregida de objetivos
-INSERT INTO objetivos (
-    email, peso_actual, peso_objetivo, objetivo_usuario, opcion_peso, actividad, kcal_objetivo, proteinas, carbohidratos, grasas) VALUES 
-    ('laura_martinez94@gmail.com', 63.0, 58.0, 'PERDERPESO', 'LIGERO', 'MODERADO', 1800, 120.0, 150.0, 50.0);
+-- Inserción de objetivos
+INSERT INTO objetivos (email, peso_actual, peso_objetivo, objetivo_usuario, opcion_peso, actividad) VALUES 
+('laura_martinez94@gmail.com', 63.0, 58.0, 'PERDERPESO', 'LIGERO', 'MODERADO');
+
 -- -------------------------------------------------------------------------------------------------------------------------------------------
--- Inserción de progresos
-INSERT INTO progresos (email, peso) VALUES 
-('laura_martinez94@gmail.com', 63.0);
+-- Inserción de valores_nutricionales
+INSERT INTO valores_nutricionales (email, kcal_objetivo, proteinas, carbohidratos, grasas, porcentaje_proteinas, porcentaje_carbohidratos, porcentaje_grasas) VALUES 
+('laura_martinez94@gmail.com', 1800, 120.0, 150.0, 50.0, 26.7, 33.3, 40.0);
+
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- Inserción de favoritos

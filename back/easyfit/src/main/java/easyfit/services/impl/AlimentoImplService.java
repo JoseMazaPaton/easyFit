@@ -16,6 +16,7 @@ import easyfit.repositories.IAlimentoRepository;
 import easyfit.repositories.ICategoriaRepository;
 import easyfit.repositories.IUsuarioRepository;
 import easyfit.services.IAlimentoService;
+import jakarta.transaction.Transactional;
 
 @Service
 public class AlimentoImplService extends GenericCrudServiceImpl<Alimento, Integer>  implements IAlimentoService{
@@ -141,10 +142,10 @@ public class AlimentoImplService extends GenericCrudServiceImpl<Alimento, Intege
 	
 	private AlimentoDto convertirADto(Alimento alimento) {
         return new AlimentoDto(
-            alimento.getIdAlimento(), alimento.getNombre(), alimento.getMarca(),
+            alimento.getNombre(), alimento.getMarca(),
             alimento.getUnidadMedida(),
             alimento.getKcal(), alimento.getProteinas(),
-            alimento.getCarbohidratos(), alimento.getGrasas()
+            alimento.getCarbohidratos(), alimento.getGrasas(), alimento.getCategoria().getIdCategoria()
         );
     }
 

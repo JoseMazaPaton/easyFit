@@ -47,9 +47,7 @@ public class UsuarioRestController {
 	//RUTA CON METODO PARA VER DATOS DEL PERFIL DEL USUARIO
 	@PutMapping("/miperfil/password")
 	public ResponseEntity<String> cambiarPassword(@RequestBody @Valid UsuarioPasswordDto dto) {
-
-	    System.out.println("🔐 DTO recibido en controlador: " + dto); // TEMPORAL
-
+		//Obtenemos el usuario autenticado
 	    Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 	    usuarioService.cambiarPassword(dto, usuario);
@@ -57,6 +55,9 @@ public class UsuarioRestController {
 	    return ResponseEntity.ok("Contraseña actualizada correctamente");
 	}
 
+
+	
+	
 
 
 }
