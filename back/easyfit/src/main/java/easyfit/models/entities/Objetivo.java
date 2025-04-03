@@ -1,7 +1,6 @@
 package easyfit.models.entities;
 
 import java.io.Serializable;
-
 import easyfit.models.enums.Actividad;
 import easyfit.models.enums.ObjetivoUsuario;
 import easyfit.models.enums.OpcionPeso;
@@ -65,5 +64,8 @@ public class Objetivo implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "email", unique = true)
 	private Usuario usuario;
+
+
+	
 
 }
