@@ -1,14 +1,14 @@
 
 ## Rutas REST para la App de Planificación de Dieta
 
-### 🔐 Controlador: `@RequestMapping("/auth")`
+### 🔐 Controlador: `@RequestMapping("/auth")` --TERMINADO
 
 - **POST /auth/register** — Registro completo del usuario.
 - **POST /auth/login** — Inicio de sesión.
 
 ---
 
-### 👤 Controlador: `@RequestMapping("/usuarios")`
+### 👤 Controlador: `@RequestMapping("/usuarios")` -- TERMINADO 
 
 - **GET /usuarios/miperfil** — El usuario puede ver su perfil.
 - **PUT /usuarios/miperfil/password** — El usuario puede cambiar su contraseña.
@@ -31,15 +31,10 @@
 
 - **GET /dashboard/resumen-diario?fecha=YYYY-MM-DD** — Devuelve kcal objetivo, consumidas y restantes del día.
 - **GET /dashboard/historial-calorias?dias=7** — Datos para el gráfico de consumo calórico.
+- **GET /dashboard/historial-Objetivo** — Progreso de peso: inicial, actual y objetivo.
 
 ---
 
-### 📈 Controlador: `@RequestMapping("/progreso")`
-
-- **GET /progreso/pesoActual-Objetivo** — Progreso de peso: inicial, actual y objetivo.
-- **POST /progreso/nuevoPeso** — Registrar nuevo peso.
-
----
 
 ### 🍽️ Controlador: `@RequestMapping("/comidas")`
 

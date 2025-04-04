@@ -37,6 +37,7 @@ public class ObjetivosRestController {
 	@Autowired 
 	private ModelMapper mapper;
 	
+<<<<<<< HEAD
 	//	- **GET /usuarios/misobjetivos** — Obtener todos los objetivos del usuario. Sí
 	//	- **PUT /usuarios/misobjetivos/macros** — Cambiar macros de mis objetivos. Sí
 	//	- **PUT /usuarios/misobjetivos/cambiarPesoActual** — Cambiar el peso actual. Sí
@@ -44,6 +45,15 @@ public class ObjetivosRestController {
 	//	- **PUT /usuarios/misobjetivos/nivelactividad** — Cambiar nivel de actividad física. Sí
 	//	- **PUT /usuarios/misobjetivos/metasemanal** — Ajustar ritmo semanal de cambio de peso. Sí
 	//	- **PUT /usuarios/misobjetivos/metaobjetivo** — Establecer objetivo general (perder, mantener, ganar).
+=======
+	//	GET /usuarios/misobjetivos** — Obtener todos los objetivos del usuario
+	//	PUT /usuarios/misobjetivos/macros** — Cambiar macros de mis objetivos
+	//	PUT /usuarios/misobjetivos/metapeso** — Cambiar el peso actual.
+	//	PUT /usuarios/misobjetivos/metapeso** — Cambiar el peso objetivo.
+	//	PUT /usuarios/misobjetivos/nivelactividad** — Cambiar nivel de actividad física.
+	//	PUT /usuarios/misobjtivos/metasemanal** — Ajustar ritmo semanal de cambio de peso.
+	//	PUT /usuarios/misobjetivos/metaobjetivo** — Establecer objetivo general (perder, mantener, ganar).
+>>>>>>> d5d1c24 (feat(backend): Se ha añadido funcionalidad de enviar por email en el auth)
 
 	//RUTA CON METODO PARA OBTENER TODOS LOS OBJETIVOS DEL USUARIO
 	@GetMapping("/")

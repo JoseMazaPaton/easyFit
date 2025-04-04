@@ -51,6 +51,9 @@ public class AuthImplService extends GenericCrudServiceImpl<Usuario,String> impl
 
     @Autowired
     private JwtUtils jwtUtils;
+    
+    @Autowired
+    private EmailServiceImpl emailService;
 
 
 	// En este metodo indicamos el repositorio que usamos en el CRUD genérico que hemos extendido 
@@ -115,10 +118,13 @@ public class AuthImplService extends GenericCrudServiceImpl<Usuario,String> impl
 	        usuario.setPassword(passwordEncoder.encode(contraseña));
 	        usuario.setFechaRegistro(LocalDate.now());
 	        usuario.setObjetivo(objetivo);
-	        objetivo.setUsuario(usuario);
+	        objetivo.setUsuario(usuario);   
 
 	        // Guardamos los datos del usuario (se guarda también objetivo por cascada)
 	        usuarioRepository.save(usuario);
+	        
+	        //Enviar credenciales por correo
+	        emailService.enviarCredenciales(usuario.getEmail(), contraseña);
 
 	        // Calculamos las Kcal (los macros se calculan automáticamente por trigger en BBDD)
 	        ValorNutriconalResponseDto calculo = objetivoService.registroMacrosYKcal(usuario.getEmail());

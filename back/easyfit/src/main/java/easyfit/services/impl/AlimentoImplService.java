@@ -109,7 +109,9 @@ public class AlimentoImplService extends GenericCrudServiceImpl<Alimento, Intege
 		    return alimentoRepository.save(existente);
 		}
 
+	
 	@Override
+	@Transactional
 	public List<AlimentoDto> buscarPorNombre(String nombre) {
         List<Alimento> alimentos;
 

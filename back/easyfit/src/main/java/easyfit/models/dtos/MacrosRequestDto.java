@@ -34,10 +34,11 @@ public class MacrosRequestDto {
     private double porcentajeGrasas;
     
     //RESTRICCION EN LA VALIDACIONES PERSONALIZA
-    //La suma de los 3 porcentajes no puede ser mayor que 100
-    @AssertTrue(message = "La suma de los porcentajes no puede ser mayor que 100")
+    //La suma de los 3 porcentajes tiene que ser exactamente el 100%
+    @AssertTrue(message = "La suma de los porcentajes tiene que ser del 100%")
     public boolean isSumaPorcentajesValida() {
-        return (porcentajeProteinas + porcentajeCarbohidratos + porcentajeGrasas) <= 100;
+        double suma = porcentajeProteinas + porcentajeCarbohidratos + porcentajeGrasas;
+        return Math.abs(suma - 100.0) < 0.01; // tolerancia para evitar errores de redondeo
     }
 
 }
