@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -20,6 +21,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import easyfit.services.impl.UsuarioDetallesServiceImpl;
 
 @Configuration
 public class SpringSecurityConfig {
@@ -53,6 +56,9 @@ public class SpringSecurityConfig {
 	// Inyectamos el manejador de errores de autenticación para devolver un 401 cuando no se autoriza
 	@Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+	
+	@Autowired
+	private UsuarioDetallesServiceImpl usuarioDetallesService;
 
     // Creamos un bean para encriptar contraseñas usando BCrypt 
     @Bean
@@ -61,11 +67,11 @@ public class SpringSecurityConfig {
     }
 
     // Configuramos el AuthenticationManager que gestiona la autenticación
-    @Bean
-    AuthenticationManager authenticationManager(AuthenticationConfiguration config)
-            throws Exception {
-        return config.getAuthenticationManager();
-    }
+    // @Bean
+    //AuthenticationManager authenticationManager(AuthenticationConfiguration config)
+    //        throws Exception {
+    //    return config.getAuthenticationManager();
+    //}
 
     // Configuración principal de seguridad
     // Este bloque define las reglas de acceso y la integración de JWT
@@ -141,5 +147,16 @@ public class SpringSecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+    
+    // Configuramos el AuthenticationManager que gestiona la autenticacion
+    @SuppressWarnings("removal")
+	@Bean
+    AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+    	return http.getSharedObject(AuthenticationManagerBuilder.class)
+    			.userDetailsService(usuarioDetallesService)
+    			.passwordEncoder(passwordEncoder())
+    			.and()
+    			.build();
     }
 }

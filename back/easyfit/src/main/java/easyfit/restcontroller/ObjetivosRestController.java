@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+<<<<<<< HEAD
 import org.springframework.web.server.ResponseStatusException;
 
 import easyfit.models.dtos.objetivo.ObjetivoResponseDto;
@@ -20,6 +21,17 @@ import easyfit.models.dtos.valornutricional.ValorNutriconalResponseDto;
 import easyfit.models.entities.Usuario;
 import easyfit.services.IObjetivoService;
 import easyfit.services.IValorNutricionalService;
+=======
+
+
+import easyfit.models.dtos.MacrosRequestDto;
+import easyfit.models.dtos.MetaPesoRequestDto;
+import easyfit.models.dtos.ObjetivoResponseDto;
+import easyfit.models.dtos.ValorNutriconalResponseDto;
+import easyfit.models.entities.Usuario;
+import easyfit.services.ValorNutricionalService;
+import easyfit.services.impl.UsuarioServiceImpl;
+>>>>>>> 2561dba67fbffbfed5abcd36b23fff66c968ed73
 import jakarta.validation.Valid;
 
 @RestController
@@ -28,14 +40,22 @@ import jakarta.validation.Valid;
 public class ObjetivosRestController {
 
 	@Autowired
+<<<<<<< HEAD
 	private IObjetivoService objetivoService;
 	
 	@Autowired
 	private IValorNutricionalService valorNutricionalService;
+=======
+	private ValorNutricionalService objetivoService;
+	
+	@Autowired
+	private UsuarioServiceImpl usuarioService;
+>>>>>>> 2561dba67fbffbfed5abcd36b23fff66c968ed73
 	
 	@Autowired 
 	private ModelMapper mapper;
 	
+<<<<<<< HEAD
 
 
 
@@ -48,6 +68,15 @@ public class ObjetivosRestController {
 //	- **PUT /objetivos/metasemanal** — Ajustar ritmo semanal de cambio de peso.
 
 
+=======
+	//	- **GET /usuarios/misobjetivos** — Obtener todos los objetivos del usuario
+	//	- **PUT /usuarios/misobjetivos/macros** — Cambiar macros de mis objetivos
+	//	- **PUT /usuarios/misobjetivos/metapeso** — Cambiar el peso actual.
+	//	- **PUT /usuarios/misobjetivos/metapeso** — Cambiar el peso objetivo.
+	//	- **PUT /usuarios/misobjetivos/nivelactividad** — Cambiar nivel de actividad física.
+	//	- **PUT /usuarios/misobjtivos/metasemanal** — Ajustar ritmo semanal de cambio de peso.
+	//	- **PUT /usuarios/misobjetivos/metaobjetivo** — Establecer objetivo general (perder, mantener, ganar).
+>>>>>>> 2561dba67fbffbfed5abcd36b23fff66c968ed73
 
 	//RUTA CON METODO PARA OBTENER TODOS LOS OBJETIVOS DEL USUARIO
 	@GetMapping("/misobjetivos")
@@ -77,6 +106,7 @@ public class ObjetivosRestController {
 		return ResponseEntity.ok(respuestaDto);	
 	}
 	
+<<<<<<< HEAD
 	
 	//REGISTRO DE NUEVO PESO
 	@PutMapping("/pesoactual")
@@ -208,4 +238,24 @@ public class ObjetivosRestController {
 //	                .body("Error al actualizar el objetivo: " + e.getMessage());
 //	    }
 //	}
+=======
+	/*
+	 * Cambiar el peso objetivo.
+	 */
+	
+	@PutMapping("/metapeso")
+	public ResponseEntity<?> cambioPesoObjetivo(@RequestBody @Valid MetaPesoRequestDto pesoDto,
+												@AuthenticationPrincipal Usuario usuario) {
+		
+		usuario.getObjetivo().setPesoObjetivo(pesoDto.getPeso());
+		usuarioService.insertOne(usuario);
+		
+		return ResponseEntity.status(HttpStatus.OK)
+				.body("Peso objetivo modificado correctamente.");
+				
+		
+		
+	}
+	
+>>>>>>> 2561dba67fbffbfed5abcd36b23fff66c968ed73
 }
