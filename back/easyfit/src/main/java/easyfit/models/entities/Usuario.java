@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,6 +23,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -92,6 +94,10 @@ public class Usuario implements Serializable, UserDetails{
 	
 	// METODOS CLASE USERDETAILS DE SPRINGSECURITY ==========================================================================  
 	
+	@Transient
+	private List<SimpleGrantedAuthority> authorities;
+	
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 	    String rol = getTipoRol();
@@ -110,5 +116,9 @@ public class Usuario implements Serializable, UserDetails{
         return this.password;
     }
 
+    
+    public void setAuthorities(List<SimpleGrantedAuthority> authorities) {
+    	this.authorities = authorities;
+    }
 
 }
