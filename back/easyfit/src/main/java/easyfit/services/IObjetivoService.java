@@ -11,11 +11,10 @@ import easyfit.models.enums.OpcionPeso;
 
 public interface IObjetivoService {
 	ObjetivoResponseDto actualizarPesoActual(PesoActualDto pesoDto, Usuario usuario);
-    Objetivo actualizarPesoObjetivo(double nuevoPesoObjetivo, Usuario usuario);
+	ObjetivoResponseDto actualizarPesoObjetivo(PesoObjetivoDto dto, Usuario usuario);
     Objetivo actualizarActividad(Actividad nuevaActividad, Usuario usuario);
     Objetivo actualizarOpcionPeso(OpcionPeso nuevaOpcion, Usuario usuario);
     Objetivo actualizarObjetivoUsuario(ObjetivoUsuario nuevoObjetivo, Usuario usuario);
-	ObjetivoResponseDto actualizarPesoObjetivo(PesoObjetivoDto dto, Usuario usuario);
 
     
     

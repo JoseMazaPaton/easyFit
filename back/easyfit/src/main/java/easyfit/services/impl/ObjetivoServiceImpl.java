@@ -81,26 +81,43 @@ public class ObjetivoServiceImpl extends GenericCrudServiceImpl<Objetivo, Intege
 	}
 
 	
-    @Override
-    public ObjetivoResponseDto actualizarPesoObjetivo(PesoObjetivoDto dto, Usuario usuario) {
-    	
-    	    double actual = usuario.getObjetivo().getPesoActual();
-    	    double objetivo = dto.getPesoObjetivo();
-    	    ObjetivoUsuario tipo = usuario.getObjetivo().getObjetivoUsuario();
+	@Override
+	public ObjetivoResponseDto actualizarPesoObjetivo(PesoObjetivoDto pesoDto, Usuario usuario) {
 
-    	    boolean valido = switch (tipo) {
-    	        case PERDERPESO -> objetivo < actual;
-    	        case GANARPESO -> objetivo > actual;
-    	        case MANTENER -> true;
-    	 
-    	    if (!valido) {
-    	        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-    	            "El peso objetivo no es coherente con tu objetivo (" + tipo + ")");
-    	    }
+	    // Validaciones iniciales
+	    if (pesoDto == null || usuario == null) {
+	        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El peso o el usuario no pueden ser null");
+	    }
 
-    	    // actualizar y guardar...
-    	
-    }
+	    double pesoActual = usuario.getObjetivo().getPesoActual();
+	    double pesoObjetivo = pesoDto.getPesoObjetivo(); // CORREGIDO: estabas usando mal el nombre
+	    ObjetivoUsuario tipo = usuario.getObjetivo().getObjetivoUsuario();
+
+	    // Validar si el peso objetivo es coherente con el tipo de objetivo del usuario
+	    boolean valido = switch (tipo) {
+	        case PERDERPESO -> pesoObjetivo < pesoActual;
+	        case GANARPESO  -> pesoObjetivo > pesoActual;
+	        case MANTENER   -> true;
+	    };
+
+	    if (!valido) {
+	        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+	            "El peso objetivo no es coherente con tu objetivo (" + tipo + ")");
+	    }
+
+	    // Verificar existencia del objetivo antes de actualizar
+	    if (!objetivoRepository.existsById(usuario.getObjetivo().getIdObjetivo())) {
+	        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Los objetivos no existen, no se pueden actualizar");
+	    }
+
+	    // Metemos el peso objetivo en los objetivos del usuario y actualizamos
+	    usuario.getObjetivo().setPesoObjetivo(pesoObjetivo);
+	    updateOne(usuario.getObjetivo());
+
+	    // Devolvemos la respuesta como dto
+	    return mapper.map(usuario.getObjetivo(), ObjetivoResponseDto.class) ;
+	}
+
     
     @Override
     public Objetivo actualizarActividad(Actividad nuevaActividad, Usuario usuario) {
@@ -140,6 +157,7 @@ public class ObjetivoServiceImpl extends GenericCrudServiceImpl<Objetivo, Intege
         objetivo.setObjetivoUsuario(nuevoObjetivo);
         return objetivoRepository.save(objetivo);
     }
+
 
     
 }
