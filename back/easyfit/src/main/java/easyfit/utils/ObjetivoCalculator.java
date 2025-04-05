@@ -2,6 +2,7 @@ package easyfit.utils;
 
 import easyfit.models.entities.Objetivo;
 import easyfit.models.entities.Usuario;
+import easyfit.models.entities.ValorNutricional;
 import easyfit.models.enums.Sexo;
 
 public class ObjetivoCalculator {
@@ -11,7 +12,7 @@ public class ObjetivoCalculator {
      * Tiene en cuenta el sexo, edad, altura, peso y nivel de actividad.
      * También ajusta el valor según si el objetivo es perder, ganar o mantener peso.
      */
-    public static int calcularKcal(Usuario usuario, Objetivo objetivo) {
+    public static void calcularKcal(Usuario usuario, Objetivo objetivo, ValorNutricional valores) {
 
         // Tasa Metabólica Basal (TMB)
         double tmb;
@@ -41,6 +42,7 @@ public class ObjetivoCalculator {
             case MANTENER -> mantenimiento;
         };
 
-        return (int) kcal;
+        // Guardamos el resultado de las kcal en la entidad de valores nutricionales
+        valores.setKcalObjetivo((int) kcal);
     }
 }

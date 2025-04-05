@@ -22,8 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import easyfit.models.dtos.AlimentoDto;
-
+import easyfit.models.dtos.alimentos.AlimentoDto;
 import easyfit.models.entities.Alimento;
 import easyfit.models.entities.Categoria;
 import easyfit.models.entities.Usuario;

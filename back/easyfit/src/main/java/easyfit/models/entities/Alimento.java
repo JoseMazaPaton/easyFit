@@ -3,8 +3,8 @@ package easyfit.models.entities;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import easyfit.models.dtos.AlimentoDto;
-import easyfit.models.dtos.AlimentoEnComidaDto;
+import easyfit.models.dtos.alimentos.AlimentoDto;
+import easyfit.models.dtos.alimentos.AlimentoEnComidaDto;
 import jakarta.persistence.*;
 import lombok.*;
 

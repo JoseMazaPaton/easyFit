@@ -1,5 +1,6 @@
-package easyfit.models.dtos;
+package easyfit.models.dtos.auth;
 
+import easyfit.models.dtos.objetivo.ObjetivoRequestDto;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

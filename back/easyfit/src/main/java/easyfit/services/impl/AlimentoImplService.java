@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import easyfit.models.dtos.AlimentoDto;
-import easyfit.models.dtos.AlimentoEnComidaDto;
+import easyfit.models.dtos.alimentos.AlimentoDto;
+import easyfit.models.dtos.alimentos.AlimentoEnComidaDto;
 import easyfit.models.entities.Alimento;
 import easyfit.models.entities.Categoria;
 import easyfit.models.entities.Usuario;

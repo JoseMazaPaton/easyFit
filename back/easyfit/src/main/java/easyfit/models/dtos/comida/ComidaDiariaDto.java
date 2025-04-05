@@ -1,11 +1,13 @@
 // ComidaDiariaDto.java
-package easyfit.models.dtos;
+package easyfit.models.dtos.comida;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.List;
+
+import easyfit.models.dtos.alimentos.AlimentoEnComidaDto;
 
 @Data
 @NoArgsConstructor

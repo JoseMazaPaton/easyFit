@@ -1,5 +1,5 @@
 // AgregarAlimentoRequest.java
-package easyfit.models.dtos;
+package easyfit.models.dtos.alimentos;
 
 import lombok.Data;
 

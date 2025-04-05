@@ -1,5 +1,5 @@
 // ResumenComidaDto.java
-package easyfit.models.dtos;
+package easyfit.models.dtos.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import easyfit.models.dtos.alimentos.AlimentoEnComidaDto;
 
 @Data
 @NoArgsConstructor

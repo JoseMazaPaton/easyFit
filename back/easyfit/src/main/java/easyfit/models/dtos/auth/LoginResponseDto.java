@@ -1,4 +1,4 @@
-package easyfit.models.dtos;
+package easyfit.models.dtos.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LoginRequestDto {
+public class LoginResponseDto {
 
     private String email;
-    private String password;
+    private String nombre;
+    private String tipoRol;
+    private String token;
+    
 }

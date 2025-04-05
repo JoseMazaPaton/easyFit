@@ -1,4 +1,4 @@
-package easyfit.models.dtos;
+package easyfit.models.dtos.auth;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

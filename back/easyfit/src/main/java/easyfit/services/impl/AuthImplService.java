@@ -16,18 +16,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import easyfit.auth.JwtUtils;
-import easyfit.models.dtos.LoginRequestDto;
-import easyfit.models.dtos.LoginResponseDto;
-import easyfit.models.dtos.ObjetivoResponseDto;
-import easyfit.models.dtos.RegistroRequestDto;
-import easyfit.models.dtos.RegistroResponseDto;
-import easyfit.models.dtos.UsuarioResponseDto;
-import easyfit.models.dtos.ValorNutriconalResponseDto;
+import easyfit.models.dtos.auth.LoginRequestDto;
+import easyfit.models.dtos.auth.LoginResponseDto;
+import easyfit.models.dtos.auth.RegistroRequestDto;
+import easyfit.models.dtos.auth.RegistroResponseDto;
+import easyfit.models.dtos.auth.UsuarioResponseDto;
+import easyfit.models.dtos.objetivo.ObjetivoResponseDto;
+import easyfit.models.dtos.valornutricional.ValorNutriconalResponseDto;
 import easyfit.models.entities.Objetivo;
 import easyfit.models.entities.Usuario;
 import easyfit.repositories.IUsuarioRepository;
 import easyfit.services.IAuthService;
-import easyfit.services.ValorNutricionalService;
+import easyfit.services.IValorNutricionalService;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -38,7 +38,7 @@ public class AuthImplService extends GenericCrudServiceImpl<Usuario,String> impl
 	
 	
 	@Autowired
-	private ValorNutricionalService objetivoService;
+	private IValorNutricionalService objetivoService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -124,7 +124,7 @@ public class AuthImplService extends GenericCrudServiceImpl<Usuario,String> impl
 	        usuarioRepository.save(usuario);
 	        
 	        //Enviar credenciales por correo
-	        emailService.enviarCredenciales(usuario.getEmail(), contraseña);
+            // emailService.enviarCredenciales(usuario.getEmail(), contraseña);  -> para cuando se despliegue
 
 	        // Calculamos las Kcal (los macros se calculan automáticamente por trigger en BBDD)
 	        ValorNutriconalResponseDto calculo = objetivoService.registroMacrosYKcal(usuario.getEmail());

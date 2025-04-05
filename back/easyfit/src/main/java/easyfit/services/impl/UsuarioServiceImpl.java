@@ -7,9 +7,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import easyfit.models.dtos.UsuarioPasswordDto;
-import easyfit.models.dtos.UsuarioRequestDto;
-import easyfit.models.dtos.UsuarioResponseDto;
+import easyfit.models.dtos.auth.UsuarioPasswordDto;
+import easyfit.models.dtos.auth.UsuarioRequestDto;
+import easyfit.models.dtos.auth.UsuarioResponseDto;
 import easyfit.models.entities.Usuario;
 import easyfit.repositories.IUsuarioRepository;
 import easyfit.services.IUsuarioService;

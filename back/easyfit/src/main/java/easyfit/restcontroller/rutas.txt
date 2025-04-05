@@ -23,7 +23,7 @@
 - **PUT /objetivos/nivelactividad** — Cambiar nivel de actividad física.
 - **PUT /objetivos/metasemanal** — Ajustar ritmo semanal de cambio de peso.
 - **PUT /objetivos/metaobjetivo** — Establecer objetivo general (perder, mantener, ganar).
-- **PUT /objetivos/editar-todo** — (Opcional) Modificar todos los valores del objetivo en un solo DTO.
+
 
 ---
 

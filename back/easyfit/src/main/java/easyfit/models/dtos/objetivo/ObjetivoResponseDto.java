@@ -1,5 +1,6 @@
-package easyfit.models.dtos;
+package easyfit.models.dtos.objetivo;
 
+import easyfit.models.dtos.valornutricional.ValorNutriconalResponseDto;
 import easyfit.models.enums.Actividad;
 import easyfit.models.enums.ObjetivoUsuario;
 import easyfit.models.enums.OpcionPeso;

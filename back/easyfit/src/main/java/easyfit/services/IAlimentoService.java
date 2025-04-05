@@ -2,7 +2,7 @@ package easyfit.services;
 
 import java.util.List;
 
-import easyfit.models.dtos.AlimentoDto;
+import easyfit.models.dtos.alimentos.AlimentoDto;
 import easyfit.models.entities.Alimento;
 
 public interface IAlimentoService extends IGenericCrud<Alimento, Integer>{

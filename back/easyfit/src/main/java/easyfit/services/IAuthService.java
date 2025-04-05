@@ -1,10 +1,10 @@
 package easyfit.services;
 
-import easyfit.models.dtos.LoginRequestDto;
-import easyfit.models.dtos.LoginResponseDto;
-import easyfit.models.dtos.RegistroRequestDto;
-import easyfit.models.dtos.RegistroResponseDto;
-import easyfit.models.dtos.UsuarioPasswordDto;
+import easyfit.models.dtos.auth.LoginRequestDto;
+import easyfit.models.dtos.auth.LoginResponseDto;
+import easyfit.models.dtos.auth.RegistroRequestDto;
+import easyfit.models.dtos.auth.RegistroResponseDto;
+import easyfit.models.dtos.auth.UsuarioPasswordDto;
 import easyfit.models.entities.Usuario;
 import jakarta.validation.Valid;
 

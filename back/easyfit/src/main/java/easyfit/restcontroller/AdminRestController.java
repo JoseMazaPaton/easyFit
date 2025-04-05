@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import easyfit.models.dtos.UsuarioResponseDto;
+
+import easyfit.models.dtos.auth.UsuarioResponseDto;
 import easyfit.models.entities.Alimento;
 import easyfit.models.entities.Categoria;
 import easyfit.models.entities.Usuario;

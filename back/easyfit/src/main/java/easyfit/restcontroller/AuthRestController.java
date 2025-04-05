@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import easyfit.models.dtos.LoginRequestDto;
-import easyfit.models.dtos.LoginResponseDto;
-import easyfit.models.dtos.RegistroRequestDto;
-import easyfit.models.dtos.RegistroResponseDto;
-import easyfit.models.dtos.UsuarioResponseDto;
+import easyfit.models.dtos.auth.LoginRequestDto;
+import easyfit.models.dtos.auth.LoginResponseDto;
+import easyfit.models.dtos.auth.RegistroRequestDto;
+import easyfit.models.dtos.auth.RegistroResponseDto;
+import easyfit.models.dtos.auth.UsuarioResponseDto;
 import easyfit.services.IAuthService;
 import jakarta.validation.Valid;
 

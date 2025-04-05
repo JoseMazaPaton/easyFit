@@ -1,4 +1,4 @@
-package easyfit.models.dtos;
+package easyfit.models.dtos.valornutricional;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

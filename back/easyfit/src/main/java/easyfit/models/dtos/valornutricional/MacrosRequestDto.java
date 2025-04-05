@@ -1,4 +1,4 @@
-package easyfit.models.dtos;
+package easyfit.models.dtos.valornutricional;
 
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.DecimalMax;
@@ -16,8 +16,7 @@ import lombok.NoArgsConstructor;
 public class MacrosRequestDto {
 
 	//POR AQUI LLEGAN LOS MACROS EN PORCENTAJE, NO EN GRAMOS
-	
-	
+
     @NotNull(message = "El porcentaje de proteínas no puede ser nulo")
     @DecimalMin(value = "0.0", inclusive = true, message = "El porcentaje de proteínas no puede ser negativo")
     @DecimalMax(value = "100.0", message = "El porcentaje de proteínas no puede superar 100")

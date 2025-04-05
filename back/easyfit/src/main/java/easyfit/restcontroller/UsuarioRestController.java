@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import easyfit.models.dtos.UsuarioPasswordDto;
-import easyfit.models.dtos.UsuarioResponseDto;
+import easyfit.models.dtos.auth.UsuarioPasswordDto;
+import easyfit.models.dtos.auth.UsuarioResponseDto;
 import easyfit.models.entities.Usuario;
 import easyfit.services.IUsuarioService;
 import jakarta.validation.Valid;

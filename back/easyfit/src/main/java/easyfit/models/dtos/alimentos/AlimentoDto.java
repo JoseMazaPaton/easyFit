@@ -1,4 +1,4 @@
-package easyfit.models.dtos;
+package easyfit.models.dtos.alimentos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

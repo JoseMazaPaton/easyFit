@@ -1,5 +1,6 @@
-package easyfit.models.dtos;
+package easyfit.models.dtos.auth;
 
+import easyfit.models.dtos.objetivo.ObjetivoResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

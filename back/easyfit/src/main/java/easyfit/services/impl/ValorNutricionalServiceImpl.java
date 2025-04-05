@@ -6,18 +6,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import easyfit.models.dtos.MacrosRequestDto;
-import easyfit.models.dtos.ValorNutriconalResponseDto;
+import easyfit.models.dtos.valornutricional.MacrosRequestDto;
+import easyfit.models.dtos.valornutricional.ValorNutriconalResponseDto;
 import easyfit.models.entities.Objetivo;
 import easyfit.models.entities.Usuario;
 import easyfit.models.entities.ValorNutricional;
 import easyfit.repositories.IUsuarioRepository;
 import easyfit.repositories.IValorNutricionalRepository;
-import easyfit.services.ValorNutricionalService;
+import easyfit.services.IValorNutricionalService;
 import easyfit.utils.ObjetivoCalculator;
 
 @Service
-public class ValorNutricionalServiceImpl extends GenericCrudServiceImpl<ValorNutricional, Integer> implements ValorNutricionalService {
+public class ValorNutricionalServiceImpl extends GenericCrudServiceImpl<ValorNutricional, Integer> implements IValorNutricionalService {
 
 	@Autowired
 	private IValorNutricionalRepository valornutricionalRepository;
@@ -42,15 +42,11 @@ public class ValorNutricionalServiceImpl extends GenericCrudServiceImpl<ValorNut
 	    // Obtenemos el objetivo del usuario
 	    Objetivo objetivo = usuario.getObjetivo();
 
-	    // Calculamos las kcal necesarias según los datos del objetivo
-	    int kcal = ObjetivoCalculator.calcularKcal(usuario, objetivo);
+	    // Calculamos las kcal necesarias según los datos del objetivo, ya se guardan en el metodo
+	     ObjetivoCalculator.calcularKcal(usuario, objetivo, usuario.getValorNutricional());
 
 	    // Accedemos al objeto ValorNutricional asociado al usuario
 	    ValorNutricional valores = usuario.getValorNutricional();
-
-	    // Guardamos las kcal calculadas (los macros se autocalculan por trigger al insert/update)
-	    valores.setKcalObjetivo(kcal);
-	    valornutricionalRepository.save(valores);
 
 	    // Devolvemos un DTO con kcal + macros (gramos y %)
 	    return ValorNutriconalResponseDto.builder()
@@ -63,6 +59,8 @@ public class ValorNutricionalServiceImpl extends GenericCrudServiceImpl<ValorNut
 	        .porcentajeGrasas(valores.getPorcentajeGrasas())
 	        .build();
 	}
+	
+	
 	
 	// METODO PARA ACTUALIZAR LOS MACROS DE UN USUARIO
 	@Override

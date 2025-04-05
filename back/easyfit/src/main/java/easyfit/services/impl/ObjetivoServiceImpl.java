@@ -1,46 +1,105 @@
 package easyfit.services.impl;
 
+import org.hibernate.sql.Update;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import easyfit.models.dtos.objetivo.ObjetivoResponseDto;
+import easyfit.models.dtos.objetivo.PesoActualDto;
+import easyfit.models.dtos.objetivo.PesoObjetivoDto;
+import easyfit.models.dtos.valornutricional.MacrosRequestDto;
+import easyfit.models.dtos.valornutricional.ValorNutriconalResponseDto;
+import easyfit.models.entities.Categoria;
 import easyfit.models.entities.Objetivo;
 import easyfit.models.entities.Usuario;
 import easyfit.models.enums.Actividad;
 import easyfit.models.enums.ObjetivoUsuario;
 import easyfit.models.enums.OpcionPeso;
+import easyfit.repositories.IComidaAlimentoRepository;
 import easyfit.repositories.IObjetivoRepository;
 import easyfit.services.IObjetivoService;
+import easyfit.utils.ObjetivoCalculator;
+import jakarta.validation.Valid;
+
 import java.util.NoSuchElementException;
 
 @Service
-public class ObjetivoServiceImpl implements IObjetivoService {
+public class ObjetivoServiceImpl extends GenericCrudServiceImpl<Objetivo, Integer> implements IObjetivoService {
 
     @Autowired
     private IObjetivoRepository objetivoRepository;
-
-    @Override
-    public Objetivo actualizarPesoActual(double nuevoPeso, Usuario usuario) {
-        if(nuevoPeso <= 0) {
-            throw new IllegalArgumentException("El peso debe ser mayor a 0");
-        }
-        
-        Objetivo objetivo = objetivoRepository.findByUsuarioEmail(usuario.getEmail())
-            .orElseThrow(() -> new NoSuchElementException("No se encontraron objetivos para el usuario"));
-        
-        objetivo.setPesoActual(nuevoPeso);
-        return objetivoRepository.save(objetivo);
-    }
     
+    @Autowired
+    private ModelMapper mapper;
+
+	// En este metodo indicamos el repositorio que usamos en el CRUD genérico que hemos extendido 
+	@Override
+	protected IObjetivoRepository getRepository() {
+		return objetivoRepository;
+	}
+    
+	//METODO PARA ACTUALIZAR EL PESO ACTUAL + RECALCULAR KCAL
+	@Override
+	public ObjetivoResponseDto actualizarPesoActual(PesoActualDto pesoDto, Usuario usuario) {
+
+	    //Primero comprobamos que los valores que llegan por el body no sean nulos
+	    if (pesoDto == null || usuario == null) {
+	        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El peso o el usuario no pueden ser null");
+	    }
+	    
+	    //Sacamos los objetivos del usuario autenticado y los guardamos 
+	    Objetivo objetivo = usuario.getObjetivo();
+
+	    //Comprobamos que no sean null
+	    if (objetivo == null) {
+	        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Los objetivos no puede ser null");
+	    }
+
+	    //Le añadimos el nuevo peso registrado 
+	    objetivo.setPesoActual(pesoDto.getPesoActual());
+
+	    //Con el nuevo peso tenemos que recalcular las Kcal
+	    ObjetivoCalculator.calcularKcal(usuario, objetivo, usuario.getValorNutricional());
+
+	    //Actualizamos objetivos con el nuevo peso
+	    if (!objetivoRepository.existsById(objetivo.getIdObjetivo())) {
+	        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Los objetivos no existen, no se pueden actualizar");
+	    } else {
+	        updateOne(objetivo); //Usamos el metodo de IGenericCrud para actualizar que ya añade excepciones extra
+	    }
+
+	    //Mapeamos la entidad y le añadimos los valores nutricionales de usuario mapeados ( para mostar que han cambiado al recalcular las kcal)
+	    ObjetivoResponseDto respuestaDto = mapper.map(objetivo, ObjetivoResponseDto.class);
+	    respuestaDto.setValores(mapper.map(usuario.getValorNutricional(), ValorNutriconalResponseDto.class));
+	    
+	    //Devolvemos la respuesta mapeada a dto
+	    return respuestaDto ;
+	}
+
+	
     @Override
-    public Objetivo actualizarPesoObjetivo(double nuevoPesoObjetivo, Usuario usuario) {
-        if(nuevoPesoObjetivo <= 0) {
-            throw new IllegalArgumentException("El peso objetivo debe ser mayor a 0");
-        }
-        
-        Objetivo objetivo = objetivoRepository.findByUsuarioEmail(usuario.getEmail())
-            .orElseThrow(() -> new NoSuchElementException("No se encontraron objetivos para el usuario"));
-        
-        objetivo.setPesoObjetivo(nuevoPesoObjetivo);
-        return objetivoRepository.save(objetivo);
+    public ObjetivoResponseDto actualizarPesoObjetivo(PesoObjetivoDto dto, Usuario usuario) {
+    	
+    	    double actual = usuario.getObjetivo().getPesoActual();
+    	    double objetivo = dto.getPesoObjetivo();
+    	    ObjetivoUsuario tipo = usuario.getObjetivo().getObjetivoUsuario();
+
+    	    boolean valido = switch (tipo) {
+    	        case PERDERPESO -> objetivo < actual;
+    	        case GANARPESO -> objetivo > actual;
+    	        case MANTENER -> true;
+    	 
+    	    if (!valido) {
+    	        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+    	            "El peso objetivo no es coherente con tu objetivo (" + tipo + ")");
+    	    }
+
+    	    // actualizar y guardar...
+    	
     }
     
     @Override
@@ -81,5 +140,6 @@ public class ObjetivoServiceImpl implements IObjetivoService {
         objetivo.setObjetivoUsuario(nuevoObjetivo);
         return objetivoRepository.save(objetivo);
     }
+
     
 }

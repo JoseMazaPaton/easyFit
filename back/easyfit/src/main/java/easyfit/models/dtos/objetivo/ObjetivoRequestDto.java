@@ -1,4 +1,4 @@
-package easyfit.models.dtos;
+package easyfit.models.dtos.objetivo;
 
 import easyfit.models.enums.Actividad;
 import easyfit.models.enums.ObjetivoUsuario;

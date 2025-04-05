@@ -19,10 +19,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import easyfit.models.dtos.ActualizarCantidadAlimentoRequestDto;
-import easyfit.models.dtos.AgregarAlimentoRequestDto;
-import easyfit.models.dtos.ComidaDiariaDto;
-import easyfit.models.dtos.ResumenComidaDto;
+
+import easyfit.models.dtos.alimentos.ActualizarCantidadAlimentoRequestDto;
+import easyfit.models.dtos.alimentos.AgregarAlimentoRequestDto;
+import easyfit.models.dtos.auth.ResumenComidaDto;
+import easyfit.models.dtos.comida.ComidaDiariaDto;
 import easyfit.models.entities.Comida;
 import easyfit.models.entities.Usuario;
 import easyfit.services.IComidaService;
