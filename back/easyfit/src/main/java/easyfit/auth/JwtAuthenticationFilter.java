@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import easyfit.models.entities.Usuario;
 import easyfit.services.impl.UsuarioDetallesServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
@@ -78,19 +79,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             logger.warn("Token inválido, no empieza con 'Bearer ' o está ausente");
         }
 
-        // Si tenemos un nombre de usuario y no hay un usuario autenticado aún
+     // Si tenemos un nombre de usuario y no hay un usuario autenticado aún
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            // Cargamos los datos del usuario
-            UserDetails userDetails = usuarioDetallesService.loadUserByUsername(username);
-            // Si el token es válido
-            if (jwtUtil.validateToken(jwtToken, userDetails)) {
-                // Creamos una autenticación con esos datos
+            
+            // Cargamos el usuario desde la base de datos (ya implementa UserDetails)
+            Usuario usuario = (Usuario) usuarioDetallesService.loadUserByUsername(username);
+
+            // Validamos el token contra el usuario
+            if (jwtUtil.validateToken(jwtToken, usuario)) {
+                
+                // Creamos una autenticación con la entidad Usuario y sus authorities
                 UsernamePasswordAuthenticationToken authToken =
-                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                        new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+                
+                // Añadimos información adicional de la petición (IP, etc.)
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                // Ponemos el usuario en el contexto de seguridad (lo dejamos "logueado")
+
+                // Establecemos la autenticación en el contexto de Spring Security
                 SecurityContextHolder.getContext().setAuthentication(authToken);
-                logger.info("Usuario autenticado: {}", username);
+                
+                logger.info("Usuario autenticado correctamente: {}", username);
             } else {
                 logger.warn("Token no válido para el usuario: {}", username);
             }

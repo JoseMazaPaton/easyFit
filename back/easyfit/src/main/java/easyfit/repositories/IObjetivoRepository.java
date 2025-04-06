@@ -5,5 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import easyfit.models.entities.Objetivo;
 
 public interface IObjetivoRepository extends JpaRepository<Objetivo, Integer>{
-	 Optional<Objetivo> findByUsuarioEmail(String email);
+	
+	Optional<Objetivo> findByUsuarioEmail(String email);
+
 }

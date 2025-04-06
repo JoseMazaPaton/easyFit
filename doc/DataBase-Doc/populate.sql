@@ -193,7 +193,7 @@ INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- Inserción de objetivos
 INSERT INTO objetivos (email, peso_actual, peso_objetivo, objetivo_usuario, opcion_peso, actividad) VALUES 
-('laura_martinez94@gmail.com', 63.0, 58.0, 'PERDERPESO', 'LIGERO', 'MODERADO');
+('laura_martinez94@gmail.com', 67.0, 60.0, 'PERDERPESO', 'LIGERO', 'MODERADO');
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- Inserción de valores_nutricionales
@@ -211,8 +211,24 @@ INSERT INTO favoritos (email, id_alimento) VALUES
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- Inserción manual de prueba de consumo_diario
 -- los triggers generan este dato automáticamente al añadir alimentos a comidas
-INSERT INTO consumo_diario (email, fecha, kcal_consumidas, proteinas, carbohidratos, grasas) VALUES 
-('laura_martinez94@gmail.com', '2025-03-27', 1750, 115.0, 145.0, 48.0);
+INSERT INTO consumo_diario (email, fecha, kcal_consumidas, proteinas, carbohidratos, grasas) VALUES
+('laura_martinez94@gmail.com', '2025-03-31', 1200, 120.0, 150.0, 50.0),
+('laura_martinez94@gmail.com', '2025-04-01', 1350, 115.0, 145.0, 48.0),
+('laura_martinez94@gmail.com', '2025-04-02', 1480, 110.0, 140.0, 45.0),
+('laura_martinez94@gmail.com', '2025-04-03', 1200, 100.0, 135.0, 42.0),
+('laura_martinez94@gmail.com', '2025-04-04', 1420, 118.0, 148.0, 47.0),
+('laura_martinez94@gmail.com', '2025-04-05', 1500, 112.0, 140.0, 46.0),
+('laura_martinez94@gmail.com', '2025-04-06', 1550, 115.0, 145.0, 48.0);
+
+
+-- Progresos de laura_martinez94@gmail.com
+INSERT INTO progresos (peso, fecha_cambio, email) VALUES
+(70.0, '2025-03-27 08:00:00', 'laura_martinez94@gmail.com'), 
+(69.0, '2025-03-30 08:00:00', 'laura_martinez94@gmail.com'),  
+(68.0, '2025-04-02 08:00:00', 'laura_martinez94@gmail.com'),  
+(67.0, '2025-04-05 08:00:00', 'laura_martinez94@gmail.com');  
+
+
 
 
 -- =========================

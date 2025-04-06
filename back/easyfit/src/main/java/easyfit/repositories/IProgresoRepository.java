@@ -1,10 +1,13 @@
 package easyfit.repositories;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import easyfit.models.entities.Progreso;
 
 public interface IProgresoRepository extends JpaRepository<Progreso, Integer>{
-	List<Progreso> findByUsuarioEmailOrderByFechaCambioDesc(String email);
+
+	Optional<Progreso> findFirstByUsuario_EmailOrderByFechaCambioAsc(String email);
+;
+
 }

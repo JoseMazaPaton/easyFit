@@ -58,6 +58,7 @@ public class UsuarioDetallesServiceImpl implements UserDetailsService {
         // Creamos la autoridad para Spring Security usando ese rol
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(nombreRol);
         
+        //Le agregamos la autoridad al usuario
         usuario.setAuthorities(Collections.singletonList(authority));
         
         

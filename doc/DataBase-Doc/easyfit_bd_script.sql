@@ -109,7 +109,7 @@ CREATE TABLE objetivos (
     peso_actual DECIMAL(5,2) NOT NULL,
     peso_objetivo DECIMAL(5,2) NOT NULL,
     objetivo_usuario ENUM('PERDERPESO', 'MANTENER', 'GANARPESO') NOT NULL,
-    opcion_peso ENUM('LIGERO', 'MODERADO', 'INTENSO', 'AGRESIVO'),
+    opcion_peso ENUM('LIGERO', 'MODERADO', 'INTENSO', 'MANTENER'),
     actividad ENUM('SEDENTARIO', 'LIGERO', 'MODERADO', 'ACTIVO', 'MUYACTIVO') NOT NULL,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (email) REFERENCES usuarios(email)

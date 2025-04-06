@@ -97,6 +97,10 @@ public class Usuario implements Serializable, UserDetails{
 	@Transient
 	private List<SimpleGrantedAuthority> authorities;
 	
+    
+    public void setAuthorities(List<SimpleGrantedAuthority> authorities) {
+    	this.authorities = authorities;
+    }
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -116,9 +120,6 @@ public class Usuario implements Serializable, UserDetails{
         return this.password;
     }
 
-    
-    public void setAuthorities(List<SimpleGrantedAuthority> authorities) {
-    	this.authorities = authorities;
-    }
+
 
 }

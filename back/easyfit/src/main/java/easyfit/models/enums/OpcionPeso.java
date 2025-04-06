@@ -11,7 +11,7 @@ public enum OpcionPeso {
     LIGERO("Ligero", 0.25),     // 0.25 kg por semana
     MODERADO("Moderado", 0.50), // 0.50 kg por semana
     INTENSO("Intenso", 0.75),   // 0.75 kg por semana
-    AGRESIVO("Agresivo", 1.00); // 1.00 kg por semana
+    MANTENER("Mantener", 0.0); // 1.00 kg por semana
 
     private final String descripcion; // Descripción para mostrar al usuario
     private final double valorKg;     // Valor real en kg para usar en los cálculos

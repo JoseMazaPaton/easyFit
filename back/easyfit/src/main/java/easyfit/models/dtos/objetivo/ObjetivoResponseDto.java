@@ -24,6 +24,8 @@ public class ObjetivoResponseDto {
     private OpcionPeso opcionPeso;
     
     private Actividad actividad;
+    
+    private boolean coherente;
 
     //Datos de calorias y macros
     private ValorNutriconalResponseDto valores;
