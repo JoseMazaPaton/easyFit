@@ -1,5 +1,5 @@
 <div class="login-wrapper d-flex justify-content-center align-items-center w-100">
-  <form class="login-form bg-white rounded-4 shadow p-5">
+  <form class="login-form bg-white rounded-4 shadow p-5" #loginForm = "ngForm" (ngSubmit)="login(loginForm)">
     <h2 class="text-center fw-bold mb-4 text-primary-custom">Inicio de sesión</h2>
 
     <!-- INPUT DEL EMAIL USUARIO -->
@@ -9,6 +9,9 @@
         id="email"
         class="form-control"
         placeholder="Dirección de email"
+        required
+        name="email"
+        ngModel
       />
     </div>
 
@@ -17,9 +20,12 @@
       <div class="input-group">
         <input
           type="password"
-          id="password"
+          id="password"  
           class="form-control"
           placeholder="Contraseña"
+          required
+          name="password"
+          ngModel
         />
         <span class="input-group-text"><i class="bi bi-eye"></i></span>
       </div>
@@ -28,7 +34,8 @@
 
     <!-- BOTON INICIO -->
     <div class="d-grid mt-5">
-      <button class="btn btn-custom btn-lg text-white fw-semibold ">
+      <button type="submit" class="btn btn-custom btn-lg text-white fw-semibold"
+      [disabled]="loginForm.invalid">
         Iniciar sesión
       </button>
     </div>

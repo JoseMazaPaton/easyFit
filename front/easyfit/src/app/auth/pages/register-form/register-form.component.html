@@ -1,1 +1,125 @@
-<p>register-form works!</p>
+
+<div>
+    <form [formGroup]="registroForm" (ngSubmit)="registrarUsuario()">
+
+        <div class="mb-3">
+            <label for="email" class="form-label mt-3">Email</label>
+            <input class="form-control" formControlName="email" type="email"
+            id="email" formControlName="email"/>
+            @if (checkControl('email', 'required')){
+                <span class="error">Campo requerido</span>
+            }
+        </div>
+      
+        <div class="mb-3">
+            <label for="password" class="form-label mt-3">Contraseña</label>
+            <input class="form-control" formControlName="password"  type="password"
+            id="password" formControlName="password"/>
+            @if (checkControl('password', 'required')){
+                <span class="error">Campo requerido</span>
+            }
+        </div>
+      
+        <div class="mb-3">
+            <label for="nombre" class="form-label mt-3">Nombre</label>
+            <input class="form-control" formControlName="nombre"  type="text"
+            id="nombre" formControlName="nombre"/>
+            @if (checkControl('nombre', 'required')){
+                <span class="error">Campo requerido</span>
+            }
+        </div>
+      
+        <div class="mb-3">
+            <label for="edad" class="form-label mt-3">Edad</label>
+            <input class="form-control" formControlName="edad" type="number"
+            id="edad" formControlName="edad"/>
+            @if (checkControl('edad', 'required')){
+                <span class="error">Campo requerido</span>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="sexo" class="form-label mt-3">Sexo</label>
+            <select class="form-select" id="sexo" formControlName="sexo">
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option value="hombre">Hombre</option>
+              <option value="mujer">Mujer</option>
+            </select>         
+            @if (checkControl('sexo', 'required')) {
+              <span class="error">Campo requerido</span>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="altura" class="form-label mt-3">Altura</label>
+            <input class="form-control" formControlName="altura" type="number"
+            id="altura" formControlName="altura"/>
+            @if (checkControl('altura', 'required')){
+                <span class="error">Campo requerido</span>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="pesoActual" class="form-label mt-3">¿Cual es tu peso actual?</label>
+            <input class="form-control" formControlName="pesoActual" type="number"
+            id="pesoActual" formControlName="pesoActual"/>
+            @if (checkControl('pesoActual', 'required')){
+                <span class="error">Campo requerido</span>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="pesoObjetivo" class="form-label mt-3">¿Cual es tu peso objetivo?</label>
+            <input class="form-control" formControlName="pesoObjetivo" type="number"
+            id="pesoObjetivo" formControlName="pesoObjetivo"/>
+            @if (checkControl('pesoObjetivo', 'required')){
+                <span class="error">Campo requerido</span>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="objetivoUsuario" class="form-label mt-3">¿Cual es tu peso objetivo?</label>
+            <select class="form-select" id="objetivoUsuario" formControlName="objetivoUsuario">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="PERDERPESO">Perder peso</option>
+                <option value="MANTENER">Mantener peso</option>
+                <option value="GANARPESO">Ganar peso</option>
+              </select> 
+            @if (checkControl('objetivoUsuario', 'required')){
+                <span class="error">Campo requerido</span>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="opcionPeso" class="form-label mt-3">En caso de no querer mantener tu peso ¿De que manera te gustaria hacerlo?</label>
+            <select class="form-select" id="opcionPeso" formControlName="opcionPeso">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="LIGERO">De manera LIGERA</option>
+                <option value="MODERADO">De manera MODERADA</option>
+                <option value="INTENSO">De manera INTENSA</option>
+              </select> 
+            @if (checkControl('opcionPeso', 'required')){
+                <span class="error">Campo requerido</span>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="actividad" class="form-label mt-3">En tu dia a dia, ¿Como es tu actividad física?</label>
+            <select class="form-select" id="actividad" formControlName="actividad">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="SEDENTARIO">Sedentario</option>
+                <option value="LIGERO">Ligera</option>
+                <option value="MODERADO">Moderada</option>
+                <option value="ACTIVO">Activa</option>
+                <option value="MUYACTIVO">Muy activa</option>
+              </select> 
+            @if (checkControl('actividad', 'required')){
+                <span class="error">Campo requerido</span>
+            }
+        </div>
+      
+        <button type="submit" class="btn btn-primary" [disabled]="registroForm.invalid">
+          Registrarse
+        </button>
+      </form>
+</div>
