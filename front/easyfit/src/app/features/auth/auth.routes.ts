@@ -1,32 +1,30 @@
 import { Routes } from '@angular/router';
+import { AccessLayoutComponent } from './layouts/access-layout/access-layout.component';
 
 export const authRoutes: Routes = [
   {
     path: '',
-    loadComponent: () =>
-      import('./layouts/access-layout/access-layout.component').then(
-        (m) => m.AccessLayoutComponent
-      ),
+    component: AccessLayoutComponent,
     children: [
       {
         path: 'login',
         loadComponent: () =>
-          import('./pages/login-page/login-page.component').then(
-            (m) => m.LoginPageComponent
-          ),
+          import('./pages/login-form/login-form.component').then(
+            (c) => c.LoginFormComponent
+          )
       },
       {
         path: 'register',
         loadComponent: () =>
-          import('./pages/register-page/register-page.component').then(
-            (m) => m.RegisterPageComponent
-          ),
+          import('./pages/register-form/register-form.component').then(
+            (c) => c.RegisterFormComponent
+          )
       },
       {
         path: '',
-        redirectTo: 'login',
         pathMatch: 'full',
-      },
-    ],
-  },
+        redirectTo: 'login'
+      }
+    ]
+  }
 ];
