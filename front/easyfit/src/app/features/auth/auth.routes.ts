@@ -4,7 +4,7 @@ export const authRoutes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./pages/access-layout/access-layout.component').then(
+      import('./layouts/access-layout/access-layout.component').then(
         (m) => m.AccessLayoutComponent
       ),
     children: [
