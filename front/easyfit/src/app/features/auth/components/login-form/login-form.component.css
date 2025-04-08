@@ -1,0 +1,25 @@
+
+.login-wrapper {
+  min-height: 100%;
+}
+
+.login-form {
+  width: 600px;
+  height: 480px;
+  box-sizing: border-box;
+}
+
+.text-primary-custom {
+  color: #0099ff;
+}
+
+.btn-custom {
+  background-color: #0099ff;
+  padding: 1.2rem 2.5rem;
+  justify-self: center;
+  border: none;
+}
+
+.btn-custom:hover {
+  background-color: #007acc;
+}
