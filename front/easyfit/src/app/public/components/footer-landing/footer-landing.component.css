@@ -1,0 +1,15 @@
+.footer-link {
+    font-size: 1.1rem;         /* más grande que fs-5 */
+    font-weight: 600;          /* semibold o usa 700 para negrita completa */
+    color: #3f3f3f !important; /* gris oscuro, override si Bootstrap aplica otro */
+    text-decoration: none;
+  }
+  
+  .footer-link:hover {
+    color: #000000;            /* opcional: al pasar el mouse, más oscuro */
+  }
+
+  .text-logo{
+    color: #3f3f3f;
+  }
+  

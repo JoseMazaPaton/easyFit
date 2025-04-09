@@ -1,6 +1,15 @@
 .hero-image {
-  mask-image: linear-gradient(
-    black 80%,
-    transparent
-  );
+  margin-bottom: -10px; 
+  z-index: 2; 
+  position: relative;
+  max-width: 700px;
+  margin-right: -100px;
 }
+
+.banner-btn {
+  width: 200px;         
+  display: inline-block; 
+  color: #3f3f3f;
+}
+
+
