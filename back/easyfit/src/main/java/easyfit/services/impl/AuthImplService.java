@@ -28,6 +28,7 @@ import easyfit.models.entities.Usuario;
 import easyfit.repositories.IUsuarioRepository;
 import easyfit.services.IAuthService;
 import easyfit.services.IValorNutricionalService;
+import easyfit.utils.ObjetivoCalculator;
 import jakarta.transaction.Transactional;
 
 @Service
