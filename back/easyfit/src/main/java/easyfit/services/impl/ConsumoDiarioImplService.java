@@ -10,9 +10,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import easyfit.models.dtos.consumidiario.DiarioResponseDto;
-import easyfit.models.dtos.consumidiario.HistorialCaloriasDto;
-import easyfit.models.dtos.consumidiario.HistorialPesoDto;
+import easyfit.models.dtos.consumodiario.DiarioResponseDto;
+import easyfit.models.dtos.consumodiario.HistorialCaloriasDto;
+import easyfit.models.dtos.consumodiario.HistorialPesoDto;
 import easyfit.models.entities.ConsumoDiario;
 import easyfit.models.entities.Objetivo;
 import easyfit.models.entities.Progreso;

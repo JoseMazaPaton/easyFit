@@ -1,125 +1,179 @@
-
-<div>
-    <form [formGroup]="registroForm" (ngSubmit)="registrarUsuario()">
-
-        <div class="mb-3">
-            <label for="email" class="form-label mt-3">Email</label>
-            <input class="form-control" formControlName="email" type="email"
-            id="email" formControlName="email"/>
-            @if (checkControl('email', 'required')){
-                <span class="error">Campo requerido</span>
-            }
+<div class="login-wrapper d-flex justify-content-center align-items-center w-100">
+    <form [formGroup]="registroForm" (ngSubmit)="registrarUsuario()" 
+          class="login-form bg-white rounded-4 shadow p-5" style="max-width: 600px; width: 100%;">
+  
+      <h2 class="text-center fw-bold mb-4 text-primary-custom">Registro</h2>
+  
+      <!-- EMAIL -->
+      <div class="mb-4">
+        <label for="email" class="form-label small text-muted">Email</label>
+        <input class="form-control" 
+               formControlName="email" 
+               type="email"
+               id="email"
+               placeholder="usuario@email.com">
+        @if (checkControl('email', 'required')){
+          <span class="error small text-danger">Campo requerido</span>
+        }
+      </div>
+  
+      <!-- CONTRASEÑA -->
+      <div class="mb-4">
+        <label for="password" class="form-label small text-muted">Contraseña</label>
+        <div class="input-group">
+          <input class="form-control" 
+                 formControlName="password"  
+                 type="password"
+                 id="password"
+                 placeholder="••••••••">
+          <span class="input-group-text"><i class="bi bi-eye"></i></span>
         </div>
-      
-        <div class="mb-3">
-            <label for="password" class="form-label mt-3">Contraseña</label>
-            <input class="form-control" formControlName="password"  type="password"
-            id="password" formControlName="password"/>
-            @if (checkControl('password', 'required')){
-                <span class="error">Campo requerido</span>
-            }
-        </div>
-      
-        <div class="mb-3">
-            <label for="nombre" class="form-label mt-3">Nombre</label>
-            <input class="form-control" formControlName="nombre"  type="text"
-            id="nombre" formControlName="nombre"/>
-            @if (checkControl('nombre', 'required')){
-                <span class="error">Campo requerido</span>
-            }
-        </div>
-      
-        <div class="mb-3">
-            <label for="edad" class="form-label mt-3">Edad</label>
-            <input class="form-control" formControlName="edad" type="number"
-            id="edad" formControlName="edad"/>
-            @if (checkControl('edad', 'required')){
-                <span class="error">Campo requerido</span>
-            }
-        </div>
-
-        <div class="mb-3">
-            <label for="sexo" class="form-label mt-3">Sexo</label>
-            <select class="form-select" id="sexo" formControlName="sexo">
-              <option value="" disabled selected>Selecciona una opción</option>
-              <option value="hombre">Hombre</option>
-              <option value="mujer">Mujer</option>
-            </select>         
-            @if (checkControl('sexo', 'required')) {
-              <span class="error">Campo requerido</span>
-            }
-        </div>
-
-        <div class="mb-3">
-            <label for="altura" class="form-label mt-3">Altura</label>
-            <input class="form-control" formControlName="altura" type="number"
-            id="altura" formControlName="altura"/>
-            @if (checkControl('altura', 'required')){
-                <span class="error">Campo requerido</span>
-            }
-        </div>
-
-        <div class="mb-3">
-            <label for="pesoActual" class="form-label mt-3">¿Cual es tu peso actual?</label>
-            <input class="form-control" formControlName="pesoActual" type="number"
-            id="pesoActual" formControlName="pesoActual"/>
-            @if (checkControl('pesoActual', 'required')){
-                <span class="error">Campo requerido</span>
-            }
-        </div>
-
-        <div class="mb-3">
-            <label for="pesoObjetivo" class="form-label mt-3">¿Cual es tu peso objetivo?</label>
-            <input class="form-control" formControlName="pesoObjetivo" type="number"
-            id="pesoObjetivo" formControlName="pesoObjetivo"/>
-            @if (checkControl('pesoObjetivo', 'required')){
-                <span class="error">Campo requerido</span>
-            }
-        </div>
-
-        <div class="mb-3">
-            <label for="objetivoUsuario" class="form-label mt-3">¿Cual es tu peso objetivo?</label>
-            <select class="form-select" id="objetivoUsuario" formControlName="objetivoUsuario">
-                <option value="" disabled selected>Selecciona una opción</option>
-                <option value="PERDERPESO">Perder peso</option>
-                <option value="MANTENER">Mantener peso</option>
-                <option value="GANARPESO">Ganar peso</option>
-              </select> 
-            @if (checkControl('objetivoUsuario', 'required')){
-                <span class="error">Campo requerido</span>
-            }
-        </div>
-
-        <div class="mb-3">
-            <label for="opcionPeso" class="form-label mt-3">En caso de no querer mantener tu peso ¿De que manera te gustaria hacerlo?</label>
-            <select class="form-select" id="opcionPeso" formControlName="opcionPeso">
-                <option value="" disabled selected>Selecciona una opción</option>
-                <option value="LIGERO">De manera LIGERA</option>
-                <option value="MODERADO">De manera MODERADA</option>
-                <option value="INTENSO">De manera INTENSA</option>
-              </select> 
-            @if (checkControl('opcionPeso', 'required')){
-                <span class="error">Campo requerido</span>
-            }
-        </div>
-
-        <div class="mb-3">
-            <label for="actividad" class="form-label mt-3">En tu dia a dia, ¿Como es tu actividad física?</label>
-            <select class="form-select" id="actividad" formControlName="actividad">
-                <option value="" disabled selected>Selecciona una opción</option>
-                <option value="SEDENTARIO">Sedentario</option>
-                <option value="LIGERO">Ligera</option>
-                <option value="MODERADO">Moderada</option>
-                <option value="ACTIVO">Activa</option>
-                <option value="MUYACTIVO">Muy activa</option>
-              </select> 
-            @if (checkControl('actividad', 'required')){
-                <span class="error">Campo requerido</span>
-            }
-        </div>
-      
-        <button type="submit" class="btn btn-primary" [disabled]="registroForm.invalid">
-          Registrarse
+        @if (checkControl('password', 'required')){
+          <span class="error small text-danger">Campo requerido</span>
+        }
+      </div>
+  
+      <!-- NOMBRE -->
+      <div class="mb-4">
+        <label for="nombre" class="form-label small text-muted">Nombre</label>
+        <input class="form-control" 
+               formControlName="nombre"  
+               type="text"
+               id="nombre"
+               placeholder="Tu nombre completo">
+        @if (checkControl('nombre', 'required')){
+          <span class="error small text-danger">Campo requerido</span>
+        }
+      </div>
+  
+      <!-- EDAD -->
+      <div class="mb-4">
+        <label for="edad" class="form-label small text-muted">Edad</label>
+        <input class="form-control" 
+               formControlName="edad" 
+               type="number"
+               id="edad"
+               placeholder="En años">
+        @if (checkControl('edad', 'required')){
+          <span class="error small text-danger">Campo requerido</span>
+        }
+      </div>
+  
+      <!-- SEXO -->
+      <div class="mb-4">
+        <label for="sexo" class="form-label small text-muted">Sexo</label>
+        <select class="form-select" 
+                id="sexo" 
+                formControlName="sexo"
+                style="cursor: pointer;">
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="hombre">Hombre</option>
+          <option value="mujer">Mujer</option>
+        </select>         
+        @if (checkControl('sexo', 'required')) {
+          <span class="error small text-danger">Campo requerido</span>
+        }
+      </div>
+  
+      <!-- ALTURA -->
+      <div class="mb-4">
+        <label for="altura" class="form-label small text-muted">Altura</label>
+        <input class="form-control" 
+               formControlName="altura" 
+               type="number"
+               id="altura"
+               placeholder="En centímetros">
+        @if (checkControl('altura', 'required')){
+          <span class="error small text-danger">Campo requerido</span>
+        }
+      </div>
+  
+      <!-- PESO ACTUAL -->
+      <div class="mb-4">
+        <label for="pesoActual" class="form-label small text-muted">¿Cuál es tu peso actual?</label>
+        <input class="form-control" 
+               formControlName="pesoActual" 
+               type="number"
+               id="pesoActual"
+               placeholder="En kilogramos">
+        @if (checkControl('pesoActual', 'required')){
+          <span class="error small text-danger">Campo requerido</span>
+        }
+      </div>
+  
+      <!-- PESO OBJETIVO -->
+      <div class="mb-4">
+        <label for="pesoObjetivo" class="form-label small text-muted">¿Cuál es tu peso objetivo?</label>
+        <input class="form-control" 
+               formControlName="pesoObjetivo" 
+               type="number"
+               id="pesoObjetivo"
+               placeholder="En kilogramos">
+        @if (checkControl('pesoObjetivo', 'required')){
+          <span class="error small text-danger">Campo requerido</span>
+        }
+      </div>
+  
+      <!-- OBJETIVO USUARIO -->
+      <div class="mb-4">
+        <label for="objetivoUsuario" class="form-label small text-muted">Objetivo principal</label>
+        <select class="form-select" 
+                id="objetivoUsuario" 
+                formControlName="objetivoUsuario"
+                style="cursor: pointer;">
+          <option value="" disabled selected>Selecciona tu meta</option>
+          <option value="PERDERPESO">Perder peso</option>
+          <option value="MANTENER">Mantener peso</option>
+          <option value="GANARPESO">Ganar peso</option>
+        </select> 
+        @if (checkControl('objetivoUsuario', 'required')){
+          <span class="error small text-danger">Campo requerido</span>
+        }
+      </div>
+  
+      <!-- OPCIÓN PESO -->
+      <div class="mb-4">
+        <label for="opcionPeso" class="form-label small text-muted">Intensidad para alcanzar tu peso</label>
+        <select class="form-select" 
+                id="opcionPeso" 
+                formControlName="opcionPeso"
+                style="cursor: pointer;">
+          <option value="" disabled selected>Selecciona intensidad</option>
+          <option value="LIGERO">De manera LIGERA</option>
+          <option value="MODERADO">De manera MODERADA</option>
+          <option value="INTENSO">De manera INTENSA</option>
+        </select> 
+        @if (checkControl('opcionPeso', 'required')){
+          <span class="error small text-danger">Campo requerido</span>
+        }
+      </div>
+  
+      <!-- ACTIVIDAD -->
+      <div class="mb-4">
+        <label for="actividad" class="form-label small text-muted">Nivel de actividad física</label>
+        <select class="form-select" 
+                id="actividad" 
+                formControlName="actividad"
+                style="cursor: pointer;">
+          <option value="" disabled selected>Selecciona tu nivel</option>
+          <option value="SEDENTARIO">Sedentario</option>
+          <option value="LIGERO">Ligera</option>
+          <option value="MODERADO">Moderada</option>
+          <option value="ACTIVO">Activa</option>
+          <option value="MUYACTIVO">Muy activa</option>
+        </select> 
+        @if (checkControl('actividad', 'required')){
+          <span class="error small text-danger">Campo requerido</span>
+        }
+      </div>
+  
+      <!-- BOTÓN -->
+      <div class="d-grid mt-5">
+        <button type="submit" class="btn btn-custom btn-lg text-aliceblue fw-semibold"
+            [disabled]="registroForm.invalid">
+            Registrarse
         </button>
-      </form>
-</div>
+      </div>
+  
+    </form>
+  </div>

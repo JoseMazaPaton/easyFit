@@ -125,7 +125,7 @@ public class ObjetivosRestController {
 			@RequestBody @Valid AjusteSemanalDto ajusteDto, 
 			@AuthenticationPrincipal Usuario usuario ) {
 		
-		//Actualizamos la opcion de peso semamanl con el metodo del service
+		//Actualizamos la opcion de peso semanal con el metodo del service
 		ObjetivoResponseDto respuestaDto = objetivoService.actualizarOpcionPeso(ajusteDto, usuario);
 		
 		return ResponseEntity.ok(respuestaDto);
@@ -137,7 +137,7 @@ public class ObjetivosRestController {
 			@RequestBody @Valid ObjetivoUsuarioDto objetivoDto,
 			@AuthenticationPrincipal Usuario usuario ) {
 		
-		//Actualizamos la opcion de peso semamanl con el metodo del service
+		//Actualizamos la opcion de peso semanal con el metodo del service
 		ObjetivoResponseDto respuestaDto = objetivoService.actualizarObjetivoUsuario(objetivoDto, usuario);
 		
 		return ResponseEntity.ok(respuestaDto);

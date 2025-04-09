@@ -60,7 +60,6 @@ public class ObjetivoServiceImpl extends GenericCrudServiceImpl<Objetivo, Intege
 	    objetivo.setPesoActual(pesoDto.getPesoActual());
 	    usuario.setValorNutricional(ObjetivoCalculator.calcularKcal(usuario, objetivo, usuario.getValorNutricional()));
 
-
 	    //Actualizamos objetivos con el nuevo peso
 	    if (!objetivoRepository.existsById(objetivo.getIdObjetivo())) {
 	        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Los objetivos no existen, no se pueden actualizar");
@@ -84,7 +83,7 @@ public class ObjetivoServiceImpl extends GenericCrudServiceImpl<Objetivo, Intege
 	    return respuestaDto ;
 	}
 
-	//METODO PARA ACTUALIZAR EL PESO OBJETIVO (TIENE EN CUENTA EL OBJETIVO DEL USUARIO!)
+	//MÉTODO PARA ACTUALIZAR EL PESO OBJETIVO (TIENE EN CUENTA EL OBJETIVO DEL USUARIO)
 	@Override
 	public ObjetivoResponseDto actualizarPesoObjetivo(PesoObjetivoDto pesoDto, Usuario usuario) {
 
@@ -141,12 +140,11 @@ public class ObjetivoServiceImpl extends GenericCrudServiceImpl<Objetivo, Intege
 	    if (objetivo == null) {
 	        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Los objetivos no puede ser null");
 	    }
-
+	    
 	    //Le añadimos la actividad y a usuario las nuevas kcal recalculadas
 	    objetivo.setActividad(actividadDto.getActividad());
 	    usuario.setValorNutricional(ObjetivoCalculator.calcularKcal(usuario, objetivo, usuario.getValorNutricional()));
 
-	        
 	    //Actualizamos objetivos con la nueva actividad
 	    if (!objetivoRepository.existsById(objetivo.getIdObjetivo())) {
 	        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Los objetivos no existen, no se pueden actualizar");
@@ -193,7 +191,6 @@ public class ObjetivoServiceImpl extends GenericCrudServiceImpl<Objetivo, Intege
 	    objetivo.setOpcionPeso(ajusteDto.getOpcionPeso());
 	    usuario.setValorNutricional(ObjetivoCalculator.calcularKcal(usuario, objetivo, usuario.getValorNutricional()));
 
-	    
 	    //Actualizamos objetivos con el nuevo peso
 	    if (!objetivoRepository.existsById(objetivo.getIdObjetivo())) {
 	        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Los objetivos no existen, no se pueden actualizar");
@@ -260,7 +257,6 @@ public class ObjetivoServiceImpl extends GenericCrudServiceImpl<Objetivo, Intege
 	    ObjetivoResponseDto respuestaDto = mapper.map(objetivo, ObjetivoResponseDto.class);
 	    respuestaDto.setValores(mapper.map(usuario.getValorNutricional(), ValorNutriconalResponseDto.class));
 	    respuestaDto.setCoherente(ObjetivoCalculator.esObjetivoCoherente(objetivo));
-
 
         // Devolvemos la respuesta mapeada
         return respuestaDto;

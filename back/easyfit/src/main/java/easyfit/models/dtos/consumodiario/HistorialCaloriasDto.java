@@ -1,4 +1,4 @@
-package easyfit.models.dtos.consumidiario;
+package easyfit.models.dtos.consumodiario;
 
 import java.time.LocalDate;
 

@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import easyfit.models.dtos.consumidiario.DiarioResponseDto;
-import easyfit.models.dtos.consumidiario.HistorialCaloriasDto;
-import easyfit.models.dtos.consumidiario.HistorialPesoDto;
+import easyfit.models.dtos.consumodiario.DiarioResponseDto;
+import easyfit.models.dtos.consumodiario.HistorialCaloriasDto;
+import easyfit.models.dtos.consumodiario.HistorialPesoDto;
 import easyfit.models.entities.Usuario;
 import easyfit.services.IConsumoDiarioService;
 
