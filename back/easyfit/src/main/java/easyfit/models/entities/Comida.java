@@ -1,8 +1,6 @@
 package easyfit.models.entities;
-
 import java.io.Serializable;
 import java.time.LocalDate;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,4 +40,6 @@ public class Comida implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "email")
 	private Usuario usuario;
+
+	
 }
