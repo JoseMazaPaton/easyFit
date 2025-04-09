@@ -1,30 +1,40 @@
 <aside class="sidebar ">
-  <!-- Perfil de usuario -->
+  <!-- ZONA DEL PERFIL DEL USUARIO -->
   <div>
     <div class="sidebar-profile">
+       <!--Aquí va una imagen del perfil del usuario que de momento lo vamos a dejar por defecto-->
       <img src="/assets/images/profile.png" alt="Avatar" class="sidebar-avatar">
       <div>
+        <!--Aqui va el nombre del usuario y su rol-->  
         <h2 class="sidebar-username">José Luis Ábalos Meco</h2>
         <p class="sidebar-role">Usuario</p>
       </div>
     </div>
 
-    <hr class="sidebar-separator" />
+    <hr class="sidebar-separator"/>
 
-    <!-- Menú de navegación -->
+    <!-- ZONA DE NAVEGACION-->
     <nav class="sidebar-nav">
+
+      <!-- Dashboard-->
       <a routerLink="/usuario/dashboard" routerLinkActive="active" class="sidebar-link">
         <i class="fa-solid fa-gauge"></i>
         <span>Dashboard</span>
       </a>
+      
+       <!-- Zona de registrar comidas-->
       <a routerLink="/usuario/diario" routerLinkActive="active" class="sidebar-link">
         <i class="fa-solid fa-calendar-days"></i>
         <span>Diario</span>
       </a>
+
+      <!-- Zona de lista de comidas-->
       <a routerLink="/usuario/alimentos" routerLinkActive="active" class="sidebar-link">
         <i class="fa-solid fa-utensils"></i>
         <span>Lista de alimentos</span>
       </a>
+
+      <!-- Zona de los objetivos del usuario-->
       <a routerLink="/usuario/objetivos" routerLinkActive="active" class="sidebar-link">
         <i class="fa-solid fa-chart-line"></i>
         <span>Objetivos</span>
@@ -32,8 +42,8 @@
     </nav>
   </div>
 
-  <!-- Botón de logout -->
-  <button class="sidebar-logout">
+  <!--ZONA DE LOGOUT -->
+  <button class="sidebar-logout" (click)="logOut()">
     <i class="fa-solid fa-right-from-bracket"></i>
     Logout
   </button>

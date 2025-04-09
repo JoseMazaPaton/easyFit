@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { UserLogin } from '../interfaces/UserLogin';
+import { ILoginUsuario } from '../interfaces/ILoginUsuario';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +13,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(email: string, password: string) {
-    return this.http.post(`${this.baseUrl}/login`, { email, password });
+  login(email: string, password: string): Observable<ILoginUsuario> {
+    return this.http.post<ILoginUsuario>(`${this.baseUrl}/login`, { email, password });
   }
 
   guardarUsuarioYToken(token: string, usuario: any) {
@@ -36,9 +36,23 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('usuario');
-    this.router.navigate(['/auth/login']);
+    //Usamos la ruta del backen para cerrar la sesion alli tambien
+    this.http.post(`${this.baseUrl}/logout`, {}).subscribe({
+      next: () => {
+        //limpiamos el token y el usuario
+        localStorage.removeItem('token');
+        localStorage.removeItem('usuario');
+        //redireccionamos al landing de la web
+        this.router.navigate(['']);
+      },
+      error: (err) => {
+        console.error('Error al cerrar sesión en el backend:', err);
+        // Aún así redirige al login aunque no se cierre correctamente en el backend
+        localStorage.removeItem('token');
+        localStorage.removeItem('usuario');
+        this.router.navigate(['/landing']);
+      }
+    });
   }
 
   obtenerRol(): string {
