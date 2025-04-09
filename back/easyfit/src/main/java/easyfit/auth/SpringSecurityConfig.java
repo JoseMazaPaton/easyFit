@@ -85,7 +85,7 @@ public class SpringSecurityConfig {
             	authorize
             	
                 // AUTH =================================================================================
-                .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/registro").permitAll()
+                .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/register").permitAll()
                 .requestMatchers(HttpMethod.GET, "/auth/logout").authenticated()
 
                 // PÚBLICO =================================================================================

@@ -36,36 +36,31 @@ export class RegisterFormComponent {
     },
     [])
   }
-  /*
-  register(datos: any) {
-    return this.http.post('tu-api-url/registro', datos);
-  }*/
-   
 
   registrarUsuario() {
-    /*
-    // Primero, comprobamos que el formulario es válido
     if (this.registroForm.invalid) {
-      // Puedes marcar todos los controles como touched para que se muestren los mensajes de error
+      // Marcamos todos los controles como "touched" para mostrar errores si existen
       this.registroForm.markAllAsTouched();
       return;
     }
     // Extraemos los datos del formulario
     const datosRegistro = this.registroForm.value;
-    // Llamamos al método del servicio para registrar el usuario.
-    // El método register debe devolver un observable con la respuesta del servidor.
+
+    // Llamamos al método del servicio para registrar al usuario
     this.authService.register(datosRegistro).subscribe(
       (response: any) => {
         console.log('Usuario registrado correctamente', response);
-        // Aquí puedes redirigir o mostrar un mensaje de éxito
+        alert('Usuario registrado correctamente');
+        // Aquí podrías redirigir al usuario, limpiar el formulario o mostrar un mensaje de éxito
       },
       (error: any) => {
         console.error('Error en el registro', error);
-        // Maneja los errores, por ejemplo mostrando un mensaje al usuario
+        alert('Error en el registro, por favor intenta nuevamente');  
+        // Maneja el error, por ejemplo mostrando un mensaje al usuario
       }
     );
-    */
   }
+  
 
   checkControl(formControlName: string, validador: string): boolean | undefined{
     return this.registroForm.get(formControlName)?.hasError(validador) && this.registroForm.get(formControlName)?.touched; 

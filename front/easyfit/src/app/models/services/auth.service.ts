@@ -4,6 +4,9 @@ import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { ILoginUsuario } from '../interfaces/ILoginUsuario';
+import { RegisterUser } from '../interfaces/registerUser';
+import { RegisterResponse } from '../interfaces/register-response';
+
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +18,18 @@ export class AuthService {
 
   login(email: string, password: string): Observable<ILoginUsuario> {
     return this.http.post<ILoginUsuario>(`${this.baseUrl}/login`, { email, password });
+  }
+
+  // Nuevo método para registrar un usuario
+  register(userData: RegisterUser): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(`${this.baseUrl}/register`, userData).pipe(
+      // Si el backend te devuelve token y usuario tras el registro, podrías almacenarlos aquí
+      tap(response => {
+        if (response.token && response.usuario) {
+          this.guardarUsuarioYToken(response.token, response.usuario);
+        }
+      })
+    );
   }
 
   guardarUsuarioYToken(token: string, usuario: any) {
