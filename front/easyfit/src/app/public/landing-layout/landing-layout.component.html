@@ -1,7 +1,13 @@
+<!-- Estructura base de página -->
 <div class="flex flex-col min-h-screen" >
+  <!-- Navbar arriba -->
   <app-nav-bar-landing></app-nav-bar-landing>
-  <main class="flex-grow">
+
+  <!-- Contenido principal que crece -->
+  <main class="flex-grow" >
     <router-outlet></router-outlet>
   </main>
+
+  <!-- Footer siempre al fondo -->
   <app-footer-landing></app-footer-landing>
 </div>

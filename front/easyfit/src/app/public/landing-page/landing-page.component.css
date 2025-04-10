@@ -1,9 +1,8 @@
 .hero-image {
-  margin-bottom: -10px; 
-  z-index: 2; 
   position: relative;
-  max-width: 700px;
-  margin-right: -100px;
+  max-width: 550px;
+  margin-bottom: -177px;
+
 }
 
 .banner-btn {
