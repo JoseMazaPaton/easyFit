@@ -1,14 +1,21 @@
-.hero-image {
-  position: relative;
-  max-width: 550px;
-  margin-bottom: -177px;
-
+.hero-landing {
+  flex-grow: 1;
+  min-height: 100%;
 }
 
+.hero-image {
+  max-height: 100%;
+  object-fit: contain;
+}
 .banner-btn {
   width: 200px;         
   display: inline-block; 
   color: #3f3f3f;
 }
 
-
+img {
+  mask-image: linear-gradient(
+    black 80%,
+    transparent
+  );
+}

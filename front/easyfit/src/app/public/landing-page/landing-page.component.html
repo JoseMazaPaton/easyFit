@@ -1,21 +1,22 @@
-<!-- HERO LANDING-->
-<div class="container d-flex flex-column justify-content-center position-relative py-5 " >
+<div class="container-fluid flex-grow-1 d-flex flex-column p-0">
+  <div class="hero-landing container d-flex justify-content-between align-items-center flex-wrap flex-lg-nowrap flex-grow-1 p-4 gap-5">
 
-  <div class="row">
-    <!-- TEXTO DE LLAMADA CON BOTON PARA REGISTRARSE-->
-    <div class="col-lg-8 d-flex flex-column justify-content-center text-white text-start mt-5">
-
-      <h1 class="fw-bold display-8 mb-3">Tu alimentación bajo control</h1>
+    <!-- Texto -->
+    <div class="d-flex flex-column justify-content-center text-white text-start flex-grow-1">
+      <h1 class="fw-bold display-6 mb-3">Tu alimentación bajo control</h1>
       <p class="fs-5 mb-4">
-        Registra tus comidas, ajusta tus macros <br>
+        Registra tus comidas, ajusta tus macros <br />
         y sigue tu progreso con precisión
       </p>
+
       <a routerLink="/auth/register" class="btn btn-light btn-lg banner-btn fw-semibold rounded-pill">
         Empieza ya
       </a>
     </div>
-  </div>
 
-  <!-- IMAGEN BANNER -->
-  <img src="assets/images/fitness-banner.png" alt="EasyFit Hero" class="hero-image position-absolute bottom-0 end-0">
+    <!-- Imagen -->
+    <div class="d-none d-md-flex align-items-end flex-grow-1">
+      <img src="assets/images/fitness-banner.png" alt="EasyFit Hero" class="img-fluid hero-image" />
+    </div>
+  </div>
 </div>

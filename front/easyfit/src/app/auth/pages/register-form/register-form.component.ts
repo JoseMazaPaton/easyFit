@@ -20,8 +20,7 @@ export class RegisterFormComponent {
   registroForm: FormGroup;
   step: number = 1;
 
-  constructor (private http: HttpClient,
-              private authService: AuthService,
+  constructor (private authService: AuthService,
               private router: Router
   ) {
   
@@ -44,7 +43,7 @@ export class RegisterFormComponent {
   registrarUsuario() {
     if (this.registroForm.invalid) {
       // Marcamos todos los controles como "touched" para mostrar errores si existen
-      this.registroForm.markAllAsTouched();
+      //this.registroForm.markAllAsTouched();
       return;
     }
 

@@ -5,5 +5,13 @@
 /* Personalización global */
 body {
   @apply w-full min-h-screen bg-gradient-to-r from-[#5de0e6] to-[#004aad] font-[Poppins];
+  
+}
+html, body {
+  height: 100%;
+  margin: 0;
+}
 
+main {
+  height: 100%;
 }
