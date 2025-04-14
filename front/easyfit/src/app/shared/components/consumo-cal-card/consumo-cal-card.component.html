@@ -1,0 +1,45 @@
+<div class="grafico-card">
+  <div class="encabezado">
+    <div>
+      <h2 class="titulo">Consumo calorías</h2>
+      <p class="subtitulo">Últimos 7 días</p>
+    </div>
+    <div class="leyenda leyenda-centro">
+      <div class="leyenda-item">
+        <span class="color objetivo"></span> Objetivo
+      </div>
+      <div class="leyenda-item">
+        <span class="color consumidas"></span> Consumidas
+      </div>
+    </div>
+  </div>
+  <div class="barras-scroll">
+    <div class="barras-container">
+      @for (dato of datos; track dato.fecha) {
+        <div class="barra-dia">
+          <div class="valores">
+            <div class="valor objetivo">{{ dato.objetivo }}</div>
+            <div class="valor consumidas">{{ dato.consumidas }}</div>
+          </div>
+          <div class="barras-pareja">
+            <div
+              class="barra objetivo"
+              [ngStyle]="{
+                height: getAltura(dato.objetivo),
+                backgroundColor: '#cbd5e1'
+              }"
+            ></div>
+            <div
+              class="barra consumidas"
+              [ngStyle]="{
+                height: getAltura(dato.consumidas),
+                backgroundColor: dato.consumidas >= dato.objetivo ? '#0099ff' : '#60a5fa'
+              }"
+            ></div>
+          </div>
+          <div class="fecha">{{ dato.fecha }}</div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

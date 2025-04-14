@@ -1,0 +1,108 @@
+.card-progreso {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    min-height: 290px;
+  }
+  
+  .titulo {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #111;
+    margin: 0;
+  }
+  
+  .subtitulo {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 2rem;
+  }
+  
+  .grafico-wrapper {
+    position: relative;
+    text-align: center;
+    max-height: 140px; /* o 140px si quieres un poco más */
+  }
+  
+  .semi-arco {
+    max-width: 250px;   /* controla el ancho visual */
+    max-height: 150px;   /* controla la altura visual */
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .arco-base {
+    fill: none;
+    stroke: #e5e7eb;
+    stroke-width: 10;
+  }
+  
+  .arco-progreso {
+    fill: none;
+    stroke: #0099ff;
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.4s ease;
+  }
+  
+  .contenido-centro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .icono {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .texto-peso {
+    font-size: 1.0rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .peso-actual {
+    font-size: 0.80rem;
+    color: #666;
+    margin-top: 0.25rem;
+  }
+  
+  .etiquetas-laterales {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    padding: 0 0.75rem;
+    font-size: 0.85rem;
+    color: #666;
+    width: 100%;
+    max-width: 260px; /* coincide con el ancho visual del SVG */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .etiquetas-laterales div {
+    text-align: center;
+    line-height: 1.2;
+    font-size: 0.8rem;
+  }
+  
+  .etiquetas-laterales span {
+    display: block;
+    font-size: 0.7rem;
+    color: #aaa;
+  }
+  

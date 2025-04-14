@@ -1,15 +1,10 @@
 <aside class="sidebar ">
   <!-- ZONA DEL PERFIL DEL USUARIO -->
   <div>
-    <div class="sidebar-profile">
-       <!--Aquí va una imagen del perfil del usuario que de momento lo vamos a dejar por defecto-->
-      <img src="/assets/images/profile.png" alt="Avatar" class="sidebar-avatar">
-      <div>
-        <!--Aqui va el nombre del usuario y su rol-->  
-        <h2 class="sidebar-username">José Luis Ábalos Meco</h2>
-        <p class="sidebar-role">Usuario</p>
-      </div>
-    </div>
+    <app-user-info-card
+      [nombre]="usuario.nombre"
+      [rol]="usuario.rol">
+    </app-user-info-card>
 
     <hr class="sidebar-separator"/>
 
