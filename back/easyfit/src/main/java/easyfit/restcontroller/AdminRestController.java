@@ -27,10 +27,14 @@ import easyfit.models.enums.Sexo;
 import easyfit.services.IAlimentoService;
 import easyfit.services.ICategoriaService;
 import easyfit.services.IUsuarioAdminService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 @RestController
 @RequestMapping("/admin")
+@Tag(name = "Administradores", description = "Operaciones relacionadas con los administradores de Easyfit.")
 @CrossOrigin(origins = "*")
 public class AdminRestController {
 	
@@ -47,7 +51,9 @@ public class AdminRestController {
 	
 	// FILTRO POR EMAIL
 	@GetMapping("/usuarios/{email}")
-	public ResponseEntity<?> getUsuariosByEmail(@PathVariable String email) {
+	@Operation(summary = "Obtener usuario", description = "Obtiene un usuario por email")
+	public ResponseEntity<?> getUsuariosByEmail(@Parameter(description = "Email del usuario a consultar", required = true)
+			@PathVariable String email) {
         try {
             List<Usuario> usuarios = usuarioAdminService.findByEmail(email);
             
@@ -78,7 +84,9 @@ public class AdminRestController {
 	
 	// FILTRO POR SEXO --> La Url sería: 'localhost:XXXX/admin/usuarios/sexo/hombre', por ejemplo.
 	@GetMapping("/usuarios/sexo/{sexo}")
-	public ResponseEntity<?> getUsuariosBySexo(@PathVariable String sexo) {
+	@Operation(summary = "Filtrar usuarios", description = "Filtra usuarios por sexo.")
+	public ResponseEntity<?> getUsuariosBySexo(@Parameter(description = "Sexo del usuario a consultar", required = true)
+			@PathVariable String sexo) {
 	    try {
 	        // Convertir el String a Enum (case-insensitive)
 	        Sexo sexoEnum = Sexo.valueOf(sexo.toUpperCase());
@@ -116,7 +124,8 @@ public class AdminRestController {
 	
 	// FILTRO POR EDAD --> La Url sería: 'localhost:XXXX/admin/usuarios/edad/25', por ejemplo.
 	@GetMapping("/usuarios/edad/{edad}")
-	public ResponseEntity<?> getUsuariosByEdad(@PathVariable int edad) {
+	@Operation(summary = "Filtrar usuarios", description = "Filtrar usuarios por edad")
+	public ResponseEntity<?> getUsuariosByEdad(@Parameter(description = "Edad del usuario a consultar", required = true)@PathVariable int edad) {
 	    try {
 	        // Validación básica de edad
 	        if(edad < 0) {
@@ -154,7 +163,9 @@ public class AdminRestController {
 	
 	// Suspensión o reactivación de cuentas de usuario por email. 
 	@PutMapping("/usuarios/{email}/suspender")
-	public ResponseEntity<?> toggleSuspension(@PathVariable String email) {
+	@Operation(summary = "Suspender/reactivar cuenta de usuario", description = "Suspende o reactiva una cuenta de usuario, obteniéndose la misma por email")
+	public ResponseEntity<?> toggleSuspension(@Parameter(description = "Email del usuario a consultar", required = true)
+			@PathVariable String email) {
 	    try {
 	        Usuario usuarioActualizado = usuarioAdminService.toggleSuspension(email);
 	        
@@ -189,7 +200,9 @@ public class AdminRestController {
 	
 	// Método para crear categorías
 	@PostMapping("/categorias/crear")
-	public ResponseEntity<?> crearCategoria(@RequestBody Categoria categoria) {
+	@Operation(summary = "Crear categoría", description = "Crea una nueva categoría")
+	public ResponseEntity<?> crearCategoria(@Parameter(description = "Categoria a crear", required = true)
+			@RequestBody Categoria categoria) {
 	    try {
 	        Categoria nuevaCategoria = categoriaService.crearCategoria(categoria);
 	        
@@ -212,7 +225,9 @@ public class AdminRestController {
 	
 	// Método para modificar categorías
 	@PutMapping("/categorias/modificar/{idCategoria}")
-	public ResponseEntity<?> modificarCategoria(@PathVariable int idCategoria,
+	@Operation(summary = "Modificar categoría", description = "Modifica categoría por ID de categoría.")
+	public ResponseEntity<?> modificarCategoria(@Parameter(description = "ID de categoría a modificar", required = true)
+			@PathVariable int idCategoria,
 	        									@RequestBody Categoria categoria) {
 	    try {
 	        Categoria categoriaActualizada = categoriaService.modificarCategoria(idCategoria, categoria);
@@ -243,7 +258,9 @@ public class AdminRestController {
 	
 	// Método para eliminar categorías
 	@DeleteMapping("/categorias/eliminar/{idCategoria}")
-	public ResponseEntity<?> eliminarCategoria(@PathVariable int idCategoria) {
+	@Operation(summary = "Eliminar categoría", description = "Elimina categoría por ID de categoría.")
+	public ResponseEntity<?> eliminarCategoria(@Parameter(description = "ID de categoría a eliminar", required = true)
+			@PathVariable int idCategoria) {
 	    try {
 	        categoriaService.eliminarCategoria(idCategoria);
 	        return ResponseEntity.ok()
@@ -264,7 +281,9 @@ public class AdminRestController {
 	
 	// Método para crear alimentos
 	@PostMapping("/alimentos/crear")
-	public ResponseEntity<?> createAlimento(@RequestBody Alimento alimento) {
+	@Operation(summary = "Crear alimento", description = "Crea un alimentol")
+	public ResponseEntity<?> createAlimento(@Parameter(description = "Alimento a crear", required = true)
+			@RequestBody Alimento alimento) {
 	    try {
 	        Alimento nuevoAlimento = alimentoService.crearAlimento(alimento);
 	        
@@ -296,7 +315,9 @@ public class AdminRestController {
 	
 	// Método para modificar alimentos
 	@PutMapping("/alimentos/modificar/{idAlimento}")
-	public ResponseEntity<?> modificarAlimento(@PathVariable int idAlimento,
+	@Operation(summary = "Modificar alimento", description = "Modifica un alimento por ID de Alimento.")
+	public ResponseEntity<?> modificarAlimento(@Parameter(description = "ID de alimento a modificar", required = true)
+			@PathVariable int idAlimento,
 	        									@RequestBody Alimento alimentoActualizado) {
 		
 	    try {
@@ -333,7 +354,9 @@ public class AdminRestController {
 	
 	// Método para eliminar alimentos
 	@DeleteMapping("/alimentos/eliminar/{idAlimento}")
-	public ResponseEntity<?> eliminarAlimento(@PathVariable int idAlimento) {
+	@Operation(summary = "Eliminar alimento", description = "Elimina un alimento por ID de Alimento.l")
+	public ResponseEntity<?> eliminarAlimento(@Parameter(description = "ID de alimento a eliminar", required = true)
+			@PathVariable int idAlimento) {
 	    try {
 	        alimentoService.eliminarAlimento(idAlimento);
 	        return ResponseEntity.ok()

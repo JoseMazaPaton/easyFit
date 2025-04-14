@@ -30,10 +30,14 @@ import easyfit.services.impl.AlimentoImplService;
 import easyfit.services.impl.CategoriaImplService;
 
 import easyfit.services.impl.UsuarioServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 @RestController
 @RequestMapping("/alimentos")
+@Tag(name = "Alimentos", description = "Operaciones relacionadas con los alimentos de Easyfit.")
 @CrossOrigin(origins = "*")
 public class AlimentoRestController {
 	
@@ -51,6 +55,7 @@ public class AlimentoRestController {
 	  *  Se puede buscar alimentos o añadir el nombre del alimento por nombre
 	  */
 	 @GetMapping("")
+	 @Operation(summary = "Buscar alimento", description = "Búsqueda de alimento por método implementado en el AlimentoService.")
 	 public ResponseEntity<List<AlimentoDto>> buscarAlimentos(
 	            @RequestParam(name = "search", required = false) String search) {
 	        
@@ -64,6 +69,7 @@ public class AlimentoRestController {
 	  *  Saca los alimentos creados por el propio usuario
 	  */
 	 @GetMapping("/mis")
+	 @Operation(summary = "Obtener alimento de usuario", description = "Obtiene alimentos por usuario.")
 	 public ResponseEntity<List<AlimentoDto>> obtenerMisAlimentos() {
 	     String email = SecurityContextHolder.getContext().getAuthentication().getName();
 	     List<AlimentoDto> alimentosDto = alimentoService.buscarPorUsuario(email);
@@ -75,7 +81,9 @@ public class AlimentoRestController {
 	  * Crear alimento personalizado (el usuario es el `creado_por`).
 	  */
 	 @PostMapping("")
-	 public ResponseEntity<?> altaAlimentoUsuario(@RequestBody AlimentoDto alimentoDto) {
+	 @Operation(summary = "Crear alimento", description = "El usuario crea/da de alta un nuevo Alimento.")
+	 public ResponseEntity<?> altaAlimentoUsuario(@Parameter(description = "Alimento a crear", required = true)
+			 @RequestBody AlimentoDto alimentoDto) {
 		 Categoria categoria = categoriaService.findById(alimentoDto.getIdCategoria());
 
 		 if (categoria == null) {
@@ -111,8 +119,10 @@ public class AlimentoRestController {
 	  * Editar alimento (solo si el usuario es el creador).
 	  */
 	 @PutMapping("/{idAlimento}")
-	 public ResponseEntity<?> modificarAlimentoUsuario (@PathVariable int idAlimento,
-			 											@RequestBody AlimentoDto alimentoDto) {
+	 @Operation(summary = "Modificar alimento", description = "Modifica alimento por ID alimento solo si el usuario es el creador del mismo.")
+	 public ResponseEntity<?> modificarAlimentoUsuario (@Parameter(description = "ID del alimento a modificar.", required = true)
+			 																					@PathVariable int idAlimento,
+			 																					@RequestBody AlimentoDto alimentoDto) {
 		 
 		 Alimento alimento = alimentoService.findById(idAlimento);
 		 System.out.println(alimento.getCreadoPor().getEmail());
@@ -147,7 +157,9 @@ public class AlimentoRestController {
 	  * Eliminar alimento (solo si el usuario es el creador).
 	  */
 	 @DeleteMapping("/{idAlimento}")
-	 public ResponseEntity<?> eliminarAlimentoUsuario (@PathVariable int idAlimento) {
+	 @Operation(summary = "Eliminar alimento", description = "Elimina el alimento por ID de Alimento, solo si el usuario es el creador del mismo.")
+	 public ResponseEntity<?> eliminarAlimentoUsuario (@Parameter(description = "ID del alimento a crear", required = true)
+			 																				@PathVariable int idAlimento) {
 		 
 		 if (alimentoService.findById(idAlimento) == null) {
 			 return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -172,7 +184,9 @@ public class AlimentoRestController {
 	  * Calcular kcal y macros según cantidad.
 	  */
 	 @GetMapping("/{idAlimento}/calculo")
-	 public ResponseEntity<?> calculoKcalMacro (@PathVariable int idAlimento,
+	 @Operation(summary = "Calcular macronutrientes", description = "Calcula los macronutrientes de los alimentos según ID de alimento y cantidad (gramos) del mismo.")
+	 public ResponseEntity<?> calculoKcalMacro (@Parameter(description = "ID del alimento elegido para calcular los macronutrientes.", required = true)
+			 @PathVariable int idAlimento,
 			 @RequestParam(name = "gramos", required = true) Double gramos) {
 		 
 		 
@@ -204,15 +218,5 @@ public class AlimentoRestController {
 		 
 	     
 	 }
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 	
 }

@@ -18,10 +18,13 @@ import easyfit.models.dtos.auth.RegistroRequestDto;
 import easyfit.models.dtos.auth.RegistroResponseDto;
 import easyfit.models.dtos.auth.UsuarioResponseDto;
 import easyfit.services.IAuthService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Autenticación", description = "Métodos relacionados con la autenticación de usuarios y administradores a la plataforma de Easyfit.")
 @CrossOrigin(origins = "*")
 public class AuthRestController {
 
@@ -31,6 +34,7 @@ public class AuthRestController {
 
   //METODO CON RUTA PARA INICIAR SESION
     @PostMapping("/login")
+    @Operation(summary = "Login de usuario", description = "Loguea un usuario.")
     public ResponseEntity<LoginResponseDto> login(@RequestBody @Valid LoginRequestDto loginDto) {
     	
     	//Hacemos login con el metodo del service y guardamos las respuesta Dto que devuelve
@@ -43,6 +47,7 @@ public class AuthRestController {
 
     //METODO CON RUTA PARA CERRAR SESIÓN
     @PostMapping("/logout")
+    @Operation(summary = "Logout de usuario", description = "Cierra la sesión del usuario.")
     public ResponseEntity<Map<String, Object>> logout() {
     	
         // Limpiamos el contexto de seguridad (borra el usuario autenticado actual)
@@ -57,14 +62,13 @@ public class AuthRestController {
     
     //METODO CON RUTA PARA REGISTRAR UN USUARIO
     @PostMapping("/register")
+    @Operation(summary = "Registro de usuario", description = "Método de registro de nuevo usuario.")
     public ResponseEntity<RegistroResponseDto> registroUsuario(@RequestBody @Valid RegistroRequestDto registroDto) {
-    	
-    	
+    
     	//Damos de alta el usuario,los objetivos y guardamos la respuesta con el metodo del servicio
     	//Todas las excepciones se controlan en el service tambien
     	RegistroResponseDto respuesta = authService.altaUsuario(registroDto);
 
-    	
     	return ResponseEntity.ok(respuesta);
     	
     }

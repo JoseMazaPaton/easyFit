@@ -15,10 +15,13 @@ import easyfit.models.dtos.auth.UsuarioPasswordDto;
 import easyfit.models.dtos.auth.UsuarioResponseDto;
 import easyfit.models.entities.Usuario;
 import easyfit.services.IUsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/usuarios")
+@Tag(name = "Usuarios", description = "Operaciones relacionadas con los Usuarios de Easyfit.")
 @CrossOrigin(origins = "*")
 public class UsuarioRestController {
 
@@ -32,6 +35,7 @@ public class UsuarioRestController {
 	
 	//RUTA CON METODO PARA VER DATOS DEL PERFIL DEL USUARIO
 	@GetMapping("/miperfil")
+	@Operation(summary = "Obtener perfil usuario", description = "Obtiene el perfil del Usuario logueado.")
 	public ResponseEntity<UsuarioResponseDto> perfilUsuarioAutenticado(){
 		
 		 //Obtnemos con springsecurity el usuario que hay actualmente en la ruta autenticado
@@ -46,6 +50,7 @@ public class UsuarioRestController {
 
 	//RUTA CON METODO PARA VER DATOS DEL PERFIL DEL USUARIO
 	@PutMapping("/miperfil/password")
+	@Operation(summary = "Obtener datos del perfil de Usuario", description = "Obtiene los datos de perfil de un Usuario autenticado y permite el cambio de password del mismo. ")
 	public ResponseEntity<String> cambiarPassword(@RequestBody @Valid UsuarioPasswordDto dto) {
 		//Obtenemos el usuario autenticado
 	    Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

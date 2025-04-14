@@ -27,9 +27,13 @@ import easyfit.models.dtos.comida.ComidaDiariaDto;
 import easyfit.models.entities.Comida;
 import easyfit.models.entities.Usuario;
 import easyfit.services.IComidaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/comidas")
+@Tag(name = "Comidas", description = "Operaciones relacionadas con los comidas de Easyfit.")
 @CrossOrigin(origins = "*")
 public class ComidaRestController {
 	
@@ -37,7 +41,9 @@ public class ComidaRestController {
 	private IComidaService comidaService;
 	
 	@GetMapping("/fecha")
-    public ResponseEntity<?> getComidasDelDia(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
+	@Operation(summary = "Obtener comida", description = "Obtiene una comida de la fecha especificada a partir del usuario logueado.")
+    public ResponseEntity<?> getComidasDelDia(@Parameter(description = "Comida de la fecha a consultar", required = true)
+    											@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
             									@AuthenticationPrincipal Usuario usuario) {
         try {
             List<ComidaDiariaDto> comidas = comidaService.obtenerComidasDelDia(fecha, usuario.getEmail());
@@ -55,6 +61,7 @@ public class ComidaRestController {
     }
 
 	@PostMapping("/crear")
+	@Operation(summary = "Crear comida", description = "Creación de comida por usuario logueado.")
     public ResponseEntity<?> crearComida(
             @RequestBody Comida comida,
             @AuthenticationPrincipal Usuario usuario) {
@@ -82,7 +89,9 @@ public class ComidaRestController {
     }
 	
 	@PostMapping("/{idComida}/añadirAlimento")
-	public ResponseEntity<?> agregarAlimentoAComida(@PathVariable int idComida,
+	@Operation(summary = "Añadir Alimento a Comida", description = "Obtiene una comida por ID comida y añade un alimento a la misma.")
+	public ResponseEntity<?> agregarAlimentoAComida(@Parameter(description = "ID de la comida a la que se va a añadir el Alimento.", required = true)
+													@PathVariable int idComida,
 											        @RequestBody AgregarAlimentoRequestDto request,
 											        @AuthenticationPrincipal Usuario usuario) {
 	    
@@ -108,7 +117,10 @@ public class ComidaRestController {
 	}
 	
 	@DeleteMapping("/{idComida}/alimentos/{idAlimento}")
-	public ResponseEntity<?> eliminarAlimentoDeComida(@PathVariable int idComida,
+	@Operation(summary = "Eliminar Alimento de Comida", description = "Elimina un Alimento por ID alimento de una Comida obtenida por el ID de la misma.")
+	public ResponseEntity<?> eliminarAlimentoDeComida(@Parameter(description = "ID de la comida a la que se va a eliminar el Alimento.", required = true)
+														@PathVariable int idComida,
+														@Parameter(description = "ID del alimento que se va eliminar de la comida.", required = true)
 												        @PathVariable int idAlimento,
 												        @AuthenticationPrincipal Usuario usuario) {
 	    
@@ -132,7 +144,10 @@ public class ComidaRestController {
 	}
 	
 	@PutMapping("/{idComida}/alimentos/{idAlimento}")
-	public ResponseEntity<?> actualizarCantidadAlimento(@PathVariable int idComida,
+	@Operation(summary = "Modificar cantidad Alimento", description = "Obtiene una comida por ID comida y modifica la cantidad de un Alimento incluido en la Comida por ID del mismo.")
+	public ResponseEntity<?> actualizarCantidadAlimento(@Parameter(description = "ID de la comida a la que se va a modificar el Alimento.", required = true)
+														@PathVariable int idComida,
+														@Parameter(description = "ID del Alimento que se va modificar de la Comida.", required = true)
 												        @PathVariable int idAlimento,
 												        @RequestBody ActualizarCantidadAlimentoRequestDto request,
 												        @AuthenticationPrincipal Usuario usuario) {
@@ -161,7 +176,9 @@ public class ComidaRestController {
 	
 	// ComidaRestController.java
 	@DeleteMapping("/{idComida}")
-	public ResponseEntity<?> eliminarComida(@PathVariable int idComida,
+	@Operation(summary = "Eliminar Comida", description = "Elimina una Comida por ID de la misma.")
+	public ResponseEntity<?> eliminarComida(@Parameter(description = "ID de la comida que se va a eliminar.", required = true)
+											@PathVariable int idComida,
 	        								@AuthenticationPrincipal Usuario usuario) {
 	    try {
 	        comidaService.eliminarComida(idComida, usuario);
@@ -187,7 +204,9 @@ public class ComidaRestController {
 	
 	// ComidaRestController.java
 	@GetMapping("/{idComida}/resumen")
-	public ResponseEntity<?> getResumenComida(@PathVariable int idComida,
+	@Operation(summary = "Resumen Comida", description = "Obtiene el resumen de una comida por el ID comida.")
+	public ResponseEntity<?> getResumenComida(@Parameter(description = "ID de la comida que se va a obtener el resumen.", required = true)
+												@PathVariable int idComida,
 	        									@AuthenticationPrincipal Usuario usuario) {
 	    try {
 	        ResumenComidaDto resumen = comidaService.obtenerResumenComida(idComida, usuario);

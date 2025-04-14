@@ -23,10 +23,13 @@ import easyfit.models.entities.Usuario;
 import easyfit.services.IObjetivoService;
 import easyfit.services.IValorNutricionalService;
 import easyfit.utils.ObjetivoCalculator;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/objetivos")
+@Tag(name = "Objetivos", description = "Operaciones relacionadas con los objetivos de los Usuarios de Easyfit.")
 @CrossOrigin(origins = "*")
 public class ObjetivosRestController {
 
@@ -54,6 +57,7 @@ public class ObjetivosRestController {
 
 	//RUTA CON METODO PARA OBTENER TODOS LOS OBJETIVOS DEL USUARIO
 	@GetMapping("/misobjetivos")
+	@Operation(summary = "Obtener objetivos de Usuario", description = "Obtiene los objetivos del Usuario logueado.")
 	public ResponseEntity<ObjetivoResponseDto> objetivosUsuario(@AuthenticationPrincipal Usuario usuario) {
 	
 		//Mapeamos los objetivos del usuario en una respuesta dto
@@ -69,6 +73,7 @@ public class ObjetivosRestController {
 
 	//RUTA CON METODO PARA MODIFICAR LOS MACROS DEL USUARIO POR PORCENTAJE
 	@PutMapping("/macros")
+	@Operation(summary = "Modifica macronutrientes de Usuario", description = "Modifica los macronutrientes por porcentaje del Usuario logueado.")
 	public ResponseEntity<ValorNutriconalResponseDto> modificarMacros(
 			@RequestBody @Valid MacrosRequestDto macrosDto,  
 			@AuthenticationPrincipal Usuario usuario) {
@@ -96,6 +101,7 @@ public class ObjetivosRestController {
 	
 	//ACTUALIZAR PESO OBJETIVO - NO MODIFICA LAS KCAL!
 	@PutMapping("/pesometa")
+	@Operation(summary = "Modificar peso objetivo de Usuario", description = "Modifica el peso objetivo del Usuario logueado sin modificar las calorías.")
 	public ResponseEntity<ObjetivoResponseDto> actualizarPesoObjetivo(
 			@RequestBody @Valid PesoObjetivoDto pesoDto, 
 			@AuthenticationPrincipal Usuario usuario) {
@@ -108,6 +114,7 @@ public class ObjetivosRestController {
 	
 	//ACTUALIZAR NIVEL DE ACTIVIDAD
 	@PutMapping("/nivelactividad")
+	@Operation(summary = "Modificar nivel de actividad", description = "Modifica el nivel de actividad del Usuario logueado.")
 	public ResponseEntity<ObjetivoResponseDto>  actualizarNivelActividad(
 			@RequestBody @Valid NivelActividadDto actividadDto, 
 			@AuthenticationPrincipal Usuario usuario ) {
@@ -121,6 +128,7 @@ public class ObjetivosRestController {
 
 	//ACTUALIZAR OPCION PESO
 	@PutMapping("/metasemanal")
+	@Operation(summary = "Modificar opcion de peso", description = "Modifica la opción de peso semanal del Usuario logueado.")
 	public ResponseEntity<ObjetivoResponseDto>  actualizarOpcionPeso(
 			@RequestBody @Valid AjusteSemanalDto ajusteDto, 
 			@AuthenticationPrincipal Usuario usuario ) {
@@ -133,6 +141,7 @@ public class ObjetivosRestController {
 	
 	//ACTUALIZAR NIVEL DE ACTIVIDAD
 	@PutMapping("/metaobjetivo")
+	@Operation(summary = "Modificar objetivo", description = "Modifica el objetivo del Usuario logueado.")
 	public ResponseEntity<ObjetivoResponseDto> actualizarObjetivoUsuario (
 			@RequestBody @Valid ObjetivoUsuarioDto objetivoDto,
 			@AuthenticationPrincipal Usuario usuario ) {
