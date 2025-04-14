@@ -1,0 +1,41 @@
+   html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: sans-serif;
+  }
+  
+  /* Estructura base */
+  .layout {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  /* Sidebar (ya lo tienes bien con .sidebar) */
+  
+  /* Área del contenido a la derecha del sidebar */
+  .contenido {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0; /* ⚠️ Necesario para que overflow funcione */
+    overflow: hidden;
+  }
+  
+  /* Contenido con scroll si hace falta */
+  .main-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    min-width: 0;
+    
+  }
+  
+  /* Footer fijo dentro del contenido */
+  .footer {
+    flex-shrink: 0;
+    padding: 1rem;
+  }
+  

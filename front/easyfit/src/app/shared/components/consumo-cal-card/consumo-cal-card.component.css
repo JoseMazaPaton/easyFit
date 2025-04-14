@@ -1,0 +1,119 @@
+.grafico-card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  height: 100%;
+}
+
+.titulo {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.subtitulo {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.barras-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+  padding-bottom: 0.5rem; /* un poco de espacio para la barra de scroll */
+}
+
+.barras-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1rem;
+  height: 160px;
+  min-width: max-content;
+  padding-left: 0.3rem;
+}
+
+.barra-dia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 30px;
+}
+
+.barras-pareja {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.barra {
+  width: 8px;
+  border-radius: 6px;
+  transition: height 0.3s ease;
+}
+
+.fecha {
+  font-size: 0.75rem;
+  color: #4b5563;
+  margin-top: 0.5rem;
+}
+
+.valores {
+  font-size: 0.7rem;
+  text-align: center;
+  margin-bottom: 0.25rem;
+  color: #64748b;
+}
+
+.valor.objetivo {
+  color: #94a3b8;
+}
+
+.valor.consumidas {
+  color: #1d4ed8;
+  font-weight: bold;
+}
+.leyenda {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.color {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  margin-right: 0.4rem;
+}
+
+.color.objetivo {
+  background-color: #cbd5e1;
+}
+
+.color.consumidas {
+  background-color: #60a5fa;
+}
+
+.encabezado {
+  text-align: center;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.leyenda-centro {
+  justify-content: center;
+}

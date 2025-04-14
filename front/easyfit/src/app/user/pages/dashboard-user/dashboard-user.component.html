@@ -1,71 +1,31 @@
-<div class="flex flex-col flex-1 w-full max-w-6xl mx-auto py-8">
+<div class="flex flex-col flex-1 min-w-0 w-full max-w-6xl mx-auto py-2">
     <!-- Título de bienvenida -->
-    <h1 class="text-3xl font-bold text-white mb-8">👋 Bienvenido, José Luis!</h1>
+    <h1 class="text-3xl font-bold text-white mb-8">👋 Bienvenido/a, ¡{{usuario.nombre}}!</h1>
   
     <!-- Contenedores de métricas -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <!-- Calorías -->
-      <div class="bg-white rounded-xl p-6 shadow-md">
-        <h2 class="text-sm text-gray-500 mb-2">Calorías</h2>
-        <p class="text-xs text-gray-400 mb-2">Restantes = Objetivo - Consumidas</p>
-        <div class="flex items-center justify-between">
-          <div class="flex flex-col items-center text-[#0099ff]">
-            <div class="text-3xl font-bold">2400</div>
-            <div class="text-sm">Restantes</div>
-          </div>
-          <div class="text-sm space-y-2 text-gray-600">
-            <div>🎯 Objetivo <strong>2400Kcal</strong></div>
-            <div>🍽️ Consumidas <strong>2400Kcal</strong></div>
-          </div>
-        </div>
-      </div>
+      <app-calorias-card
+      [kcalObjetivo]="kcalObjetivo"
+      [kcalConsumidas]="kcalConsumidas"
+      [kcalRestantes]="kcalRestantes"
+      [porcentaje]="porcentaje">
+      </app-calorias-card>
   
       <!-- Progreso del peso -->
-      <div class="bg-white rounded-xl p-6 shadow-md">
-        <h2 class="text-sm text-gray-500 mb-2">Progreso del peso</h2>
-        <p class="text-xs text-gray-400 mb-4">Progreso desde el inicio hasta día de hoy</p>
-        <div class="flex flex-col items-center justify-center text-[#0099ff]">
-          <div class="text-xl font-bold">5 kg perdidos</div>
-          <div class="text-sm text-gray-500">Actual: 82 kg</div>
-        </div>
-      </div>
+      <app-progreso-peso-card
+        [pesoInicial]="pesoInicial"
+        [pesoActual]="pesoActual"
+        [pesoObjetivo]="pesoObjetivo">
+      </app-progreso-peso-card>
+
     </div>
   
     <!-- Gráfico de calorías -->
-    <div class="bg-white rounded-xl p-6 shadow-md">
-      <h2 class="text-md font-semibold text-gray-700 mb-1">Consumo calorías</h2>
-      <p class="text-xs text-gray-400 mb-4">Últimos 7 días</p>
-  
-      <div class="grid grid-cols-7 gap-2 text-center text-xs text-gray-700">
-        <div>
-          <div class="h-40 bg-cyan-300 rounded-md mb-1" style="height: 80%;"></div>
-          05/06/2025
-        </div>
-        <div>
-          <div class="h-40 bg-blue-500 rounded-md mb-1" style="height: 75%;"></div>
-          05/06/2025
-        </div>
-        <div>
-          <div class="h-40 bg-cyan-300 rounded-md mb-1" style="height: 80%;"></div>
-          05/06/2025
-        </div>
-        <div>
-          <div class="h-40 bg-blue-500 rounded-md mb-1" style="height: 60%;"></div>
-          05/06/2025
-        </div>
-        <div>
-          <div class="h-40 bg-cyan-300 rounded-md mb-1" style="height: 85%;"></div>
-          05/06/2025
-        </div>
-        <div>
-          <div class="h-40 bg-blue-500 rounded-md mb-1" style="height: 90%;"></div>
-          05/06/2025
-        </div>
-        <div>
-          <div class="h-40 bg-cyan-300 rounded-md mb-1" style="height: 85%;"></div>
-          05/06/2025
-        </div>
-      </div>
-    </div>
+    <app-consumo-cal-card
+      [datos]="consumoSemanal">
+
+    </app-consumo-cal-card>
+
   </div>
   
