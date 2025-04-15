@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
-import { Alimento } from '../../../models/interfaces/alimento';
-import { Categoria } from '../../../models/interfaces/categoria';
+import { Alimento } from '../../../../models/interfaces/alimento';
+import { Categoria } from '../../../../models/interfaces/categoria';
 import { CommonModule } from '@angular/common';
-import { CategoriasService } from '../../../models/services/categorias.service';
+import { CategoriasService } from '../../../../models/services/categorias.service';
 
 @Component({
   selector: 'app-alimentos-lista',

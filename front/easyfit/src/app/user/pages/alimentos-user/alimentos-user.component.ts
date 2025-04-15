@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { AlimentosSwitcherComponent } from '../../../shared/components/alimentos-switcher/alimentos-switcher.component';
-import { AlimentosFiltroComponent } from '../../../shared/components/alimentos-filtro/alimentos-filtro.component';
+import { AlimentosSwitcherComponent } from '../../../shared/components/alimentos-user/alimentos-switcher/alimentos-switcher.component';
+import { AlimentosFiltroComponent } from '../../../shared/components/alimentos-user/alimentos-filtro/alimentos-filtro.component';
 import { Alimento } from '../../../models/interfaces/alimento';
 import { AlimentosService } from '../../../models/services/alimentos.service';
-import { AlimentosListaComponent } from '../../../shared/components/alimentos-lista/alimentos-lista.component';
+import { AlimentosListaComponent } from '../../../shared/components/alimentos-user/alimentos-lista/alimentos-lista.component';
 import { Categoria } from '../../../models/interfaces/categoria';
 import { CategoriasService } from '../../../models/services/categorias.service';
-import { AlimentosFormularioComponent } from '../../../shared/components/alimentos-formulario/alimentos-formulario.component';
+import { AlimentosFormularioComponent } from '../../../shared/components/alimentos-user/alimentos-formulario/alimentos-formulario.component';
 
 @Component({
   selector: 'app-alimentos-user',

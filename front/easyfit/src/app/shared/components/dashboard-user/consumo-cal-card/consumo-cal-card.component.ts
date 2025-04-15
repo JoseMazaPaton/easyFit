@@ -11,7 +11,7 @@ import { Component, Input } from '@angular/core';
 export class ConsumoCaloriasSimplesComponent {
   @Input() datos: { fecha: string; consumidas: number; objetivo: number }[] = [];
 
-  maxAltura = 100;
+  maxAltura = 180;
 
     
   getAltura(valor: number): string {

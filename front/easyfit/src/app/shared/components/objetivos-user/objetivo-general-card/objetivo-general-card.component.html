@@ -1,0 +1,65 @@
+<div class="card-objetivo">
+
+  <!-- Peso actual y objetivo -->
+  <div class="pesos-inputs">
+    <!-- Peso actual -->
+    <form [formGroup]="formPesoActual">
+      <div class="campo-card">
+        <label for="pesoActual">Registrar peso</label>
+        <div class="input-con-check">
+          <div class="input-unidad">
+            <input
+              type="number"
+              id="pesoActual"
+              formControlName="pesoActual"
+              (blur)="guardarPesoActual()" />
+            <span class="unidad">kg</span>
+            @if (guardadoPesoActual) {
+              <i class="fa-solid fa-floppy-disk check-icon visible"></i>
+            }
+          </div>
+
+        </div>
+      </div>
+    </form>
+
+    <!-- Peso objetivo -->
+    <form [formGroup]="formPesoObjetivo">
+      <div class="campo-card">
+        <label for="pesoObjetivo">Peso objetivo</label>
+        <div class="input-con-check">
+          <div class="input-unidad">
+            <input
+              type="number"
+              id="pesoObjetivo"
+              formControlName="pesoObjetivo"
+              (blur)="guardarPesoObjetivo()" />
+            <span class="unidad">kg</span>
+            @if (guardadoPesoObjetivo) {
+              <i class="fa-solid fa-floppy-disk check-icon visible"></i>
+            }
+          </div>
+          
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Objetivo general -->
+  <form [formGroup]="formObjetivo">
+    <div class="campo-card-objetivo">
+      <label for="objetivoUsuario">Cambiar objetivo</label>
+      <div class="select-wrapper-objetivo">
+        <select id="objetivoUsuario" formControlName="objetivoUsuario" (blur)="guardarObjetivo()">
+          <option value="">Seleccione...</option>
+          @for (opcion of opcionesObjetivo; track opcion) {
+            <option [value]="opcion">{{ opcion }}</option>
+          }
+        </select>
+        @if (guardadoObjetivo) {
+          <i class="fa-solid fa-floppy-disk check-icon visible"></i>
+        }
+      </div>
+    </div>
+  </form>
+</div>

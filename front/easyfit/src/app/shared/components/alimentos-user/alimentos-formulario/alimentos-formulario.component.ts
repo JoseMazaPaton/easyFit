@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Alimento } from '../../../models/interfaces/alimento';
-import { Categoria } from '../../../models/interfaces/categoria';
-import { AlimentosService } from '../../../models/services/alimentos.service';
+import { Alimento } from '../../../../models/interfaces/alimento';
+import { Categoria } from '../../../../models/interfaces/categoria';
+import { AlimentosService } from '../../../../models/services/alimentos.service';
 
 @Component({
   selector: 'app-alimentos-formulario',

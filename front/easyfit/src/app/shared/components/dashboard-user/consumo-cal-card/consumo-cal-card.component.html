@@ -17,10 +17,10 @@
     <div class="barras-container">
       @for (dato of datos; track dato.fecha) {
         <div class="barra-dia">
-          <div class="valores">
-            <div class="valor objetivo">{{ dato.objetivo }}</div>
-            <div class="valor consumidas">{{ dato.consumidas }}</div>
+          <div class="valor-numero">
+            {{ dato.objetivo }} {{ dato.consumidas }}
           </div>
+        
           <div class="barras-pareja">
             <div
               class="barra objetivo"
@@ -37,6 +37,7 @@
               }"
             ></div>
           </div>
+        
           <div class="fecha">{{ dato.fecha }}</div>
         </div>
       }

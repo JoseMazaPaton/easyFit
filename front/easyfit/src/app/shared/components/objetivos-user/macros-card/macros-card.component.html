@@ -1,0 +1,55 @@
+<div class="card-macros">
+
+    @if (form) {
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  
+        <div class="fila-calorias">
+            <span class="label">Calorías objetivo</span>
+            <div class="input-kcal-wrapper">
+              <span class="valor">{{ valores.kcalObjetivo }}</span>
+              <span class="unidad">kcal</span>
+            </div>
+          </div>
+  
+        <h2 class="titulo">Macronutrientes</h2>
+        <p class="subtitulo">Ajusta el porcentaje de tus macros al 100%</p>
+  
+        <div class="linea-formulario">
+          <label>Proteínas (%)</label>
+          <select formControlName="porcentajeProteinas">
+            @for (opcion of valoresOpcionales; track opcion) {
+              <option [value]="opcion">{{ opcion }}%</option>
+            }
+          </select>
+        </div>
+  
+        <div class="linea-formulario">
+          <label>Carbohidratos (%)</label>
+          <select formControlName="porcentajeCarbohidratos">
+            @for (opcion of valoresOpcionales; track opcion) {
+              <option [value]="opcion">{{ opcion }}%</option>
+            }
+          </select>
+        </div>
+  
+        <div class="linea-formulario">
+          <label>Grasas (%)</label>
+          <select formControlName="porcentajeGrasas">
+            @for (opcion of valoresOpcionales; track opcion) {
+              <option [value]="opcion">{{ opcion }}%</option>
+            }
+          </select>
+        </div>
+  
+        <div class="suma" [class.error]="sumaTotal !== 100">
+          Total: {{ sumaTotal }}%
+        </div>
+  
+        <div class="acciones">
+          <button type="submit" [disabled]="form.invalid || sumaTotal !== 100">Guardar</button>
+        </div>
+      </form>
+    }
+  
+  </div>
+  

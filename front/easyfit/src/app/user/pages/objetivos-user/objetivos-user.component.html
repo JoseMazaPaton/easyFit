@@ -1,1 +1,32 @@
-<p>objetivos-user works!</p>
+<div class="objetivos-wrapper" @fadeIn>
+
+  <h1 class="text-3xl font-bold text-white mb-1">Objetivos diarios</h1>
+  
+  @if (!loading && objetivo && objetivo.valores) {
+    <app-macros-card
+      [valores]="objetivo.valores"
+      (actualizado)="onActualizado()">
+    </app-macros-card>
+  }
+
+  @if (!loading && objetivo) {
+    <app-objetivo-general-card
+      [objetivo]="objetivo"
+      (actualizado)="onActualizado()">
+    </app-objetivo-general-card>
+  }
+
+  @if (!loading && objetivo) {
+    <app-actividad-objetivo-card
+      [objetivo]="objetivo"
+      (actualizado)="onActualizado()">
+    </app-actividad-objetivo-card>
+  }
+
+  @if (loading) {
+    <div class="loading">
+      Cargando objetivos...
+    </div>
+  }
+
+</div>

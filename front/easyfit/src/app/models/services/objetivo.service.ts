@@ -8,7 +8,7 @@ import { ObjetivoResponse } from '../interfaces/objetivo-response';
 })
 export class ObjetivoService {
 
-  private apiUrl = 'http://localhost:9008/objetivos';
+  private apiUrl = 'http://localhost:9008';
 
   constructor(private http: HttpClient) { }
 
@@ -16,62 +16,52 @@ export class ObjetivoService {
    * Obtiene los objetivos del usuario (peso, actividad, kcal, macros, etc.)
    */
   getObjetivosUsuario(): Observable<ObjetivoResponse> {
-    return this.http.get<ObjetivoResponse>(`${this.apiUrl}/misobjetivos`);
+    return this.http.get<ObjetivoResponse>(`${this.apiUrl}/objetivos/misobjetivos`);
   }
 
   /**
    * Cambia los macros del usuario (en porcentaje).
    */
-  actualizarMacros(macrosDto: {
+  actualizarMacros(dto: {
     porcentajeProteinas: number;
     porcentajeCarbohidratos: number;
     porcentajeGrasas: number;
   }): Observable<any> {
-    return this.http.put(`${this.apiUrl}/macros`, macrosDto);
+    return this.http.put(`${this.apiUrl}/objetivos/macros`, dto);
   }
 
   /**
    * Cambia el peso actual del usuario.
    */
-  actualizarPesoActual(peso: number): Observable<ObjetivoResponse> {
-    return this.http.put<ObjetivoResponse>(`${this.apiUrl}/pesoactual`, {
-      pesoActual: peso
-    });
+  actualizarPesoActual(dto: { pesoActual: number }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/objetivos/pesoactual`, dto);
   }
 
   /**
    * Cambia el peso objetivo del usuario.
    */
-  actualizarPesoObjetivo(peso: number): Observable<ObjetivoResponse> {
-    return this.http.put<ObjetivoResponse>(`${this.apiUrl}/pesometa`, {
-      pesoObjetivo: peso
-    });
+  actualizarPesoObjetivo(dto: { pesoObjetivo: number }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/objetivos/pesometa`, dto);
   }
 
   /**
    * Cambia el nivel de actividad del usuario.
    */
-  actualizarActividad(actividad: 'SEDENTARIO' | 'LIGERO' | 'MODERADO' | 'ACTIVO' | 'MUY_ACTIVO'): Observable<ObjetivoResponse> {
-    return this.http.put<ObjetivoResponse>(`${this.apiUrl}/nivelactividad`, {
-      actividad
-    });
+  actualizarActividad(dto: { actividad: string }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/objetivos/nivelactividad`, dto);
   }
 
   /**
    * Ajusta el ritmo semanal de cambio de peso.
    */
-  actualizarMetaSemanal(opcionPeso: 'GANAR_RAPIDO' | 'GANAR_LENTO' | 'MANTENER' | 'PERDER_LENTO' | 'PERDER_RAPIDO'): Observable<ObjetivoResponse> {
-    return this.http.put<ObjetivoResponse>(`${this.apiUrl}/metasemanal`, {
-      opcionPeso
-    });
+  actualizarMetaSemanal(dto: { opcionPeso: string }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/objetivos/metasemanal`, dto);
   }
 
   /**
    * Establece el objetivo general (mantener, perder, ganar).
    */
-  actualizarObjetivoUsuario(objetivoUsuario: 'PERDER' | 'MANTENER' | 'GANAR'): Observable<ObjetivoResponse> {
-    return this.http.put<ObjetivoResponse>(`${this.apiUrl}/metaobjetivo`, {
-      objetivoUsuario
-    });
+  actualizarObjetivoUsuario(dto: { objetivoUsuario: string }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/objetivos/metaobjetivo`, dto);
   }
 }

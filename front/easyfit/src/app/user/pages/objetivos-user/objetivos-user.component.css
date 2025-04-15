@@ -1,0 +1,9 @@
+.objetivos-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: auto;
+    padding: 2rem;
+  }
+  
