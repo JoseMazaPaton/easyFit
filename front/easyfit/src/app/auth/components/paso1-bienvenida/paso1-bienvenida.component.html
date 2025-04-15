@@ -1,0 +1,49 @@
+<div class="registro-form-contenedor">
+    <div class="card-registro">
+      <h2 class="titulo-principal text-center">Bienvenido</h2>
+  
+      <form>
+        <!-- Nombre -->
+        <div class="mb-4">
+          <label for="nombre" class="form-label titulo-seccion d-block mb-1">
+            ¿Cuál es tu nombre?
+          </label>
+          <p class="mb-2" style="color: var(--color-texto-principal); font-size: 12px;">
+            Nos alegra que estés aquí, vamos a conocerte un poco.
+          </p>
+          <input
+            type="text"
+            class="form-control"
+            id="nombre"
+            placeholder="Introduce tu nombre"
+            
+            name="nombre"
+            required
+          />
+        </div>
+  
+        <!-- Email -->
+        <div class="mb-5">
+          <label for="email" class="form-label titulo-seccion d-block mb-2">
+            Introduce tu dirección de correo
+          </label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Dirección de correo"
+           
+            name="email"
+            required
+          />
+        </div>
+  
+        <!-- Botones -->
+        <div class="d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-primary" [routerLink]="['/auth/login']">Volver</button>
+          <button type="button" class="btn btn-primary" (click)="siguientePaso()" [disabled]="!nombre || !email">Siguiente</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

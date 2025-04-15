@@ -1,47 +1,42 @@
-<div class="container h-100 d-flex align-items-center justify-content-center">
-  <div class="login-wrapper w-100" >
-    <form class="login-form bg-white rounded-4 shadow p-4" #loginForm = "ngForm" (ngSubmit)="login(loginForm)">
-      <h3 class="text-center fw-bold text-primary-custom">Inicio de sesión</h3>
-  
-      <!-- INPUT DEL EMAIL USUARIO -->
-      <div class=" mt-4">
+<section class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div style="max-width: 400px; width: 100%;" class="px-3">
+    <form class="bg-white rounded-4 shadow p-4" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+      <h3 class="text-center fw-bold text-primary-custom mb-4">Inicio de sesión</h3>
+
+      <!-- EMAIL -->
+      <div class="mb-3">
         <input
           type="email"
           id="email"
           class="form-control"
-          placeholder="Dirección de email"
-          required
+          placeholder="Correo electrónico"
           name="email"
-          ngModel
-        />
+          required
+          ngModel />
       </div>
-  
-      <!-- INPUT DE LA PASSWORD USUARIO -->
-      <div class="mt-4">
-        <div class="input-group">
-          <input
-            type="password"
-            id="password"  
-            class="form-control"
-            placeholder="Contraseña"
-            required
-            name="password"
-            ngModel
-          />
-          <span class="input-group-text"><i class="bi bi-eye"></i></span>
-        </div>
-        <a class="d-block text-end small mt-2 text-muted">¿Olvidaste tu contraseña?</a>
+
+      <!-- PASSWORD -->
+      <div class="mb-3">
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          placeholder="Contraseña"
+          name="password"
+          required
+          ngModel />
+        <a class="d-block text-end small mt-2 text-muted" href="#">¿Olvidaste tu contraseña?</a>
       </div>
-  
-      <!-- BOTON INICIO -->
+
+      <!-- BOTÓN -->
       <div class="d-grid mt-4">
-        <button type="submit" class="btn btn-custom btn-lg text-white fw-semibold"
-        [disabled]="loginForm.invalid">
+        <button
+          type="submit"
+          class="btn btn-custom btn-lg text-white fw-semibold"
+          [disabled]="loginForm.invalid">
           Iniciar sesión
         </button>
       </div>
-      
     </form>
   </div>
-</div>
-
+</section>

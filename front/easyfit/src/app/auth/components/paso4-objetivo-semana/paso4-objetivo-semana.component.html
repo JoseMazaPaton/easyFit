@@ -1,0 +1,58 @@
+<div class="registro-form-contenedor">
+    <div class="card-registro">
+      <form>
+        <!-- Título -->
+        <h5 class="titulo-seccion mb-2">¿Cuál es tu objetivo semanal?</h5>
+        <p class="mb-4" style="color: var(--color-texto-principal); font-size: 14px;">
+          Para que te sea más cumplir tu objetivo de salud general, vamos a desglosarlo por semanas.
+          ¡Es mejor ir poquito a poco!
+        </p>
+  
+        <!-- Opciones tipo botón -->
+        <div class="d-grid gap-3 mb-5">
+          <button
+            type="button"
+            class="btn"
+            [value]="objetivoSemanal === 'perder' ? 'btn-primary' : 'btn-outline-secondary'"
+            (click)="seleccionarObjetivo('perder')"
+          >
+            Perder peso
+          </button>
+  
+          <button
+            type="button"
+            class="btn"
+            [value]="objetivoSemanal === 'perder' ? 'btn-primary' : 'btn-outline-secondary'"
+            (click)="seleccionarObjetivo('mantener')"
+          >
+            Mantener peso
+          </button>
+          
+          <button
+            type="button"
+            class="btn"
+            [value]="objetivoSemanal === 'perder' ? 'btn-primary' : 'btn-outline-secondary'"
+            (click)="seleccionarObjetivo('ganar')"
+          >
+            Ganar peso
+          </button>
+        </div>
+  
+        <!-- Botones navegación -->
+        <div class="d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-primary" [routerLink]="['/auth/register/paso3']">
+            Volver
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="siguientePaso()"
+            
+          >
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

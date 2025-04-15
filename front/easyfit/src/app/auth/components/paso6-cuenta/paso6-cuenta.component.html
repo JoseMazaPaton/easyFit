@@ -1,0 +1,57 @@
+<div class="registro-form-contenedor">
+    <div class="card-registro">
+      <form>
+        <!-- Correo electrónico -->
+        <div class="mb-4">
+          <label for="email" class="form-label titulo-seccion d-block mb-2">
+            Introduce tu dirección de correo
+          </label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Dirección de correo"
+            [(value)]="email"
+            name="email"
+            required
+          />
+        </div>
+  
+        <!-- Contraseña -->
+        <div class="mb-4">
+          <label for="password" class="form-label titulo-seccion d-block mb-2">
+            Crea una contraseña
+          </label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Crear una contraseña"
+            [(value)]="password"
+            name="password"
+            required
+            minlength="10"
+          />
+          <p style="font-size: 13px; color: var(--color-texto-principal); margin-top: -4px;">
+            Debe tener al menos 10 caracteres, sin espacios.
+          </p>
+        </div>
+  
+        <!-- Botones -->
+        <div class="d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-primary" [routerLink]="['/auth/register/paso5']">
+            Volver
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="crearCuenta()"
+            [disabled]="!email || !password || password.length < 10"
+          >
+            Finalizar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

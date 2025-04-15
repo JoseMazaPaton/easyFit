@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { Paso3ObjetivoGeneraComponent } from './components/paso3-objetivo-genera/paso3-objetivo-genera.component';
 
 export const authRoutes: Routes = [
   {
@@ -21,6 +22,51 @@ export const authRoutes: Routes = [
           import('./pages/register-form/register-form.component').then(
             m => m.RegisterFormComponent
           ),
+        children: [
+          { path: '', redirectTo: 'paso1', pathMatch: 'full' },
+          {
+            path: 'paso1',
+            loadComponent: () =>
+              import('./components/paso1-bienvenida/paso1-bienvenida.component').then(
+                m => m.Paso1BienvenidaComponent
+              )
+          },
+          {
+            path: 'paso2',
+            loadComponent: () =>
+              import('./components/paso2-sexo-fecha/paso2-sexo-fecha.component').then(
+                m => m.Paso2SexoFechaComponent
+              )
+          },
+          {
+            path: 'paso3',
+            loadComponent: () =>
+              import('./components/paso3-objetivo-genera/paso3-objetivo-genera.component').then(
+                m => m.Paso3ObjetivoGeneraComponent
+              )
+          },
+          {
+            path: 'paso4',
+            loadComponent: () =>
+              import('./components/paso4-objetivo-semana/paso4-objetivo-semana.component').then(
+                m => m.Paso4ObjetivoSemanaComponent
+              )
+          },
+          {
+            path: 'paso5',
+            loadComponent: () =>
+              import('./components/paso5-datos-fisicos/paso5-datos-fisicos.component').then(
+                m => m.Paso5DatosFisicosComponent
+              )
+          },
+          {
+            path: 'paso6',
+            loadComponent: () =>
+              import('./components/paso6-cuenta/paso6-cuenta.component').then(
+                m => m.Paso6CuentaComponent
+              )
+          }
+        ]
       },
       {
         path: '',

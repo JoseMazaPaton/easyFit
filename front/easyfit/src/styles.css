@@ -1,17 +1,53 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-/* Personalización global */
+:root {
+  --color-texto-principal: #545454;
+}
+
+
+
 body {
-  @apply w-full min-h-screen bg-gradient-to-r from-[#5de0e6] to-[#004aad] font-[Poppins];
-  
-}
-html, body {
-  height: 100%;
-  margin: 0;
+  background: linear-gradient(to right, #5de0e6, #004aad);
+  font-family: 'Poppins', sans-serif;
 }
 
-main {
-  height: 100%;
+
+.fondo-degradado {
+  background: linear-gradient(to right, #5de0e6, #004aad);
+}
+
+.titulo-seccion {
+  color: var(--color-texto-principal);
+  font-weight: bold;
+}
+
+.registro-form-contenedor {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-registro {
+  background-color: white;
+  padding: 40px;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.titulo-principal {
+  font-weight: bold;
+  color: #0099ff;
+  margin-bottom: 30px;
+}
+
+.btn-primary {
+  background-color: #0099ff;
+  border-color: #0099ff;
+}
+
+.btn-outline-primary {
+  border-color: #0099ff;
+  color: #0099ff;
 }

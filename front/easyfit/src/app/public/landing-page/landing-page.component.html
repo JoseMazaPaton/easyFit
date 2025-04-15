@@ -1,22 +1,94 @@
-<div class="container-fluid flex-grow-1 d-flex flex-column p-0">
-  <div class="hero-landing container d-flex justify-content-between align-items-center flex-wrap flex-lg-nowrap flex-grow-1 p-4 gap-5">
+<!-- NAVBAR -->
+<nav class="bg-transparent">
+  <app-nav-bar-landing></app-nav-bar-landing>
+</nav>
 
-    <!-- Texto -->
-    <div class="d-flex flex-column justify-content-center text-white text-start flex-grow-1">
-      <h1 class="fw-bold display-6 mb-3">Tu alimentación bajo control</h1>
-      <p class="fs-5 mb-4">
-        Registra tus comidas, ajusta tus macros <br />
-        y sigue tu progreso con precisión
-      </p>
+<!-- HERO PRINCIPAL -->
+<section class="py-5 px-3 text-white">
+  <div class="container" style="max-width: 1200px;">
+    <div class="row align-items-center g-4 flex-column-reverse flex-md-row">
+      
+      <!-- TEXTO -->
+      <div class="col-md-6 text-center text-md-start">
+        <h1 class="fw-bold display-5 mb-3">Tu alimentación, bajo control</h1>
+        <p class="fs-5 mb-4">Registra tus comidas, ajusta tus macros y sigue tu progreso con precisión.</p>
+        <a routerLink="/auth/register" class="btn btn-outline-light btn-lg fw-semibold rounded-pill px-4 py-2">
+          Empieza ya
+        </a>
+      </div>
 
-      <a routerLink="/auth/register" class="btn btn-light btn-lg banner-btn fw-semibold rounded-pill">
-        Empieza ya
-      </a>
-    </div>
+      <!-- IMAGEN -->
+      <div class="col-md-6 text-center text-md-end  justify-content-center justify-content-md-end pe-md-">
+        <img src="assets/images/fitness-banner.png" alt="EasyFit Hero" class="img-fluid"  style="max-width: 500px; object-fit: contain; margin-bottom: -47px;">
+      </div>
 
-    <!-- Imagen -->
-    <div class="d-none d-md-flex align-items-end flex-grow-1">
-      <img src="assets/images/fitness-banner.png" alt="EasyFit Hero" class="img-fluid hero-image" />
     </div>
   </div>
-</div>
+</section>
+
+<!-- SECCIÓN 2: BENEFICIOS -->
+<section class="bg-white py-5 px-3 text-dark">
+  <div class="container text-center" style="max-width: 1200px;">
+    <h2 class="fw-bold mb-5">¿Por qué usar EasyFit?</h2>
+
+    <div class="row row-cols-1 row-cols-md-3 g-5 justify-content-center align-items-stretch">
+      <!-- BENEFICIO 1 -->
+      <div class="col d-flex flex-column align-items-center text-center px-4">
+        <img src="assets/images/progreso.png" alt="Progreso" class="mb-3" style="width: 64px; height: 64px;" />
+        <h5 class="fw-semibold">Sigue tu progreso</h5>
+        <p class="text-secondary">
+          Monitorea tu ingesta diaria de calorías, macros y peso para alcanzar tus objetivos.
+        </p>
+      </div> 
+
+      <!-- BENEFICIO 2 -->
+      <div class="col d-flex flex-column align-items-center text-center px-4">
+        <img src="assets/images/alimentos.png" alt="Macros" class="mb-3" style="width: 64px; height: 64px;" />
+        <h5 class="fw-semibold">Controla tus macros</h5>
+        <p class="text-secondary">
+          Fija tus metas de proteínas, carbohidratos y grasas y ajusta tus comidas al instante.
+        </p>
+      </div>
+
+      <!-- BENEFICIO 3 -->
+      <div class="col d-flex flex-column align-items-center text-center px-4">
+        <img src="assets/images/movil.png" alt="Multidispositivo" class="mb-3" style="width: 64px; height: 64px;" />
+        <h5 class="fw-semibold">Desde cualquier lugar</h5>
+        <p class="text-secondary">
+          Accede desde tu móvil, tablet o PC. EasyFit siempre contigo.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- SECCIÓN 3: APP PREVIEW -->
+<section class="py-5 px-3 text-white">
+  <div class="container" style="max-width: 1200px;">
+    <div class="row align-items-center g-5 flex-column-reverse flex-md-row">
+      
+      <!-- IMAGEN -->
+      <div class="col-md-6 text-center">
+        <img src="assets/images/easyfit.png" alt="Vista previa EasyFit" class="img-fluid" style="max-width: 400px;">
+      </div>
+
+      <!-- TEXTO -->
+      <div class="col-md-6 text-center text-md-start">
+        <h2 class="fw-bold mb-4">Visualiza tus comidas fácilmente</h2>
+        <p class="fs-5 mb-4">
+          Nuestra app te muestra de forma clara tu consumo diario, comparaciones semanales y recomendaciones.
+          Gracias a una interfaz sencilla e intuitiva, puedes revisar tus hábitos alimenticios, detectar patrones y mejorar tu nutrición con datos reales.
+        </p>
+        <a routerLink="/auth/register" class="btn btn-outline-light btn-lg fw-semibold rounded-pill px-4 py-2">
+          Ver cómo funciona
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<app-footer-landing></app-footer-landing>
