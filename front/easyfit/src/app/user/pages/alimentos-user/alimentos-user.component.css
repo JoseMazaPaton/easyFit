@@ -1,0 +1,47 @@
+.alimentos-page {
+    max-width: 1200px;     /* o 1000px, ajusta según tu diseño */
+    margin: 0 auto;        /* centra horizontalmente */
+    padding: 1.5rem;       /* para respiración */
+    width: 100%;           /* ocupa todo hasta el máximo */
+  }
+
+
+.btn-add {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #0099ff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .btn-add:hover {
+    background-color: #007acc;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 100%;
+  }

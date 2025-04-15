@@ -1,0 +1,141 @@
+.tabla-alimentos {
+    border-radius: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    overflow: visible; /* o simplemente quítalo */
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0 0.5rem; /* espacio entre filas */
+    min-width: 1000px;
+    table-layout: auto;
+  }
+  
+  thead {
+    background-color: transparent;
+    color: #1f2937;
+  }
+  thead th {
+    position: sticky;
+    top: 0;
+    background-color: white; /* o el color de tu tabla */
+    z-index: 2;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* sutil sombra */
+  }
+  
+  th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #6b7280;
+
+  }
+  
+  td {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: #374151;
+    background-color: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  tbody tr {
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+  
+  tbody tr:hover td {
+    background-color: #f9fafb;
+  }
+  
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #6b7280;
+  }
+  
+  button:hover {
+    color: #0099ff;
+  }
+
+  
+td, th {
+    padding: 0.75rem 1rem;
+    white-space: normal;
+    word-break: break-word;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    max-width: 150px; /* Fuerza salto antes de expandir */
+    }
+  
+  /* td.nombre {
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-word;
+    max-width: 180px; 
+    line-height: 1.2;
+  } */
+  .mensaje-vacio {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1rem;
+    color: #6b7280;
+    border-radius: 1rem;
+    background-color: #f9fafb;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    margin-top: 1rem;
+  }
+  
+  .mensaje-vacio i {
+    font-size: 2rem;
+    color: #94a3b8;
+    margin-bottom: 0.5rem;
+  }
+
+  .acciones {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .btn-accion {
+    background: none;
+    border: none;
+    color: #4b5563; /* gris */
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .btn-accion:hover {
+    color: #0099ff;
+  }
+  
+  .btn-accion.eliminar:hover {
+    color: #ef4444; /* rojo al pasar el mouse sobre eliminar */
+  }
+  .tabla-scroll {
+    overflow-x: auto;
+    max-width: 100%;
+    width: 100%;
+
+    position: relative;
+    z-index: 1;
+  }
+
+  .tabla-scroll-both {
+    max-height: 300px;        /* 👈 define aquí la altura máxima */
+    overflow-y: auto;         /* 👈 scroll vertical */
+    overflow-x: auto;         /* 👈 scroll horizontal */
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    position: relative;
+  }

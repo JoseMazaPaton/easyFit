@@ -1,0 +1,64 @@
+<div class="modal">
+    <div class="formulario-wrapper">
+        <button class="modal-close" (click)="cerrar.emit()">
+          <i class="fas fa-times"></i>
+        </button>
+    
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="formulario">
+          <div class="campo">
+            <label>Nombre</label>
+            <input formControlName="nombre" type="text" />
+          </div>
+      
+          <div class="campo">
+            <label>Marca</label>
+            <input formControlName="marca" type="text" />
+          </div>
+      
+          <div class="campo-doble">
+            <div class="campo">
+              <label>Kcal</label>
+              <input formControlName="kcal" type="number" />
+            </div>
+            <div class="campo">
+              <label>Unidad</label>
+              <input formControlName="unidadMedida" type="text" />
+            </div>
+          </div>
+      
+          <div class="campo-doble">
+            <div class="campo">
+              <label>Proteínas</label>
+              <input formControlName="proteinas" type="number" />
+            </div>
+            <div class="campo">
+              <label>Carbohidratos</label>
+              <input formControlName="carbohidratos" type="number" />
+            </div>
+          </div>
+      
+          <div class="campo">
+            <label>Grasas</label>
+            <input formControlName="grasas" type="number" />
+          </div>
+      
+          <div class="campo">
+            <label>Categoría</label>
+            <select formControlName="idCategoria">
+              <option value="">Seleccione...</option>
+              @for (cat of categorias; track cat.idCategoria) {
+                <option [value]="cat.idCategoria">{{ cat.nombre }}</option>
+              }
+            </select>
+          </div>
+      
+          <div class="acciones">
+            <button type="submit" [disabled]="form.invalid">
+              {{ alimento ? 'Actualizar' : 'Crear' }}
+            </button>
+            <button type="button" (click)="cancelar()">Cancelar</button>
+          </div>
+        </form>
+    </div>
+</div>
+  

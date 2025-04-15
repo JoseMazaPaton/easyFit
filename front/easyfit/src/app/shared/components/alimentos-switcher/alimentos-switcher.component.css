@@ -1,0 +1,44 @@
+.switcher-tabs {
+    display: flex;
+    justify-content: flex-start;
+    gap: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 1.5rem;
+  }
+  
+  .tab {
+    position: relative;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .tab:hover {
+    color: #80cfff;
+  }
+  
+  /* Línea azul animada debajo */
+  .tab::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 100%;
+    background-color: #0099ff;
+    transform: scaleX(0);
+    transform-origin: bottom left;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Activar la animación cuando está activo */
+  .tab.activo::after {
+    transform: scaleX(1);
+  }
+  

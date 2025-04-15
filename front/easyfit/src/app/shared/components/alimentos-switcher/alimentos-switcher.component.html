@@ -1,0 +1,15 @@
+<nav class="switcher-tabs">
+    <button
+      class="tab"
+      [class.activo]="modo === 'todos'"
+      (click)="cambiarModo('todos')">
+      Lista de alimentos
+    </button>
+  
+    <button
+      class="tab"
+      [class.activo]="modo === 'favoritos'"
+      (click)="cambiarModo('favoritos')">
+      Mis alimentos
+    </button>
+  </nav>

@@ -144,6 +144,7 @@ public class AlimentoImplService extends GenericCrudServiceImpl<Alimento, Intege
 	
 	private AlimentoDto convertirADto(Alimento alimento) {
         return new AlimentoDto(
+        	alimento.getIdAlimento(),	
             alimento.getNombre(), alimento.getMarca(),
             alimento.getUnidadMedida(),
             alimento.getKcal(), alimento.getProteinas(),

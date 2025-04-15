@@ -1,0 +1,124 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3); /* capa oscura de fondo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+  }
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+  }
+  
+  .campo, .campo-doble {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .campo-doble {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  
+  .campo-doble .campo {
+    flex: 1;
+  }
+  
+  .acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+  
+  button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: #0099ff;
+    color: white;
+    font-weight: bold;
+  }
+  
+  button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  button[type="button"] {
+    background-color: #f3f4f6;
+    color: #333;
+  }
+  
+  /* NUEVO: Contenedor general con fondo blanco y posición relativa */
+.formulario-wrapper {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1); /* solo una sombra */
+  position: relative;
+  min-width: 400px;
+}
+  
+  /* NUEVO: Botón flotante de cerrar (❌) */
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: #6b7280;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .modal-close:hover {
+    color: #0099ff;
+  }
+  .formulario, .formulario-wrapper, input, select, label, p, h1, h2, h3 {
+    color: #1f2937; /* gris oscuro */
+  }
+  
+  input,
+select {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db; /* gris claro */
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: white;
+  color: #1f2937;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+  border-color: #0099ff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 153, 255, 0.2);
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border: 1px solid #ef4444; /* rojo suave */
+  background-color: #fef2f2;
+}
+
+label::after {
+  content: '*';
+  color: #ef4444;
+  margin-left: 0.25rem;
+  font-weight: bold;
+}

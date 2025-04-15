@@ -1,0 +1,14 @@
+<div class="filtro">
+    <i class="fas fa-search icono"></i>
+    <input
+      type="text"
+      [(ngModel)]="textoBusqueda"
+      (input)="onInputChange()"
+      placeholder="Buscar alimento..."
+    />
+    @if (textoBusqueda) {
+        <button class="btn-clear" (click)="borrarBusqueda()">
+          <i class="fas fa-times"></i>
+        </button>
+      }
+  </div>

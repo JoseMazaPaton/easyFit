@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AlimentoDto {
 	
+	private Integer idAlimento;
     private String nombre;
     private String marca;
     private String unidadMedida;
