@@ -2,6 +2,7 @@ package easyfit.models.entities;
 
 import java.io.Serializable;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +25,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of="idValores")
 @Entity
 @Table(name = "valores_nutricionales")
+@Schema(description = "Entidad que representa los Valores Nutricionales del Usuario")
 public class ValorNutricional implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -31,17 +33,19 @@ public class ValorNutricional implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_valores", nullable = false)
+	@Schema(description = "Nº ID de los Valores Nutricionales", example = "1")
     private Integer idValores;
 
+	@Schema(description = "Calorías a consumir como objetivo de Usuario", example = "1800(calorías)")
     @Column(name = "kcal_objetivo", nullable = false)
     private Integer kcalObjetivo;
 
-   //Estos de autocalculan con un TRIGGER en la bbdd, solo estan de LECTURA
+   //Estos se autocalculan con un TRIGGER en la bbdd, solo están de LECTURA
     private double proteinas;
     private double carbohidratos; 
     private double grasas; 
 
-    // Los porcentaje de macros por defecto van a llevar unos para cuando se cree un usuario
+    // Los porcentajes de macros por defecto van a llevar unos para cuando se cree un usuario
     @Builder.Default
     @Column(name = "porcentaje_proteinas", nullable = false)
     private double porcentajeProteinas = 20;
@@ -55,7 +59,7 @@ public class ValorNutricional implements Serializable{
     private double porcentajeGrasas = 30;
 
     @OneToOne
-    @JoinColumn(name = "email", referencedColumnName = "email") 
+    @JoinColumn(name = "email", referencedColumnName = "email")
     private Usuario usuario;
     
 }
