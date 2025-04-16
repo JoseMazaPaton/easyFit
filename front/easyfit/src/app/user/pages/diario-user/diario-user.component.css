@@ -1,0 +1,39 @@
+.diario-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 15px;
+}
+
+/* Ya tienes estas definidas, pero asegúrate de que están bien */
+.control-fecha-custom {
+  background-color: white;
+  border-radius: 12px;
+  padding: 8px 12px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.btn-fecha-icon {
+  background-color: #0099ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-size: 14px;
+}
+
+.btn-fecha-icon:hover {
+  background-color: #007acc;
+}
+
+.fecha-activa {
+  background-color: #0099ff;
+  color: white;
+  border-radius: 10px;
+  min-width: 200px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.lista-comidas {
+  margin-top: 1rem;
+}

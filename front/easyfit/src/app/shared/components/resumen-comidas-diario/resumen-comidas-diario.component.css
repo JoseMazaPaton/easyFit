@@ -1,0 +1,50 @@
+.resumen-comidas-container {
+    margin-bottom: 1.5rem;
+  }
+  
+  .resumen-box {
+    min-width: 510px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+  }
+  
+  .resumen-titulo h6 {
+    font-size: 1rem;
+  }
+  
+  .resumen-textos {
+    font-size: 0.95rem;
+    color: #474747;
+  }
+  
+  .resumen-valor {
+    font-size: 1.15rem;
+    color: #474747;
+  }
+  
+  .resumen-label {
+    font-size: 0.8rem;
+    color: #999;
+  }
+  
+  .tabla-macros {
+    font-size: 0.9rem;
+    color: #474747;
+    border-collapse: collapse;
+  }
+  
+  .tabla-macros th,
+  .tabla-macros td {
+    padding: 0.2rem 0.5rem;
+    border: none;
+  }
+  
+  .tabla-macros thead {
+    font-size: 0.85rem;
+  }
+  
+  .tabla-macros thead th {
+    font-weight: 600;
+    color: #555;
+  }
+  

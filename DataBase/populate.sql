@@ -149,46 +149,63 @@ INSERT INTO alimentos (nombre, marca, kcal, proteinas, carbohidratos, grasas, un
 
 -- Inserción de comidas
 INSERT INTO comidas (email, nombre, orden, fecha) VALUES 
-('laura_martinez94@gmail.com', 'Desayuno', 1, '2025-03-27'),
-('laura_martinez94@gmail.com', 'Almuerzo', 2, '2025-03-27'),
-('laura_martinez94@gmail.com', 'Comida', 3, '2025-03-27'),
-('laura_martinez94@gmail.com', 'Merienda', 4, '2025-03-27'),
-('laura_martinez94@gmail.com', 'Cena', 5, '2025-03-27'),
-('laura_martinez94@gmail.com', 'Snack nocturno', 6, '2025-03-27');
+
+-- comidas del dia 15/04/205
+('laura_martinez94@gmail.com', 'Desayuno', 1, '2025-04-15'),
+('laura_martinez94@gmail.com', 'Comida', 2, '2025-04-15'),
+('laura_martinez94@gmail.com', 'Cena', 3, '2025-04-15'),
+
+-- comidas del dia 16/04/205
+('laura_martinez94@gmail.com', 'Desayuno', 1, '2025-04-16'),
+('laura_martinez94@gmail.com', 'Comida', 2, '2025-04-16'),
+('laura_martinez94@gmail.com', 'Cena', 3, '2025-04-16'),
+
+-- comidas del dia 17/04/205
+('laura_martinez94@gmail.com', 'Desayuno', 1, '2025-04-17'),
+('laura_martinez94@gmail.com', 'Comida', 2, '2025-04-17'),
+('laura_martinez94@gmail.com', 'Cena', 3, '2025-04-17'),
+
+-- comidas del dia 18/04/205
+('laura_martinez94@gmail.com', 'Desayuno', 1, '2025-04-18'),
+('laura_martinez94@gmail.com', 'Comida', 2, '2025-04-18'),
+('laura_martinez94@gmail.com', 'Cena', 3, '2025-04-18');
+
+
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Inserción de comidas_alimentos
--- Desayuno (id_comida = 1)
+-- Inserción de comidas_alimentos (con alimentos diferentes por día)
 INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
-(1, 1, 1.0),   -- 100g Manzana
-(1, 14, 0.5);  -- 50g Avena
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 1, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 14, 0.5),
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 20, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 31, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 18, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 21, 1.5),
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 6, 0.5),
 
--- Almuerzo (id_comida = 2)
-INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
-(2, 20, 1.0),  -- 100g Almendras
-(2, 31, 1.0);  -- 100g Yogur natural
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 2, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 12, 0.75),
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 22, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 33, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 19, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 25, 1.0),
 
--- Comida (id_comida = 3)
-INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
-(3, 18, 1.0),  -- 100g Arroz blanco
-(3, 21, 1.5),  -- 150g Pechuga de pollo
-(3, 6, 0.5);   -- 50g Brócoli
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 3, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 13, 0.5),
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 24, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 30, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 17, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 29, 1.0),
 
--- Merienda (id_comida = 4)
-INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
-(4, 12, 0.5),  -- 50g Garbanzos cocidos
-(4, 2, 1.0);   -- 100g Plátano
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 4, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 15, 0.5),
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 26, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 34, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 27, 1.0),
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 28, 1.5);
 
--- Cena (id_comida = 5)
-INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
-(5, 23, 1.0),  -- 100g Salmón
-(5, 10, 1.0);  -- 100g Calabacín
-
--- Snack nocturno (id_comida = 6)
-INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
-(6, 31, 1.0),  -- 100g Yogur natural
-(6, 6, 0.25);  -- 25g Almendras
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- Inserción de objetivos

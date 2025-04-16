@@ -1,0 +1,53 @@
+<div class="resumen-titulo mb-3">
+  <h6 class="fw-bold text-white">Resumen del día</h6>
+</div>
+
+<div class="resumen-comidas-container d-flex gap-3 flex-wrap justify-content-start">
+  <!-- Tarjeta resumen calorías -->
+  <div class="resumen-box resumen-calorias p-3 rounded-3 bg-white text-center">
+    <div class="d-flex align-items-center gap-3 justify-content-center resumen-textos mt-3">
+      <div >
+        <div class="fw-semibold resumen-valor">{{ resumen.kcalObjetivo }}</div>
+        <small class="resumen-label">Objetivo</small>
+      </div>
+      <div class="fw-semibold resumen-valor">-</div>
+      <div>
+        <div class="fw-semibold resumen-valor">{{ resumen.kcalConsumidas }}</div>
+        <small class="resumen-label">Consumidas</small>
+      </div>
+      <div class="fw-semibold resumen-valor">=</div>
+      <div>
+        <div class="fw-semibold resumen-valor">{{ resumen.kcalRestantes }}</div>
+        <small class="resumen-label">Restantes</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tarjeta resumen macros -->
+  <div class="resumen-box p-3 rounded-3 bg-white text-center">
+    <table class="tabla-macros m-0 w-100">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Carbohidratos</th>
+          <th>Grasas</th>
+          <th>Proteínas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th class="fw-semibold">Total</th>
+          <td>{{ resumen.carbohidratosPorcentaje }}%</td>
+          <td>{{ resumen.grasasPorcentaje }}%</td>
+          <td>{{ resumen.proteinasPorcentaje }}%</td>
+        </tr>
+        <tr>
+          <th class="fw-semibold">Objetivo</th>
+          <td>50%</td>
+          <td>25%</td>
+          <td>25%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
