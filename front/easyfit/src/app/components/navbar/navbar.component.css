@@ -1,93 +1,43 @@
-.sidebar {
-    width: 20rem; /* w-64 */
-    min-height: 100vh;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 1rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  }
-  
-  .sidebar-profile {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .sidebar-avatar {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 9999px;
-    border: 1px solid #ccc;
-  }
-  
-  .sidebar-username {
-    font-weight: 600;
-    font-size: 1rem;
-    color: #1f2937; /* text-gray-800 */
-    margin: 0;
-  }
-  
-  .sidebar-role {
-    font-size: 0.9rem;
-    color: #0099ff;
-    margin: 0;
-  }
-  
-  .sidebar-separator {
-    margin-bottom: 1.5rem;
-    border-color: #e5e7eb; /* border-gray-200 */
-  }
-  
-  .sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem; /* Antes era 0.5rem → más separación vertical */
-  }
-  
-  
-  .sidebar-link {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem; /* un poco más de padding vertical */
-    font-size: 1.5rem;
-    font-weight: 450;
-    color: #4c4a4a;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  
-  
-  .sidebar-link:hover {
-    color: #0099ff;
-  }
-  
-  .sidebar-link.active {
-    color: #0099ff;
-    font-weight: bold;
-  }
-  
-  .sidebar-logout {
-    margin-top: 1.5rem;
-    background-color: #f3f4f6;
-    padding: 0.5rem 1rem;
-    border-radius: 0.75rem;
-    font-size: 1.2rem;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #374151;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .sidebar-logout:hover {
-    background-color: #e5e7eb;
-  }
+.nav-link-candidato {
+  color: #474747;
+  font-weight: normal;
+  text-decoration: none;
+  transition: transform 0.2s ease, font-size 0.2s ease;
+  display: inline-block;
+}
+
+.nav-link-candidato:hover {
+  transform: scale(1.02);
+}
+
+.activo {
+  color: #0099ff;
+  font-weight: bold;
+}
+
+.avatar-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+
+.logout-btn:hover {
+  background-color: #0099ff;
+  color: rgb(255, 255, 255);
+  border-color: #0099ff;
+}
+
+
+.name-text{
+  color: #474747;
+  font-size: 15px;
+}
+
+
+.rol-text{
+  color: #0099ff !important;
+  font-size: 10px;
+}
   

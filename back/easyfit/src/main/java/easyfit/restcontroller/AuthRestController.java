@@ -61,7 +61,7 @@ public class AuthRestController {
     
     
     //METODO CON RUTA PARA REGISTRAR UN USUARIO
-    @PostMapping("/register")
+    @PostMapping("/registro")
     @Operation(summary = "Registro de usuario", description = "Método de registro de nuevo usuario.")
     public ResponseEntity<RegistroResponseDto> registroUsuario(@RequestBody @Valid RegistroRequestDto registroDto) {
     

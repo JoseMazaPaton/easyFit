@@ -54,10 +54,8 @@ public class ValorNutricional implements Serializable{
     @Column(name = "porcentaje_grasas", nullable = false)
     private double porcentajeGrasas = 30;
 
-    // ANOTACIONES RELACIONES DE VALORENUTRICONAL =========================================================================
-    
     @OneToOne
-    @JoinColumn(name = "email", referencedColumnName = "email", nullable = false)
+    @JoinColumn(name = "email", referencedColumnName = "email") 
     private Usuario usuario;
-
+    
 }

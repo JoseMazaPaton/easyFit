@@ -1,0 +1,13 @@
+.btn-volver {
+    color: #0099ff;
+    border: 2px solid #0099ff;
+    font-weight: 500;
+    background-color: white;
+    transition: 0.3s ease;
+  }
+  
+  .btn-volver:hover {
+    background-color: #0099ff;
+    color: white;
+  }
+  

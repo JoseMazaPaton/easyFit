@@ -26,7 +26,7 @@ CREATE TABLE usuarios (
 -- Tabla de valores nutricionales (por usuario)
 CREATE TABLE valores_nutricionales (
     id_valores INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(100) UNIQUE NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE, 
     kcal_objetivo INT NOT NULL,
     proteinas DECIMAL(5,2) NOT NULL,         -- gramos
     carbohidratos DECIMAL(5,2) NOT NULL,     -- gramos
@@ -35,7 +35,7 @@ CREATE TABLE valores_nutricionales (
     porcentaje_carbohidratos DECIMAL(5,2) NOT NULL DEFAULT 30,
     porcentaje_grasas DECIMAL(5,2) NOT NULL DEFAULT 20,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (email) REFERENCES usuarios(email) ON DELETE CASCADE
+	FOREIGN KEY (email) REFERENCES usuarios(email) ON DELETE CASCADE
 );
 
 -- Tabla de categorías de alimentos
@@ -105,14 +105,14 @@ CREATE TABLE progresos (
 -- Tabla de objetivos (sin kcal ni macros)
 CREATE TABLE objetivos (
     id_objetivo INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE, 
     peso_actual DECIMAL(5,2) NOT NULL,
     peso_objetivo DECIMAL(5,2) NOT NULL,
     objetivo_usuario ENUM('PERDERPESO', 'MANTENER', 'GANARPESO') NOT NULL,
     opcion_peso ENUM('LIGERO', 'MODERADO', 'INTENSO', 'MANTENER'),
     actividad ENUM('SEDENTARIO', 'LIGERO', 'MODERADO', 'ACTIVO', 'MUYACTIVO') NOT NULL,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (email) REFERENCES usuarios(email)
+    FOREIGN KEY (email) REFERENCES usuarios(email) ON DELETE CASCADE
 );
 
 -- Tabla de favoritos

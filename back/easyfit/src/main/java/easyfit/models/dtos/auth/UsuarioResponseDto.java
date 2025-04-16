@@ -18,6 +18,8 @@ public class UsuarioResponseDto {
     
     private String email;
     
+    private String password;
+    
     private Sexo sexo;
     
     private int edad;

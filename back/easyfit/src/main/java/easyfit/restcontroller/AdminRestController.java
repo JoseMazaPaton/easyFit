@@ -66,6 +66,7 @@ public class AdminRestController {
             List<UsuarioResponseDto> response = usuarios.stream()
                     .map(usuario -> new UsuarioResponseDto(
                             usuario.getNombre(),
+                            usuario.getPassword(),
                             usuario.getEmail(),
                             usuario.getSexo(),
                             usuario.getEdad(),

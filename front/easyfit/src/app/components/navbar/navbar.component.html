@@ -1,45 +1,35 @@
-<aside class="sidebar ">
+<aside class="d-flex flex-column justify-content-between bg-white p-4 shadow-sm min-vh-100" style="width: 16rem;">
   <!-- ZONA DEL PERFIL DEL USUARIO -->
   <div>
-    <app-user-info-card
-      [nombre]="usuario.nombre"
-      [rol]="usuario.rol">
-    </app-user-info-card>
+    <div class="d-flex align-items-center gap-3 mb-5">
+      <img
+        [src]="'assets/images/avatar.svg'" alt="Avatar" class="rounded-circle" style="width: 50px;"/>
+      <div>
+        <p class="name-text fw-semibold small mb-0">{{ usuario.nombre || 'Usuario' }} </p>
+        <p class="rol-text text-uppercase text-muted text-xs mb-0" style="letter-spacing: 0.05em;">{{ role }}</p>
+      </div>
+    </div>
 
     <hr class="sidebar-separator"/>
 
     <!-- ZONA DE NAVEGACION-->
-    <nav class="sidebar-nav">
-
-      <!-- Dashboard-->
-      <a routerLink="/usuario/dashboard" routerLinkActive="active" class="sidebar-link">
-        <i class="fa-solid fa-gauge"></i>
-        <span>Dashboard</span>
-      </a>
+    <nav class="d-flex flex-column gap-4 ps-1">
       
-       <!-- Zona de registrar comidas-->
-      <a routerLink="/usuario/diario" routerLinkActive="active" class="sidebar-link">
-        <i class="fa-solid fa-calendar-days"></i>
-        <span>Diario</span>
-      </a>
+      <!-- @if (role === 'ADMON') {
+        <a routerLink="/admin/empresas" routerLinkActive="activo" class="nav-link-candidato">GESTIÓN EMPRESAS</a>
+        <a routerLink="/admin/candidatos" routerLinkActive="activo" class="nav-link-candidato">GESTIÓN CANDIDATOS</a>
+        <a routerLink="/admin/administradores" routerLinkActive="activo" class="nav-link-candidato">GESTIÓN ADMIN</a>
+        <a routerLink="/admin/categorias" routerLinkActive="activo" class="nav-link-candidato">GESTIÓN CATEGORÍAS</a>
+      } -->
 
-      <!-- Zona de lista de comidas-->
-      <a routerLink="/usuario/alimentos" routerLinkActive="active" class="sidebar-link">
-        <i class="fa-solid fa-utensils"></i>
-        <span>Lista de alimentos</span>
-      </a>
+      <a routerLink="/usuario/dashboard" routerLinkActive="activo" class="nav-link-candidato">DASHBOARD</a>
+      <a routerLink="/usuario/diario" routerLinkActive="activo" class="nav-link-candidato">DIARIO</a>
+      <a routerLink="/usuario/alimentos" routerLinkActive="activo" class="nav-link-candidato">LISTA DE ALIMENTOS</a>
+      <a routerLink="/usuario/objetivos" routerLinkActive="activo" class="nav-link-candidato">OBJETIVOS</a>
 
-      <!-- Zona de los objetivos del usuario-->
-      <a routerLink="/usuario/objetivos" routerLinkActive="active" class="sidebar-link">
-        <i class="fa-solid fa-chart-line"></i>
-        <span>Objetivos</span>
-      </a>
     </nav>
   </div>
-
-  <!--ZONA DE LOGOUT -->
-  <button class="sidebar-logout" (click)="logOut()">
-    <i class="fa-solid fa-right-from-bracket"></i>
-    Logout
-  </button>
+  <!--BOTON LOGOUT -->
+  <button class="btn btn-outline-dark w-100 mt-4 logout-btn" (click)="logOut()">Cerrar sesión</button>
 </aside>
+

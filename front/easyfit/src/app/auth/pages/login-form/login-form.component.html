@@ -1,38 +1,39 @@
-<section class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-  <div style="max-width: 400px; width: 100%;" class="px-3">
+<section class="d-flex justify-content-center align-items-center fondo-gradiente" style="min-height: 100vh;">
+  <div style="max-width: 420px; width: 100%;" class="px-3">
     <form class="bg-white rounded-4 shadow p-4" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-      <h3 class="text-center fw-bold text-primary-custom mb-4">Inicio de sesión</h3>
+      <!-- Título -->
+      <h3 class="text-center fw-bold mb-4" style="color: #0099ff;">Inicio de sesión</h3>
 
-      <!-- EMAIL -->
+      <!-- Correo -->
       <div class="mb-3">
         <input
           type="email"
           id="email"
-          class="form-control"
-          placeholder="Correo electrónico"
           name="email"
+          placeholder="Dirección de email"
+          class="form-control campo-estilo"
           required
           ngModel />
       </div>
 
-      <!-- PASSWORD -->
-      <div class="mb-3">
+      <!-- Contraseña -->
+      <div class="mb-3 position-relative">
         <input
           type="password"
           id="password"
-          class="form-control"
-          placeholder="Contraseña"
           name="password"
+          placeholder="Contraseña"
+          class="form-control campo-estilo"
           required
           ngModel />
-        <a class="d-block text-end small mt-2 text-muted" href="#">¿Olvidaste tu contraseña?</a>
+        <a class="d-block text-end small mt-2 text-muted" href="#">¿Olvidaste la contraseña?</a>
       </div>
 
-      <!-- BOTÓN -->
+      <!-- Botón -->
       <div class="d-grid mt-4">
         <button
           type="submit"
-          class="btn btn-custom btn-lg text-white fw-semibold"
+          class="btn btn-siguiente btn-lg fw-semibold"
           [disabled]="loginForm.invalid">
           Iniciar sesión
         </button>

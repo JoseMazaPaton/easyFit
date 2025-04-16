@@ -1,11 +1,8 @@
-<div class="layout">
-  <app-navbar></app-navbar>
-
-  <div class="contenido">
-    <main class="main-scroll">
+<div class="d-flex vh-100 overflow-hidden">
+  <app-navbar class="navbar-fixed"></app-navbar>
+  <div class="flex-grow-1 overflow-auto d-flex flex-column bg-mostaza">
+    <div class="flex-grow-1 p-4">
       <router-outlet></router-outlet>
-    </main>
-
-    <app-footer class="footer"></app-footer>
+    </div>
   </div>
 </div>

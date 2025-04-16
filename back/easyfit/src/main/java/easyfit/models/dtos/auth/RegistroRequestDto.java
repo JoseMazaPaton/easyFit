@@ -17,6 +17,7 @@ public class RegistroRequestDto {
 	@Valid // Esto es para que se validen las validaciones que llevan anidadas 
 	//*NOTA : Dentro de usuario NO hay ROL porque ya lo hemos puesto por defecto en la entidad*
     private UsuarioRequestDto usuario;
+
     
    //DATOS OBJETIVO
     @Valid

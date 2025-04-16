@@ -1,69 +1,43 @@
 <div class="registro-form-contenedor">
-    <div class="card-registro">
-      <form>
-        <!-- Encabezado -->
-        <h3 class="text-center mb-1" style="color: #0099ff; font-weight: bold;">¡Gracias, usuario!</h3>
-        <p class="text-center mb-4 fw-semibold" style="color: #0099ff;">
-          Ahora vamos con tus objetivos.
+  <div class="card-registro">
+    <form [formGroup]="formPaso3" (ngSubmit)="siguientePaso()">
+      <h3 class="text-center mb-1" style="color: #0099ff; font-weight: bold;">¡Gracias, usuario!</h3>
+      <p class="text-center mb-4 fw-semibold" style="color: #0099ff;">Ahora vamos con tus objetivos.</p>
+
+      <!-- Objetivo -->
+      <div class="mb-4">
+        <label class="form-label titulo-seccion mb-2">Selecciona uno que sea importante para ti</label>
+        <select class="form-select" formControlName="objetivoUsuario">
+          <option value="">Selecciona una opción</option>
+          <option value="PERDERPESO">Perder peso</option>
+          <option value="MANTENER">Mantener peso</option>
+          <option value="GANARPESO">Ganar peso</option>
+        </select>
+        <p class="error" *ngIf="checkControl('objetivoUsuario', 'required')">Este campo es obligatorio.</p>
+      </div>
+
+      <!-- Actividad -->
+      <div class="mb-5">
+        <label class="form-label titulo-seccion mb-2">¿Cuál es tu nivel de actividad base?</label>
+        <p style="font-size: 13px; color: var(--color-texto-principal); margin-top: -4px;">
+          Sin incluir las rutinas de entrenamiento
         </p>
-  
-        <!-- Objetivo principal -->
-        <div class="mb-4">
-          <label for="objetivo" class="form-label titulo-seccion d-block mb-2" style="font-size: 15px;">
-            Selecciona uno que sea importantes para ti.
-          </label>
-          <select
-            class="form-select"
-            id="objetivo"
-            
-            name="objetivo"
-            required
-          >
-            <option value="" disabled selected>Selecciona una opción</option>
-            <option value="perder">Perder peso</option>
-            <option value="mantener">Mantener peso</option>
-            <option value="ganar">Ganar peso</option>
-          </select>
-        </div>
-  
-        <!-- Nivel de actividad -->
-        <div class="mb-5">
-          <label for="actividad" class="form-label titulo-seccion d-block mb-1">
-            ¿Cuál es tu nivel de actividad base?
-          </label>
-          <p style="font-size: 13px; color: var(--color-texto-principal); margin-top: -4px;">
-            Sin incluir las rutinas de entrenamiento
-          </p>
-          <select
-            class="form-select mt-2"
-            id="actividad"
-            
-            name="actividad"
-            required
-          >
-            <option value="" disabled selected>Selecciona nivel</option>
-            <option value="sedentario">Sedentario</option>
-            <option value="ligero">Ligero</option>
-            <option value="activo">Activo</option>
-            <option value="muy_activo">Muy activo</option>
-          </select>
-        </div>
-  
-        <!-- Botones -->
-        <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-outline-primary" [routerLink]="['/auth/register/paso2']">
-            Volver
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="siguientePaso()"
-            [disabled]="!objetivo || !actividad"
-          >
-            Siguiente
-          </button>
-        </div>
-      </form>
-    </div>
+        <select class="form-select" formControlName="actividad">
+          <option value="">Selecciona un nivel de actividad</option>
+          <option value="SEDENTARIO">Sedentario</option>
+          <option value="LIGERO">Ligero</option>
+          <option value="MODERADO">Moderado</option>
+          <option value="ACTIVO">Activo</option>
+          <option value="MUYACTIVO">Muy activo</option>
+        </select>
+        <p class="error" *ngIf="checkControl('actividad', 'required')">Este campo es obligatorio.</p>
+      </div>
+
+      <!-- Botones -->
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-volver"[routerLink]="['/auth/register/paso1']">Volver</button>
+        <button type="button" class="btn btn-siguiente" (click)="siguientePaso()" [disabled]="formPaso3.invalid">Siguiente</button>
+      </div>
+    </form>
   </div>
-  
+</div>

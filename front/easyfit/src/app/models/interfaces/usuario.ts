@@ -6,4 +6,5 @@ export interface Usuario {
     edad: number
     sexo: string
     altura: number
+    fechaRegistro: Date
 }

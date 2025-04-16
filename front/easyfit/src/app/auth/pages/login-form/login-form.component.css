@@ -1,30 +1,29 @@
-.container{
-  margin-top: 6rem;
-}
-.login-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
+
+/* Inputs personalizados */
+.campo-estilo {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 14px;
+  outline: none;
 }
 
-.login-form {
-  width: 100%;
-  max-width: 500px;
+.campo-estilo:focus {
+  border-color: #0099ff;
+  box-shadow: 0 0 5px rgba(0, 153, 255, 0.3);
 }
 
-.text-primary-custom {
-  color: #0099ff;
-}
-
-.btn-custom {
+/* Botón reutilizable estilo EasyFit */
+.btn-siguiente {
   background-color: #0099ff;
-  padding: 1.2rem 2.5rem;
-  justify-self: center;
-  border: none;
+  border: 2px solid #0099ff;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s ease;
+  border-radius: 10px;
 }
 
-.btn-custom:hover {
-  background-color: #007acc;
+.btn-siguiente:hover {
+  background-color: white;
+  color: #0099ff;
 }

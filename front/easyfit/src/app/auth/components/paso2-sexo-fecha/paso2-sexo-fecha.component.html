@@ -1,71 +1,50 @@
 <div class="registro-form-contenedor">
-    <div class="card-registro">
-      <form>
-        <!-- Título del paso -->
-        <p class="fw-semibold mb-4 text-left" style="font-size: 15px; font-weight: 300px; color: var(--color-texto-principal);">
-         Selecciona el sexo en el que debemos basar el cálculo de tus necesidades calóricas.
-        </p>
-  
-        <!-- Radios de sexo -->
-        <div class="d-flex justify-content-center gap-5 mb-5">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="sexo"
-              id="hombre"
-              
-              value="hombre"
-            />
-            <label class="form-check-label" for="hombre" style="color: var(--color-texto-principal);">
-              hombre
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="sexo"
-              id="mujer"
-              
-              value="mujer"
-            />
-            <label class="form-check-label" for="mujer" style="color: var(--color-texto-principal);">
-              mujer
-            </label>
-          </div>
-        </div>
-  
-        <!-- Fecha de nacimiento -->
-        <div class="mb-5">
-          <label for="fechaNacimiento" class="form-label titulo-seccion d-block mb-2">
-            ¿Cuándo naciste?
+  <div class="card-registro">
+    <form [formGroup]="formPaso2">
+      <!-- Título del paso -->
+      <p class="fw-semibold mb-4 text-left"
+        style="font-size: 15px; font-weight: 300px; color: var(--color-texto-principal);">
+        Selecciona el sexo en el que debemos basar el cálculo de tus necesidades calóricas.
+      </p>
+
+      <!-- Radios de sexo -->
+      <div class="d-flex justify-content-center gap-5 mb-5">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="sexo" id="hombre" value="HOMBRE" formControlName="sexo"  />
+          <label class="form-check-label" for="hombre" style="color: var(--color-texto-principal);">
+            hombre
           </label>
-          <input
-            type="date"
-            class="form-control"
-            id="fechaNacimiento"
-            name="fechaNacimiento"
-            
-            required
-          />
         </div>
-  
-        <!-- Botones -->
-        <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-outline-primary" [routerLink]="['/auth/register/paso1']">
-            Volver
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="siguientePaso()"
-            [disabled]="!sexo || !fechaNacimiento"
-          >
-            Siguiente
-          </button>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="sexo" id="mujer" value="MUJER" formControlName="sexo"  />
+          <label class="form-check-label" for="mujer" style="color: var(--color-texto-principal);">
+            mujer
+          </label>
         </div>
-      </form>
-    </div>
+      </div>
+
+        <!-- Mensaje de error del sexo -->
+         <p class="error text-center" *ngIf="checkControl('sexo', 'required')">
+          Debes seleccionar tu sexo.
+        </p>
+
+      <!-- Fecha de nacimiento -->
+      <div class="mb-5">
+        <label for="edad" class="form-label titulo-seccion d-block mb-2">
+          ¿Cuándo edad tienes?
+        </label>
+        <input type="number" class="form-control" id="edad" name="edad"  formControlName="edad" required />
+          <!-- Mensaje de error de la edad-->
+          <p class="error" *ngIf="checkControl('edad', 'required')">La edad es obligatoria</p>
+          <p class="error" *ngIf="checkControl('edad', 'min')">Debes introducir una edad valida</p>
+          <p class="error" *ngIf="checkControl('edad', 'max')">Debes introducir una edad valida</p>
+      </div>
+
+      <!-- Botones -->
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-volver"[routerLink]="['/auth/register/paso1']">Volver</button>
+        <button type="button" class="btn btn-siguiente" (click)="siguientePaso()" [disabled]="formPaso2.invalid">Siguiente</button>
+      </div>
+    </form>
   </div>
-  
+</div>

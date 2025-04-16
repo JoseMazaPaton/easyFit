@@ -1,75 +1,73 @@
 <div class="registro-form-contenedor">
-    <div class="card-registro">
-      <form>
-        <!-- Altura -->
-        <div class="mb-4">
-          <label for="altura" class="form-label titulo-seccion d-block mb-2">
-            ¿Cuánto mides?
-          </label>
-          <input
-            type="number"
-            class="form-control"
-            id="altura"
-            placeholder="Peso en centímetros"
-            [(value)]="altura"
-            name="altura"
-            required
-          />
-        </div>
-  
-        <!-- Peso actual -->
-        <div class="mb-4">
-          <label for="pesoActual" class="form-label titulo-seccion d-block mb-1">
-            ¿Cuánto pesas?
-          </label>
-          <p style="font-size: 13px; color: var(--color-texto-principal); margin-top: -4px;">
-            Se trata de un cálculo aproximado, podrás actualizarlo más adelante.
-          </p>
-          <input
-            type="number"
-            class="form-control mt-2"
-            id="pesoActual"
-            placeholder="Peso en Kilogramos"
-            [(value)]="pesoActual"
-            name="pesoActual"
-            required
-          />
-        </div>
-  
-        <!-- Peso deseado -->
-        <div class="mb-5">
-          <label for="pesoDeseado" class="form-label titulo-seccion d-block mb-1">
-            ¿Cuál es tu peso deseado?
-          </label>
-          <p style="font-size: 13px; color: var(--color-texto-principal); margin-top: -4px;">
-            Esto no afecta a tu objetivo calórico diario y podrás cambiarlo más adelante.
-          </p>
-          <input
-            type="number"
-            class="form-control mt-2"
-            id="pesoDeseado"
-            placeholder="Peso en Kilogramos"
-            [(value)]="pesoDeseado"
-            name="pesoDeseado"
-            required
-          />
-        </div>
-  
-        <!-- Botones -->
-        <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-outline-primary" [routerLink]="['/auth/register/paso4']">
-            Volver
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="siguientePaso()"
-            [disabled]="!altura || !pesoActual || !pesoDeseado"
-          >
-            Siguiente
-          </button>
-        </div>
-      </form>
-    </div>
+  <div class="card-registro">
+    <form [formGroup]="formPaso5">
+      <!-- Altura -->
+      <div class="mb-4">
+        <label for="altura" class="form-label titulo-seccion d-block mb-2">
+          ¿Cuánto mides?
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          id="altura"
+          placeholder="Altura en cm"
+          formControlName="altura"
+        />
+        <p class="error" *ngIf="checkControl('altura', 'required')">Este campo es obligatorio.</p>
+        <p class="error" *ngIf="checkControl('altura', 'min') || checkControl('altura', 'max')">
+          Introduce una altura entre 100 y 250 cm.
+        </p>
+      </div>
+
+      <!-- Peso actual -->
+      <div class="mb-4">
+        <label for="pesoActual" class="form-label titulo-seccion d-block mb-1">
+          ¿Cuánto pesas?
+        </label>
+        <p style="font-size: 13px; color: var(--color-texto-principal); margin-top: -4px;">
+          Se trata de un cálculo aproximado, podrás actualizarlo más adelante.
+        </p>
+        <input
+          type="number"
+          class="form-control mt-2"
+          id="pesoActual"
+          placeholder="Peso actual en kg"
+          formControlName="pesoActual"
+        />
+        <p class="error" *ngIf="checkControl('pesoActual', 'required')">Este campo es obligatorio.</p>
+        <p class="error" *ngIf="checkControl('pesoActual', 'min') || checkControl('pesoActual', 'max')">
+          Introduce un peso entre 30 y 250 kg.
+        </p>
+      </div>
+
+      <!-- Peso deseado -->
+      <div class="mb-5">
+        <label for="pesoDeseado" class="form-label titulo-seccion d-block mb-1">
+          ¿Cuál es tu peso deseado?
+        </label>
+        <p style="font-size: 13px; color: var(--color-texto-principal); margin-top: -4px;">
+          Esto no afecta a tu objetivo calórico diario y podrás cambiarlo más adelante.
+        </p>
+        <input
+          type="number"
+          class="form-control mt-2"
+          id="pesoDeseado"
+          placeholder="Peso objetivo en kg"
+          formControlName="pesoObjetivo"
+        />
+        <p class="error" *ngIf="checkControl('pesoObjetivo', 'required')">Este campo es obligatorio.</p>
+        <p class="error" *ngIf="checkControl('pesoObjetivo', 'min') || checkControl('pesoObjetivo', 'max')">
+          Introduce un peso entre 30 y 250 kg.
+        </p>
+      </div>
+
+      <!-- Botones -->
+      <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-volver" [routerLink]="['/auth/register/paso4']">Volver</button>
+        <button type="button" class="btn btn-siguiente" (click)="siguientePaso()" [disabled]="formPaso5.invalid">
+          Siguiente
+        </button>
+      </div>
+    </form>
   </div>
-  
+</div>
