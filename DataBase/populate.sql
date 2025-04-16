@@ -150,61 +150,199 @@ INSERT INTO alimentos (nombre, marca, kcal, proteinas, carbohidratos, grasas, un
 -- Inserción de comidas
 INSERT INTO comidas (email, nombre, orden, fecha) VALUES 
 
--- comidas del dia 15/04/205
+-- Comidas para el 14 de abril
+('laura_martinez94@gmail.com', 'Desayuno', 1, '2025-04-14'),
+('laura_martinez94@gmail.com', 'Comida', 2, '2025-04-14'),
+('laura_martinez94@gmail.com', 'Cena', 3, '2025-04-14'),
+
+-- Comidas para el 15 de abril
 ('laura_martinez94@gmail.com', 'Desayuno', 1, '2025-04-15'),
 ('laura_martinez94@gmail.com', 'Comida', 2, '2025-04-15'),
 ('laura_martinez94@gmail.com', 'Cena', 3, '2025-04-15'),
 
--- comidas del dia 16/04/205
+-- Comidas para el 16 de abril
 ('laura_martinez94@gmail.com', 'Desayuno', 1, '2025-04-16'),
 ('laura_martinez94@gmail.com', 'Comida', 2, '2025-04-16'),
 ('laura_martinez94@gmail.com', 'Cena', 3, '2025-04-16'),
 
--- comidas del dia 17/04/205
+-- Comidas para el 17 de abril
 ('laura_martinez94@gmail.com', 'Desayuno', 1, '2025-04-17'),
 ('laura_martinez94@gmail.com', 'Comida', 2, '2025-04-17'),
 ('laura_martinez94@gmail.com', 'Cena', 3, '2025-04-17'),
 
--- comidas del dia 18/04/205
+-- Comidas para el 18 de abril
 ('laura_martinez94@gmail.com', 'Desayuno', 1, '2025-04-18'),
 ('laura_martinez94@gmail.com', 'Comida', 2, '2025-04-18'),
-('laura_martinez94@gmail.com', 'Cena', 3, '2025-04-18');
+('laura_martinez94@gmail.com', 'Cena', 3, '2025-04-18'),
+
+-- Comidas para el 19 de abril
+('laura_martinez94@gmail.com', 'Desayuno', 1, '2025-04-19'),
+('laura_martinez94@gmail.com', 'Comida', 2, '2025-04-19'),
+('laura_martinez94@gmail.com', 'Cena', 3, '2025-04-19'),
+
+-- Comidas para el 20 de abril
+('laura_martinez94@gmail.com', 'Desayuno', 1, '2025-04-20'),
+('laura_martinez94@gmail.com', 'Comida', 2, '2025-04-20'),
+('laura_martinez94@gmail.com', 'Cena', 3, '2025-04-20');
 
 
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Inserción de comidas_alimentos
--- Inserción de comidas_alimentos (con alimentos diferentes por día)
+-- Desayuno: 14/04/2025
 INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
-((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 1, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 14, 0.5),
-((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 20, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 31, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 18, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 21, 1.5),
-((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 6, 0.5),
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 3, 1.0),   -- Naranja
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 4, 1.0),   -- Fresas
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 14, 0.5),  -- Avena
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 38, 1.0),  -- Leche semidesnatada
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 40, 1.0);  -- Queso fresco batido 0%
 
-((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 2, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 12, 0.75),
-((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 22, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 33, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 19, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 25, 1.0),
+-- Comida: 14/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 11, 1.0),  -- Lentejas cocidas
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 23, 1.0),  -- Pechuga de pollo
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 6, 1.0),   -- Brócoli
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 8, 1.0),   -- Zanahoria
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 16, 1.0);  -- Arroz blanco
 
-((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 3, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 13, 0.5),
-((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 24, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 30, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 17, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 29, 1.0),
+-- Cena: 14/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 9, 1.0),    -- Tomate
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 10, 1.0),   -- Calabacín
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 19, 1.0),   -- Nueces
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 25, 1.0),   -- Zumo de naranja
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-14' AND email = 'laura_martinez94@gmail.com'), 39, 1.0);   -- Yogur natural
 
-((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 4, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 15, 0.5),
-((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 26, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 34, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 27, 1.0),
-((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 28, 1.5);
+-- Desayuno: 15/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 1, 1.0),   -- Manzana
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 2, 1.0),   -- Plátano
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 14, 0.5),  -- Avena
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 15, 1.0),  -- Pan integral
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 38, 1.0);  -- Leche semidesnatada
+
+-- Comida: 15/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 11, 1.0),  -- Lentejas cocidas
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 20, 0.5),  -- Ternera magra
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 6, 1.0),   -- Brócoli
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 8, 1.0),   -- Zanahoria
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 16, 1.0);  -- Arroz blanco
+
+-- Cena: 15/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 9, 1.0),    -- Tomate
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 10, 1.0),   -- Calabacín
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 39, 1.0),   -- Yogur natural
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 19, 1.0),   -- Nueces
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-15' AND email = 'laura_martinez94@gmail.com'), 25, 1.0);   -- Zumo de naranja
+
+
+-- Desayuno: 16/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 2, 1.0),   -- Plátano
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 14, 0.5),  -- Avena
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 15, 1.0),  -- Pan integral
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 38, 1.0),  -- Leche semidesnatada
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 18, 0.5);  -- Almendras
+
+-- Comida: 16/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 11, 1.0),  -- Lentejas cocidas
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 24, 1.0),  -- Judías blancas
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 6, 1.0),   -- Brócoli
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 20, 1.0),  -- Ternera magra
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 34, 1.0);  -- Patatas fritas
+
+-- Cena: 16/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 9, 1.0),    -- Tomate
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 10, 1.0),   -- Calabacín
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 19, 1.0),   -- Nueces
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 37, 1.0),   -- Huevo cocido
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-16' AND email = 'laura_martinez94@gmail.com'), 25, 1.0);   -- Zumo de naranja
+
+
+-- Desayuno: 17/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 3, 1.0),   -- Naranja
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 5, 1.0),   -- Kiwi
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 14, 0.5),  -- Avena
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 38, 1.0),  -- Leche semidesnatada
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 18, 0.5);  -- Almendras
+
+-- Comida: 17/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 11, 1.0),  -- Lentejas cocidas
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 16, 1.0),  -- Arroz blanco
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 23, 1.0),  -- Pechuga de pollo
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 6, 1.0),   -- Brócoli
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 20, 0.5);  -- Ternera magra
+
+-- Cena: 17/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 9, 1.0),    -- Tomate
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 10, 1.0),   -- Calabacín
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 39, 1.0),   -- Yogur natural
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 19, 1.0),   -- Nueces
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-17' AND email = 'laura_martinez94@gmail.com'), 25, 1.0);   -- Zumo de naranja
+
+
+-- Desayuno: 18/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 1, 1.0),   -- Manzana
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 2, 1.0),   -- Plátano
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 14, 0.5),  -- Avena
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 15, 1.0),  -- Pan integral
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 38, 1.0);  -- Leche semidesnatada
+
+-- Comida: 18/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 16, 1.0),  -- Arroz blanco
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 23, 1.0),  -- Pechuga de pollo
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 6, 1.0),   -- Brócoli
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 8, 1.0),   -- Zanahoria
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 20, 0.5);  -- Ternera magra
+
+-- Cena: 18/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 37, 1.0),  -- Huevo cocido
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 9, 1.0),   -- Tomate
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 39, 1.0),  -- Yogur natural
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 18, 0.5),  -- Almendras
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-18' AND email = 'laura_martinez94@gmail.com'), 25, 0.5);  -- Zumo de naranja
+
+-- Desayuno: 19/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-19' AND email = 'laura_martinez94@gmail.com'), 1, 1.0),  -- Manzana
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-19' AND email = 'laura_martinez94@gmail.com'), 14, 0.5); -- Avena
+
+-- Comida: 19/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-19' AND email = 'laura_martinez94@gmail.com'), 16, 1.0),  -- Arroz blanco
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-19' AND email = 'laura_martinez94@gmail.com'), 23, 1.0); -- Pechuga de pollo
+
+-- Cena: 19/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-19' AND email = 'laura_martinez94@gmail.com'), 39, 1.0),  -- Yogur natural
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-19' AND email = 'laura_martinez94@gmail.com'), 18, 0.5),  -- Almendras
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-19' AND email = 'laura_martinez94@gmail.com'), 6, 1.0);   -- Brócoli
+
+-- Desayuno:20/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-20' AND email = 'laura_martinez94@gmail.com'), 2, 1.0),  -- Plátano
+((SELECT id_comida FROM comidas WHERE nombre = 'Desayuno' AND fecha = '2025-04-20' AND email = 'laura_martinez94@gmail.com'), 38, 1.5); -- Leche semidesnatada
+
+-- Comida: 20/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-20' AND email = 'laura_martinez94@gmail.com'), 11, 1.0),  -- Lentejas cocidas
+((SELECT id_comida FROM comidas WHERE nombre = 'Comida' AND fecha = '2025-04-20' AND email = 'laura_martinez94@gmail.com'), 8, 1.0);   -- Zanahoria
+
+-- Cena: 20/04/2025
+INSERT INTO comidas_alimentos (id_comida, id_alimento, cantidad) VALUES
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-20' AND email = 'laura_martinez94@gmail.com'), 37, 1.0),  -- Huevo cocido
+((SELECT id_comida FROM comidas WHERE nombre = 'Cena' AND fecha = '2025-04-20' AND email = 'laura_martinez94@gmail.com'), 9, 1.0);   -- Tomate
 
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
@@ -219,6 +357,8 @@ INSERT INTO valores_nutricionales (email, kcal_objetivo, proteinas, carbohidrato
 
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
+
+
 -- Inserción de favoritos
 INSERT INTO favoritos (email, id_alimento) VALUES 
 ('laura_martinez94@gmail.com', 2), 
@@ -226,17 +366,6 @@ INSERT INTO favoritos (email, id_alimento) VALUES
 ('laura_martinez94@gmail.com', 31);
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
--- Inserción manual de prueba de consumo_diario
--- los triggers generan este dato automáticamente al añadir alimentos a comidas
-INSERT INTO consumo_diario (email, fecha, kcal_consumidas, proteinas, carbohidratos, grasas) VALUES
-('laura_martinez94@gmail.com', '2025-03-31', 1200, 120.0, 150.0, 50.0),
-('laura_martinez94@gmail.com', '2025-04-01', 1350, 115.0, 145.0, 48.0),
-('laura_martinez94@gmail.com', '2025-04-02', 1480, 110.0, 140.0, 45.0),
-('laura_martinez94@gmail.com', '2025-04-03', 1200, 100.0, 135.0, 42.0),
-('laura_martinez94@gmail.com', '2025-04-04', 1420, 118.0, 148.0, 47.0),
-('laura_martinez94@gmail.com', '2025-04-05', 1500, 112.0, 140.0, 46.0),
-('laura_martinez94@gmail.com', '2025-04-06', 1550, 115.0, 145.0, 48.0);
-
 
 -- Progresos de laura_martinez94@gmail.com
 INSERT INTO progresos (peso, fecha_cambio, email) VALUES
@@ -244,8 +373,6 @@ INSERT INTO progresos (peso, fecha_cambio, email) VALUES
 (69.0, '2025-03-30 08:00:00', 'laura_martinez94@gmail.com'),  
 (68.0, '2025-04-02 08:00:00', 'laura_martinez94@gmail.com'),  
 (67.0, '2025-04-05 08:00:00', 'laura_martinez94@gmail.com');  
-
-
 
 
 -- =========================

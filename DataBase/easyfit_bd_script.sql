@@ -90,8 +90,10 @@ CREATE TABLE consumo_diario (
     proteinas DECIMAL(5,2) NOT NULL,
     carbohidratos DECIMAL(5,2) NOT NULL,
     grasas DECIMAL(5,2) NOT NULL,
-    FOREIGN KEY (email) REFERENCES usuarios(email)
+    FOREIGN KEY (email) REFERENCES usuarios(email),
+    UNIQUE KEY unique_email_fecha (email, fecha)
 );
+
 
 -- Tabla de progreso
 CREATE TABLE progresos (
@@ -124,72 +126,83 @@ CREATE TABLE favoritos (
     FOREIGN KEY (id_alimento) REFERENCES alimentos(id_alimento)
 );
 
--- Triggers
+-- ============================TIGGERS===========================================================================
 DELIMITER $$
 
+-- TRIGGER INSERT
 CREATE TRIGGER after_comida_alimento_insert
 AFTER INSERT ON comidas_alimentos
 FOR EACH ROW
 BEGIN
+    DECLARE v_email VARCHAR(100);
+    DECLARE v_fecha DATE;
+
+    SELECT c.email, c.fecha INTO v_email, v_fecha
+    FROM comidas c
+    WHERE c.id_comida = NEW.id_comida;
+
     REPLACE INTO consumo_diario (email, fecha, kcal_consumidas, proteinas, carbohidratos, grasas)
-    SELECT c.email, c.fecha,
+    SELECT v_email, v_fecha,
            COALESCE(SUM(a.kcal * ca.cantidad), 0),
            COALESCE(SUM(a.proteinas * ca.cantidad), 0),
            COALESCE(SUM(a.carbohidratos * ca.cantidad), 0),
            COALESCE(SUM(a.grasas * ca.cantidad), 0)
     FROM comidas c
-    LEFT JOIN comidas_alimentos ca ON c.id_comida = ca.id_comida
-    LEFT JOIN alimentos a ON ca.id_alimento = a.id_alimento
-    WHERE c.id_comida = NEW.id_comida
+    JOIN comidas_alimentos ca ON c.id_comida = ca.id_comida
+    JOIN alimentos a ON ca.id_alimento = a.id_alimento
+    WHERE c.email = v_email AND c.fecha = v_fecha
     GROUP BY c.email, c.fecha;
 END$$
 
+-- TRIGGER DELETE
 CREATE TRIGGER after_comida_alimento_delete
 AFTER DELETE ON comidas_alimentos
 FOR EACH ROW
 BEGIN
+    DECLARE v_email VARCHAR(100);
+    DECLARE v_fecha DATE;
+
+    SELECT c.email, c.fecha INTO v_email, v_fecha
+    FROM comidas c
+    WHERE c.id_comida = OLD.id_comida;
+
     REPLACE INTO consumo_diario (email, fecha, kcal_consumidas, proteinas, carbohidratos, grasas)
-    SELECT c.email, c.fecha,
+    SELECT v_email, v_fecha,
            COALESCE(SUM(a.kcal * ca.cantidad), 0),
            COALESCE(SUM(a.proteinas * ca.cantidad), 0),
            COALESCE(SUM(a.carbohidratos * ca.cantidad), 0),
            COALESCE(SUM(a.grasas * ca.cantidad), 0)
     FROM comidas c
-    LEFT JOIN comidas_alimentos ca ON c.id_comida = ca.id_comida
-    LEFT JOIN alimentos a ON ca.id_alimento = a.id_alimento
-    WHERE c.id_comida = OLD.id_comida
+    JOIN comidas_alimentos ca ON c.id_comida = ca.id_comida
+    JOIN alimentos a ON ca.id_alimento = a.id_alimento
+    WHERE c.email = v_email AND c.fecha = v_fecha
     GROUP BY c.email, c.fecha;
 END$$
 
+-- TRIGGER UPDATE
 CREATE TRIGGER after_comida_alimento_update
 AFTER UPDATE ON comidas_alimentos
 FOR EACH ROW
 BEGIN
+    DECLARE v_email VARCHAR(100);
+    DECLARE v_fecha DATE;
+
+    SELECT c.email, c.fecha INTO v_email, v_fecha
+    FROM comidas c
+    WHERE c.id_comida = NEW.id_comida;
+
     REPLACE INTO consumo_diario (email, fecha, kcal_consumidas, proteinas, carbohidratos, grasas)
-    SELECT c.email, c.fecha,
+    SELECT v_email, v_fecha,
            COALESCE(SUM(a.kcal * ca.cantidad), 0),
            COALESCE(SUM(a.proteinas * ca.cantidad), 0),
            COALESCE(SUM(a.carbohidratos * ca.cantidad), 0),
            COALESCE(SUM(a.grasas * ca.cantidad), 0)
     FROM comidas c
-    LEFT JOIN comidas_alimentos ca ON c.id_comida = ca.id_comida
-    LEFT JOIN alimentos a ON ca.id_alimento = a.id_alimento
-    WHERE c.id_comida = NEW.id_comida
+    JOIN comidas_alimentos ca ON c.id_comida = ca.id_comida
+    JOIN alimentos a ON ca.id_alimento = a.id_alimento
+    WHERE c.email = v_email AND c.fecha = v_fecha
     GROUP BY c.email, c.fecha;
 END$$
-
-CREATE TRIGGER after_peso_update
-AFTER UPDATE ON objetivos
-FOR EACH ROW
-BEGIN
-    IF NEW.peso_actual <> OLD.peso_actual THEN
-        INSERT INTO progresos (email, peso)
-        VALUES (NEW.email, NEW.peso_actual);
-    END IF;
-END$$
-
-DELIMITER ;
-DELIMITER $$
 
 -- Trigger que se ejecuta antes de insertar un nuevo registro en la tabla valores_nutricionales
 CREATE TRIGGER before_valores_insert
@@ -207,7 +220,6 @@ BEGIN
     SET NEW.carbohidratos = ROUND((NEW.kcal_objetivo * (NEW.porcentaje_carbohidratos / 100)) / 4, 2);
     SET NEW.grasas = ROUND((NEW.kcal_objetivo * (NEW.porcentaje_grasas / 100)) / 9, 2);
 END$$
-
 
 
 -- Trigger que se ejecuta antes de actualizar un registro en la tabla valores_nutricionales

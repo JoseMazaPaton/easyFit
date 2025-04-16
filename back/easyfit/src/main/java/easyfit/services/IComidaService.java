@@ -17,4 +17,5 @@ public interface IComidaService extends IGenericCrud<Comida, Integer>{
 	 void actualizarCantidadAlimento(int idComida, int idAlimento, double nuevaCantidad);
 	 void eliminarComida(int idComida, Usuario usuario);
 	 ResumenComidaDto obtenerResumenComida(int idComida, Usuario usuario);
+
 }

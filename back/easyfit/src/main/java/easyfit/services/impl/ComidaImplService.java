@@ -52,12 +52,15 @@ public class ComidaImplService extends GenericCrudServiceImpl<Comida, Integer> i
 
     @Override
     public List<ComidaDiariaDto> obtenerComidasDelDia(LocalDate fecha, String emailUsuario) {
+    	
         List<Comida> comidas = comidaRepository.findByFechaAndUsuarioEmail(fecha, emailUsuario);
         
         return comidas.stream()
                 .map(this::convertirAComidaDiariaDto)
                 .collect(Collectors.toList());
     }
+    
+    
 
     private ComidaDiariaDto convertirAComidaDiariaDto(Comida comida) {
         List<ComidaAlimento> alimentosEnComida = comidaAlimentoRepository.findByComidaIdComida(comida.getIdComida());
