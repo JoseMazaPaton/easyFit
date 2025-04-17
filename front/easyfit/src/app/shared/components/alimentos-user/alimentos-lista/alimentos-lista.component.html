@@ -1,61 +1,56 @@
 <div class="tabla-alimentos">
-    @if (alimentos.length > 0) {
-      <div class="tabla-scroll-both">
-        <table>
-            <thead>
-              <tr>
-                <th>Alimento</th>
-                <th>Categoría</th>
-                <th>Marca</th>
-                <th>Ración</th>
-                <th>Proteínas</th>
-                <th>Carb.</th>
-                <th>Grasas</th>
-                <th>Kcal</th>
-                @if (modo === 'favoritos') {
-                  <th>Acciones</th>
-                }
-              </tr>
-            </thead>
-            <tbody>
-              @for (alimento of alimentos; track alimento.idAlimento) {
-                <tr>
-                  <td class="nombre">{{ alimento.nombre }}</td>
-                  <td>{{ getNombreCategoria(alimento.idCategoria) }}</td>
-                  <td>{{ alimento.marca }}</td>
-                  <td>{{ alimento.unidadMedida }}</td>
-                  <td>{{ alimento.proteinas }} gr</td>
-                  <td>{{ alimento.carbohidratos }} gr</td>
-                  <td>{{ alimento.grasas }} gr</td>
-                  <td>{{ alimento.kcal }} gr</td>
-      
-                  @if (modo === 'favoritos') {
-                    <td class="acciones">
-                        <button class="btn-accion" (click)="onEditar(alimento)">
-                          <i class="fa-solid fa-pen"></i>
-                        </button>
-                        <button class="btn-accion eliminar" (click)="onEliminar(alimento)">
-                          <i class="fa-solid fa-trash"></i>
-                        </button>
-                      </td>
-                  }
-                </tr>
+  @if (alimentos.length > 0) {
+    <div class="tabla-scroll-both">
+      <table>
+        <thead>
+          <tr>
+            <th>Alimento</th>
+            <th>Categoría</th>
+            <th>Marca</th>
+            <th>Ración</th>
+            <th>Proteínas</th>
+            <th>Carb.</th>
+            <th>Grasas</th>
+            <th>Kcal</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (alimento of alimentos; track alimento.idAlimento) {
+            <tr
+              [class.fila-hover]="modo === 'seleccionar'"
+              (click)="modo === 'seleccionar' && onSeleccionar(alimento)"
+            >
+              <td class="nombre">{{ alimento.nombre }}</td>
+              <td>{{ getNombreCategoria(alimento.idCategoria) }}</td>
+              <td>{{ alimento.marca }}</td>
+              <td>{{ alimento.unidadMedida }}</td>
+              <td>{{ alimento.proteinas }} gr</td>
+              <td>{{ alimento.carbohidratos }} gr</td>
+              <td>{{ alimento.grasas }} gr</td>
+              <td>{{ alimento.kcal }} gr</td>
+
+              @if (modo === 'favoritos') {
+                <td class="acciones">
+                  <button class="btn-accion" (click)="onEditar(alimento)">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                  <button class="btn-accion eliminar" (click)="onEliminar(alimento)">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
               }
-            </tbody>
-          </table>
-      </div>
-        
-    }
-  
-    @if (alimentos.length === 0 && modo === 'favoritos') {
-      <div
-        class="mensaje-vacio"
-        @animate:enter.fade @animate:leave.fade
-      >
-        <i class="fa-solid fa-face-sad-tear"></i>
-        <p>No tienes ningún alimento registrado aún.</p>
-        <p>Pulsa <strong>"Añadir alimento"</strong> para empezar.</p>
-      </div>
-    }
-  </div>
-  
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  @if (alimentos.length === 0 && modo === 'favoritos') {
+    <div class="mensaje-vacio" @animate:enter.fade @animate:leave.fade>
+      <i class="fa-solid fa-face-sad-tear"></i>
+      <p>No tienes ningún alimento registrado aún.</p>
+      <p>Pulsa <strong>"Añadir alimento"</strong> para empezar.</p>
+    </div>
+  }
+</div>

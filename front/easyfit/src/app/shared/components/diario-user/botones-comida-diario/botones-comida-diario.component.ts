@@ -2,6 +2,7 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { IComidaDiariaDto } from '../../../../models/interfaces/IComidaDiario';
 import Swal from 'sweetalert2';
 import { ComidaService } from '../../../../models/services/comida.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,12 +18,10 @@ export class BotonesComidaDiarioComponent {
   @Output() refresh = new EventEmitter<void>();
   comidaService = inject(ComidaService);
 
-  // onAñadirAlimentos() {
-  //   // Aquí puedes abrir un modal o navegar
-  //   console.log(`Añadir alimentos a: ${this.comida.nombre}`);
-  //   // Por ejemplo: this.router.navigate(['/alimentos'], { queryParams: { idComida: this.comida.idComida } })
-  // }
-  onEliminarComida() {
+  constructor(private router: Router) {}
+
+  // Eliminar una comida con confirmación
+  onEliminarComida(): void {
     Swal.fire({
       title: `¿Eliminar "${this.comida.nombre}"?`,
       text: 'Esta acción no se puede deshacer.',
@@ -42,16 +41,27 @@ export class BotonesComidaDiarioComponent {
               showConfirmButton: false,
               timer: 1200
             });
-
-            this.refresh.emit(); // Notifica al padre que refresque
+            this.refresh.emit(); // Avisamos al padre que se refresque la vista
           },
-          error: (err) => {
+          error: () => {
             Swal.fire('Error', 'No se pudo eliminar la comida', 'error');
-            console.error(err);
           }
         });
       }
     });
   }
-  
+
+  // Navega al componente para añadir alimento a esta comida
+  agregarAlimentoComida(): void {
+    const idComida = this.comida.idComida;
+
+    // Usamos la fecha de la comida para que al volver cargue el día correcto
+    const fecha = this.comida.fecha 
+      ? new Date(this.comida.fecha).toISOString().split('T')[0]
+      : '';
+
+    this.router.navigate(['/usuario/diario/alimento', idComida], {
+      queryParams: { fecha }
+    });
+  }
 }

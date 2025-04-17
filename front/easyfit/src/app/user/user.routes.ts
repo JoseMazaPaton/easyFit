@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 
+
 export const userRoutes: Routes = [
   {
     path: '',
@@ -20,6 +21,13 @@ export const userRoutes: Routes = [
         loadComponent: () =>
           import('./pages/diario-user/diario-user.component').then(
             m => m.DiarioUserComponent
+          ),
+      },
+      {
+        path: 'diario/alimento/:idComida',
+        loadComponent: () =>
+          import('../shared/components/diario-user/agregar-alimento-diario-page/agregar-alimento-diario-page.component').then(
+            m => m.AgregarAlimentoDiarioPageComponent
           ),
       },
       {

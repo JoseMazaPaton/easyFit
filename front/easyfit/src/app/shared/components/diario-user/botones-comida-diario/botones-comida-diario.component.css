@@ -10,14 +10,16 @@
   
   /* Botón azul relleno */
   .btn-primary-custom {
-    background-color: #0099ff;
+    background-color: #7ed957;
     color: white;
     border-radius: 10px;
   }
   
   .btn-primary-custom:hover {
-    background-color: #0085e6;
+    background-color: #50d816;
+    color: white;
   }
+  
   
   /* Botón contorno azul */
   .btn-outline-custom {

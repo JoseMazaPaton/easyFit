@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './resumen-comidas-diario.component.css'
 })
 export class ResumenComidasDiarioComponent {
+  
   @Input() resumen!: {
     kcalObjetivo: number ;
     kcalConsumidas: number;

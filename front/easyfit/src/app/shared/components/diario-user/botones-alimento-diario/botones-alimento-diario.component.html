@@ -1,1 +1,11 @@
-<p>botones-alimento-diario works!</p>
+<div class="d-flex justify-content-center gap-2">
+  <!-- Botón editar -->
+  <button class="btn btn-sm rounded-circle btn-editar" (click)="onEditarCantidad()" title="Editar alimento">
+    <img src="assets/icons/editar.svg" alt="Editar" width="45" height="20" />
+  </button>
+
+  <!-- Botón eliminar -->
+  <button class="btn btn-sm rounded-circle btn-eliminar" (click)="onEliminarAlimento()" title="Eliminar alimento">
+    <img src="assets/icons/eliminar.svg" alt="Eliminar" width="25" height="16" />
+  </button>
+</div>

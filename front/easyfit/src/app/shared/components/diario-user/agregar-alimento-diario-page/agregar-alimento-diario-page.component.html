@@ -1,0 +1,47 @@
+<div class="container-fluid py-4 pantalla-añadir">
+    <div class="row justify-content-center">
+      <!-- IZQUIERDA -->
+      <div class="col-lg-7 col-md-12 mb-4 lado-izquierdo">
+        <h1 class="text-3xl font-bold text-white mb-5">Añadir alimento a Desayuno</h1>
+  
+        <!-- 🔍 Filtro reutilizable -->
+        <app-alimentos-filtro (buscar)="onBuscar($event)"></app-alimentos-filtro>
+  
+        <!-- 📋 Lista reutilizable -->
+        <app-alimentos-lista
+          [alimentos]="alimentos"
+          [modo]="'seleccionar'"
+          (seleccionarAlimento)="seleccionarAlimento($event)">
+        </app-alimentos-lista>
+      </div>
+  
+      <!-- DERECHA: SIEMPRE visible -->
+      <div class="col-lg-4 col-md-12 lado-derecho mt-5">
+        <div class="card shadow-sm p-4 text-center rounded-4">
+          <ng-container *ngIf="alimentoSeleccionado; else placeholder">
+            <h5 class="fw-bold mb-1">{{ alimentoSeleccionado.nombre }}</h5>
+            <p class="text-muted">{{ alimentoSeleccionado.marca }}</p>
+  
+            <div class="d-flex justify-content-center align-items-center gap-2 mb-3 porciones-input">
+              <input
+                type="number"
+                class="form-control text-center w-25 fw-semibold"
+                [(ngModel)]="porciones"
+                min="1"
+                step="0.5"
+              />
+              <span class="fw-medium">porciones de <b class="text-primary">{{ alimentoSeleccionado.unidadMedida }}</b></span>
+            </div>
+  
+            <button class="btn btn-success px-4 fw-semibold" (click)="agregarAlimento()">+ Añadir a Desayuno</button>
+          </ng-container>
+  
+          <!-- Mensaje por defecto -->
+          <ng-template #placeholder>
+            <p class="text-muted m-0">Selecciona un alimento de la lista para añadirlo aquí 🍽️</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  

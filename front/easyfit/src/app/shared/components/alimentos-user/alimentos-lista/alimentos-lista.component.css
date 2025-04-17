@@ -139,3 +139,12 @@ td, th {
     border-radius: 0.75rem;
     position: relative;
   }
+
+  .fila-hover {
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .fila-hover:hover {
+    background-color: #f8f9fa; /* gris claro Bootstrap */
+  }

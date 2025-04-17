@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { IComidaDiariaDto } from '../../../../models/interfaces/IComidaDiario';
 import { IResumenComida } from '../../../../models/interfaces/IResumenComida';
 import { ComidaService } from '../../../../models/services/comida.service';
+import { BotonesAlimentoDiarioComponent } from "../botones-alimento-diario/botones-alimento-diario.component";
 
 @Component({
   selector: 'app-comida-diario-card',
   standalone: true,
-  imports: [CommonModule, BotonesComidaDiarioComponent],
+  imports: [CommonModule, BotonesComidaDiarioComponent, BotonesAlimentoDiarioComponent],
   templateUrl: './comida-diario-card.component.html',
   styleUrl: './comida-diario-card.component.css'
 })
@@ -22,6 +23,7 @@ export class ComidaDiarioCardComponent {
 
   ngOnInit(): void {
     this.comidaService.getResumenComida(this.comida.idComida).subscribe({
+
       next: (resumen) => {
         this.resumen = resumen;
       },
@@ -31,6 +33,10 @@ export class ComidaDiarioCardComponent {
     });
   }
   
-}
+  actualizarDatosComida() {
+    this.refresh.emit(); // esto se lanza desde el hijo
+  
+  }
 
+}
 

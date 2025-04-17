@@ -1,0 +1,20 @@
+/* Botón editar */
+.btn-editar img {
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+  
+  .btn-editar:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+  }
+  
+  /* Botón eliminar */
+  .btn-eliminar img {
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+   /* Botón eliminar */
+  .btn-eliminar:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+  }

@@ -1,0 +1,39 @@
+.pantalla-añadir {
+  min-height: 100vh;
+  overflow-x: hidden; /* 🧼 quita scroll horizontal */
+}
+
+.titulo {
+  font-weight: bold;
+  color: white;
+}
+
+.lado-derecho .card {
+  background: white;
+  border-radius: 12px;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.lado-derecho {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn-aniadir {
+  background-color: #63d762;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-aniadir:hover {
+  background-color: #4cb44c;
+}

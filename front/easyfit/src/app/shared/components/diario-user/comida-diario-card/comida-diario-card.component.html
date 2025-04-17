@@ -1,7 +1,9 @@
 <div class="card-comida rounded-3 shadow-sm p-3 bg-white">
   <div class="d-flex justify-content-between align-items-center mb-2">
     <h5 class="mb-0 fw-bold text-dark">{{ comida.nombre }}</h5>
-    <span class="text-total fw-semibold">{{ resumen.totalKcal }} kcal</span>
+    @if (resumen) {
+      <span class="text-total fw-semibold">{{ resumen.totalKcal }} kcal</span>
+    }
   </div>
 
   <div class="table-responsive">
@@ -20,7 +22,7 @@
       </thead>
       <tbody class="text-center">
         @if (comida.alimentos.length > 0) {
-          @for (alimento of comida.alimentos; track alimento.idAlimento) {
+          @for (alimento of comida.alimentos; track $index) {
             <tr>
               <td>{{ alimento.nombre }}</td>
               <td>{{ alimento.marca }}</td>
@@ -30,7 +32,7 @@
               <td>{{ alimento.grasas }}</td>
               <td>{{ alimento.kcal }}</td>
               <td>
-                <!-- <app-botones-alimento-diario [alimento]="alimento" [idComida]="comida.idComida"></app-botones-alimento-diario> -->
+                <app-botones-alimento-diario [alimento]="alimento" [idComida]="comida.idComida" (refresh)="actualizarDatosComida()"></app-botones-alimento-diario>
               </td>
             </tr>
           }

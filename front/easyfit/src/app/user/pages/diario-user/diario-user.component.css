@@ -4,7 +4,6 @@
   padding: 20px 15px;
 }
 
-/* Ya tienes estas definidas, pero asegúrate de que están bien */
 .control-fecha-custom {
   background-color: white;
   border-radius: 12px;
@@ -13,21 +12,22 @@
 }
 
 .btn-fecha-icon {
-  background-color: #0099ff;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 4px 10px;
+  background-color: #ffffff;
+  color: #231f20;
+  border: 2px solid #231f20;
+  border-radius: 5px;
+  padding: 2px 5px;
   font-size: 14px;
+  font-weight: 800px;
 }
 
 .btn-fecha-icon:hover {
-  background-color: #007acc;
+  background-color: #000000;
+  color: white;
 }
 
 .fecha-activa {
-  background-color: #0099ff;
-  color: white;
+  color: rgb(0, 0, 0);
   border-radius: 10px;
   min-width: 200px;
   text-align: center;
@@ -39,16 +39,16 @@
 }
 
 .btn-crear-comida {
-  background-color: #5ce1e6;
+  background-color: #7ed957;
   border: none;
   color: white;
   font-weight: 600;
-  padding: 15px 20px;
+  padding: 10px 17px;
   border-radius: 10px;
-  font-size: 1.0em;
+  font-size: 0.9em;
   transition: background-color 0.2s ease;
 }
 
 .btn-crear-comida:hover {
-  background-color: #4fd1d6;
+  background-color: #50d816;
 }

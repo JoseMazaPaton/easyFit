@@ -95,6 +95,7 @@ public class ComidaImplService extends GenericCrudServiceImpl<Comida, Integer> i
         return ComidaDiariaDto.builder()
                 .idComida(comida.getIdComida())
                 .nombre(comida.getNombre())
+                .fecha(comida.getFecha())
                 .orden(comida.getOrden())
                 .alimentos(convertirAlimentosADto(alimentosEnComida))
                 .build();
@@ -172,6 +173,8 @@ public class ComidaImplService extends GenericCrudServiceImpl<Comida, Integer> i
 	    
 	    comidaAlimentoRepository.save(comidaAlimento);
 	}
+	
+	
 	
 	@Override
 	public void eliminarAlimentoDeComida(int idComida, int idAlimento) {

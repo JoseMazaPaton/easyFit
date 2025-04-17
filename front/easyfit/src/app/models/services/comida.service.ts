@@ -3,6 +3,8 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IComidaDiariaDto } from '../interfaces/IComidaDiario';
 import { IResumenComida } from '../interfaces/IResumenComida';
+import { IAgregarAlimento } from '../interfaces/IAgregarAlimento';
+import { IAlimentoCantidad } from '../interfaces/IAlimentoCantidad';
 
 @Injectable({
   providedIn: 'root'
@@ -32,12 +34,12 @@ export class ComidaService {
     );
   }
 
-  // // Añadir alimento a comida
-  // agregarAlimentoAComida(idComida: number, request: AgregarAlimentoRequestDto): Observable<any> {
-  //   return this.http.post(`${this.apiUrl}/${idComida}/añadirAlimento`, request).pipe(
-  //     tap(() => this.refreshComidas())
-  //   );
-  // }
+  // Añadir alimento a comida
+  agregarAlimentoAComida(idComida: number, request: IAgregarAlimento): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${idComida}/añadirAlimento`, request).pipe(
+      tap(() => this.refreshComidas())
+    );
+  }
 
   // Eliminar alimento de comida
   eliminarAlimentoDeComida(idComida: number, idAlimento: number): Observable<any> {
@@ -46,13 +48,13 @@ export class ComidaService {
     );
   }
 
-  // // Actualizar cantidad de alimento
-  // actualizarCantidadAlimento(idComida: number, idAlimento: number, cantidad: number): Observable<any> {
-  //   const body: ActualizarCantidadAlimentoRequestDto = { cantidad };
-  //   return this.http.put(`${this.apiUrl}/${idComida}/alimentos/${idAlimento}`, body).pipe(
-  //     tap(() => this.refreshComidas())
-  //   );
-  // }
+  // Actualizar cantidad de alimento
+  actualizarCantidadAlimento(idComida: number, idAlimento: number, cantidad: number): Observable<any> {
+    const body: IAlimentoCantidad = { cantidad };
+    return this.http.put(`${this.apiUrl}/${idComida}/alimentos/${idAlimento}`, body).pipe(
+      tap(() => this.refreshComidas())
+    );
+  }
 
   // Eliminar comida completa
   eliminarComida(idComida: number): Observable<any> {
