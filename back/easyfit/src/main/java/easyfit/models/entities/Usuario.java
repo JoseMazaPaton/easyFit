@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import easyfit.models.enums.Sexo;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,27 +39,35 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of="email")
 @Entity
 @Table(name="usuarios")
+@Schema(description = "Entidad que representa a los Usuarios")
 public class Usuario implements Serializable, UserDetails{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Column(name="email")
+	@Schema(description = "ID de Usuario como Email", example = "pablo@gmail.com")
 	private String email;
 	
+	@Schema(description = "Password de Usuario para entrar a la App Web", example = "Holahola10_!")
 	private String password;
 	
+	@Schema(description = "Nombre del Usuario", example = "Alicia")
 	private String nombre;
 	
+	@Schema(description = "Edad del Usuario", example = "30(años)")
 	private int edad;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "sexo", nullable = false) Sexo sexo;
 	
+	@Schema(description = "Altura del Usuario", example = "1.85(metros)")
 	private Double altura;
 	
+	@Schema(description = "Suspensión de la cuenta del Usuario", example = "true")
 	private boolean suspendida;	
-
+	
+	@Schema(description = "Fecha de registro del Usuario", example = "2025-03-25")
 	@Column(name="fecha_registro")
 	private LocalDate fechaRegistro;
 	
@@ -69,6 +78,7 @@ public class Usuario implements Serializable, UserDetails{
 	// La FK esta en la tabla Objetivo y alli se gestiona
 	// Al decir mappedBy, indicamos que la relación se gestiona desde Objetivo.
 	// Esta relación la vamos a usar para que desde el Usuario podamos acceder directamente a su Objetivo con usuario.getObjetivo()
+	@Schema(description = "Objetivo del Usuario, relación 1 a 1, Un Objetivo por cada Usuario")
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Objetivo objetivo;
 
@@ -77,10 +87,12 @@ public class Usuario implements Serializable, UserDetails{
 	// Muchos usuarios pueden tener el mismo rol.
 	@ManyToOne
 	@JoinColumn(name="id_rol")
+	@Schema(description = "Nº de ID de Rol", example = "1")
 	private Rol idRol;
 	
 	
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+	@Schema(description = "Valor Nutricional del Usuario, relación 1 a 1, Un Valor Nutricional por cada Usuario")
 	private ValorNutricional valorNutricional;
 
 	
