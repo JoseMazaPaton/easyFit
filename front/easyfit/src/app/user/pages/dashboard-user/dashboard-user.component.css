@@ -1,0 +1,9 @@
+:host {
+  display: block;
+  padding-top: 1rem;
+}
+
+.container-fluid {
+  max-width: 1200px;
+  margin: 0 auto;
+}

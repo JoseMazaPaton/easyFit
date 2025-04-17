@@ -1,11 +1,11 @@
 package easyfit.restcontroller;
 
 import java.util.Arrays;
-
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import easyfit.models.dtos.admin.UserResumenDto;
 import easyfit.models.dtos.auth.UsuarioResponseDto;
 import easyfit.models.entities.Alimento;
 import easyfit.models.entities.Categoria;
@@ -376,6 +377,19 @@ public class AdminRestController {
 	    }
 	}
 	
+	
+	@GetMapping("/dashboard/resumen")
+	@Operation(summary = "Resumen usuarios", description = "Resumen de estadísticas de usuarios para el panel de administración")
+	public ResponseEntity<?> getResumenUsuarios() {
+	    try {
+	        UserResumenDto resumen = usuarioAdminService.obtenerResumenUsuarios();
+	        return ResponseEntity.ok(resumen);
+	    } catch (Exception e) {
+	        return ResponseEntity.internalServerError()
+	                .body("Error al obtener el resumen de usuarios: " + e.getMessage());
+	    }
+	}
+
 	
 	
 }

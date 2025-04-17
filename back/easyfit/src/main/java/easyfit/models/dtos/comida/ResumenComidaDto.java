@@ -1,5 +1,5 @@
 // ResumenComidaDto.java
-package easyfit.models.dtos.auth;
+package easyfit.models.dtos.comida;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +16,7 @@ import easyfit.models.dtos.alimentos.AlimentoEnComidaDto;
 @AllArgsConstructor
 @Builder
 public class ResumenComidaDto {
+	
     private String nombreComida;
     private LocalDate fecha;
     private int totalKcal;

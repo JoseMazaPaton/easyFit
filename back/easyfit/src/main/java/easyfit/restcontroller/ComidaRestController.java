@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import easyfit.models.dtos.alimentos.ActualizarCantidadAlimentoRequestDto;
 import easyfit.models.dtos.alimentos.AgregarAlimentoRequestDto;
-import easyfit.models.dtos.auth.ResumenComidaDto;
 import easyfit.models.dtos.comida.ComidaDiariaDto;
+import easyfit.models.dtos.comida.ResumenComidaDto;
 import easyfit.models.entities.Comida;
 import easyfit.models.entities.Usuario;
 import easyfit.services.IComidaService;

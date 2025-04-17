@@ -1,0 +1,33 @@
+
+  /* Estilo base */
+  .btn-custom {
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    transition: 0.2s ease;
+  }
+  
+  /* Botón azul relleno */
+  .btn-primary-custom {
+    background-color: #0099ff;
+    color: white;
+    border-radius: 10px;
+  }
+  
+  .btn-primary-custom:hover {
+    background-color: #0085e6;
+  }
+  
+  /* Botón contorno azul */
+  .btn-outline-custom {
+    border: 2px solid #0099ff;
+    background-color: transparent;
+    color: #0099ff;
+  }
+  
+  .btn-outline-custom:hover {
+    background-color: #0099ff;
+    color: white;
+  }
+  

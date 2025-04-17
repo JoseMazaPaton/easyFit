@@ -1,15 +1,10 @@
 package easyfit.services.impl;
 
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import easyfit.models.dtos.auth.UsuarioPasswordDto;
-import easyfit.models.dtos.auth.UsuarioRequestDto;
-import easyfit.models.dtos.auth.UsuarioResponseDto;
 import easyfit.models.entities.Usuario;
 import easyfit.repositories.IUsuarioRepository;
 import easyfit.services.IUsuarioService;
@@ -42,10 +37,5 @@ public class UsuarioServiceImpl extends GenericCrudServiceImpl<Usuario, String> 
 		
 	}
 
-
-
-
-	
-	
 
 }

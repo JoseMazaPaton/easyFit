@@ -1,0 +1,23 @@
+.card-total {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  height: 100%;
+}
+
+.card-total p {
+  font-size: 0.95rem;
+  color: #474747;
+}
+
+.card-total span.text-primary {
+  color: #0099ff !important;
+}
+
+.card-total span.text-danger {
+  font-size: 1rem;
+}
+
+.card-total span.text-success {
+  font-size: 1rem;
+}

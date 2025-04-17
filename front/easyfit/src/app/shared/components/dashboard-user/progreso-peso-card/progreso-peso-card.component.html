@@ -1,40 +1,43 @@
 <div class="card-progreso">
-    <h2 class="titulo">Progreso del peso</h2>
-    <p class="subtitulo">Progreso desde el inicio hasta día de hoy</p>
-  
-    <div class="grafico-wrapper">
-        <svg viewBox="0 0 200 100" class="semi-arco">
-            <!-- Arco de fondo (gris claro) -->
-            <path
-              d="M20,100 A80,80 0 0,1 180,100"
-              class="arco-base"
-            />
-          
-            <!-- Arco de progreso (azul continuo, sin cortes) -->
-            <path
-              d="M20,100 A80,80 0 0,1 180,100"
-              class="arco-progreso"
-              [attr.stroke-dasharray]="'251'"
-              [attr.stroke-dashoffset]="251 - (porcentajeProgreso * 2.51)"
-              [attr.stroke]="colorProgreso"
-            />
-          </svg>
-          
-  
-      <div class="contenido-centro">
-        <i class="fas fa-weight-scale icono"></i>
-        <div class="texto-peso">{{ mensaje }}</div>
-        <div class="peso-actual">Actual: {{ pesoActual }} kg</div>
+  <h2 class="titulo">Progreso del peso</h2>
+  <p class="subtitulo">Progreso desde el inicio hasta día de hoy</p>
+
+  <div class="grafico-wrapper">
+    <svg viewBox="0 0 200 100" class="semi-arco">
+      <!-- Gradiente personalizado azul -->
+      <defs>
+        <linearGradient id="gradiente" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#5ce1e6" />
+          <stop offset="100%" stop-color="#0099ff" />
+        </linearGradient>
+      </defs>
+
+      <!-- Arco azul claro como base -->
+      <path d="M20,100 A80,80 0 0,1 180,100" class="arco-base" />
+
+      <!-- Arco azul oscuro como progreso -->
+      <path
+        d="M20,100 A80,80 0 0,1 180,100"
+        class="arco-progreso"
+        stroke="#0099ff"
+        [attr.stroke-dasharray]="'251'"
+        [attr.stroke-dashoffset]="251 - (porcentajeProgreso * 2.51)"
+      />
+    </svg>
+
+    <div class="contenido-centro mt-3">
+      <i class="fas fa-weight-scale icono"></i>
+      <div class="texto-peso">{{ getPesoPerdido() }} kg perdidos</div>
+      <div class="peso-actual">Actual: {{ pesoActual }} kg</div>
+    </div>
+
+    <div class="etiquetas-laterales">
+      <div class="peso-inicial fw-bold">
+        {{ pesoInicial }}<br /><span>Inicio</span>
       </div>
-  
-      <div class="etiquetas-laterales">
-        <div class="peso-inicial">
-          {{ pesoInicial }}<br><span>Inicio</span>
-        </div>
-        <div class="peso-objetivo">
-          {{ pesoObjetivo }}<br><span>Objetivo</span>
-        </div>
+      <div class="peso-objetivo fw-bold">
+        {{ pesoObjetivo }}<br /><span>Objetivo</span>
       </div>
     </div>
   </div>
-  
+</div>

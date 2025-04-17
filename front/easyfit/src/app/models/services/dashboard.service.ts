@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ResumenDiario } from '../interfaces/resumen-diario';
 import { HistorialPeso } from '../interfaces/historial-peso';
 import { HistorialCalorias } from '../interfaces/historial-calorias';
@@ -12,27 +12,67 @@ export class DashboardService {
 
   private apiUrl = 'http://localhost:9008/dashboard';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
+  // 📌 1. Resumen Diario
+  private resumenDiarioSubject = new BehaviorSubject<ResumenDiario | null>(null);
+  public resumenDiario$ = this.resumenDiarioSubject.asObservable();
 
-  /**
-   * Obtiene el resumen de calorías del día actual (objetivo, consumidas y restantes).
-   */
-  getResumenDiario(): Observable<ResumenDiario> {
-    return this.http.get<ResumenDiario>(`${this.apiUrl}/resumendiario`);
+  cargarResumenDiario(): void {
+    this.http.get<ResumenDiario>(`${this.apiUrl}/resumendiario`).subscribe({
+      next: (data) => this.resumenDiarioSubject.next(data),
+      error: (err) => {
+        console.error('[Resumen Diario] Error:', err);
+        this.resumenDiarioSubject.next(null);
+      }
+    });
   }
 
-  /**
-   * Devuelve el resumen de pesos (inicial, actual y objetivo) del usuario.
-   */
-  getResumenPesos(): Observable<HistorialPeso> {
-    return this.http.get<HistorialPeso>(`${this.apiUrl}/resumenpesos`);
+  // 📌 2. Resumen Pesos
+  private resumenPesoSubject = new BehaviorSubject<HistorialPeso | null>(null);
+  public resumenPeso$ = this.resumenPesoSubject.asObservable();
+
+  cargarResumenPeso(): void {
+    this.http.get<HistorialPeso>(`${this.apiUrl}/resumenpesos`).subscribe({
+      next: (data) => this.resumenPesoSubject.next(data),
+      error: (err) => {
+        console.error('[Resumen Pesos] Error:', err);
+        this.resumenPesoSubject.next(null);
+      }
+    });
   }
 
-  /**
-   * Devuelve el historial de calorías consumidas durante los últimos 7 días.
-   */
-  getResumenCalorias7Dias(): Observable<HistorialCalorias[]> {
-    return this.http.get<HistorialCalorias[]>(`${this.apiUrl}/resumencalorias`);
+  // 📌 3. Historial Calorías
+  private calorias7diasSubject = new BehaviorSubject<HistorialCalorias[] | null>(null);
+  public calorias7dias$ = this.calorias7diasSubject.asObservable();
+
+  cargarCalorias7Dias(): void {
+    this.http.get<HistorialCalorias[]>(`${this.apiUrl}/resumencalorias`).subscribe({
+      next: (data) => this.calorias7diasSubject.next(data),
+      error: (err) => {
+        console.error('[Calorías 7 días] Error:', err);
+        this.calorias7diasSubject.next(null);
+      }
+    });
+  }
+
+  // 🔁 Cargar todos juntos
+  refrescarDashboard(): void {
+    this.cargarResumenDiario();
+    this.cargarResumenPeso();
+    this.cargarCalorias7Dias();
+  }
+
+  // 🔍 Acceso directo a último valor (opcional)
+  get resumenActual(): ResumenDiario | null {
+    return this.resumenDiarioSubject.value;
+  }
+
+  get pesoActual(): HistorialPeso | null {
+    return this.resumenPesoSubject.value;
+  }
+
+  get caloriasActual(): HistorialCalorias[] | null {
+    return this.calorias7diasSubject.value;
   }
 }

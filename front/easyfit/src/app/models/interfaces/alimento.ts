@@ -9,4 +9,5 @@ export interface Alimento {
     grasas: number;
     unidadMedida: string;
     idCategoria: number;
+    
 }

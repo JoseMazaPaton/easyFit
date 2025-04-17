@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
-import { Paso3ObjetivoGeneraComponent } from './components/paso3-objetivo-genera/paso3-objetivo-genera.component';
 
 export const authRoutes: Routes = [
+
+
+    // ✅ ACCESO DEL USUARIO
   {
     path: '',
     loadComponent: () =>
@@ -72,6 +74,24 @@ export const authRoutes: Routes = [
         path: '',
         redirectTo: 'login',
         pathMatch: 'full'
+      }
+    ]
+  },
+
+  // ✅ ACCESO DEL ADMINISTRADOR
+  {
+    path: 'admin',
+    loadComponent: () =>
+      import('./layouts/access-admin/access-admin.component').then(
+        m => m.AccessAdminComponent
+      ),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./pages/login-form/login-form.component').then(
+            m => m.LoginFormComponent
+          )
       }
     ]
   }

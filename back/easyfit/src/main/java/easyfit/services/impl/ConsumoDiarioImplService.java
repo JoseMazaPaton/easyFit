@@ -1,7 +1,9 @@
 package easyfit.services.impl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,26 +119,38 @@ public class ConsumoDiarioImplService extends GenericCrudServiceImpl<ConsumoDiar
 	@Override
 	public List<HistorialCaloriasDto> getConsumoUltimos7Dias(Usuario usuario) {
 	    
-	    // Calcular las fechas, hoy y los 6 dias anteriores
 	    LocalDate hoy = LocalDate.now();
 	    LocalDate hace7dias = hoy.minusDays(6);
 
-	    // Guardamos las kcal objetivo del usuario
 	    int kcalObjetivo = usuario.getValorNutricional().getKcalObjetivo();
 
-	    // Obtener el consumo de kcal buscando por las fechas anteriores
-	    List<ConsumoDiario> listaCalorias = diarioRepository.findByUsuarioEmailAndFechaBetweenOrderByFechaAsc(usuario.getEmail(), hace7dias, hoy);
+	    // Obtener consumos registrados en los últimos 7 días
+	    List<ConsumoDiario> listaCalorias = diarioRepository
+	        .findByUsuarioEmailAndFechaBetweenOrderByFechaAsc(usuario.getEmail(), hace7dias, hoy);
 
-	    // Devolver respuesta Dto
-	    return listaCalorias.stream()
-	        .map(c -> HistorialCaloriasDto.builder()
-	            .fecha(c.getFecha()) 
+	    // Mapear los consumos por fecha para buscarlos rápido
+	    Map<LocalDate, ConsumoDiario> mapaPorFecha = listaCalorias.stream()
+	        .collect(Collectors.toMap(ConsumoDiario::getFecha, c -> c));
+
+	    // Lista final con los 7 días completos
+	    List<HistorialCaloriasDto> resultado = new ArrayList<>();
+
+	    for (int i = 0; i <= 6; i++) {
+	        LocalDate fecha = hace7dias.plusDays(i);
+
+	        ConsumoDiario consumo = mapaPorFecha.get(fecha);
+
+	        int kcalConsumidas = consumo != null ? consumo.getKcalConsumidas() : 0;
+
+	        resultado.add(HistorialCaloriasDto.builder()
+	            .fecha(fecha)
 	            .kcalObjetivo(kcalObjetivo)
-	            .kcalConsumidas(c.getKcalConsumidas())
-	            .build())
-	        .collect(Collectors.toList());
-	}
+	            .kcalConsumidas(kcalConsumidas)
+	            .build());
+	    }
 
+	    return resultado;
+	}
 
 
 }

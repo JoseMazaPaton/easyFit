@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import easyfit.models.dtos.alimentos.AlimentoEnComidaDto;
-import easyfit.models.dtos.auth.ResumenComidaDto;
 import easyfit.models.dtos.comida.ComidaDiariaDto;
+import easyfit.models.dtos.comida.ResumenComidaDto;
 import easyfit.models.entities.Alimento;
 import easyfit.models.entities.Comida;
 import easyfit.models.entities.ComidaAlimento;
@@ -23,6 +23,7 @@ import easyfit.repositories.IConsumoDiarioRepository;
 import easyfit.repositories.IUsuarioRepository;
 import easyfit.services.IComidaService;
 import jakarta.transaction.Transactional;
+import static easyfit.utils.RoundNumbers.redondear;
 
 @Service
 public class ComidaImplService extends GenericCrudServiceImpl<Comida, Integer> implements IComidaService{
@@ -50,17 +51,43 @@ public class ComidaImplService extends GenericCrudServiceImpl<Comida, Integer> i
 
 	
 
-    @Override
-    public List<ComidaDiariaDto> obtenerComidasDelDia(LocalDate fecha, String emailUsuario) {
-    	
-        List<Comida> comidas = comidaRepository.findByFechaAndUsuarioEmail(fecha, emailUsuario);
-        
-        return comidas.stream()
-                .map(this::convertirAComidaDiariaDto)
-                .collect(Collectors.toList());
-    }
-    
-    
+	@Override
+	public List<ComidaDiariaDto> obtenerComidasDelDia(LocalDate fecha, String emailUsuario) {
+	    // Obtenemos todas las comidas que ya existen para ese usuario y fecha
+	    List<Comida> comidas = comidaRepository.findByFechaAndUsuarioEmail(fecha, emailUsuario);
+
+	    // Si no hay ninguna comida registrada, significa que es un día nuevo → creamos las 3 por defecto
+	    if (comidas.isEmpty()) {
+
+	        // Buscamos al usuario asociado
+	        Usuario usuario = usuarioRepository.findById(emailUsuario)
+	            .orElseThrow(() -> new NoSuchElementException("Usuario no encontrado"));
+
+	        // Definimos los nombres y orden predefinido de las comidas
+	        String[] nombres = {"Desayuno", "Comida", "Cena"};
+
+	        // Creamos las 3 comidas básicas para ese día
+	        for (int i = 0; i < nombres.length; i++) {
+	            Comida nueva = Comida.builder()
+	                .usuario(usuario)
+	                .fecha(fecha)
+	                .nombre(nombres[i])
+	                .orden(i + 1)
+	                .build();
+
+	            comidaRepository.save(nueva);
+	        }
+
+	        // Volvemos a consultar ya incluyendo las recién creadas
+	        comidas = comidaRepository.findByFechaAndUsuarioEmail(fecha, emailUsuario);
+	    }
+
+	    // Convertimos las comidas a DTOs y las devolvemos
+	    return comidas.stream()
+	        .map(this::convertirAComidaDiariaDto)
+	        .collect(Collectors.toList());
+	}
+
 
     private ComidaDiariaDto convertirAComidaDiariaDto(Comida comida) {
         List<ComidaAlimento> alimentosEnComida = comidaAlimentoRepository.findByComidaIdComida(comida.getIdComida());
@@ -74,26 +101,27 @@ public class ComidaImplService extends GenericCrudServiceImpl<Comida, Integer> i
     }
 
     private List<AlimentoEnComidaDto> convertirAlimentosADto(List<ComidaAlimento> alimentosEnComida) {
-        
-    	 return alimentosEnComida.stream()
-    		        .map(ca -> {
-    		            Alimento alimento = ca.getAlimento();
-    		            
-    		            return AlimentoEnComidaDto.builder()
-    		                .idAlimento(alimento.getIdAlimento())
-    		                .nombre(alimento.getNombre())
-    		                .marca(alimento.getMarca())
-    		                .cantidad(ca.getCantidad())
-    		                .unidadMedida(alimento.getUnidadMedida())
-    		                .kcal((int) (alimento.getKcal() * (ca.getCantidad() / 100.0)))
-    		                .proteinas(alimento.getProteinas() * (ca.getCantidad() / 100.0))
-    		                .carbohidratos(alimento.getCarbohidratos() * (ca.getCantidad() / 100.0))
-    		                .grasas(alimento.getGrasas() * (ca.getCantidad() / 100.0))
-    		                .build();
-    		        })
-    		        .collect(Collectors.toList());
-    		}
+        return alimentosEnComida.stream()
+            .map(ca -> {
+                Alimento alimento = ca.getAlimento();
+                double cantidad = ca.getCantidad();
 
+                return AlimentoEnComidaDto.builder()
+                    .idAlimento(alimento.getIdAlimento())
+                    .nombre(alimento.getNombre())
+                    .marca(alimento.getMarca())
+                    .cantidad(cantidad)
+                    .unidadMedida(alimento.getUnidadMedida())
+                    .kcal((int) Math.round(alimento.getKcal() * cantidad))
+                    .proteinas(redondear(alimento.getProteinas() * cantidad))
+                    .carbohidratos(redondear(alimento.getCarbohidratos() * cantidad))
+                    .grasas(redondear(alimento.getGrasas() * cantidad))
+                    .build();
+            })
+            .collect(Collectors.toList());
+    }
+    
+    
     @Override
     public Comida crearComida(Comida comida) {
         // Validaciones básicas
@@ -237,30 +265,29 @@ public class ComidaImplService extends GenericCrudServiceImpl<Comida, Integer> i
 	        .totalGrasas(calcularTotalGrasas(alimentos))
 	        .build();
 	}
-
-
-	// Métodos de cálculo
+	
+	
 	private int calcularTotalKcal(List<ComidaAlimento> alimentos) {
 	    return alimentos.stream()
-	        .mapToInt(ca -> (int) (ca.getAlimento().getKcal() * (ca.getCantidad() / 100.0)))
+	        .mapToInt(ca -> (int) Math.round(ca.getAlimento().getKcal() * ca.getCantidad()))
 	        .sum();
 	}
 
 	private double calcularTotalProteinas(List<ComidaAlimento> alimentos) {
 	    return alimentos.stream()
-	        .mapToDouble(ca -> ca.getAlimento().getProteinas() * (ca.getCantidad() / 100.0))
+	        .mapToDouble(ca -> redondear(ca.getAlimento().getProteinas() * ca.getCantidad()))
 	        .sum();
 	}
 
 	private double calcularTotalCarbohidratos(List<ComidaAlimento> alimentos) {
 	    return alimentos.stream()
-	        .mapToDouble(ca -> ca.getAlimento().getCarbohidratos() * (ca.getCantidad() / 100.0))
+	        .mapToDouble(ca -> redondear(ca.getAlimento().getCarbohidratos() * ca.getCantidad()))
 	        .sum();
 	}
 
 	private double calcularTotalGrasas(List<ComidaAlimento> alimentos) {
 	    return alimentos.stream()
-	        .mapToDouble(ca -> ca.getAlimento().getGrasas() * (ca.getCantidad() / 100.0))
+	        .mapToDouble(ca -> redondear(ca.getAlimento().getGrasas() * ca.getCantidad()))
 	        .sum();
 	}
 	

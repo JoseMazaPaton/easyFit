@@ -14,8 +14,60 @@ INSERT INTO roles (id_rol, nombre) VALUES
 -- Inserción de usuarios (admin y cliente)
 INSERT INTO usuarios (email, password, nombre, edad, sexo, altura, suspendida, id_rol, fecha_registro) VALUES 
 ('admin@easyfit.com', '$2a$12$zOJTAIhfyPI7Eq9FPqYW2usvjQvgoHKWyLBmqLXcsdI36cfiaXKOK', 'Pablo Prieto López', 36, 'HOMBRE', 180.5, FALSE, 1,'2025-03-31'), -- CONTRASEÑA: Admin1234
-('laura_martinez94@gmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Laura Martínez Ruiz', 28, 'MUJER', 165.2, FALSE, 2,'2025-03-31'); -- CONTRASEÑA: Usuario1234
+('laura_martinez94@gmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Laura Martínez Ruiz', 28, 'MUJER', 165.2, FALSE, 2,'2025-03-31'),-- CONTRASEÑA: Usuario1234
 
+-- USUARIOS FAKE PARA RELLENAR
+('marco.diaz87@gmail.com','$2a$12$3K1zFvZ/8SK2N3EzLgCkN.g9/P9bWZZ6ulB4qvqpr4VjHohY5bqgO','Marco Díaz Fernández',37,'HOMBRE',178.4,FALSE,2,'2025-03-10'),
+('reyesjurado@bru.net', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Sandra Rosado Tena', 22, 'MUJER', 181.9, FALSE, 2, '2025-04-12'),
+('pvalls@yahoo.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'José Navarro Escamilla', 53, 'MUJER', 155.3, FALSE, 1, '2024-11-19'),
+('jose-antonio47@gmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Inmaculada Salamanca', 43, 'MUJER', 165.2, FALSE, 1, '2025-01-05'),
+('egordillo@hotmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Baudelio Morante Pina', 23, 'HOMBRE', 158.8, FALSE, 1, '2024-10-17'),
+('fmendez@solis.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Nélida Gras', 23, 'MUJER', 169.2, FALSE, 2, '2025-01-10'),
+('piamanzano@pera.es', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Julieta Garay Chaparro', 18, 'MUJER', 167.4, FALSE, 1, '2024-10-03'),
+('pedreroelpidio@hotmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Encarna Prats Suarez', 20, 'MUJER', 165.3, FALSE, 2, '2024-12-28'),
+('muryolanda@varela-barreda.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Máximo Tomé Carmona', 21, 'HOMBRE', 180.1, FALSE, 2, '2025-03-08'),
+('adanjaen@gmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Adela Orozco Pizarro', 38, 'MUJER', 175.7, FALSE, 1, '2024-10-01'),
+('acerojuan-luis@andrade.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Consuelo Criado Alvarado', 48, 'MUJER', 185.7, FALSE, 2, '2024-12-26'),
+('albertaparicio@hidalgo-anguita.es', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Eusebia Martina Calzada Barco', 51, 'MUJER', 191.6, FALSE, 2, '2025-03-07'),
+('evapelaez@llorens.org', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Ruth Fabra Camino', 41, 'MUJER', 173.4, FALSE, 1, '2025-01-15'),
+('jose-manuel25@solera.es', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Amelia Dulce Matas Mayol', 46, 'MUJER', 174.2, FALSE, 2, '2025-02-01'),
+('amayanogues@gmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Porfirio Cristian Ribas Gomis', 51, 'HOMBRE', 167.5, FALSE, 1, '2024-10-03'),
+('teodosio22@ariza.net', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Mar Bermudez Cámara', 22, 'MUJER', 190.4, FALSE, 2, '2025-01-16'),
+('estefaniaaguilar@bayo.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Albina Leiva Salvà', 38, 'MUJER', 177.3, FALSE, 2, '2024-10-20'),
+('renatatomas@gmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Berto Pagès Bernat', 51, 'HOMBRE', 162.1, FALSE, 2, '2024-10-23'),
+('donatoperales@gmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Julio Ballester Pascual', 39, 'HOMBRE', 151.1, FALSE, 2, '2024-11-15'),
+('solsonaadela@villegas.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Rosa Fernandez-Quevedo', 60, 'MUJER', 173.9, FALSE, 2, '2025-02-24'),
+('acamino@hotmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Omar Castelló Valbuena', 24, 'HOMBRE', 177.2, FALSE, 1, '2025-02-10'),
+('ainaraparra@gmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Azeneth Céspedes', 48, 'MUJER', 189.2, FALSE, 1, '2025-02-22'),
+('garias@vazquez-maza.es', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Darío Baena', 56, 'HOMBRE', 150.6, FALSE, 1, '2024-12-16'),
+('uiniesta@yahoo.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Abigaíl Alfaro Jover', 54, 'MUJER', 187.8, FALSE, 1, '2025-02-13'),
+('squero@gmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Morena Arenas Cruz', 37, 'MUJER', 160.6, FALSE, 1, '2025-01-20'),
+('pastorjulian@yahoo.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Loreto Escobar Quevedo', 60, 'MUJER', 167.9, FALSE, 2, '2025-01-24'),
+('vparra@enriquez.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Cebrián Pastor Cuesta', 37, 'HOMBRE', 161.0, FALSE, 1, '2024-12-07'),
+('luisdiaz@bayo.org', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Delia Leyre Alcalá Gallo', 38, 'MUJER', 187.6, FALSE, 1, '2024-11-02'),
+('felipainiesta@yahoo.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Zacarías Jover Valls', 24, 'HOMBRE', 192.6, FALSE, 2, '2025-03-09'),
+('domitila01@yahoo.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Ricardo Casanova', 34, 'HOMBRE', 186.5, FALSE, 2, '2024-12-16'),
+('bpla@gonzalez-benito.org', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Otilia Chico Narváez', 45, 'MUJER', 194.0, FALSE, 1, '2025-01-24'),
+('maciasrufina@yahoo.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Juan José Barroso Salcedo', 47, 'HOMBRE', 155.9, FALSE, 2, '2024-10-01'),
+('bautistaprudencio@galvez.es', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Amaro Moya', 32, 'HOMBRE', 150.9, FALSE, 2, '2024-11-21'),
+('maestreroberta@galindo.es', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Arcelia Rivera Ribas', 60, 'MUJER', 191.9, FALSE, 1, '2024-10-21'),
+('nidiaferrando@benet.org', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Lalo Sanz', 42, 'HOMBRE', 161.8, FALSE, 2, '2024-12-16'),
+('flujan@poza.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Socorro Chacón Solé', 25, 'MUJER', 189.8, FALSE, 2, '2024-11-11'),
+('fidel89@gmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Ruben Baños Ballesteros', 59, 'HOMBRE', 179.4, FALSE, 1, '2025-01-25'),
+('miguelnatanael@aranda-perez.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Pancho Morán Hernandez', 18, 'HOMBRE', 154.1, FALSE, 2, '2025-02-11'),
+('atienzaagata@gmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Cipriano Olivé Cánovas', 44, 'HOMBRE', 192.5, FALSE, 2, '2025-01-01'),
+('anselmacasanova@lago.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Nicodemo Nicodemo Larrañaga Batalla', 50, 'HOMBRE', 171.9, FALSE, 1, '2024-11-09'),
+('cornejolola@yahoo.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Inmaculada Ángeles Vergara Zabala', 19, 'MUJER', 184.7, FALSE, 2, '2025-01-02'),
+('anadiez@ortega.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Sandalio Ayala Cueto', 45, 'HOMBRE', 184.4, FALSE, 2, '2025-01-27'),
+('mariareguera@yahoo.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Leonardo Losada Gascón', 45, 'HOMBRE', 176.4, FALSE, 1, '2024-11-01'),
+('robertaalmeida@alvarez-olivares.es', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Maxi Barrena Bermejo', 43, 'HOMBRE', 178.7, FALSE, 1, '2025-02-11'),
+('azahara39@barrena-torrecilla.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Erasmo Miranda Castellanos', 51, 'HOMBRE', 168.8, FALSE, 1, '2025-01-13'),
+('rbello@rubio.net', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'María Teresa Ordóñez Hoyos', 36, 'MUJER', 176.4, FALSE, 1, '2025-02-02'),
+('ilorenzo@carballo.es', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Cosme Cózar Manrique', 42, 'HOMBRE', 161.5, FALSE, 2, '2025-02-10'),
+('isaias29@yahoo.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Griselda Maestre', 40, 'MUJER', 155.7, FALSE, 2, '2025-03-07'),
+('casandraberrocal@bermudez-ortega.es', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Inés Tomás Arteaga', 59, 'MUJER', 177.7, FALSE, 1, '2025-04-02'),
+('adolfodavila@gmail.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Leocadio Trujillo Tovar', 18, 'HOMBRE', 150.2, FALSE, 2, '2025-03-27'),
+('halcalde@yahoo.com', '$2a$12$Yy6ttVkjaBPqdyRBkcSO2OJTltRU.y6Hlved0k44HRChxcEqc1Naa', 'Salomón Pallarès Agudo', 18, 'HOMBRE', 192.6, FALSE, 2, '2025-02-13');
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- Inserción de categorias
 INSERT INTO categorias (nombre) VALUES 

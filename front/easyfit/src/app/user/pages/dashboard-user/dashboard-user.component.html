@@ -1,31 +1,20 @@
-<div class="flex flex-col flex-1 min-w-0 w-full max-w-6xl mx-auto py-2">
-    <!-- Título de bienvenida -->
-    <h1 class="text-3xl font-bold text-white mb-4">👋 Bienvenido/a, ¡{{usuario.nombre}}!</h1>
-  
-    <!-- Contenedores de métricas -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-      <!-- Calorías -->
-      <app-calorias-card
-      [kcalObjetivo]="kcalObjetivo"
-      [kcalConsumidas]="kcalConsumidas"
-      [kcalRestantes]="kcalRestantes"
-      [porcentaje]="porcentaje">
-      </app-calorias-card>
-  
-      <!-- Progreso del peso -->
-      <app-progreso-peso-card
-        [pesoInicial]="pesoInicial"
-        [pesoActual]="pesoActual"
-        [pesoObjetivo]="pesoObjetivo">
-      </app-progreso-peso-card>
 
+<h2 class="bienvenida">👋 Bienvenido, {{ nombreUsuario }}!</h2>
+
+<div class="dashboard-admin-container p-4">
+  <div class="row mb-4">
+    <div class="col-md-6 mb-3">
+      <app-calorias-card></app-calorias-card>
     </div>
-  
-    <!-- Gráfico de calorías -->
-    <app-consumo-cal-card
-      [datos]="consumoSemanal">
-
-    </app-consumo-cal-card>
-
+    <div class="col-md-6 mb-3">
+      <app-progreso-peso-card></app-progreso-peso-card>
+    </div>
   </div>
-  
+
+  <div class="row">
+    <div class="col-12">
+      <app-consumo-cal-card></app-consumo-cal-card>
+    </div>
+  </div>
+</div>
+

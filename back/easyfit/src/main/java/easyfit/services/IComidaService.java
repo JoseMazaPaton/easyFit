@@ -3,8 +3,8 @@ package easyfit.services;
 import java.time.LocalDate;
 import java.util.List;
 
-import easyfit.models.dtos.auth.ResumenComidaDto;
 import easyfit.models.dtos.comida.ComidaDiariaDto;
+import easyfit.models.dtos.comida.ResumenComidaDto;
 import easyfit.models.entities.Comida;
 import easyfit.models.entities.Usuario;
 

@@ -15,17 +15,19 @@
     <!-- ZONA DE NAVEGACION-->
     <nav class="d-flex flex-column gap-4 ps-1">
       
-      <!-- @if (role === 'ADMON') {
-        <a routerLink="/admin/empresas" routerLinkActive="activo" class="nav-link-candidato">GESTIÓN EMPRESAS</a>
-        <a routerLink="/admin/candidatos" routerLinkActive="activo" class="nav-link-candidato">GESTIÓN CANDIDATOS</a>
-        <a routerLink="/admin/administradores" routerLinkActive="activo" class="nav-link-candidato">GESTIÓN ADMIN</a>
-        <a routerLink="/admin/categorias" routerLinkActive="activo" class="nav-link-candidato">GESTIÓN CATEGORÍAS</a>
-      } -->
+       @if (role === 'ROL_ADMIN') { 
+        <a routerLink="/admin/dashboard" routerLinkActive="activo" class="nav-link-candidato">DASHBOARD</a>
+        <a routerLink="/admin/usuarios" routerLinkActive="activo" class="nav-link-candidato">GESTIÓN USUARIOS</a>
+        <a routerLink="/admin/alimentos" routerLinkActive="activo" class="nav-link-candidato">GESTIÓN ALIMENTOS</a>
+        <a routerLink="/admin/categorias" routerLinkActive="activo" class="nav-link-candidato">GESTIÓN CATEGORIAS</a>
+      }
 
+      @if (role === 'ROL_USUARIO') { 
       <a routerLink="/usuario/dashboard" routerLinkActive="activo" class="nav-link-candidato">DASHBOARD</a>
       <a routerLink="/usuario/diario" routerLinkActive="activo" class="nav-link-candidato">DIARIO</a>
       <a routerLink="/usuario/alimentos" routerLinkActive="activo" class="nav-link-candidato">LISTA DE ALIMENTOS</a>
       <a routerLink="/usuario/objetivos" routerLinkActive="activo" class="nav-link-candidato">OBJETIVOS</a>
+      }
 
     </nav>
   </div>

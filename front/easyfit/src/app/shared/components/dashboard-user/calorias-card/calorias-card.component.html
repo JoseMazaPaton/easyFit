@@ -1,49 +1,27 @@
-<!-- <div class="card-calorias">
-    <div class="grafico">
-      <svg width="100" height="100" viewBox="0 0 36 36">
-        <circle class="bg" cx="18" cy="18" r="15.9155" />
-        <circle class="progress" 
-                cx="18" cy="18" r="15.9155"
-                [attr.stroke-dasharray]="porcentaje + ', 100'" />
-        <text x="18" y="20.35" class="label">{{ kcalRestantes }} kcal</text>
-      </svg>
-    </div>
-  
-    <div class="info">
-      <p><strong>Objetivo:</strong> {{ kcalObjetivo }} kcal</p>
-      <p><strong>Consumidas:</strong> {{ kcalConsumidas }} kcal</p>
-      <p><strong>Restantes:</strong> {{ kcalRestantes }} kcal</p>
-    </div>
-  </div> -->
-  <div class="card-calorias">
-    <div class="contenido-calorias">
-      <div class="encabezado">
-        <h2 class="titulo">Calorías</h2>
-        <p class="subtitulo">Restantes = Objetivo - Consumidas</p>
-      </div>
-  
-      <div class="contenido-main">
-        <div class="grafico">
-          <svg width="150" height="150" viewBox="0 0 36 36">
-            <circle class="bg" cx="18" cy="18" r="15.9155" />
-            <circle class="progress" 
-                    cx="18" cy="18" r="15.9155"
-                    [attr.stroke-dasharray]="porcentaje + ', 100'" />
-            <text x="18" y="18" class="label">{{ kcalRestantes }}<tspan x="18" dy="5">Restantes</tspan></text>
-          </svg>
-        </div>
-  
-        <div class="valores">
-          <div class="dato">
-            <i class="fas fa-flag"></i>
-            <span>Objetivo<br><strong>{{ kcalObjetivo }}Kcal</strong></span>
-          </div>
-          <div class="dato">
-            <i class="fas fa-utensils"></i>
-            <span>Consumidas<br><strong>{{ kcalConsumidas }}Kcal</strong></span>
-          </div>
-        </div>
+<div class="card-kcal d-flex justify-content-between align-items-center">
+  <div class="lado-izquierdo mr-3">
+    <div class="titulo-kcal">Calorías</div>
+    <div class="subtitulo-kcal">Restantes = Objetivo - Consumidas</div>
+
+    <div class="donut-wrapper mt-2">
+      <canvas #donutChart></canvas>
+      <div class="donut-label">
+        <span class="donut-value">{{ resumen?.kcalRestantes }}</span>
+        <span class="donut-text">Restantes</span>
       </div>
     </div>
   </div>
-  
+
+  <div class="kcal-info mr-5 ">
+    <div class="dato objetivo">
+      <i class="bi bi-flag-fill"></i>
+      <span>Objetivo</span>
+      <strong>{{ resumen?.kcalObjetivo }}Kcal</strong>
+    </div>
+    <div class="dato consumidas mt-2">
+      <i class="bi bi-fire"></i>
+      <span>Consumidas</span>
+      <strong>{{ resumen?.kcalConsumidas }}Kcal</strong>
+    </div>
+  </div>
+</div>

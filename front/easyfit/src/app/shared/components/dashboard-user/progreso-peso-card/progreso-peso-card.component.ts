@@ -1,37 +1,37 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { DashboardService } from '../../../../models/services/dashboard.service';
 
 @Component({
   selector: 'app-progreso-peso-card',
   standalone: true,
-  imports: [],
   templateUrl: './progreso-peso-card.component.html',
-  styleUrl: './progreso-peso-card.component.css'
+  styleUrl: './progreso-peso-card.component.css',
+  imports: []
 })
 export class ProgresoPesoCardComponent {
-  @Input() pesoInicial: number = 0;
-  @Input() pesoActual: number = 0;
-  @Input() pesoObjetivo: number = 0;
+  pesoInicial: number = 0;
+  pesoActual: number = 0;
+  pesoObjetivo: number = 0;
+  porcentajeProgreso: number = 0;
 
-  get diferencia(): number {
-    return parseFloat((this.pesoInicial - this.pesoActual).toFixed(1));
+  constructor(private dashboardService: DashboardService) {}
+
+  ngOnInit(): void {
+    this.dashboardService.resumenPeso$.subscribe(data => {
+      if (data) {
+        this.pesoInicial = data.pesoInicial;
+        this.pesoActual = data.pesoActual;
+        this.pesoObjetivo = data.pesoObjetivo;
+
+        const total = this.pesoInicial - this.pesoObjetivo;
+        const progreso = this.pesoInicial - this.pesoActual;
+
+        this.porcentajeProgreso = total > 0 ? (progreso / total) * 100 : 0;
+      }
+    });
   }
 
-  get mensaje(): string {
-    if (this.diferencia > 0) return `${this.diferencia} kg perdidos`;
-    if (this.diferencia < 0) return `${Math.abs(this.diferencia)} kg ganados`;
-    return `Peso estable`;
+  getPesoPerdido(): number {
+    return Math.max(this.pesoInicial - this.pesoActual, 0);
   }
-
-  get porcentajeProgreso(): number {
-    const total = Math.abs(this.pesoInicial - this.pesoObjetivo);
-    const progreso = Math.abs(this.pesoInicial - this.pesoActual);
-    if (total === 0) return 0;
-    return Math.min(100, Math.max(0, (progreso / total) * 100));
-  }
-
-  get colorProgreso(): string {
-    return this.pesoActual < this.pesoInicial ? '#0099ff' : '#f87171'; // rojo si sube
-  }
-
-  
 }

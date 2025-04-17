@@ -37,3 +37,18 @@
 .lista-comidas {
   margin-top: 1rem;
 }
+
+.btn-crear-comida {
+  background-color: #5ce1e6;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-size: 1.0em;
+  transition: background-color 0.2s ease;
+}
+
+.btn-crear-comida:hover {
+  background-color: #4fd1d6;
+}

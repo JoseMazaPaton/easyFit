@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IComidaDiariaDto } from '../interfaces/IComidaDiario';
+import { IResumenComida } from '../interfaces/IResumenComida';
 
 @Injectable({
   providedIn: 'root'
@@ -60,10 +61,10 @@ export class ComidaService {
     );
   }
 
-  // // Obtener resumen de una comida
-  // getResumenComida(idComida: number): Observable<ResumenComidaDto> {
-  //   return this.http.get<ResumenComidaDto>(`${this.apiUrl}/${idComida}/resumen`);
-  // }
+  // Obtener resumen de una comida
+  getResumenComida(idComida: number): Observable<IResumenComida> {
+    return this.http.get<IResumenComida>(`${this.apiUrl}/${idComida}/resumen`);
+  }
 
   // Refrescar comidas (se puede llamar tras añadir/eliminar)
   private refreshComidas() {

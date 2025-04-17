@@ -1,91 +1,115 @@
-.card-calorias {
+.card-kcal {
   background-color: #ffffff;
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  min-height: 180px;
   font-family: 'Segoe UI', sans-serif;
-  color: #333;
-  width: 100%;
+}
+
+.lado-izquierdo {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 290px;
-}
-
-.encabezado .titulo {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 0.2rem;
-}
-
-.encabezado .subtitulo {
-  font-size: 0.85rem;
-  color: #aaa;
-  margin-bottom: 1.5rem;
-}
-
-.contenido-main {
-  display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  gap: 2rem;
+  justify-content: start;
+  gap: 4px;
 }
 
-.grafico {
+.titulo-kcal {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111;
+  align-self: flex-start;
+}
+
+.subtitulo-kcal {
+  font-size: 0.75rem;
+  color: #888;
+  align-self: flex-start;
+  margin-bottom: 8px;
+}
+
+.donut-wrapper {
+  position: relative;
   width: 140px;
   height: 140px;
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-svg {
-  transform: rotate(-90deg);
+canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 
-circle.bg {
-  fill: none;
-  stroke: #e0e0e0;
-  stroke-width: 3.5;
+.donut-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
-circle.progress {
-  fill: none;
-  stroke: #007BFF;
-  stroke-width: 3.5;
-  stroke-linecap: round;
-  transition: stroke-dasharray 0.3s ease;
+.donut-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+  display: block;
+  line-height: 1;
 }
 
-text.label {
-  fill: #333;
-  font-size: 5px;
-  font-weight: bold;
-  text-anchor: middle;
-  dominant-baseline: middle;
-  transform: rotate(90deg);
-  transform-origin: center;
+.donut-text {
+  font-size: 0.8rem;
+  color: #666;
 }
 
-.valores {
+.kcal-info {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  justify-content: center;
+  gap: 16px;
+  font-size: 0.9rem;
+  min-width: 140px;
 }
 
 .dato {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.95rem;
-  color: #555;
+  gap: 8px;
 }
 
 .dato i {
   font-size: 1rem;
-  color: #999;
+}
+
+.dato span {
+  color: #555;
+  font-weight: 500;
+  margin-right: 8px;
 }
 
 .dato strong {
-  font-weight: 700;
-  color: #333;
-  font-size: 1rem;
+  font-size: 1.05rem;
+  margin-left: auto;
+}
+
+.objetivo i {
+  color: #f4c542;
+}
+
+.objetivo strong {
+  color: #f4c542;
+}
+
+.consumidas i {
+  color: #0099ff;
+}
+
+.consumidas strong {
+  color: #0099ff;
 }

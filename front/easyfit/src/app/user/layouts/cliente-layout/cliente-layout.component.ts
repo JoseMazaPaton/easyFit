@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-cliente-layout',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, RouterOutlet],
+  imports: [NavbarComponent, RouterOutlet],
   templateUrl: './cliente-layout.component.html',
   styleUrl: './cliente-layout.component.css'
 })

@@ -33,15 +33,21 @@ export class LoginFormComponent {
 
     this.authService.login(email, password).subscribe({
       next: (response) => {
-        // 💾 Guardamos el token y el usuario
+        // 💾 Guardar token y usuario
         this.authService.guardarUsuarioYToken(response.token, {
           email: response.email,
           nombre: response.nombre,
-          rol: response.rol // Usa 'rol' o 'tipoRol' según lo que devuelve tu backend
+          rol: response.rol
         });
 
-        // ✅ Redirigimos al área privada
-        this.router.navigate(['/usuario']);
+        // 🔀 Redirigir según rol
+        const rol = response.rol?.toUpperCase(); // Normalizamos por si acaso
+
+        if (rol === 'ROL_ADMIN') {
+          this.router.navigate(['/admin']); // O '/access/admin/dashboard' si lo tienes así
+        } else {
+          this.router.navigate(['/usuario']);
+        }
       },
       error: () => {
         alert('Usuario o Contraseña incorrectos');
@@ -49,5 +55,4 @@ export class LoginFormComponent {
       }
     });
   }
-
 }

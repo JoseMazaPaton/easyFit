@@ -1,11 +1,19 @@
 package easyfit.services.impl;
 
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import easyfit.models.dtos.admin.UserResumenDto;
+import easyfit.models.dtos.admin.UsuarioPorMesDto;
 import easyfit.models.entities.Usuario;
 import easyfit.models.enums.Sexo;
 import easyfit.repositories.IUsuarioRepository;
@@ -50,6 +58,51 @@ public class UsuarioAdminServiceImpl extends GenericCrudServiceImpl<Usuario, Str
 			    return usuarioRepository.save(usuario);
 	}
 
-	
+	@Override
+	public UserResumenDto obtenerResumenUsuarios() {
+	    LocalDate hoy = LocalDate.now();
+	    LocalDate primerDiaMesActual = hoy.withDayOfMonth(1);
+	    LocalDate primerDiaMesAnterior = primerDiaMesActual.minusMonths(1);
+	    LocalDate primerDiaHace6Meses = primerDiaMesActual.minusMonths(5);
+
+	    List<Usuario> usuariosUltimos6Meses = usuarioRepository.findByFechaRegistroBetween(primerDiaHace6Meses, hoy);
+	    List<Usuario> registradosEsteMes = usuarioRepository.findByFechaRegistroBetween(primerDiaMesActual, hoy);
+	    List<Usuario> registradosMesAnterior = usuarioRepository.findByFechaRegistroBetween(primerDiaMesAnterior, primerDiaMesActual.minusDays(1));
+	    List<Usuario> activos = usuarioRepository.findBySuspendidaFalse();
+	    List<Usuario> hombres = usuarioRepository.findBySexo(Sexo.HOMBRE);
+	    List<Usuario> mujeres = usuarioRepository.findBySexo(Sexo.MUJER);
+
+	    Map<String, UsuarioPorMesDto> mapa = new LinkedHashMap<>();
+	    for (int i = 5; i >= 0; i--) {
+	        LocalDate mesInicio = primerDiaMesActual.minusMonths(i);
+	        String nombreMes = mesInicio.getMonth().getDisplayName(TextStyle.FULL, Locale.forLanguageTag("es"));
+	        nombreMes = nombreMes.substring(0, 1).toUpperCase() + nombreMes.substring(1); // Capitalizar
+
+	        int hombresMes = (int) usuariosUltimos6Meses.stream()
+	            .filter(u -> u.getSexo() == Sexo.HOMBRE && u.getFechaRegistro().getMonth() == mesInicio.getMonth())
+	            .count();
+
+	        int mujeresMes = (int) usuariosUltimos6Meses.stream()
+	            .filter(u -> u.getSexo() == Sexo.MUJER && u.getFechaRegistro().getMonth() == mesInicio.getMonth())
+	            .count();
+
+	        mapa.put(nombreMes, UsuarioPorMesDto.builder()
+	            .mes(nombreMes)
+	            .hombres(hombresMes)
+	            .mujeres(mujeresMes)
+	            .build());
+	    }
+
+	    return UserResumenDto.builder()
+	        .registradosEsteMes(registradosEsteMes.size())
+	        .registradosMesAnterior(registradosMesAnterior.size())
+	        .mediaRegistros6Meses(usuariosUltimos6Meses.size() / 6.0)
+	        .totalUsuariosActivos(activos.size())
+	        .totalHombres(hombres.size())
+	        .totalMujeres(mujeres.size())
+	        .registrosPorMes(new ArrayList<>(mapa.values()))
+	        .build();
+	}
+
 }
 
