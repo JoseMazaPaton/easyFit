@@ -5,6 +5,8 @@ import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import easyfit.models.dtos.admin.CategoriasRecuento;
 import easyfit.models.entities.Categoria;
 import easyfit.repositories.ICategoriaRepository;
 import easyfit.services.ICategoriaService;
@@ -20,6 +22,12 @@ public class CategoriaImplService extends GenericCrudServiceImpl<Categoria, Inte
 		return categoriaRepository;
 	}
 
+	@Override
+    public List<CategoriasRecuento> listarCategoriasConRecuento() {
+        return categoriaRepository.findAllCategoriasConTotalAlimentos();
+    }
+
+	
 	@Override
 	public Categoria crearCategoria(Categoria categoria) {
 		// Validación básica
@@ -53,11 +61,6 @@ public class CategoriaImplService extends GenericCrudServiceImpl<Categoria, Inte
 	    categoriaRepository.deleteById(idCategoria);
 	}
 
-	@Override
-	public List<Categoria> obtenerTodasCategorias() {
-		// TODO Auto-generated method stub
-		return categoriaRepository.findAll();
-	}
 	
 
 }

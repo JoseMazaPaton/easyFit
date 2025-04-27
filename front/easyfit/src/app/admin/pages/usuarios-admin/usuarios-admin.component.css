@@ -1,0 +1,63 @@
+.usuarios-container {
+    padding: 2rem;
+    border-radius: 10px;
+  }
+  
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  
+  .active-tab {
+    color: #c1ff72;
+    padding-bottom: 5px;
+  }
+  
+  .inactive-tab {
+    color: white;
+  }
+  
+  input.form-control {
+    border-radius: 50px;
+    padding-left: 1.5rem;
+  }
+  
+  .table {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+  }
+  
+  .table thead {
+    background-color: #f8f9fa;
+  }
+  
+  .table th {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .table td, .table th {
+    vertical-align: middle;
+    text-align: center;
+  }
+  
+  .btn-link {
+    color: inherit;
+  }
+  
+  .bi-check-circle-fill {
+    color: #28a745;
+  }
+  
+  .bi-x-circle-fill {
+    color: #dc3545;
+  }
+  
+  .borde-grueso {
+    border-bottom: 3px solid white;
+    padding-bottom: 5px;
+  }
+  

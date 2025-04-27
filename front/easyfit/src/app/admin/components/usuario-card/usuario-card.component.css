@@ -1,0 +1,20 @@
+/* Scroll para la tabla */
+.table-responsive::-webkit-scrollbar {
+    width: 10px; /* Más finito */
+  }
+  
+  .table-responsive::-webkit-scrollbar-thumb {
+    background-color: #9e9e9e; /* Gris clarito */
+    border-radius: 10px; /* Redondeado */
+  }
+  
+  .table-responsive::-webkit-scrollbar-track {
+    background: #f8f9fa; /* Fondo muy claro */
+  }
+  
+  /* Para que se vea igual en Firefox */
+  .table-responsive {
+    scrollbar-width: thin; /* Scroll fino */
+    scrollbar-color: #9e9e9e #f8f9fa; /* Color del thumb y track */
+  }
+  

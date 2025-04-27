@@ -1,0 +1,39 @@
+<div class="container">
+  <h2 class="text-center mb-4 fs-4 fw-bold">
+    {{ categoria ? 'Editar Categoría' : 'Nueva Categoría' }}
+  </h2>
+
+  <form [formGroup]="formCategoria" (ngSubmit)="guardarCategoria()">
+    <!-- Input Nombre -->
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre *</label>
+      <input
+        id="nombre"
+        type="text"
+        formControlName="nombre"
+        class="form-control"
+        [ngClass]="{'is-invalid': formCategoria.get('nombre')?.invalid && formCategoria.get('nombre')?.touched}"
+      />
+      <div *ngIf="formCategoria.get('nombre')?.invalid && formCategoria.get('nombre')?.touched" class="invalid-feedback">
+        El nombre es obligatorio y debe tener máximo 50 caracteres.
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="d-flex justify-content-center gap-2 mt-4">
+      <button type="submit" class="btn btn-primary" [disabled]="formCategoria.invalid">
+        {{ categoria ? 'Actualizar' : 'Crear' }}
+      </button>
+
+      @if (categoria) {
+        <button type="button" class="btn btn-danger" (click)="eliminar()">
+          Eliminar
+        </button>
+      }
+
+      <button type="button" class="btn btn-secondary" (click)="cerrar.emit()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

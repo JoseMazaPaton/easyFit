@@ -33,7 +33,7 @@ public class UsuarioRestController {
 	private ModelMapper mapper;
 	
 	
-	//RUTA CON METODO PARA VER DATOS DEL PERFIL DEL USUARIO
+	//RUTA CON METODO PARA VER DATOS DEL PERFIL DEL USUARIO AUTENTICADO
 	@GetMapping("/miperfil")
 	@Operation(summary = "Obtener perfil usuario", description = "Obtiene el perfil del Usuario logueado.")
 	public ResponseEntity<UsuarioResponseDto> perfilUsuarioAutenticado(){
@@ -48,7 +48,7 @@ public class UsuarioRestController {
 	}
 	
 
-	//RUTA CON METODO PARA VER DATOS DEL PERFIL DEL USUARIO
+	//RUTA CON METODO PARA CAMBIAR LA PASSWORD DEL USUARIO AUTENTICADO
 	@PutMapping("/miperfil/password")
 	@Operation(summary = "Obtener datos del perfil de Usuario", description = "Obtiene los datos de perfil de un Usuario autenticado y permite el cambio de password del mismo. ")
 	public ResponseEntity<String> cambiarPassword(@RequestBody @Valid UsuarioPasswordDto dto) {

@@ -25,16 +25,17 @@ export class AlimentosListaComponent {
   constructor(private categoriaService: CategoriasService) {}
 
   ngOnInit(): void {
-    this.categoriaService.getCategorias().subscribe({
-      next: (categorias) => {
-        this.categorias = categorias;
-        this.categoriaMap = {};
-        for (const cat of categorias) {
-          this.categoriaMap[cat.idCategoria] = cat.nombre;
-        }
-      },
-      error: (e) => console.error('❌ Error al cargar categorías en hijo:', e)
+    this.categoriaService.categorias$.subscribe((categorias: Categoria[]) => {
+      this.categorias = categorias;
+      this.generarCategoriaMap(categorias);
     });
+  }
+
+  generarCategoriaMap(categorias: Categoria[]): void {
+    this.categoriaMap = {};
+    for (const cat of categorias) {
+      this.categoriaMap[cat.idCategoria] = cat.nombre;
+    }
   }
 
   onEditar(alimento: Alimento): void {

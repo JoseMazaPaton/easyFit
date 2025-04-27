@@ -25,21 +25,19 @@ export class AlimentosUserComponent {
   alimentoAEditar: Alimento | null = null;
 
   categorias: Categoria[] = [];
-  
-  
-  constructor(private alimentosService: AlimentosService,
-            private categoriaService: CategoriasService
+
+  constructor(
+    private alimentosService: AlimentosService,
+    private categoriasService: CategoriasService
   ) {}
 
   ngOnInit(): void {
-    this.cargarCategorias();  
-    this.cargarAlimentos(); 
+    this.cargarCategorias();
+    this.cargarAlimentos();
   }
 
-  
-
   cargarCategorias(): void {
-    this.categoriaService.getCategorias().subscribe(cat => {
+    this.categoriasService.categorias$.subscribe((cat: Categoria[]) => {
       this.categorias = cat;
     });
   }
@@ -48,9 +46,9 @@ export class AlimentosUserComponent {
     const fuente = this.modoActual === 'favoritos'
       ? this.alimentosService.getMisAlimentos()
       : this.alimentosService.getAlimentos();
-  
+
     fuente.subscribe({
-      next: (alimentos) => {
+      next: (alimentos: Alimento[]) => {
         this.alimentosOriginales = alimentos;
         this.alimentosFiltrados = alimentos;
       },
@@ -59,18 +57,18 @@ export class AlimentosUserComponent {
       }
     });
   }
-  
+
   onModoCambio(nuevoModo: 'todos' | 'favoritos'): void {
     if (this.modoActual !== nuevoModo) {
       this.modoActual = nuevoModo;
-      this.cargarAlimentos(); // carga según el modo
+      this.cargarAlimentos();
     }
   }
 
   onBuscar(texto: string): void {
     const normalizar = (str: string) =>
       str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  
+
     if (!texto) {
       this.alimentosFiltrados = this.alimentosOriginales;
     } else {
@@ -82,7 +80,7 @@ export class AlimentosUserComponent {
   }
 
   abrirFormularioNuevoAlimento(): void {
-    this.alimentoAEditar = null; // ← 🔑 importante
+    this.alimentoAEditar = null;
     this.formularioVisible = true;
   }
 
@@ -97,13 +95,11 @@ export class AlimentosUserComponent {
   }
 
   onEliminarAlimento(alimento: Alimento): void {
-    console.log('🧪 Alimento recibido para eliminar:', alimento);
-  
     if (!alimento.idAlimento) {
       console.error('❌ El alimento no tiene idAlimento:', alimento);
       return;
     }
-  
+
     if (confirm(`¿Eliminar el alimento "${alimento.nombre}"?`)) {
       this.alimentosService.eliminarAlimento(alimento.idAlimento).subscribe({
         next: () => {
@@ -119,13 +115,11 @@ export class AlimentosUserComponent {
 
   onAlimentoCreado(): void {
     this.cerrarFormulario();
-    this.cargarAlimentos(); // refresca lista
-  }
-
-  onAlimentoActualizado(): void {
-    this.formularioVisible = false;
-    this.alimentoAEditar = null;
     this.cargarAlimentos();
   }
 
+  onAlimentoActualizado(): void {
+    this.cerrarFormulario();
+    this.cargarAlimentos();
+  }
 }

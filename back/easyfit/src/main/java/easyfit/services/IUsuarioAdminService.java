@@ -2,6 +2,8 @@ package easyfit.services;
 import java.util.List;
 
 import easyfit.models.dtos.admin.UserResumenDto;
+import easyfit.models.dtos.admin.UsuarioAdminListaDto;
+import easyfit.models.dtos.auth.UsuarioResponseDto;
 import easyfit.models.entities.Usuario;
 import easyfit.models.enums.Sexo;
 
@@ -13,9 +15,11 @@ public interface IUsuarioAdminService extends IGenericCrud<Usuario, String>{
 	
 	List<Usuario> findByEdad(int edad);
 	
-	Usuario toggleSuspension(String email);
+	UsuarioAdminListaDto cambiarEstadoUsuario(String email);
 	
 	UserResumenDto obtenerResumenUsuarios();
+
+	List<UsuarioAdminListaDto> obtenerUsuarios();
 }
 
 

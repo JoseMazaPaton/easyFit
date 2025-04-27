@@ -1,1 +1,33 @@
-<p>alimentos-admin works!</p>
+<div class="alimentos-container">
+
+  <h1 class="text-3xl font-bold text-white mb-8">Lista de alimentos</h1>
+
+  <app-alimentos-filtro
+    (buscar)="onBuscar($event)">
+  </app-alimentos-filtro>
+
+  <app-alimentos-lista
+    [alimentos]="alimentosFiltrados"
+    (editarAlimento)="onEditarAlimento($event)"
+    (eliminarAlimento)="onEliminarAlimento($event)">
+  </app-alimentos-lista>
+
+  <button class="btn-add" (click)="abrirFormularioNuevoAlimento()">
+    <i class="fas fa-plus"></i> Añadir alimento
+  </button>
+
+  @if (formularioVisible) {
+    <div class="modal-overlay" (click)="cerrarFormulario()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <app-alimentos-formulario
+          [alimento]="alimentoAEditar"
+          [categorias]="categorias"
+          (cerrar)="cerrarFormulario()"
+          (eliminarAlimento)="onEliminarAlimento($event)"
+          (guardado)="alimentoAEditar ? onAlimentoActualizado() : onAlimentoCreado()"
+        />
+      </div>
+    </div> 
+  }
+
+</div>

@@ -140,7 +140,7 @@ public class ConsumoDiarioImplService extends GenericCrudServiceImpl<ConsumoDiar
 
 	        ConsumoDiario consumo = mapaPorFecha.get(fecha);
 
-	        int kcalConsumidas = consumo != null ? consumo.getKcalConsumidas() : 0;
+	        double kcalConsumidas = consumo != null ? consumo.getKcalConsumidas() : 0;
 
 	        resultado.add(HistorialCaloriasDto.builder()
 	            .fecha(fecha)

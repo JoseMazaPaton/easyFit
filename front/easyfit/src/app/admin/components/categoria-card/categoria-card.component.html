@@ -1,0 +1,39 @@
+<div class="container bg-white rounded shadow-sm p-3">
+  @if (categorias.length > 0) {
+    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+      <table class="table table-hover align-middle text-le">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th class="text-center" scope="col">Total de Alimentos</th>
+            <th class="text-center" scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (categoria of categorias; track categoria.idCategoria) {
+            <tr>
+              <td>{{ categoria.idCategoria }}</td>
+              <td class="fw-semibold text-muted">{{ categoria.nombre }}</td>
+              <td class="text-center">{{ categoria.totalAlimentos }}</td>
+              <td class="text-center">
+                <app-categoria-botones
+                  (editar)="onEditar(categoria)"
+                  (eliminar)="onEliminar(categoria)">
+                </app-categoria-botones>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  @if (categorias.length === 0) {
+    <div class="text-center text-white mt-4">
+      <i class="fa-solid fa-face-sad-tear fa-2x"></i>
+      <p>No tienes ninguna categoría registrada aún.</p>
+      <p>Pulsa <strong>"Añadir categoría"</strong> para empezar.</p>
+    </div>
+  }
+</div>

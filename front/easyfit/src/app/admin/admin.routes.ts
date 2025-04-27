@@ -1,3 +1,4 @@
+import { CategoriasAdminComponent } from './pages/categorias-admin/categorias-admin.component';
 import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
@@ -23,6 +24,12 @@ export const adminRoutes: Routes = [
         loadComponent: () =>
           import('./pages/alimentos-admin/alimentos-admin.component')
             .then(m => m.AlimentosAdminComponent)
+      },
+      {
+        path: 'categorias',
+        loadComponent: () =>
+          import('./pages/categorias-admin/categorias-admin.component')
+            .then(m => m.CategoriasAdminComponent)
       },
       {
         path: '',

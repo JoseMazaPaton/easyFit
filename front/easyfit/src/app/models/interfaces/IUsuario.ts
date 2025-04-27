@@ -7,4 +7,6 @@ export interface IUsuario {
     edad: number;
     altura: number;
     fechaRegistro: string;
+    suspendida: boolean;
+
 }

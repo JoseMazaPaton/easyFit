@@ -27,11 +27,9 @@ import easyfit.models.entities.Objetivo;
 import easyfit.models.entities.Rol;
 import easyfit.models.entities.Usuario;
 import easyfit.models.entities.ValorNutricional;
-import easyfit.models.enums.TipoRol;
 import easyfit.repositories.IRolRepository;
 import easyfit.repositories.IUsuarioRepository;
 import easyfit.services.IAuthService;
-import easyfit.services.IValorNutricionalService;
 import easyfit.utils.ObjetivoCalculator;
 import jakarta.transaction.Transactional;
 

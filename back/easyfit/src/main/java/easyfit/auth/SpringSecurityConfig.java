@@ -114,10 +114,16 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/alimentos/**").hasAnyRole("ROL_USUARIO", "ROL_ADMIN")
 
                 // SOLO ADMIN ==========================================================================================
+                
                 .requestMatchers(HttpMethod.GET, "/admin/**").hasRole("ROL_ADMIN")
                 .requestMatchers(HttpMethod.POST, "/admin/**").hasRole("ROL_ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/admin/**").hasRole("ROL_ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/admin/**").hasRole("ROL_ADMIN")
+                
+                .requestMatchers(HttpMethod.POST, "/categorias/**").hasRole("ROL_ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/categorias/**").hasRole("ROL_ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/categorias/**").hasRole("ROL_ADMIN")
+
 
                 // POR DEFECTO =========================================================================================
                 .anyRequest().authenticated();

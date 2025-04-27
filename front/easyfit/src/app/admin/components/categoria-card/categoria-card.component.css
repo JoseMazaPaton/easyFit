@@ -1,0 +1,35 @@
+.iconos-acciones {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .icono-editar {
+    color: #28a745; /* verde */
+    cursor: pointer;
+  }
+  
+  .icono-eliminar {
+    color: #dc3545; /* rojo */
+    cursor: pointer;
+  }
+  
+/* Scroll para la tabla */
+.table-responsive::-webkit-scrollbar {
+  width: 6px; /* Más finito */
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: #9e9e9e; /* Gris clarito */
+  border-radius: 10px; /* Redondeado */
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background: #f8f9fa; /* Fondo muy claro */
+}
+
+/* Para que se vea igual en Firefox */
+.table-responsive {
+  scrollbar-width: thin; /* Scroll fino */
+  scrollbar-color: #9e9e9e #f8f9fa; /* Color del thumb y track */
+}

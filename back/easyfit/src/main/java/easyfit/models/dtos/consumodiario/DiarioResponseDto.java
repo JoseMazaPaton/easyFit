@@ -11,14 +11,14 @@ import lombok.NoArgsConstructor;
 @Builder
 public class DiarioResponseDto {
 
-	private int kcalConsumidas;
+	private double kcalConsumidas;
 	
-	private int KcalObjetivo;
+	private double KcalObjetivo;
 
-	private int KcalRestantes;
+	private double KcalRestantes;
 	
 
-	public int getKcalRestantes() {
+	public double getKcalRestantes() {
 		return KcalObjetivo - kcalConsumidas;
 	}
 }

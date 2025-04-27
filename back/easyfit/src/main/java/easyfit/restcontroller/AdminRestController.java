@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import easyfit.models.dtos.admin.UserResumenDto;
+import easyfit.models.dtos.admin.UsuarioAdminListaDto;
 import easyfit.models.dtos.auth.UsuarioResponseDto;
 import easyfit.models.entities.Alimento;
 import easyfit.models.entities.Categoria;
@@ -31,6 +32,8 @@ import easyfit.services.IUsuarioAdminService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -48,6 +51,15 @@ public class AdminRestController {
 	@Autowired
 	private IAlimentoService alimentoService;
 	
+	
+	//OBTENER TODOS LOS USUARIOS
+	@GetMapping("/usuarios")
+	public ResponseEntity<List<UsuarioAdminListaDto>> obtenerUsuarios() {
+		
+		List<UsuarioAdminListaDto> listaUsuarios = usuarioAdminService.obtenerUsuarios();
+		
+		return ResponseEntity.ok(listaUsuarios);
+	}
 	
 	
 	// FILTRO POR EMAIL
@@ -163,123 +175,34 @@ public class AdminRestController {
 	}
 	
 	
-	// Suspensión o reactivación de cuentas de usuario por email. 
 	@PutMapping("/usuarios/{email}/suspender")
 	@Operation(summary = "Suspender/reactivar cuenta de usuario", description = "Suspende o reactiva una cuenta de usuario, obteniéndose la misma por email")
-	public ResponseEntity<?> toggleSuspension(@Parameter(description = "Email del usuario a consultar", required = true)
-			@PathVariable String email) {
+	public ResponseEntity<?> cambiarEstadoUsuario(
+	        @Parameter(description = "Email del usuario a suspender/reactivar", required = true)
+	        @PathVariable String email) {
+
 	    try {
-	        Usuario usuarioActualizado = usuarioAdminService.toggleSuspension(email);
-	        
-	        UsuarioResponseDto response = UsuarioResponseDto.builder()
-	            .nombre(usuarioActualizado.getNombre())
-	            .email(usuarioActualizado.getEmail())
-	            .sexo(usuarioActualizado.getSexo())
-	            .edad(usuarioActualizado.getEdad())
-	            .altura(usuarioActualizado.getAltura())
-	            .fechaRegistro(usuarioActualizado.getFechaRegistro())
-	            .build();
+	        UsuarioAdminListaDto usuarioActualizado = usuarioAdminService.cambiarEstadoUsuario(email);
 	        
 	        String estado = usuarioActualizado.isSuspendida() ? "suspendida" : "reactivada";
-	        return ResponseEntity.ok()
-	            .body(Map.of(
-	                "mensaje", "Cuenta " + estado + " exitosamente",
-	                "usuario", response
-	            ));
-	            
+
+	        return ResponseEntity.ok(Map.of(
+	            "mensaje", "Cuenta " + estado + " exitosamente",
+	            "usuario", usuarioActualizado
+	        ));
+	        
 	    } catch (RuntimeException e) {
-	    	
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-	            .body("Error: " + e.getMessage());
-	        
+	            .body(Map.of("error", e.getMessage()));
+
 	    } catch (Exception e) {
-	    	
 	        return ResponseEntity.internalServerError()
-	            .body("Error al actualizar el estado: " + e.getMessage());
+	            .body(Map.of("error", "Error al actualizar el estado: " + e.getMessage()));
 	    }
 	}
 	
 	
-	// Método para crear categorías
-	@PostMapping("/categorias/crear")
-	@Operation(summary = "Crear categoría", description = "Crea una nueva categoría")
-	public ResponseEntity<?> crearCategoria(@Parameter(description = "Categoria a crear", required = true)
-			@RequestBody Categoria categoria) {
-	    try {
-	        Categoria nuevaCategoria = categoriaService.crearCategoria(categoria);
-	        
-	        return ResponseEntity.status(HttpStatus.CREATED)
-	                .body(Map.of(
-	                    "mensaje", "Categoría creada exitosamente",
-	                    "categoria", Map.of(
-	                        "id", nuevaCategoria.getIdCategoria(),
-	                        "nombre", nuevaCategoria.getNombre()
-	                    )
-	                ));
-	                
-	    } catch (IllegalArgumentException e) {
-	        return ResponseEntity.badRequest().body(e.getMessage());
-	    } catch (Exception e) {
-	        return ResponseEntity.internalServerError()
-	                .body("Error al crear la categoría: " + e.getMessage());
-	    }
-	}
 	
-	// Método para modificar categorías
-	@PutMapping("/categorias/modificar/{idCategoria}")
-	@Operation(summary = "Modificar categoría", description = "Modifica categoría por ID de categoría.")
-	public ResponseEntity<?> modificarCategoria(@Parameter(description = "ID de categoría a modificar", required = true)
-			@PathVariable int idCategoria,
-	        									@RequestBody Categoria categoria) {
-	    try {
-	        Categoria categoriaActualizada = categoriaService.modificarCategoria(idCategoria, categoria);
-	        
-	        return ResponseEntity.ok()
-	                .body(Map.of(
-	                    "mensaje", "Categoría actualizada exitosamente",
-	                    "categoria",
-	                    Map.of(
-		                    "id", categoriaActualizada.getIdCategoria(),
-		                    "nombre", categoriaActualizada.getNombre()
-	                    	)
-	                ));
-	                
-	    } catch (NoSuchElementException e) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-	                .body(e.getMessage());
-	        
-	    } catch (IllegalArgumentException e) {
-	        return ResponseEntity.badRequest()
-	                .body(e.getMessage());
-	        
-	    } catch (Exception e) {
-	        return ResponseEntity.internalServerError()
-	                .body("Error al actualizar la categoría: " + e.getMessage());
-	    }
-	}
-	
-	// Método para eliminar categorías
-	@DeleteMapping("/categorias/eliminar/{idCategoria}")
-	@Operation(summary = "Eliminar categoría", description = "Elimina categoría por ID de categoría.")
-	public ResponseEntity<?> eliminarCategoria(@Parameter(description = "ID de categoría a eliminar", required = true)
-			@PathVariable int idCategoria) {
-	    try {
-	        categoriaService.eliminarCategoria(idCategoria);
-	        return ResponseEntity.ok()
-	                .body(Map.of(
-	                    "mensaje", "Categoría eliminada exitosamente",
-	                    "idEliminado", idCategoria
-	                ));
-	                
-	    } catch (NoSuchElementException e) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-	                .body(e.getMessage());
-	        
-	    } catch (Exception e) {
-	        return ResponseEntity.internalServerError()
-	                .body("Error al eliminar la categoría: " + e.getMessage());
-	    }
-	}
 	
 	// Método para crear alimentos
 	@PostMapping("/alimentos/crear")
@@ -350,30 +273,6 @@ public class AdminRestController {
 	    } catch (Exception e) {
 	        return ResponseEntity.internalServerError()
 	                .body("Error al modificar el alimento: " + e.getMessage());
-	    }
-	}
-	
-	
-	// Método para eliminar alimentos
-	@DeleteMapping("/alimentos/eliminar/{idAlimento}")
-	@Operation(summary = "Eliminar alimento", description = "Elimina un alimento por ID de Alimento.l")
-	public ResponseEntity<?> eliminarAlimento(@Parameter(description = "ID de alimento a eliminar", required = true)
-			@PathVariable int idAlimento) {
-	    try {
-	        alimentoService.eliminarAlimento(idAlimento);
-	        return ResponseEntity.ok()
-	                .body(Map.of(
-	                    "mensaje", "Alimento eliminado exitosamente",
-	                    "idEliminado", idAlimento
-	                ));
-	                
-	    } catch (NoSuchElementException e) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-	                .body(e.getMessage());
-	        
-	    } catch (Exception e) {
-	        return ResponseEntity.internalServerError()
-	                .body("Error al eliminar el alimento: " + e.getMessage());
 	    }
 	}
 	

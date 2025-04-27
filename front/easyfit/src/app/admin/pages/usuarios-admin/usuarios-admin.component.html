@@ -1,1 +1,35 @@
-<p>usuarios-admin works!</p>
+<div class="usuarios-container">
+
+  <!-- Título principal -->
+  <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+    <h2 class="fw-bold text-white mb-2">Usuarios</h2>
+  </div>
+
+  <!-- Botones Activados / Desactivados -->
+  <div class="d-flex gap-4 mb-3 borde-grueso pb-2">
+    <a href="javascript:void(0);" 
+       (click)="onActivadosClick()"
+       [ngClass]="{'active-tab': estadoSeleccionado === 'ACTIVO', 'inactive-tab': estadoSeleccionado !== 'ACTIVO'}">
+      Activados
+    </a>
+    <a href="javascript:void(0);" 
+       (click)="onDesactivadosClick()"
+       [ngClass]="{'active-tab': estadoSeleccionado === 'SUSPENDIDO', 'inactive-tab': estadoSeleccionado !== 'SUSPENDIDO'}">
+      Desactivados
+    </a>
+  </div>
+
+  <!-- Filtro de usuarios -->
+  <div class="mb-4">
+    <app-usuario-filtro (busqueda)="actualizarTextoBusqueda($event)"></app-usuario-filtro>
+  </div>
+
+  <!-- Tabla de usuarios -->
+  <div class="table-responsive">
+    <app-usuario-card
+      [estadoSeleccionado]="estadoSeleccionado"
+      [textoBusqueda]="textoBusqueda"
+></app-usuario-card>
+  </div>
+
+</div>

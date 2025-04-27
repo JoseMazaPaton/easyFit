@@ -1,0 +1,35 @@
+/* Botón editar */
+
+.btn-editar img {
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+  
+  .btn-editar:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+  }
+  
+  /* Botón eliminar */
+  .btn-eliminar img {
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+   /* Botón eliminar */
+  .btn-eliminar:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+  }
+
+  .btn-editar,
+.btn-eliminar {
+  outline: none; /* Elimina el borde al hacer click */
+  box-shadow: none; /* Elimina cualquier sombra de enfoque */
+}
+
+.btn-editar:focus,
+.btn-eliminar:focus,
+.btn-editar:active,
+.btn-eliminar:active {
+  outline: none;
+  box-shadow: none;
+}

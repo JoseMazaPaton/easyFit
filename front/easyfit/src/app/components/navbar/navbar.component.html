@@ -1,37 +1,55 @@
-<aside class="d-flex flex-column justify-content-between bg-white p-4 shadow-sm min-vh-100" style="width: 16rem;">
-  <!-- ZONA DEL PERFIL DEL USUARIO -->
+<aside class="sidebar d-flex flex-column justify-content-between p-4 min-vh-100">
   <div>
-    <div class="d-flex align-items-center gap-3 mb-5">
-      <img
-        [src]="'assets/images/avatar.svg'" alt="Avatar" class="rounded-circle" style="width: 50px;"/>
-      <div>
-        <p class="name-text fw-semibold small mb-0">{{ usuario.nombre || 'Usuario' }} </p>
-        <p class="rol-text text-uppercase text-muted text-xs mb-0" style="letter-spacing: 0.05em;">{{ role }}</p>
-      </div>
+    <!-- Logo como imagen -->
+    <div class="sidebar-header  d-flex align-items-center gap-2">
+      <img src="assets/icons/logopng.png" alt="EasyFit Logo" style="height: 40px;">
     </div>
-
-    <hr class="sidebar-separator"/>
-
-    <!-- ZONA DE NAVEGACION-->
-    <nav class="d-flex flex-column gap-4 ps-1">
-      
-       @if (role === 'ROL_ADMIN') { 
-        <a routerLink="/admin/dashboard" routerLinkActive="activo" class="nav-link-candidato">DASHBOARD</a>
-        <a routerLink="/admin/usuarios" routerLinkActive="activo" class="nav-link-candidato">GESTIÓN USUARIOS</a>
-        <a routerLink="/admin/alimentos" routerLinkActive="activo" class="nav-link-candidato">GESTIÓN ALIMENTOS</a>
-        <a routerLink="/admin/categorias" routerLinkActive="activo" class="nav-link-candidato">GESTIÓN CATEGORIAS</a>
+    <hr class="mb-5">
+    <!-- Zona de navegación -->
+    <nav class="d-flex flex-column gap-3">
+      @if (role === 'ROL_ADMIN') {
+        <a routerLink="/admin/dashboard" routerLinkActive="activo" class="nav-link-candidato">
+          <i class="fa-solid fa-chart-line me-2"></i> Dashboard
+        </a>
+        <a routerLink="/admin/usuarios" routerLinkActive="activo" class="nav-link-candidato">
+          <i class="fa-solid fa-users me-2"></i> Gestión Usuarios
+        </a>
+        <a routerLink="/admin/alimentos" routerLinkActive="activo" class="nav-link-candidato">
+          <i class="fa-solid fa-apple-whole me-2"></i> Gestión Alimentos
+        </a>
+        <a routerLink="/admin/categorias" routerLinkActive="activo" class="nav-link-candidato">
+          <i class="fa-solid fa-tags me-2"></i> Gestión Categorías
+        </a>
       }
 
-      @if (role === 'ROL_USUARIO') { 
-      <a routerLink="/usuario/dashboard" routerLinkActive="activo" class="nav-link-candidato">DASHBOARD</a>
-      <a routerLink="/usuario/diario" routerLinkActive="activo" class="nav-link-candidato">DIARIO</a>
-      <a routerLink="/usuario/alimentos" routerLinkActive="activo" class="nav-link-candidato">LISTA DE ALIMENTOS</a>
-      <a routerLink="/usuario/objetivos" routerLinkActive="activo" class="nav-link-candidato">OBJETIVOS</a>
+      @if (role === 'ROL_USUARIO') {
+        <a routerLink="/usuario/dashboard" routerLinkActive="activo" class="nav-link-candidato">
+          <i class="fa-solid fa-chart-pie me-2"></i> Dashboard
+        </a>
+        <a routerLink="/usuario/diario" routerLinkActive="activo" class="nav-link-candidato">
+          <i class="fa-solid fa-calendar-days me-2"></i> Diario
+        </a>
+        <a routerLink="/usuario/alimentos" routerLinkActive="activo" class="nav-link-candidato">
+          <i class="fa-solid fa-bowl-food me-2"></i> Lista de Alimentos
+        </a>
+        <a routerLink="/usuario/objetivos" routerLinkActive="activo" class="nav-link-candidato">
+          <i class="fa-solid fa-bullseye me-2"></i> Objetivos
+        </a>
       }
-
     </nav>
   </div>
-  <!--BOTON LOGOUT -->
-  <button class="btn btn-outline-dark w-100 mt-4 logout-btn" (click)="logOut()">Cerrar sesión</button>
-</aside>
 
+  <!-- Footer con usuario y logout -->
+  <div class="sidebar-footer mt-4">
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <img [src]="'assets/images/avatar.svg'" alt="Avatar" class="avatar-img">
+      <div>
+        <p class="name-text mb-0">{{ usuario.nombre || 'Usuario' }}</p>
+        <p class="rol-text mb-0">{{ role }}</p>
+      </div>
+    </div>
+    <button class="btn logout-btn w-100" (click)="logOut()">
+      <i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar sesión
+    </button>
+  </div>
+</aside>

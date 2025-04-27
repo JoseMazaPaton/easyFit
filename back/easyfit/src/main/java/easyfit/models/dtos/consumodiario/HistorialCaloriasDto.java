@@ -15,7 +15,7 @@ public class HistorialCaloriasDto {
 	
     private LocalDate fecha;     
     private int kcalObjetivo;   
-    private int kcalConsumidas;   
+    private double kcalConsumidas;   
 }
 
 

@@ -1,43 +1,69 @@
+.sidebar {
+  background-color: #ffffff; 
+  width: 16rem;
+  color: #1f2937;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-header .logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0099ff; 
+}
+
 .nav-link-candidato {
-  color: #474747;
-  font-weight: normal;
+  color: #4b5563;
   text-decoration: none;
-  transition: transform 0.2s ease, font-size 0.2s ease;
-  display: inline-block;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  transition: background 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
 }
 
 .nav-link-candidato:hover {
-  transform: scale(1.02);
+  background-color: #e0f2fe;
+  color: #0099ff;
 }
 
 .activo {
+  background-color: #dbeafe;
   color: #0099ff;
   font-weight: bold;
 }
 
 .avatar-img {
-  width: 48px;
-  height: 48px;
-  object-fit: cover;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
+.name-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1f2937; /* Gris muy oscuro */
+}
+
+.rol-text {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #3b82f6; /* Azul brillante */
+  letter-spacing: 0.05em;
+}
+
+.logout-btn {
+  background-color: transparent;
+  border: 1px solid #0099ff;
+  color: #0099ff;
+  font-size: 0.9rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s, color 0.3s;
+}
 
 .logout-btn:hover {
   background-color: #0099ff;
-  color: rgb(255, 255, 255);
   border-color: #0099ff;
+  color: #ffffff;
 }
-
-
-.name-text{
-  color: #474747;
-  font-size: 15px;
-}
-
-
-.rol-text{
-  color: #0099ff !important;
-  font-size: 10px;
-}
-  

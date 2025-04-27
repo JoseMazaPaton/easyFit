@@ -1,0 +1,43 @@
+<div class="categorias-container">
+
+  <h1 class="text-3xl font-bold text-white mb-8">Lista de Categorías</h1>
+
+  <!-- Filtro de Categorías -->
+  <div class="mb-4">
+    <app-categoria-filtro (buscar)="onBuscar($event)">
+    </app-categoria-filtro>
+  </div>
+
+  <!-- Lista de Categorías -->
+  <app-categoria-card
+    [categorias]="categoriasFiltradas"
+    (editarCategoria)="onEditarCategoria($event)"
+    (eliminarCategoria)="onEliminarCategoria($event)">
+  </app-categoria-card>
+
+  <!-- Botón Añadir Categoría -->
+  <button class="btn btn-success mt-4" (click)="abrirFormularioNuevaCategoria()">
+    <i class="fas fa-plus"></i> Añadir categoría
+  </button>
+
+  <!-- Modal de Formulario -->
+  @if (formularioVisible) {
+    <div class="modal d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);" (click)="cerrarFormulario()">
+      <div class="modal-dialog modal-dialog-centered" (click)="$event.stopPropagation()">
+        <div class="modal-content p-4 rounded-3">
+
+          <!-- Aquí dentro tu formulario -->
+          <app-categoria-form
+            [categoria]="categoriaAEditar ?? undefined"
+            (cerrar)="cerrarFormulario()"
+            (eliminarCategoria)="onEliminarCategoria($event)"
+            (guardado)="categoriaAEditar ? onCategoriaActualizada($event) : onCategoriaCreada($event)"
+          >
+          </app-categoria-form>
+
+        </div>
+      </div>
+    </div>
+  }
+
+</div>
