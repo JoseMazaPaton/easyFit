@@ -1,6 +1,10 @@
 package easyfit.restcontroller;
 
 import java.util.Map;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +37,16 @@ public class AuthRestController {
 
 
   //METODO CON RUTA PARA INICIAR SESION
+    @Operation(summary = "Login de usuario", description = "Autentica un usuario con sus credenciales y devuelve un token JWT.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Login exitoso",
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoginResponseDto.class))),
+        @ApiResponse(responseCode = "400", description = "Credenciales inválidas"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
     @PostMapping("/login")
-    @Operation(summary = "Login de usuario", description = "Loguea un usuario.")
-    public ResponseEntity<LoginResponseDto> login(@RequestBody @Valid LoginRequestDto loginDto) {
+    public ResponseEntity<LoginResponseDto> login(@Schema(description = "Objeto con email y contraseña para autenticación", required = true)
+    												@RequestBody @Valid LoginRequestDto loginDto) {
     	
     	//Hacemos login con el metodo del service y guardamos las respuesta Dto que devuelve
         LoginResponseDto response = authService.login(loginDto);
@@ -46,8 +57,13 @@ public class AuthRestController {
     
 
     //METODO CON RUTA PARA CERRAR SESIÓN
+    @Operation(summary = "Logout de usuario", description = "Cierra la sesión del usuario eliminando su contexto de seguridad.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Logout exitoso",
+                     content = @Content(mediaType = "application/json")),
+        @ApiResponse(responseCode = "401", description = "Usuario no autenticado")
+    })
     @PostMapping("/logout")
-    @Operation(summary = "Logout de usuario", description = "Cierra la sesión del usuario.")
     public ResponseEntity<Map<String, Object>> logout() {
     	
         // Limpiamos el contexto de seguridad (borra el usuario autenticado actual)
@@ -61,9 +77,17 @@ public class AuthRestController {
     
     
     //METODO CON RUTA PARA REGISTRAR UN USUARIO
+    @Operation(summary = "Registro de usuario", description = "Crea un nuevo usuario en el sistema con los datos proporcionados.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "201", description = "Usuario registrado exitosamente",
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = RegistroResponseDto.class))),
+        @ApiResponse(responseCode = "400", description = "Datos de registro inválidos"),
+        @ApiResponse(responseCode = "409", description = "Usuario ya existe"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
     @PostMapping("/registro")
-    @Operation(summary = "Registro de usuario", description = "Método de registro de nuevo usuario.")
-    public ResponseEntity<RegistroResponseDto> registroUsuario(@RequestBody @Valid RegistroRequestDto registroDto) {
+    public ResponseEntity<RegistroResponseDto> registroUsuario(@Schema(description = "Datos para el registro de un nuevo usuario", required = true)
+    															@RequestBody @Valid RegistroRequestDto registroDto) {
     
     	//Damos de alta el usuario,los objetivos y guardamos la respuesta con el metodo del servicio
     	//Todas las excepciones se controlan en el service tambien
