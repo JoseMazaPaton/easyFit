@@ -3,13 +3,9 @@ package easyfit.restcontroller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,18 +17,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import easyfit.models.dtos.alimentos.AlimentoDto;
 import easyfit.models.entities.Alimento;
 import easyfit.models.entities.Categoria;
 import easyfit.models.entities.Usuario;
 import easyfit.services.impl.AlimentoImplService;
 import easyfit.services.impl.CategoriaImplService;
-
 import easyfit.services.impl.UsuarioServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 
 @RestController
@@ -54,8 +52,13 @@ public class AlimentoRestController {
 	 /*
 	  *  Se puede buscar alimentos o añadir el nombre del alimento por nombre
 	  */
+	 @Operation(summary = "Buscar alimentos", description = "Busca alimentos por nombre opcionalmente filtrado.")
+	    @ApiResponses({
+	        @ApiResponse(responseCode = "200", description = "Lista de alimentos obtenida",
+	                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = AlimentoDto.class))),
+	        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+	    })
 	 @GetMapping("")
-	 @Operation(summary = "Buscar alimento", description = "Búsqueda de alimento por método implementado en el AlimentoService.")
 	 public ResponseEntity<List<AlimentoDto>> buscarAlimentos(
 	            @RequestParam(name = "search", required = false) String search) {
 	        
@@ -68,8 +71,14 @@ public class AlimentoRestController {
 	 /*
 	  *  Saca los alimentos creados por el propio usuario
 	  */
+	 @Operation(summary = "Obtener mis alimentos", description = "Recupera los alimentos creados por el usuario autenticado.")
+	    @ApiResponses({
+	        @ApiResponse(responseCode = "200", description = "Alimentos del usuario obtenidos",
+	                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = AlimentoDto.class))),
+	        @ApiResponse(responseCode = "401", description = "Usuario no autenticado"),
+	        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+	    })
 	 @GetMapping("/mis")
-	 @Operation(summary = "Obtener alimento de usuario", description = "Obtiene alimentos por usuario.")
 	 public ResponseEntity<List<AlimentoDto>> obtenerMisAlimentos() {
 	     String email = SecurityContextHolder.getContext().getAuthentication().getName();
 	     List<AlimentoDto> alimentosDto = alimentoService.buscarPorUsuario(email);
@@ -80,8 +89,13 @@ public class AlimentoRestController {
 	 /*
 	  * Crear alimento personalizado (el usuario es el `creado_por`).
 	  */
+	 @Operation(summary = "Crear alimento personalizado", description = "El usuario autenticado crea un nuevo alimento.")
+	    @ApiResponses({
+	        @ApiResponse(responseCode = "201", description = "Alimento creado exitosamente"),
+	        @ApiResponse(responseCode = "404", description = "Categoría no encontrada"),
+	        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+	    })
 	 @PostMapping("")
-	 @Operation(summary = "Crear alimento", description = "El usuario crea/da de alta un nuevo Alimento.")
 	 public ResponseEntity<?> altaAlimentoUsuario(@Parameter(description = "Alimento a crear", required = true)
 			 @RequestBody AlimentoDto alimentoDto) {
 		 Categoria categoria = categoriaService.findById(alimentoDto.getIdCategoria());
@@ -118,8 +132,14 @@ public class AlimentoRestController {
 	 /*
 	  * Editar alimento (solo si el usuario es el creador).
 	  */
+	 @Operation(summary = "Modificar alimento", description = "Modifica un alimento si el usuario autenticado es su creador.")
+	    @ApiResponses({
+	        @ApiResponse(responseCode = "200", description = "Alimento modificado correctamente"),
+	        @ApiResponse(responseCode = "404", description = "Alimento o categoría no encontrados"),
+	        @ApiResponse(responseCode = "409", description = "Usuario no autorizado para modificar"),
+	        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+	    })
 	 @PutMapping("/{idAlimento}")
-	 @Operation(summary = "Modificar alimento", description = "Modifica alimento por ID alimento solo si el usuario es el creador del mismo.")
 	 public ResponseEntity<?> modificarAlimentoUsuario (@Parameter(description = "ID del alimento a modificar.", required = true)
 			 																					@PathVariable int idAlimento,
 			 																					@RequestBody AlimentoDto alimentoDto) {
@@ -156,8 +176,14 @@ public class AlimentoRestController {
 	 /*
 	  * Eliminar alimento (solo si el usuario es el creador).
 	  */
+	 @Operation(summary = "Eliminar alimento", description = "Elimina un alimento si el usuario autenticado es su creador.")
+	    @ApiResponses({
+	        @ApiResponse(responseCode = "200", description = "Alimento eliminado correctamente"),
+	        @ApiResponse(responseCode = "404", description = "Alimento no encontrado"),
+	        @ApiResponse(responseCode = "409", description = "Usuario no autorizado para eliminar"),
+	        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+	    })
 	 @DeleteMapping("/{idAlimento}")
-	 @Operation(summary = "Eliminar alimento", description = "Elimina el alimento por ID de Alimento, solo si el usuario es el creador del mismo.")
 	 public ResponseEntity<?> eliminarAlimentoUsuario (@Parameter(description = "ID del alimento a crear", required = true)
 			 																				@PathVariable int idAlimento) {
 		 
@@ -183,12 +209,20 @@ public class AlimentoRestController {
 	 /*
 	  * Calcular kcal y macros según cantidad.
 	  */
+	 @Operation(summary = "Calcular macronutrientes", description = "Calcula kcal y macros según gramos de un alimento.")
+	    @ApiResponses({
+	        @ApiResponse(responseCode = "200", description = "Cálculo realizado correctamente",
+	                     content = @Content(mediaType = "application/json")),
+	        @ApiResponse(responseCode = "400", description = "Parámetros inválidos"),
+	        @ApiResponse(responseCode = "404", description = "Alimento no encontrado"),
+	        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+	    })
 	 @GetMapping("/{idAlimento}/calculo")
-	 @Operation(summary = "Calcular macronutrientes", description = "Calcula los macronutrientes de los alimentos según ID de alimento y cantidad (gramos) del mismo.")
 	 public ResponseEntity<?> calculoKcalMacro (@Parameter(description = "ID del alimento elegido para calcular los macronutrientes.", required = true)
-			 @PathVariable int idAlimento,
-			 @RequestParam(name = "gramos", required = true) Double gramos) {
-		 
+												 @PathVariable int idAlimento,
+												 @Parameter(description = "Cantidad en gramos", required = true)
+												 @RequestParam(name = "gramos", required = true) Double gramos) {
+											 
 		 
 		 if (gramos < 0) {
 			 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
