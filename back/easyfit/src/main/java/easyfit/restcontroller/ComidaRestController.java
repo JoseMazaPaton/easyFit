@@ -1,6 +1,10 @@
 package easyfit.restcontroller;
 
 import java.time.LocalDate;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +23,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import easyfit.models.dtos.alimentos.ActualizarCantidadAlimentoRequestDto;
 import easyfit.models.dtos.alimentos.AgregarAlimentoRequestDto;
 import easyfit.models.dtos.comida.ComidaDiariaDto;
@@ -40,9 +43,16 @@ public class ComidaRestController {
 	@Autowired
 	private IComidaService comidaService;
 	
+	
+	@Operation(summary = "Obtener comidas del día", description = "Recupera las comidas registradas para una fecha dada por el usuario autenticado.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Comidas del día obtenidas",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ComidaDiariaDto.class))),
+        @ApiResponse(responseCode = "204", description = "No hay comidas para la fecha indicada"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
 	@GetMapping("/fecha")
-	@Operation(summary = "Obtener comida", description = "Obtiene una comida de la fecha especificada a partir del usuario logueado.")
-    public ResponseEntity<?> getComidasDelDia(@Parameter(description = "Comida de la fecha a consultar", required = true)
+	public ResponseEntity<?> getComidasDelDia(@Parameter(description = "Fecha de la comida a consultar (YYYY-MM-DD)", required = true)
     											@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
             									@AuthenticationPrincipal Usuario usuario) {
         try {
@@ -60,9 +70,16 @@ public class ComidaRestController {
         }
     }
 
+	@Operation(summary = "Crear comida", description = "Registra una nueva comida para el usuario autenticado.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "201", description = "Comida creada",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Comida.class))),
+        @ApiResponse(responseCode = "400", description = "Datos de comida inválidos"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
 	@PostMapping("/crear")
-	@Operation(summary = "Crear comida", description = "Creación de comida por usuario logueado.")
-    public ResponseEntity<?> crearComida(
+	public ResponseEntity<?> crearComida(
+			@Parameter(description = "Objeto Comida a crear", required = true)
             @RequestBody Comida comida,
             @AuthenticationPrincipal Usuario usuario) {
         try {
@@ -88,10 +105,18 @@ public class ComidaRestController {
         }
     }
 	
+	@Operation(summary = "Añadir alimento a comida", description = "Agrega un alimento existente a una comida específica.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Alimento agregado",
+            content = @Content(mediaType = "application/json")),
+        @ApiResponse(responseCode = "404", description = "Comida o alimento no encontrado"),
+        @ApiResponse(responseCode = "400", description = "Cantidad inválida"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
 	@PostMapping("/{idComida}/añadirAlimento")
-	@Operation(summary = "Añadir Alimento a Comida", description = "Obtiene una comida por ID comida y añade un alimento a la misma.")
 	public ResponseEntity<?> agregarAlimentoAComida(@Parameter(description = "ID de la comida a la que se va a añadir el Alimento.", required = true)
 													@PathVariable int idComida,
+													@Parameter(description = "Datos del alimento a agregar (id y cantidad)", required = true)
 											        @RequestBody AgregarAlimentoRequestDto request,
 											        @AuthenticationPrincipal Usuario usuario) {
 	    
@@ -116,8 +141,15 @@ public class ComidaRestController {
 	    }
 	}
 	
+	
+	@Operation(summary = "Eliminar alimento de comida", description = "Elimina un alimento de una comida existente.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Alimento eliminado",
+            content = @Content(mediaType = "application/json")),
+        @ApiResponse(responseCode = "404", description = "Comida o alimento no encontrado"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
 	@DeleteMapping("/{idComida}/alimentos/{idAlimento}")
-	@Operation(summary = "Eliminar Alimento de Comida", description = "Elimina un Alimento por ID alimento de una Comida obtenida por el ID de la misma.")
 	public ResponseEntity<?> eliminarAlimentoDeComida(@Parameter(description = "ID de la comida a la que se va a eliminar el Alimento.", required = true)
 														@PathVariable int idComida,
 														@Parameter(description = "ID del alimento que se va eliminar de la comida.", required = true)
@@ -143,12 +175,21 @@ public class ComidaRestController {
 	    }
 	}
 	
+	
+	@Operation(summary = "Actualizar cantidad de alimento", description = "Modifica la cantidad de un alimento en una comida.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Cantidad actualizada",
+            content = @Content(mediaType = "application/json")),
+        @ApiResponse(responseCode = "404", description = "Comida o alimento no encontrado"),
+        @ApiResponse(responseCode = "400", description = "Cantidad inválida"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
 	@PutMapping("/{idComida}/alimentos/{idAlimento}")
-	@Operation(summary = "Modificar cantidad Alimento", description = "Obtiene una comida por ID comida y modifica la cantidad de un Alimento incluido en la Comida por ID del mismo.")
 	public ResponseEntity<?> actualizarCantidadAlimento(@Parameter(description = "ID de la comida a la que se va a modificar el Alimento.", required = true)
 														@PathVariable int idComida,
 														@Parameter(description = "ID del Alimento que se va modificar de la Comida.", required = true)
 												        @PathVariable int idAlimento,
+												        @Parameter(description = "Nueva cantidad a asignar", required = true)
 												        @RequestBody ActualizarCantidadAlimentoRequestDto request,
 												        @AuthenticationPrincipal Usuario usuario) {
 	    try {
@@ -175,8 +216,15 @@ public class ComidaRestController {
 	}
 	
 	// ComidaRestController.java
+	@Operation(summary = "Eliminar comida", description = "Elimina una comida por su ID para el usuario autenticado.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Comida eliminada",
+            content = @Content(mediaType = "application/json")),
+        @ApiResponse(responseCode = "404", description = "Comida no encontrada"),
+        @ApiResponse(responseCode = "403", description = "Usuario no autorizado"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
 	@DeleteMapping("/{idComida}")
-	@Operation(summary = "Eliminar Comida", description = "Elimina una Comida por ID de la misma.")
 	public ResponseEntity<?> eliminarComida(@Parameter(description = "ID de la comida que se va a eliminar.", required = true)
 											@PathVariable int idComida,
 	        								@AuthenticationPrincipal Usuario usuario) {
@@ -203,8 +251,16 @@ public class ComidaRestController {
 	}
 	
 	// ComidaRestController.java
+	
+	@Operation(summary = "Resumen de comida", description = "Obtiene un resumen nutricional de una comida por su ID.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Resumen obtenido",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResumenComidaDto.class))),
+        @ApiResponse(responseCode = "404", description = "Comida no encontrada"),
+        @ApiResponse(responseCode = "403", description = "Usuario no autorizado"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
 	@GetMapping("/{idComida}/resumen")
-	@Operation(summary = "Resumen Comida", description = "Obtiene el resumen de una comida por el ID comida.")
 	public ResponseEntity<?> getResumenComida(@Parameter(description = "ID de la comida que se va a obtener el resumen.", required = true)
 												@PathVariable int idComida,
 	        									@AuthenticationPrincipal Usuario usuario) {
