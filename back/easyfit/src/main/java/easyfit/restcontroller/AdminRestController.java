@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import easyfit.models.dtos.admin.UserResumenDto;
 import easyfit.models.dtos.admin.UsuarioAdminListaDto;
 import easyfit.models.dtos.auth.UsuarioResponseDto;
@@ -31,8 +29,12 @@ import easyfit.services.ICategoriaService;
 import easyfit.services.IUsuarioAdminService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RequestParam;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 
 
@@ -53,6 +55,12 @@ public class AdminRestController {
 	
 	
 	//OBTENER TODOS LOS USUARIOS
+	@Operation(summary = "Listar usuarios", description = "Obtiene la lista de todos los usuarios registrados en el sistema.")
+	@ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Usuarios recuperados correctamente", 
+                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = UsuarioAdminListaDto.class))),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
 	@GetMapping("/usuarios")
 	public ResponseEntity<List<UsuarioAdminListaDto>> obtenerUsuarios() {
 		
@@ -63,8 +71,15 @@ public class AdminRestController {
 	
 	
 	// FILTRO POR EMAIL
+	@Operation(summary = "Obtener usuario por email", 
+             description = "Recupera usuarios que coincidan con el email proporcionado.")
+	@ApiResponses({
+	      @ApiResponse(responseCode = "200", description = "Usuario encontrado", 
+	                   content = @Content(mediaType = "application/json", schema = @Schema(implementation = UsuarioResponseDto.class))),
+	      @ApiResponse(responseCode = "404", description = "Usuario no encontrado"),
+	      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+	  })
 	@GetMapping("/usuarios/{email}")
-	@Operation(summary = "Obtener usuario", description = "Obtiene un usuario por email")
 	public ResponseEntity<?> getUsuariosByEmail(@Parameter(description = "Email del usuario a consultar", required = true)
 			@PathVariable String email) {
         try {
@@ -97,8 +112,16 @@ public class AdminRestController {
 	
 	
 	// FILTRO POR SEXO --> La Url sería: 'localhost:XXXX/admin/usuarios/sexo/hombre', por ejemplo.
+	@Operation(summary = "Filtrar usuarios por sexo", 
+            description = "Devuelve una lista de usuarios según el sexo especificado (HOMBRE o MUJER).")
+	@ApiResponses({
+	     @ApiResponse(responseCode = "200", description = "Usuarios filtrados correctamente", 
+	                  content = @Content(mediaType = "application/json", schema = @Schema(implementation = UsuarioResponseDto.class))),
+	     @ApiResponse(responseCode = "400", description = "Sexo inválido"),
+	     @ApiResponse(responseCode = "404", description = "No se encontraron usuarios para el sexo dado"),
+	     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+	})
 	@GetMapping("/usuarios/sexo/{sexo}")
-	@Operation(summary = "Filtrar usuarios", description = "Filtra usuarios por sexo.")
 	public ResponseEntity<?> getUsuariosBySexo(@Parameter(description = "Sexo del usuario a consultar", required = true)
 			@PathVariable String sexo) {
 	    try {
@@ -137,9 +160,18 @@ public class AdminRestController {
 	}
 	
 	// FILTRO POR EDAD --> La Url sería: 'localhost:XXXX/admin/usuarios/edad/25', por ejemplo.
+	@Operation(summary = "Filtrar usuarios por edad", 
+	            description = "Devuelve una lista de usuarios que tengan la edad especificada.")
+	 @ApiResponses({
+	     @ApiResponse(responseCode = "200", description = "Usuarios filtrados correctamente", 
+	                  content = @Content(mediaType = "application/json", schema = @Schema(implementation = UsuarioResponseDto.class))),
+	     @ApiResponse(responseCode = "400", description = "Edad inválida"),
+	     @ApiResponse(responseCode = "404", description = "No se encontraron usuarios con esa edad"),
+	     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+	 })
 	@GetMapping("/usuarios/edad/{edad}")
-	@Operation(summary = "Filtrar usuarios", description = "Filtrar usuarios por edad")
-	public ResponseEntity<?> getUsuariosByEdad(@Parameter(description = "Edad del usuario a consultar", required = true)@PathVariable int edad) {
+	public ResponseEntity<?> getUsuariosByEdad(@Parameter(description = "Edad del usuario a consultar", required = true)
+												@PathVariable int edad) {
 	    try {
 	        // Validación básica de edad
 	        if(edad < 0) {
@@ -174,9 +206,14 @@ public class AdminRestController {
 	    }
 	}
 	
-	
+	@Operation(summary = "Suspender o reactivar un usuario", 
+            description = "Cambia el estado de suspensión de un usuario en base a su email.")
+	 @ApiResponses({
+	     @ApiResponse(responseCode = "200", description = "Estado actualizado correctamente"),
+	     @ApiResponse(responseCode = "404", description = "Usuario no encontrado"),
+	     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+	 })
 	@PutMapping("/usuarios/{email}/suspender")
-	@Operation(summary = "Suspender/reactivar cuenta de usuario", description = "Suspende o reactiva una cuenta de usuario, obteniéndose la misma por email")
 	public ResponseEntity<?> cambiarEstadoUsuario(
 	        @Parameter(description = "Email del usuario a suspender/reactivar", required = true)
 	        @PathVariable String email) {
@@ -205,8 +242,15 @@ public class AdminRestController {
 	
 	
 	// Método para crear alimentos
+	@Operation(summary = "Crear un nuevo alimento", 
+              description = "Agrega un nuevo alimento en el sistema.")
+	   @ApiResponses({
+	       @ApiResponse(responseCode = "201", description = "Alimento creado exitosamente"),
+	       @ApiResponse(responseCode = "400", description = "Datos inválidos"),
+	       @ApiResponse(responseCode = "404", description = "Categoría no encontrada"),
+	       @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+	   })
 	@PostMapping("/alimentos/crear")
-	@Operation(summary = "Crear alimento", description = "Crea un alimentol")
 	public ResponseEntity<?> createAlimento(@Parameter(description = "Alimento a crear", required = true)
 			@RequestBody Alimento alimento) {
 	    try {
@@ -239,11 +283,19 @@ public class AdminRestController {
 	
 	
 	// Método para modificar alimentos
+	 @Operation(summary = "Modificar un alimento existente", 
+             description = "Actualiza los datos de un alimento identificado por su ID.")
+	  @ApiResponses({
+	      @ApiResponse(responseCode = "200", description = "Alimento actualizado correctamente"),
+	      @ApiResponse(responseCode = "400", description = "Datos inválidos"),
+	      @ApiResponse(responseCode = "404", description = "Alimento no encontrado"),
+	      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+	  })
 	@PutMapping("/alimentos/modificar/{idAlimento}")
-	@Operation(summary = "Modificar alimento", description = "Modifica un alimento por ID de Alimento.")
 	public ResponseEntity<?> modificarAlimento(@Parameter(description = "ID de alimento a modificar", required = true)
-			@PathVariable int idAlimento,
-	        									@RequestBody Alimento alimentoActualizado) {
+												@PathVariable int idAlimento,
+												@Parameter(description = "Datos actualizados del alimento", required = true)
+			        							@RequestBody Alimento alimentoActualizado) {
 		
 	    try {
 	        Alimento alimentoModificado = alimentoService.modificarAlimento(idAlimento, alimentoActualizado);
@@ -276,9 +328,14 @@ public class AdminRestController {
 	    }
 	}
 	
-	
+	 @Operation(summary = "Obtener resumen de usuarios", 
+             description = "Devuelve estadísticas globales para el dashboard administrativo.")
+	  @ApiResponses({
+	      @ApiResponse(responseCode = "200", description = "Resumen obtenido correctamente", 
+	                   content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResumenDto.class))),
+	      @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+	  })
 	@GetMapping("/dashboard/resumen")
-	@Operation(summary = "Resumen usuarios", description = "Resumen de estadísticas de usuarios para el panel de administración")
 	public ResponseEntity<?> getResumenUsuarios() {
 	    try {
 	        UserResumenDto resumen = usuarioAdminService.obtenerResumenUsuarios();
