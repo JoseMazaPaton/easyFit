@@ -21,6 +21,7 @@ import easyfit.models.dtos.valornutricional.MacrosRequestDto;
 import easyfit.models.dtos.valornutricional.ValorNutriconalResponseDto;
 import easyfit.models.entities.Usuario;
 import easyfit.services.IObjetivoService;
+import easyfit.services.IProgresoService;
 import easyfit.services.IValorNutricionalService;
 import easyfit.utils.ObjetivoCalculator;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,6 +39,9 @@ public class ObjetivosRestController {
 	
 	@Autowired
 	private IValorNutricionalService valorNutricionalService;
+	
+	@Autowired
+	private IProgresoService progresoService;
 	
 	@Autowired 
 	private ModelMapper mapper;
@@ -94,6 +98,9 @@ public class ObjetivosRestController {
 		
 		//Actualizamos el peso con metodo del service
 		ObjetivoResponseDto respuestaDto = objetivoService.actualizarPesoActual(pesoDto, usuario);
+		double pesoProgreso = pesoDto.getPesoActual();
+		
+		progresoService.registrarNuevoPeso(pesoProgreso, usuario);
 			
 		return ResponseEntity.ok(respuestaDto);
 	}

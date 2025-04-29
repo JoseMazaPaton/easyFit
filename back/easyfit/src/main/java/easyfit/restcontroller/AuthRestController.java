@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +19,12 @@ import easyfit.models.dtos.auth.LoginRequestDto;
 import easyfit.models.dtos.auth.LoginResponseDto;
 import easyfit.models.dtos.auth.RegistroRequestDto;
 import easyfit.models.dtos.auth.RegistroResponseDto;
-import easyfit.models.dtos.auth.UsuarioResponseDto;
+
+
+import easyfit.models.entities.Usuario;
 import easyfit.services.IAuthService;
+import easyfit.services.IProgresoService;
+import easyfit.services.IUsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -34,6 +37,13 @@ public class AuthRestController {
 
     @Autowired
     private IAuthService authService;
+    
+    @Autowired
+    private IProgresoService progresoService;
+    
+    
+    @Autowired
+    private IUsuarioService usuarioService;
 
 
   //METODO CON RUTA PARA INICIAR SESION
@@ -92,6 +102,10 @@ public class AuthRestController {
     	//Damos de alta el usuario,los objetivos y guardamos la respuesta con el metodo del servicio
     	//Todas las excepciones se controlan en el service tambien
     	RegistroResponseDto respuesta = authService.altaUsuario(registroDto);
+    	
+    	Usuario usuario = usuarioService.findById(registroDto.getUsuario().getEmail());
+    	progresoService.registrarNuevoPeso(registroDto.getObjetivo().getPesoActual(), usuario); 
+    		 	
 
     	return ResponseEntity.ok(respuesta);
     	
