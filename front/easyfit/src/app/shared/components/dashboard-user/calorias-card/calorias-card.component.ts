@@ -21,6 +21,7 @@ export class CaloriasCardComponent {
     this.dashboardService.resumenDiario$.subscribe(resumen => {
       if (resumen) {
         this.resumen = resumen;
+        console.log(resumen)
         this.renderChart(resumen.kcalConsumidas, resumen.kcalObjetivo);
       }
     });

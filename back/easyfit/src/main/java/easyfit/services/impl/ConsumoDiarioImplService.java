@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,24 +42,23 @@ public class ConsumoDiarioImplService extends GenericCrudServiceImpl<ConsumoDiar
 
 
 	@Override
-	public DiarioResponseDto obtenerResumenDiario (Usuario usuario) {
-		
-		//Guardamos la fecha de hoy
-		LocalDate fecha = LocalDate.now();
-		
-		//Obtenemos el consumo de hoy y lo guardamos
-		ConsumoDiario resumen = diarioRepository.findByFechaAndUsuarioEmail(fecha, usuario.getEmail())
-				 .orElseThrow(() -> new UsernameNotFoundException("No se encontro un diario con esa fecha y con ese usuario "));
-				
-		//Creamos un dto de respuesta
-		DiarioResponseDto resumenDto = DiarioResponseDto.builder()
-				                       .kcalConsumidas(resumen.getKcalConsumidas())
-				                       .KcalObjetivo(usuario.getValorNutricional().getKcalObjetivo())
-				                       .build();
-		//Obtenemos el calcululo de las kcal restantes
-		resumenDto.getKcalRestantes();
-		
-		return resumenDto;
+	public DiarioResponseDto obtenerResumenDiario(Usuario usuario) {
+
+	    LocalDate fecha = LocalDate.now();
+
+	    // ✅ Si no hay diario, asumimos consumo 0
+	    Optional<ConsumoDiario> resumenOpt = diarioRepository.findByFechaAndUsuarioEmail(fecha, usuario.getEmail());
+
+	    int kcalConsumidas = resumenOpt.map(ConsumoDiario::getKcalConsumidas).orElse(0);
+
+	    DiarioResponseDto resumenDto = DiarioResponseDto.builder()
+	            .kcalConsumidas(kcalConsumidas)
+	            .KcalObjetivo(usuario.getValorNutricional().getKcalObjetivo())
+	            .build();
+
+	    resumenDto.getKcalRestantes(); // si este método realiza lógica interna, mantenlo
+
+	    return resumenDto;
 	}
 	
 	@Override

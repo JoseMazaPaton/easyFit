@@ -181,9 +181,33 @@ public class ComidaImplService extends GenericCrudServiceImpl<Comida, Integer> i
 	    // Verificar existencia de la relación		
 	    ComidaAlimento comidaAlimento = comidaAlimentoRepository.findByComidaIdComidaAndAlimentoIdAlimento(idComida, idAlimento)
 	        .orElseThrow(() -> new NoSuchElementException("El alimento no está asociado a esta comida"));
-	    
+
+	    // Obtener datos nutricionales a restar
+	    Alimento alimento = comidaAlimento.getAlimento();
+	    double cantidad = comidaAlimento.getCantidad(); // en porciones (por ejemplo 1.2 significa 120g)
+
+	    int kcalARestar = (int) Math.round(alimento.getKcal() * cantidad);
+	    double proteinasARestar = redondear(alimento.getProteinas() * cantidad);
+	    double carbohidratosARestar = redondear(alimento.getCarbohidratos() * cantidad);
+	    double grasasARestar = redondear(alimento.getGrasas() * cantidad);
+
+	    // Buscar el consumo diario del usuario
+	    ConsumoDiario consumo = consumoDiarioRepository.findByFechaAndUsuarioEmail(comidaAlimento.getComida().getFecha(), comidaAlimento.getComida().getUsuario().getEmail())
+	        .orElse(null);
+
+	    if (consumo != null) {
+	        consumo.setKcalConsumidas(Math.max(0, consumo.getKcalConsumidas() - kcalARestar));
+	        consumo.setProteinas(Math.max(0, consumo.getProteinas() - proteinasARestar));
+	        consumo.setCarbohidratos(Math.max(0, consumo.getCarbohidratos() - carbohidratosARestar));
+	        consumo.setGrasas(Math.max(0, consumo.getGrasas() - grasasARestar));
+	        consumoDiarioRepository.save(consumo);
+	    }
+
+	    // Finalmente, eliminar el alimento de la comida
 	    comidaAlimentoRepository.delete(comidaAlimento);
 	}
+
+
 	
 	@Override
 	public void actualizarCantidadAlimento(int idComida, int idAlimento, double nuevaCantidad) {
