@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import easyfit.models.dtos.objetivo.AjusteSemanalDto;
 import easyfit.models.dtos.objetivo.NivelActividadDto;
 import easyfit.models.dtos.objetivo.ObjetivoResponseDto;
@@ -27,6 +26,10 @@ import easyfit.utils.ObjetivoCalculator;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/objetivos")
@@ -61,7 +64,12 @@ public class ObjetivosRestController {
 
 	//RUTA CON METODO PARA OBTENER TODOS LOS OBJETIVOS DEL USUARIO
 	@GetMapping("/misobjetivos")
-	@Operation(summary = "Obtener objetivos de Usuario", description = "Obtiene los objetivos del Usuario logueado.")
+	@Operation(summary = "Obtener objetivos de Usuario", description = "Obtiene todos los objetivos actuales del usuario: kcal, macros, peso, objetivo, etc.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Objetivos obtenidos correctamente",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ObjetivoResponseDto.class))),
+        @ApiResponse(responseCode = "500", description = "Error al obtener objetivos", content = @Content)
+    })
 	public ResponseEntity<ObjetivoResponseDto> objetivosUsuario(@AuthenticationPrincipal Usuario usuario) {
 	
 		//Mapeamos los objetivos del usuario en una respuesta dto
@@ -77,7 +85,13 @@ public class ObjetivosRestController {
 
 	//RUTA CON METODO PARA MODIFICAR LOS MACROS DEL USUARIO POR PORCENTAJE
 	@PutMapping("/macros")
-	@Operation(summary = "Modifica macronutrientes de Usuario", description = "Modifica los macronutrientes por porcentaje del Usuario logueado.")
+	@Operation(summary = "Modificar macronutrientes", description = "Modifica los macronutrientes del usuario (proteínas, carbohidratos, grasas) en porcentaje.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Macronutrientes modificados correctamente",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ValorNutriconalResponseDto.class))),
+        @ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content),
+        @ApiResponse(responseCode = "500", description = "Error interno", content = @Content)
+    })
 	public ResponseEntity<ValorNutriconalResponseDto> modificarMacros(
 			@RequestBody @Valid MacrosRequestDto macrosDto,  
 			@AuthenticationPrincipal Usuario usuario) {
@@ -92,6 +106,12 @@ public class ObjetivosRestController {
 	
 	//REGISTRO DE NUEVO PESO
 	@PutMapping("/pesoactual")
+	@Operation(summary = "Actualizar peso actual", description = "Registra un nuevo peso actual del usuario y lo guarda en el historial de progreso.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Peso actualizado correctamente",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ObjetivoResponseDto.class))),
+        @ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content)
+    })
 	public ResponseEntity<ObjetivoResponseDto> actualizarPesoActual(
 			@RequestBody @Valid PesoActualDto pesoDto, 
 			@AuthenticationPrincipal Usuario usuario) {
@@ -108,7 +128,12 @@ public class ObjetivosRestController {
 	
 	//ACTUALIZAR PESO OBJETIVO - NO MODIFICA LAS KCAL!
 	@PutMapping("/pesometa")
-	@Operation(summary = "Modificar peso objetivo de Usuario", description = "Modifica el peso objetivo del Usuario logueado sin modificar las calorías.")
+	@Operation(summary = "Modificar peso objetivo", description = "Modifica el peso objetivo del usuario sin alterar las calorías.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Peso objetivo actualizado correctamente",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ObjetivoResponseDto.class))),
+        @ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content)
+    })
 	public ResponseEntity<ObjetivoResponseDto> actualizarPesoObjetivo(
 			@RequestBody @Valid PesoObjetivoDto pesoDto, 
 			@AuthenticationPrincipal Usuario usuario) {
@@ -121,7 +146,12 @@ public class ObjetivosRestController {
 	
 	//ACTUALIZAR NIVEL DE ACTIVIDAD
 	@PutMapping("/nivelactividad")
-	@Operation(summary = "Modificar nivel de actividad", description = "Modifica el nivel de actividad del Usuario logueado.")
+	@Operation(summary = "Modificar nivel de actividad", description = "Modifica el nivel de actividad física del usuario.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Nivel de actividad actualizado correctamente",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ObjetivoResponseDto.class))),
+        @ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content)
+    })
 	public ResponseEntity<ObjetivoResponseDto>  actualizarNivelActividad(
 			@RequestBody @Valid NivelActividadDto actividadDto, 
 			@AuthenticationPrincipal Usuario usuario ) {
@@ -135,7 +165,12 @@ public class ObjetivosRestController {
 
 	//ACTUALIZAR OPCION PESO
 	@PutMapping("/metasemanal")
-	@Operation(summary = "Modificar opcion de peso", description = "Modifica la opción de peso semanal del Usuario logueado.")
+	@Operation(summary = "Modificar meta semanal", description = "Ajusta el ritmo semanal de cambio de peso del usuario (ganar/perder por semana).")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Meta semanal actualizada correctamente",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ObjetivoResponseDto.class))),
+        @ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content)
+    })
 	public ResponseEntity<ObjetivoResponseDto>  actualizarOpcionPeso(
 			@RequestBody @Valid AjusteSemanalDto ajusteDto, 
 			@AuthenticationPrincipal Usuario usuario ) {
@@ -148,7 +183,12 @@ public class ObjetivosRestController {
 	
 	//ACTUALIZAR NIVEL DE ACTIVIDAD
 	@PutMapping("/metaobjetivo")
-	@Operation(summary = "Modificar objetivo", description = "Modifica el objetivo del Usuario logueado.")
+	@Operation(summary = "Modificar objetivo general", description = "Modifica el objetivo general del usuario: perder peso, mantener o ganar masa.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Objetivo actualizado correctamente",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ObjetivoResponseDto.class))),
+        @ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content)
+    })
 	public ResponseEntity<ObjetivoResponseDto> actualizarObjetivoUsuario (
 			@RequestBody @Valid ObjetivoUsuarioDto objetivoDto,
 			@AuthenticationPrincipal Usuario usuario ) {

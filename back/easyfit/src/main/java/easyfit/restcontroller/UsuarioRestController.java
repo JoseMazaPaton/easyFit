@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import easyfit.models.dtos.auth.UsuarioPasswordDto;
 import easyfit.models.dtos.auth.UsuarioResponseDto;
 import easyfit.models.entities.Usuario;
@@ -18,6 +17,9 @@ import easyfit.services.IUsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -50,7 +52,12 @@ public class UsuarioRestController {
 
 	//RUTA CON METODO PARA CAMBIAR LA PASSWORD DEL USUARIO AUTENTICADO
 	@PutMapping("/miperfil/password")
-	@Operation(summary = "Obtener datos del perfil de Usuario", description = "Obtiene los datos de perfil de un Usuario autenticado y permite el cambio de password del mismo. ")
+	@Operation(summary = "Cambiar contraseña del usuario", description = "Permite al usuario autenticado cambiar su contraseña.")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "Contraseña cambiada correctamente"),
+		@ApiResponse(responseCode = "400", description = "Solicitud inválida", content = @Content),
+		@ApiResponse(responseCode = "401", description = "No autorizado", content = @Content)
+	})
 	public ResponseEntity<String> cambiarPassword(@RequestBody @Valid UsuarioPasswordDto dto) {
 		//Obtenemos el usuario autenticado
 	    Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
