@@ -19,9 +19,10 @@ export class CaloriasCardComponent {
 
   ngOnInit(): void {
     this.dashboardService.resumenDiario$.subscribe(resumen => {
+      console.log("resumen diario calorias",resumen)
       if (resumen) {
         this.resumen = resumen;
-        console.log(resumen)
+        console.log("resumen diario calorias",resumen)
         this.renderChart(resumen.kcalConsumidas, resumen.kcalObjetivo);
       }
     });

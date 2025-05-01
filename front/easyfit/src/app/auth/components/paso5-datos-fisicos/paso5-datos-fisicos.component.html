@@ -61,6 +61,11 @@
         </p>
       </div>
 
+      <div class="error" *ngIf="formPaso5.hasError('pesoIncoherente')">
+        {{ formPaso5.getError('pesoIncoherente') }}
+      </div>
+      
+
       <!-- Botones -->
       <div class="d-flex justify-content-between">
         <button type="button" class="btn btn-volver" [routerLink]="['/auth/register/paso4']">Volver</button>

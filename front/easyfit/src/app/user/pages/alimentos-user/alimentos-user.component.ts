@@ -32,6 +32,7 @@ export class AlimentosUserComponent {
   ) {}
 
   ngOnInit(): void {
+    this.categoriasService.cargarCategorias();
     this.cargarCategorias();
     this.cargarAlimentos();
   }

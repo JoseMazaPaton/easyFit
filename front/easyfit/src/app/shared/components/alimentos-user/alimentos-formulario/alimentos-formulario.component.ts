@@ -53,8 +53,8 @@ export class AlimentosFormularioComponent {
   
     request.subscribe({
       next: () => {
-        this.guardado.emit();       // ✅ avisa al padre que guarde/recargue
-        this.form.reset();          // 🧼 limpia el formulario
+        this.guardado.emit();       
+        this.form.reset();          
       },
       error: (e) => {
         console.error('❌ Error al guardar alimento:', e);

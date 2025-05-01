@@ -1,5 +1,6 @@
 package easyfit.models.dtos.consumodiario;
 
+import easyfit.models.enums.ObjetivoUsuario;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,4 +22,5 @@ public class HistorialPesoDto {
 
     private int porcentajeProgreso;
 
+    private ObjetivoUsuario objetivoUsuario;
 }

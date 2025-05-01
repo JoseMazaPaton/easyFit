@@ -106,14 +106,14 @@ public class ConsumoDiarioImplService extends GenericCrudServiceImpl<ConsumoDiar
 	        ? (int) Math.round((diferenciaKg * 100) / totalPorPerder)
 	        : 0;
 
-	    // Devolvemos una respuesta en formato dto
 	    return HistorialPesoDto.builder()
-	        .pesoInicial(pesoInicial)
-	        .pesoActual(pesoActual)
-	        .pesoObjetivo(pesoObjetivo)
-	        .diferenciaKg(diferenciaKg)
-	        .porcentajeProgreso(porcentaje)
-	        .build();
+	    	    .pesoInicial(pesoInicial)
+	    	    .pesoActual(pesoActual)
+	    	    .pesoObjetivo(pesoObjetivo)
+	    	    .diferenciaKg(diferenciaKg)
+	    	    .porcentajeProgreso(porcentaje)
+	    	    .objetivoUsuario(objetivo.getObjetivoUsuario()) // 👈 añadir aquí
+	    	    .build();
 	}
 	
 	@Override
