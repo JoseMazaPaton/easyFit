@@ -1,4 +1,67 @@
 .diario-container {
+  padding: 1.5rem;
+}
+
+.fecha-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.control-fecha-custom {
+  background-color: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.control-fecha-custom:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn-fecha-icon {
+  background: none;
+  border: none;
+  color: #0d6efd;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.btn-fecha-icon:hover {
+  background-color: rgba(13, 110, 253, 0.1);
+}
+
+.fecha-activa {
+  font-weight: 500;
+  color: #333;
+}
+
+.lista-comidas {
+  margin-top: 1.5rem;
+}
+
+.btn-crear-comida {
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  box-shadow: 0 4px 10px rgba(13, 110, 253, 0.2);
+}
+
+.btn-crear-comida:hover {
+  background-color: #0b5ed7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(13, 110, 253, 0.3);
+}
+.diario-container {
   padding: 2rem;
   border-radius: 10px;
 }

@@ -1,21 +1,21 @@
 <div class="diario-container">
   
   <!-- Título y control de fecha en la misma fila -->
-  <div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
-    <h2 class="fw-bold text-white mb-2">Resumen del día</h2>
+  <div class="d-flex justify-content-between align-items-center flex-wrap mb-4 fecha-header">
+    <h2 class="fw-bold text-white mb-0">Resumen del día</h2>
 
-    <div class="control-fecha-custom d-inline-flex align-items-center px-3 py-2 rounded-3">
-      <span class="fw-bold me-2 text-dark">Tu diario de comidas para :</span>
+    <div class="control-fecha-custom d-inline-flex align-items-center px-3 py-2">
+      <span class="fw-semibold me-3 text-dark">Tu diario de comidas para :</span>
 
-      <button (click)="cambiarFecha(-1)" class="btn-fecha-icon me-1">
+      <button (click)="cambiarFecha(-1)" class="btn-fecha-icon">
         <i class="bi bi-chevron-left"></i>
       </button>
 
-      <div class="fecha-activa px-3 py-1 fw-semibold">
+      <div class="fecha-activa px-3 py-1">
         {{ fechaSeleccionada | date:'fullDate' }}
       </div>
 
-      <button (click)="cambiarFecha(1)" class="btn-fecha-icon ms-1">
+      <button (click)="cambiarFecha(1)" class="btn-fecha-icon">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
@@ -27,7 +27,7 @@
   </div>
 
   <!-- Lista de comidas -->
-  <div class="lista-comidas d-flex flex-column gap-3"a>
+  <div class="lista-comidas d-flex flex-column gap-3">
     @for (comida of arrayComidas ; track $index) {
       <app-comida-diario-card 
         [comida]="comida" 
@@ -37,6 +37,6 @@
   </div>
 
   <!-- Botón añadir comida -->
-  <div class="mt-3">
+  <div class="mt-4 text-center">
     <button class="btn-crear-comida" (click)="abrirDialogoCrearComida()">+ Añadir comida</button>
   </div>

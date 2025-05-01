@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-resumen-comidas-diario',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './resumen-comidas-diario.component.html',
   styleUrl: './resumen-comidas-diario.component.css'
 })
@@ -18,5 +19,5 @@ export class ResumenComidasDiarioComponent {
     proteinasPorcentaje: number;
   };
 
-  // Ya no necesitamos inicializar el resumen aquí, lo recibiremos como Input
+  // No se necesitan métodos adicionales ya que solo se aplican cambios de color basados en condiciones simples
 }

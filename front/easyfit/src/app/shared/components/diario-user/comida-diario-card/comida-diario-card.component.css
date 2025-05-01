@@ -1,4 +1,37 @@
+.card-comida {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.card-comida:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
 .text-total{
-    font-size: 20px;
-    color:#0099ff; ;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+.tabla-estilo {
+  margin-bottom: 0;
+}
+
+.tabla-estilo th {
+  color: #444;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.tabla-estilo td {
+  color: #555;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.tabla-estilo .text-muted {
+  color: #888 !important;
+  font-style: italic;
 }
