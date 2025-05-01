@@ -10,7 +10,7 @@ import { Component, Input } from '@angular/core';
 export class ResumenComidasDiarioComponent {
   
   @Input() resumen!: {
-    kcalObjetivo: number ;
+    kcalObjetivo: number;
     kcalConsumidas: number;
     kcalRestantes: number;
     carbohidratosPorcentaje: number;
@@ -18,15 +18,5 @@ export class ResumenComidasDiarioComponent {
     proteinasPorcentaje: number;
   };
 
-  constructor() {
-    this.resumen = {
-      kcalObjetivo: 2500,
-      kcalConsumidas: 2000,
-      kcalRestantes: 500,
-      carbohidratosPorcentaje: 50,
-      grasasPorcentaje: 30,
-      proteinasPorcentaje: 20,
-      
-    }
-  }
+  // Ya no necesitamos inicializar el resumen aquí, lo recibiremos como Input
 }

@@ -6,6 +6,8 @@ import { IComidaDiariaDto } from '../../../models/interfaces/IComidaDiario';
 import Swal from 'sweetalert2';
 import { ComidaDiarioCardComponent } from "../../../shared/components/diario-user/comida-diario-card/comida-diario-card.component";
 import { ActivatedRoute, Router } from '@angular/router';
+import { DashboardService } from '../../../models/services/dashboard.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-diario-user',
@@ -17,11 +19,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DiarioUserComponent {
   arrayComidas: IComidaDiariaDto[] = [];
   fechaSeleccionada: Date = new Date();
+  
+  // Datos para el resumen diario
+  resumenDiario = {
+    kcalObjetivo: 2500,
+    kcalConsumidas: 2000,
+    kcalRestantes: 500,
+    carbohidratosPorcentaje: 50,
+    grasasPorcentaje: 25,
+    proteinasPorcentaje: 25
+  };
 
   constructor(
     private comidaService: ComidaService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dashboardService: DashboardService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -31,7 +45,75 @@ export class DiarioUserComponent {
       this.fechaSeleccionada = fechaParam ? new Date(fechaParam) : new Date();
 
       this.obtenerComidas();
+      this.obtenerResumenDiario();
     });
+  }
+
+  // Obtenemos el resumen del día directamente del backend
+  obtenerResumenDiario(): void {
+    const fechaString = formatDate(this.fechaSeleccionada, 'yyyy-MM-dd', 'en-US');
+    
+    this.http.get<any>(`http://localhost:9008/dashboard/resumendiario`).subscribe({
+      next: (data) => {
+        // Guardamos los datos básicos de calorías
+        this.resumenDiario.kcalObjetivo = data.kcalObjetivo;
+        this.resumenDiario.kcalConsumidas = data.kcalConsumidas;
+        this.resumenDiario.kcalRestantes = data.kcalObjetivo - data.kcalConsumidas;
+        
+        // Calculamos los porcentajes totales de macros basados en los alimentos del día
+        this.calcularPorcentajesMacros();
+      },
+      error: (error) => {
+        console.error('Error al obtener resumen diario:', error);
+      }
+    });
+  }
+
+  // Calculamos los porcentajes de macros basados en las comidas del día
+  calcularPorcentajesMacros(): void {
+    let totalProteinas = 0;
+    let totalCarbohidratos = 0;
+    let totalGrasas = 0;
+    
+    // Sumamos todos los macros de cada alimento en cada comida
+    this.arrayComidas.forEach(comida => {
+      comida.alimentos.forEach(alimento => {
+        totalProteinas += alimento.proteinas || 0;
+        totalCarbohidratos += alimento.carbohidratos || 0;
+        totalGrasas += alimento.grasas || 0;
+      });
+    });
+    
+    const totalMacros = totalProteinas + totalCarbohidratos + totalGrasas;
+    
+    if (totalMacros > 0) {
+      // Calculamos los porcentajes redondeados
+      this.resumenDiario.proteinasPorcentaje = Math.round((totalProteinas / totalMacros) * 100);
+      this.resumenDiario.carbohidratosPorcentaje = Math.round((totalCarbohidratos / totalMacros) * 100);
+      this.resumenDiario.grasasPorcentaje = Math.round((totalGrasas / totalMacros) * 100);
+      
+      // Ajustamos para asegurar que sumen 100%
+      const suma = this.resumenDiario.proteinasPorcentaje + 
+                  this.resumenDiario.carbohidratosPorcentaje + 
+                  this.resumenDiario.grasasPorcentaje;
+      
+      if (suma !== 100) {
+        // Ajustamos el mayor valor para que todo sume 100
+        const diff = 100 - suma;
+        if (totalProteinas >= totalCarbohidratos && totalProteinas >= totalGrasas) {
+          this.resumenDiario.proteinasPorcentaje += diff;
+        } else if (totalCarbohidratos >= totalProteinas && totalCarbohidratos >= totalGrasas) {
+          this.resumenDiario.carbohidratosPorcentaje += diff;
+        } else {
+          this.resumenDiario.grasasPorcentaje += diff;
+        }
+      }
+    } else {
+      // Valores por defecto si no hay datos
+      this.resumenDiario.proteinasPorcentaje = 25;
+      this.resumenDiario.carbohidratosPorcentaje = 50;
+      this.resumenDiario.grasasPorcentaje = 25;
+    }
   }
 
   // Pedimos al backend las comidas del día seleccionado
@@ -41,6 +123,8 @@ export class DiarioUserComponent {
     this.comidaService.getComidasDelDia(fechaString).subscribe({
       next: (data) => {
         this.arrayComidas = data;
+        // Actualizamos el resumen después de obtener las comidas
+        this.calcularPorcentajesMacros();
       },
       error: () => {
         console.error('Error al obtener comidas');
@@ -81,7 +165,10 @@ export class DiarioUserComponent {
         };
 
         this.comidaService.crearComida(nuevaComida).subscribe({
-          next: () => this.obtenerComidas(),
+          next: () => {
+            this.obtenerComidas();
+            this.obtenerResumenDiario();
+          },
           error: () => {
             Swal.fire('Error', 'No se pudo crear la comida', 'error');
           }

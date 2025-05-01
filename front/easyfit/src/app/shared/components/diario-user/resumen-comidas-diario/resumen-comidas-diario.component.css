@@ -4,7 +4,7 @@
 
 .resumen-box {
   width: 100%;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
   background-color: #fff;
 }
 
@@ -14,29 +14,30 @@
 
 .resumen-textos {
   font-size: 0.95rem;
-  color: #474747;
+  color: #333;
 }
 
 .resumen-valor {
-  font-size: 1.15rem;
-  color: #474747;
+  font-size: 1.2rem;
+  color: #333;
 }
 
 .resumen-label {
   font-size: 0.8rem;
-  color: #999;
+  color: #777;
 }
 
 .tabla-macros {
   font-size: 0.9rem;
-  color: #474747;
+  color: #333;
   border-collapse: collapse;
 }
 
 .tabla-macros th,
 .tabla-macros td {
-  padding: 0.2rem 0.5rem;
+  padding: 0.3rem 0.5rem;
   border: none;
+  text-align: center;
 }
 
 .tabla-macros thead {
@@ -45,5 +46,9 @@
 
 .tabla-macros thead th {
   font-weight: 600;
-  color: #555;
+  color: #444;
+}
+
+.tabla-macros tbody th {
+  text-align: left;
 }
