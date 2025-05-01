@@ -49,19 +49,15 @@ export class DiarioUserComponent {
     });
   }
 
-  // Obtenemos el resumen del día directamente del backend
-  obtenerResumenDiario(): void {
-    const fechaString = formatDate(this.fechaSeleccionada, 'yyyy-MM-dd', 'en-US');
-    
+  // Obtenemos el valor de calorías objetivo del usuario desde el backend
+  obtenerResumenDiario(): void {    
     this.http.get<any>(`http://localhost:9008/dashboard/resumendiario`).subscribe({
       next: (data) => {
-        // Guardamos los datos básicos de calorías
+        // Solo obtenemos el objetivo de calorías del backend
         this.resumenDiario.kcalObjetivo = data.kcalObjetivo;
-        this.resumenDiario.kcalConsumidas = data.kcalConsumidas;
-        this.resumenDiario.kcalRestantes = data.kcalObjetivo - data.kcalConsumidas;
         
-        // Calculamos los porcentajes totales de macros basados en los alimentos del día
-        this.calcularPorcentajesMacros();
+        // El resto lo calculamos a partir de las comidas del día seleccionado
+        this.calcularResumenDiarioCompleto();
       },
       error: (error) => {
         console.error('Error al obtener resumen diario:', error);
@@ -69,36 +65,46 @@ export class DiarioUserComponent {
     });
   }
 
-  // Calculamos los porcentajes de macros basados en las comidas del día
-  calcularPorcentajesMacros(): void {
+  // Calculamos todo el resumen directamente a partir de los alimentos en las comidas del día
+  calcularResumenDiarioCompleto(): void {
+    // Reiniciamos contadores
+    this.resumenDiario.kcalConsumidas = 0;
     let totalProteinas = 0;
     let totalCarbohidratos = 0;
     let totalGrasas = 0;
     
-    // Sumamos todos los macros de cada alimento en cada comida
+    // Sumamos todos los valores de cada alimento en cada comida
     this.arrayComidas.forEach(comida => {
       comida.alimentos.forEach(alimento => {
+        // Sumamos calorías
+        this.resumenDiario.kcalConsumidas += alimento.kcal || 0;
+        
+        // Sumamos macronutrientes
         totalProteinas += alimento.proteinas || 0;
         totalCarbohidratos += alimento.carbohidratos || 0;
         totalGrasas += alimento.grasas || 0;
       });
     });
     
+    // Calculamos los restantes
+    this.resumenDiario.kcalRestantes = this.resumenDiario.kcalObjetivo - this.resumenDiario.kcalConsumidas;
+    
+    // Calculamos porcentajes de macros
     const totalMacros = totalProteinas + totalCarbohidratos + totalGrasas;
     
     if (totalMacros > 0) {
-      // Calculamos los porcentajes redondeados
+      // Porcentajes redondeados
       this.resumenDiario.proteinasPorcentaje = Math.round((totalProteinas / totalMacros) * 100);
       this.resumenDiario.carbohidratosPorcentaje = Math.round((totalCarbohidratos / totalMacros) * 100);
       this.resumenDiario.grasasPorcentaje = Math.round((totalGrasas / totalMacros) * 100);
       
-      // Ajustamos para asegurar que sumen 100%
+      // Ajustamos para que sumen 100%
       const suma = this.resumenDiario.proteinasPorcentaje + 
                   this.resumenDiario.carbohidratosPorcentaje + 
                   this.resumenDiario.grasasPorcentaje;
       
-      if (suma !== 100) {
-        // Ajustamos el mayor valor para que todo sume 100
+      if (suma !== 100 && suma > 0) {
+        // Ajustamos el mayor valor
         const diff = 100 - suma;
         if (totalProteinas >= totalCarbohidratos && totalProteinas >= totalGrasas) {
           this.resumenDiario.proteinasPorcentaje += diff;
@@ -109,7 +115,7 @@ export class DiarioUserComponent {
         }
       }
     } else {
-      // Valores por defecto si no hay datos
+      // Valores por defecto
       this.resumenDiario.proteinasPorcentaje = 25;
       this.resumenDiario.carbohidratosPorcentaje = 50;
       this.resumenDiario.grasasPorcentaje = 25;
@@ -123,8 +129,8 @@ export class DiarioUserComponent {
     this.comidaService.getComidasDelDia(fechaString).subscribe({
       next: (data) => {
         this.arrayComidas = data;
-        // Actualizamos el resumen después de obtener las comidas
-        this.calcularPorcentajesMacros();
+        // Actualizamos el resumen con las comidas obtenidas
+        this.calcularResumenDiarioCompleto();
       },
       error: () => {
         console.error('Error al obtener comidas');
@@ -167,7 +173,7 @@ export class DiarioUserComponent {
         this.comidaService.crearComida(nuevaComida).subscribe({
           next: () => {
             this.obtenerComidas();
-            this.obtenerResumenDiario();
+            // El resumen se actualizará automáticamente en obtenerComidas()
           },
           error: () => {
             Swal.fire('Error', 'No se pudo crear la comida', 'error');
