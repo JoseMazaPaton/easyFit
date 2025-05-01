@@ -36,15 +36,15 @@
         <tbody>
           <tr>
             <th class="fw-semibold">Total</th>
-            <td>{{ resumen.carbohidratosPorcentaje }}%</td>
-            <td>{{ resumen.grasasPorcentaje }}%</td>
-            <td>{{ resumen.proteinasPorcentaje }}%</td>
+            <td>{{ resumen.carbohidratosPorcentaje || 0 }}%</td>
+            <td>{{ resumen.grasasPorcentaje || 0 }}%</td>
+            <td>{{ resumen.proteinasPorcentaje || 0 }}%</td>
           </tr>
           <tr>
             <th class="fw-semibold">Objetivo</th>
-            <td>50%</td>
-            <td>25%</td>
-            <td>25%</td>
+            <td>{{ 50 }}%</td>
+            <td>{{ 25 }}%</td>
+            <td>{{ 25 }}%</td>
           </tr>
         </tbody>
       </table>

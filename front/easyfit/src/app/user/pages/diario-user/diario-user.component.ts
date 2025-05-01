@@ -73,21 +73,35 @@ export class DiarioUserComponent {
     let totalCarbohidratos = 0;
     let totalGrasas = 0;
     
+    // Variable para verificar si hay al menos un alimento
+    let hayAlimentos = false;
+    
     // Sumamos todos los valores de cada alimento en cada comida
     this.arrayComidas.forEach(comida => {
-      comida.alimentos.forEach(alimento => {
-        // Sumamos calorías
-        this.resumenDiario.kcalConsumidas += alimento.kcal || 0;
-        
-        // Sumamos macronutrientes
-        totalProteinas += alimento.proteinas || 0;
-        totalCarbohidratos += alimento.carbohidratos || 0;
-        totalGrasas += alimento.grasas || 0;
-      });
+      if (comida.alimentos && comida.alimentos.length > 0) {
+        hayAlimentos = true;
+        comida.alimentos.forEach(alimento => {
+          // Sumamos calorías
+          this.resumenDiario.kcalConsumidas += alimento.kcal || 0;
+          
+          // Sumamos macronutrientes
+          totalProteinas += alimento.proteinas || 0;
+          totalCarbohidratos += alimento.carbohidratos || 0;
+          totalGrasas += alimento.grasas || 0;
+        });
+      }
     });
     
     // Calculamos los restantes
     this.resumenDiario.kcalRestantes = this.resumenDiario.kcalObjetivo - this.resumenDiario.kcalConsumidas;
+    
+    // Si no hay alimentos, establecemos los macronutrientes a 0
+    if (!hayAlimentos) {
+      this.resumenDiario.proteinasPorcentaje = 0;
+      this.resumenDiario.carbohidratosPorcentaje = 0;
+      this.resumenDiario.grasasPorcentaje = 0;
+      return;
+    }
     
     // Calculamos porcentajes de macros
     const totalMacros = totalProteinas + totalCarbohidratos + totalGrasas;
@@ -115,10 +129,10 @@ export class DiarioUserComponent {
         }
       }
     } else {
-      // Valores por defecto
-      this.resumenDiario.proteinasPorcentaje = 25;
-      this.resumenDiario.carbohidratosPorcentaje = 50;
-      this.resumenDiario.grasasPorcentaje = 25;
+      // Valores a 0 si no hay macros
+      this.resumenDiario.proteinasPorcentaje = 0;
+      this.resumenDiario.carbohidratosPorcentaje = 0;
+      this.resumenDiario.grasasPorcentaje = 0;
     }
   }
 
