@@ -52,7 +52,7 @@ export class CategoriasAdminComponent {
   onEliminarCategoria(categoria: Categoria) {
     Swal.fire({
       title: '¿Estás seguro?',
-      text: `Esta acción eliminará la categoría "${categoria.nombre}".`,
+      text: `Esta acción eliminará la categoría "${categoria.nombre}" y todos los alimentos de la categoria.`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
@@ -78,7 +78,6 @@ export class CategoriasAdminComponent {
       }
     });
   }
-  
 
   cerrarFormulario() {
     this.formularioVisible = false;

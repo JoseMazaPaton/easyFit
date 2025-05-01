@@ -3,6 +3,7 @@ import { Alimento } from '../../../../models/interfaces/alimento';
 import { Categoria } from '../../../../models/interfaces/categoria';
 import { CommonModule } from '@angular/common';
 import { CategoriasService } from '../../../../models/services/categorias.service';
+import { AuthService } from '../../../../models/services/auth.service';
 
 @Component({
   selector: 'app-alimentos-lista',
@@ -19,12 +20,14 @@ export class AlimentosListaComponent {
   @Output() eliminarAlimento = new EventEmitter<Alimento>();
   @Output() seleccionarAlimento = new EventEmitter<Alimento>();
 
+  role : string = '';
   categorias: Categoria[] = [];
   categoriaMap: Record<number, string> = {};
 
-  constructor(private categoriaService: CategoriasService) {}
+  constructor(private categoriaService: CategoriasService , private authService: AuthService ) {}
 
   ngOnInit(): void {
+    this.role = this.authService.obtenerRol();
     this.categoriaService.categorias$.subscribe((categorias: Categoria[]) => {
       this.categorias = categorias;
       this.generarCategoriaMap(categorias);

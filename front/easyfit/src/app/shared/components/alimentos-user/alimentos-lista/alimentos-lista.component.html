@@ -29,6 +29,17 @@
               <td>{{ alimento.grasas }} gr</td>
               <td>{{ alimento.kcal }} gr</td>
 
+              @if (role === 'ROL_ADMIN') {
+                <td class="acciones">
+                  <button class="btn-accion" (click)="onEditar(alimento)">
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+                  <button class="btn-accion eliminar" (click)="onEliminar(alimento)">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
+              }
+
               @if (modo === 'favoritos') {
                 <td class="acciones">
                   <button class="btn-accion" (click)="onEditar(alimento)">

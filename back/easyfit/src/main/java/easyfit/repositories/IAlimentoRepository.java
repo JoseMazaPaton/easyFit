@@ -10,5 +10,8 @@ public interface IAlimentoRepository extends JpaRepository<Alimento, Integer>{
 
 	
 	public List<Alimento> findByNombreContainingIgnoreCase(String nombre);
+	
 	List<Alimento> findByCreadoPor_Email(String email);
+	
+	List<Alimento> findByCategoria_idCategoria(int idCategoria);
 }

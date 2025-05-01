@@ -19,11 +19,8 @@ export class NavbarComponent {
   usuario!: ILoginUsuario;
 
   ngOnInit(): void {
-
     this.role = this.authService.obtenerRol();
     this.usuario = this.authService.obtenerUsuario(); 
-    console.log('[Navbar] Rol detectado:', this.role);
-    console.log('[Navbar] Usuario:', this.usuario);
   }
 
   logOut(): void {
