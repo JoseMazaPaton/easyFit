@@ -21,13 +21,10 @@ export class ObjetivoGeneralCardComponent {
 
   opcionesObjetivo = ['PERDERPESO', 'MANTENER', 'GANARPESO'];
 
-  // feedback visual tras guardado
-  guardadoPesoActual = false;
-  guardadoPesoObjetivo = false;
-  guardadoObjetivo = false;
-
-  constructor(private fb: FormBuilder, 
-              private objetivoService: ObjetivoService) {}
+  constructor(
+    private fb: FormBuilder,
+    private objetivoService: ObjetivoService
+  ) {}
 
   ngOnInit(): void {
     this.formPesoActual = this.fb.group({
@@ -41,50 +38,36 @@ export class ObjetivoGeneralCardComponent {
     this.formObjetivo = this.fb.group({
       objetivoUsuario: [this.objetivo.objetivoUsuario, Validators.required]
     });
+
+    this.suscribirCambios();
   }
 
-  guardarPesoActual() {
-    if (this.formPesoActual.valid) {
-      this.objetivoService.actualizarPesoActual(this.formPesoActual.value).subscribe({
-        next: () => {
-          this.resetChecks();
-          this.guardadoPesoActual = true;
-          setTimeout(() => this.actualizado.emit(), 500)
-        },
-        error: err => console.error('❌ Error al actualizar peso actual', err)
-      });
-    }
-  }
+  private suscribirCambios(): void {
+    this.formPesoActual.valueChanges.subscribe(value => {
+      if (this.formPesoActual.valid) {
+        this.objetivoService.actualizarPesoActual(value).subscribe({
+          next: () => this.actualizado.emit(),
+          error: err => console.error('❌ Error al actualizar peso actual', err)
+        });
+      }
+    });
 
-  guardarPesoObjetivo() {
-    if (this.formPesoObjetivo.valid) {
-      this.objetivoService.actualizarPesoObjetivo(this.formPesoObjetivo.value).subscribe({
-        next: () => {
-          this.resetChecks();
-          this.guardadoPesoObjetivo = true;
-          setTimeout(() => this.actualizado.emit(), 500)
-        },
-        error: err => console.error('❌ Error al actualizar peso objetivo', err)
-      });
-    }
-  }
+    this.formPesoObjetivo.valueChanges.subscribe(value => {
+      if (this.formPesoObjetivo.valid) {
+        this.objetivoService.actualizarPesoObjetivo(value).subscribe({
+          next: () => this.actualizado.emit(),
+          error: err => console.error('❌ Error al actualizar peso objetivo', err)
+        });
+      }
+    });
 
-  guardarObjetivo() {
-    if (this.formObjetivo.valid) {
-      this.objetivoService.actualizarObjetivoUsuario(this.formObjetivo.value).subscribe({
-        next: () => {
-          this.resetChecks();
-          this.guardadoObjetivo = true;
-          setTimeout(() => this.actualizado.emit(), 500)
-        },
-        error: err => console.error('❌ Error al actualizar objetivo', err)
-      });
-    }
-  }
-
-  private resetChecks(): void {
-    this.guardadoPesoActual = false;
-    this.guardadoPesoObjetivo = false;
-    this.guardadoObjetivo = false;
+    this.formObjetivo.valueChanges.subscribe(value => {
+      if (this.formObjetivo.valid) {
+        this.objetivoService.actualizarObjetivoUsuario(value).subscribe({
+          next: () => this.actualizado.emit(),
+          error: err => console.error('❌ Error al actualizar objetivo', err)
+        });
+      }
+    });
   }
 }

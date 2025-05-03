@@ -9,21 +9,8 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    border-spacing: 0 0.5rem;
     min-width: 1000px;
     table-layout: auto;
-  }
-  
-  thead {
-    color: #1f2937;
-  }
-  
-  thead th {
-    position: sticky;
-    top: 0;
-    background-color: white; 
-    z-index: 2;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); 
   }
   
   th {
@@ -125,9 +112,9 @@
   }
 
   .tabla-scroll-both {
-    max-height: 300px;        /* 👈 define aquí la altura máxima */
-    overflow-y: auto;         /* 👈 scroll vertical */
-    overflow-x: auto;         /* 👈 scroll horizontal */
+    max-height: 300px;        
+    overflow-y: auto;        
+    overflow-x: auto;         
     border: 1px solid #e5e7eb;
     border-radius: 0.75rem;
     position: relative;

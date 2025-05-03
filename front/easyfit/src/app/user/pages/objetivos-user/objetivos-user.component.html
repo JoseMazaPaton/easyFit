@@ -1,6 +1,6 @@
-<div class="objetivos-wrapper" @fadeIn>
+<div class="container-page mx-auto max-w-screen-lg px-4" >
 
-  <h1 class="titulos mb-1">Objetivos diarios</h1>
+  <h1 class="titulos mb-3">Objetivos diarios</h1>
   
   @if (!loading && objetivo && objetivo.valores) {
     <app-macros-card
@@ -9,19 +9,23 @@
     </app-macros-card>
   }
 
-  @if (!loading && objetivo) {
+  <div class="mt-3">  
+    @if (!loading && objetivo) {
     <app-objetivo-general-card
       [objetivo]="objetivo"
       (actualizado)="onActualizado()">
     </app-objetivo-general-card>
-  }
-
-  @if (!loading && objetivo) {
-    <app-actividad-objetivo-card
-      [objetivo]="objetivo"
-      (actualizado)="onActualizado()">
-    </app-actividad-objetivo-card>
-  }
+    }
+  </div>
+  
+  <div class="mt-3">
+    @if (!loading && objetivo) {
+      <app-actividad-objetivo-card
+        [objetivo]="objetivo"
+        (actualizado)="onActualizado()">
+      </app-actividad-objetivo-card>
+    }  
+  </div>
 
   @if (loading) {
     <div class="loading">

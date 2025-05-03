@@ -16,8 +16,8 @@
 
 .btn-fecha-icon {
   background-color: #ffffff;
-  color:   var(--color-secundario);
-  border: 3px solid var(--color-secundario);
+  color: var(--texto-secundario);
+  border: 3px solid var(--texto-secundario);
   border-radius: 5px;
   padding: 2px 5px;
   font-size: 14px;
@@ -25,7 +25,7 @@
 }
 
 .btn-fecha-icon:hover {
-  background-color: var(--color-secundario);
+  background-color: var(--texto-secundario);
   color: white;
 }
 

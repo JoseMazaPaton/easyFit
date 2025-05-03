@@ -1,5 +1,4 @@
 <div class="card-objetivo">
-
   <!-- Peso actual y objetivo -->
   <div class="pesos-inputs">
     <!-- Peso actual -->
@@ -11,14 +10,9 @@
             <input
               type="number"
               id="pesoActual"
-              formControlName="pesoActual"
-              (blur)="guardarPesoActual()" />
+              formControlName="pesoActual" />
             <span class="unidad">kg</span>
-            @if (guardadoPesoActual) {
-              <i class="fa-solid fa-floppy-disk check-icon visible"></i>
-            }
           </div>
-
         </div>
       </div>
     </form>
@@ -32,14 +26,9 @@
             <input
               type="number"
               id="pesoObjetivo"
-              formControlName="pesoObjetivo"
-              (blur)="guardarPesoObjetivo()" />
+              formControlName="pesoObjetivo" />
             <span class="unidad">kg</span>
-            @if (guardadoPesoObjetivo) {
-              <i class="fa-solid fa-floppy-disk check-icon visible"></i>
-            }
           </div>
-          
         </div>
       </div>
     </form>
@@ -50,15 +39,12 @@
     <div class="campo-card-objetivo">
       <label for="objetivoUsuario">Cambiar objetivo</label>
       <div class="select-wrapper-objetivo">
-        <select id="objetivoUsuario" formControlName="objetivoUsuario" (blur)="guardarObjetivo()">
+        <select formControlName="objetivoUsuario">
           <option value="">Seleccione...</option>
           @for (opcion of opcionesObjetivo; track opcion) {
             <option [value]="opcion">{{ opcion }}</option>
           }
         </select>
-        @if (guardadoObjetivo) {
-          <i class="fa-solid fa-floppy-disk check-icon visible"></i>
-        }
       </div>
     </div>
   </form>

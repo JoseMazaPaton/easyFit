@@ -1,22 +1,14 @@
 <div class="card-actividad">
-
   <!-- Actividad física -->
   <form [formGroup]="formActividad">
     <div class="campo-card">
       <label for="actividad">Nivel de actividad</label>
-      <div class="input-con-check">
-        <div class="select-wrapper-actividad">
-          <select id="actividad" formControlName="actividad" (blur)="guardarActividad()">
-            <option value="">Seleccione...</option>
-            @for (nivel of nivelesActividad; track nivel) {
-              <option [value]="nivel">{{ nivel }}</option>
-            }
-          </select>
-        </div>
-        @if (guardadoActividad) {
-          <i class="fa-solid fa-floppy-disk check-icon"></i>
+      <select id="actividad" formControlName="actividad">
+        <option value="">Seleccione...</option>
+        @for (nivel of nivelesActividad; track nivel) {
+          <option [value]="nivel">{{ nivel }}</option>
         }
-      </div>
+      </select>
     </div>
   </form>
 
@@ -24,20 +16,12 @@
   <form [formGroup]="formMetaSemanal">
     <div class="campo-card">
       <label for="opcionPeso">Meta semanal</label>
-      <div class="input-con-check">
-        <div class="select-wrapper-actividad">
-          <select id="opcionPeso" formControlName="opcionPeso" (blur)="guardarMeta()">
-            <option value="">Seleccione...</option>
-            @for (opcion of opcionesPeso; track opcion) {
-              <option [value]="opcion">{{ opcion }}</option>
-            }
-          </select>
-        </div>
-        @if (guardadoMeta) {
-          <i class="fa-solid fa-floppy-disk check-icon"></i>
+      <select id="opcionPeso" formControlName="opcionPeso">
+        <option value="">Seleccione...</option>
+        @for (opcion of opcionesPeso; track opcion) {
+          <option [value]="opcion">{{ opcion }}</option>
         }
-      </div>
+      </select>
     </div>
   </form>
-
 </div>

@@ -18,14 +18,7 @@ export class ActividadObjetivoCardComponent {
   formActividad!: FormGroup;
   formMetaSemanal!: FormGroup;
 
-  guardadoActividad = false;
-  guardadoMeta = false;
-
-  nivelesActividad = ['SEDENTARIO',
-    'LIGERO',
-    'MODERADO',
-    'ACTIVO',
-    'MUYACTIVO'];
+  nivelesActividad = ['SEDENTARIO', 'LIGERO', 'MODERADO', 'ACTIVO', 'MUYACTIVO'];
   opcionesPeso = ['LIGERO', 'MODERADO', 'INTENSO', 'MANTENER'];
 
   constructor(private fb: FormBuilder, private objetivoService: ObjetivoService) {}
@@ -38,29 +31,27 @@ export class ActividadObjetivoCardComponent {
     this.formMetaSemanal = this.fb.group({
       opcionPeso: [this.objetivo.opcionPeso, Validators.required]
     });
+
+    this.suscribirCambios();
   }
 
-  guardarActividad() {
-    if (this.formActividad.valid) {
-      this.objetivoService.actualizarActividad(this.formActividad.value).subscribe({
-        next: () => {
-          this.guardadoActividad = true,
-          setTimeout(() => this.actualizado.emit(), 500)
-        },
-        error: err => console.error('❌ Error al actualizar actividad', err)
-      });
-    }
-  }
+  private suscribirCambios(): void {
+    this.formActividad.valueChanges.subscribe(value => {
+      if (this.formActividad.valid) {
+        this.objetivoService.actualizarActividad(value).subscribe({
+          next: () => this.actualizado.emit(),
+          error: err => console.error('❌ Error al actualizar actividad', err)
+        });
+      }
+    });
 
-  guardarMeta() {
-    if (this.formMetaSemanal.valid) {
-      this.objetivoService.actualizarMetaSemanal(this.formMetaSemanal.value).subscribe({
-        next: () => {
-          this.guardadoMeta = true,
-          setTimeout(() => this.actualizado.emit(), 500)
-        },
-        error: err => console.error('❌ Error al actualizar meta semanal', err)
-      });
-    }
+    this.formMetaSemanal.valueChanges.subscribe(value => {
+      if (this.formMetaSemanal.valid) {
+        this.objetivoService.actualizarMetaSemanal(value).subscribe({
+          next: () => this.actualizado.emit(),
+          error: err => console.error('❌ Error al actualizar meta semanal', err)
+        });
+      }
+    });
   }
 }
