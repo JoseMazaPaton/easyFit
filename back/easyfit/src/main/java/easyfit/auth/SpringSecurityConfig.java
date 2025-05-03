@@ -87,6 +87,7 @@ public class SpringSecurityConfig {
                 // AUTH =================================================================================
                 .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/registro").permitAll()
                 .requestMatchers(HttpMethod.GET, "/auth/logout").authenticated()
+                .requestMatchers(HttpMethod.GET, "/auth/comprobaremail").permitAll()
 
                 // PÚBLICO =================================================================================
                 .requestMatchers(HttpMethod.GET, "/alimentos", "/alimentos/**", "/categorias/todas").permitAll()

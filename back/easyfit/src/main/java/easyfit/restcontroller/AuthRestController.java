@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import easyfit.models.dtos.auth.LoginRequestDto;
@@ -26,6 +28,7 @@ import easyfit.services.IAuthService;
 import easyfit.services.IProgresoService;
 import easyfit.services.IUsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
@@ -110,6 +113,36 @@ public class AuthRestController {
     	return ResponseEntity.ok(respuesta);
     	
     }
+    
+    @Operation(
+    	    summary = "Comprobar si un email ya está registrado",
+    	    description = "Devuelve true si el email está disponible para registro, false si ya está en uso."
+    	)
+    	@ApiResponses(value = {
+    	    @ApiResponse(
+    	        responseCode = "200",
+    	        description = "Resultado de la disponibilidad",
+    	        content = @Content(mediaType = "application/json")
+    	    ),
+    	    @ApiResponse(
+    	        responseCode = "500",
+    	        description = "Error interno del servidor",
+    	        content = @Content
+    	    )
+    	})
+    	@GetMapping("/comprobaremail")
+    	public ResponseEntity<?> comprobarEmailDisponible(
+    	    @Parameter(description = "Email que se desea comprobar", required = true)
+    	    @RequestParam String email
+    	) {
+    	    try {
+    	        boolean existe = authService.emailExiste(email);
+    	        return ResponseEntity.ok(Map.of("disponible", !existe));
+    	    } catch (Exception e) {
+    	        return ResponseEntity.internalServerError()
+    	                .body(Map.of("error", "Error al comprobar el email", "detalle", e.getMessage()));
+    	    }
+    	}
 
 
 

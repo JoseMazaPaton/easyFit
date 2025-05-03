@@ -17,6 +17,9 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, String>{
 	List<Usuario> findByFechaRegistroBetween(LocalDate inicio, LocalDate fin);
 
 	List<Usuario> findBySuspendidaFalse();
+	
+	boolean existsByEmail(String email);
+
 
 
 }

@@ -11,5 +11,7 @@ public interface IAuthService extends IGenericCrud<Usuario, String>{
 	LoginResponseDto login(LoginRequestDto loginDto);
 	
 	RegistroResponseDto altaUsuario (RegistroRequestDto registroDto);
+	
+	boolean emailExiste (String email);
 
 }
