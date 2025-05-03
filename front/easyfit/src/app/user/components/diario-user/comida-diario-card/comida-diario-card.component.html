@@ -1,12 +1,12 @@
-<div class="card-comida p-4 bg-white">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h5 class="mb-0 fw-bold" style="color: #222;">{{ comida.nombre }}</h5>
-    <span class="text-total">{{ calcularTotalKcal() }} kcal</span>
+<div class="card-comida p-3">
+  <div class="d-flex justify-content-between align-items-center mb-1 px-2">
+    <h5 class="text-comida">{{ comida.nombre }}</h5>
+    <span class="text-comida">{{ calcularTotalKcal() }} kcal</span>
   </div>
 
   <div class="table-responsive">
     <table class="table tabla-estilo table-sm align-middle mb-3">
-      <thead class="table-light text-center">
+      <thead class="text-center">
         <tr>
           <th>Alimento</th>
           <th>Marca</th>
@@ -36,14 +36,14 @@
           }
         } @else {
           <tr>
-            <td colspan="8" class="text-muted py-3">No hay alimentos en esta comida</td>
+            <td colspan="8" class="text-center text-muted py-3">No hay alimentos en esta comida</td>
           </tr>
         }
       </tbody>
     </table>
   </div>
 
-  <div class="d-flex gap-2 justify-content-start mt-3">
+  <div class="d-flex justify-content-start mt-3">
     <app-botones-comida-diario [comida]="comida" (refresh)="refresh.emit(); actualizarDatosComida()"></app-botones-comida-diario>
   </div>
 </div>

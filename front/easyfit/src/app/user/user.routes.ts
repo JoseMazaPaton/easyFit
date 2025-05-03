@@ -26,7 +26,7 @@ export const userRoutes: Routes = [
       {
         path: 'diario/alimento/:idComida',
         loadComponent: () =>
-          import('../shared/components/diario-user/agregar-alimento-diario-page/agregar-alimento-diario-page.component').then(
+          import('./components/diario-user/agregar-alimento-diario-page/agregar-alimento-diario-page.component').then(
             m => m.AgregarAlimentoDiarioPageComponent
           ),
       },
@@ -42,13 +42,6 @@ export const userRoutes: Routes = [
         loadComponent: () =>
           import('./pages/objetivos-user/objetivos-user.component').then(
             m => m.ObjetivosUserComponent
-          ),
-      },
-      {
-        path: 'perfil',
-        loadComponent: () =>
-          import('./pages/perfil-user/perfil-user.component').then(
-            m => m.PerfilUserComponent
           ),
       },
       {

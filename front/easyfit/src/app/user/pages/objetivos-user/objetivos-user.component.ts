@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ObjetivoResponse } from '../../../models/interfaces/objetivo-response';
 import { ObjetivoService } from '../../../models/services/objetivo.service';
-import { MacrosCardComponent } from '../../../shared/components/objetivos-user/macros-card/macros-card.component';
-import { ObjetivoGeneralCardComponent } from '../../../shared/components/objetivos-user/objetivo-general-card/objetivo-general-card.component';
-import { ActividadObjetivoCardComponent } from '../../../shared/components/objetivos-user/actividad-objetivo-card/actividad-objetivo-card.component';
+import { MacrosCardComponent } from '../../components/objetivo-user/macros-card/macros-card.component';
+import { ObjetivoGeneralCardComponent } from '../../components/objetivo-user/objetivo-general-card/objetivo-general-card.component';
+import { ActividadObjetivoCardComponent } from '../../components/objetivo-user/actividad-objetivo-card/actividad-objetivo-card.component';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({

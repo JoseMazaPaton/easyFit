@@ -3,9 +3,9 @@ import { Alimento } from '../../../models/interfaces/alimento';
 import { Categoria } from '../../../models/interfaces/categoria';
 import { AlimentosService } from '../../../models/services/alimentos.service';
 import { CategoriasService } from '../../../models/services/categorias.service';
-import { AlimentosListaComponent } from "../../../shared/components/alimentos-user/alimentos-lista/alimentos-lista.component";
-import { AlimentosFormularioComponent } from "../../../shared/components/alimentos-user/alimentos-formulario/alimentos-formulario.component";
-import { AlimentosFiltroComponent } from "../../../shared/components/alimentos-user/alimentos-filtro/alimentos-filtro.component";
+import { AlimentosListaComponent } from "../../../user/components/alimentos-user/alimentos-lista/alimentos-lista.component";
+import { AlimentosFormularioComponent } from "../../../user/components/alimentos-user/alimentos-formulario/alimentos-formulario.component";
+import { AlimentosFiltroComponent } from '../../../user/components/alimentos-user/alimentos-filtro/alimentos-filtro.component';
 
 @Component({
   selector: 'app-alimentos-admin',

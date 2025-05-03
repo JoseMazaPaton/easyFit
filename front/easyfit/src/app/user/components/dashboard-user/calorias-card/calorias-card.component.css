@@ -1,8 +1,8 @@
 .card-kcal {
   background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,19 +19,75 @@
   gap: 4px;
 }
 
+
+/* Textos */
+
 .titulo-kcal {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: #111;
+  color: var(--texto-principal);
   align-self: flex-start;
 }
 
 .subtitulo-kcal {
   font-size: 0.75rem;
-  color: #888;
+  color: var(--texto-terciario);
   align-self: flex-start;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
+
+.donut-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--texto-secundario);
+  display: block;
+  line-height: 1;
+}
+
+.donut-text {
+  font-size: 0.8rem;
+  color: var(--texto-terciario);
+}
+
+.dato {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dato span {
+  color: var(--texto-secundario);
+  font-weight: 400;
+  margin-right: 8px;
+}
+
+.dato strong {
+  font-size: 1.05rem;
+  margin-left: auto;
+}
+
+
+.objetivo strong {
+  color: #f4c542;
+}
+
+
+.consumidas strong {
+  color:  var(--color-principal);
+}
+
+/* Iconos*/
+
+.consumidas i {
+  color: var(--color-principal);
+}
+
+.objetivo i {
+  color: #f4c542;
+}
+
+
+/* Graifico*/
 
 .donut-wrapper {
   position: relative;
@@ -55,61 +111,3 @@ canvas {
   text-align: center;
 }
 
-.donut-value {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #333;
-  display: block;
-  line-height: 1;
-}
-
-.donut-text {
-  font-size: 0.8rem;
-  color: #666;
-}
-
-.kcal-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 16px;
-  font-size: 0.9rem;
-  min-width: 140px;
-}
-
-.dato {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.dato i {
-  font-size: 1rem;
-}
-
-.dato span {
-  color: #555;
-  font-weight: 500;
-  margin-right: 8px;
-}
-
-.dato strong {
-  font-size: 1.05rem;
-  margin-left: auto;
-}
-
-.objetivo i {
-  color: #f4c542;
-}
-
-.objetivo strong {
-  color: #f4c542;
-}
-
-.consumidas i {
-  color: #0099ff;
-}
-
-.consumidas strong {
-  color: #0099ff;
-}

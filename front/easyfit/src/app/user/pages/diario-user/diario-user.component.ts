@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ComidaService } from '../../../models/services/comida.service';
-import { ResumenComidasDiarioComponent } from "../../../shared/components/diario-user/resumen-comidas-diario/resumen-comidas-diario.component";
+import { ResumenComidasDiarioComponent } from "../../components/diario-user/resumen-comidas-diario/resumen-comidas-diario.component";
 import { CommonModule, formatDate } from '@angular/common';
 import { IComidaDiariaDto } from '../../../models/interfaces/IComidaDiario';
 import Swal from 'sweetalert2';
-import { ComidaDiarioCardComponent } from "../../../shared/components/diario-user/comida-diario-card/comida-diario-card.component";
+import { ComidaDiarioCardComponent } from "../../components/diario-user/comida-diario-card/comida-diario-card.component";
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardService } from '../../../models/services/dashboard.service';
 import { HttpClient } from '@angular/common/http';

@@ -2,18 +2,18 @@ import { Component, Input } from '@angular/core';
 import { Alimento } from '../../../../models/interfaces/alimento';
 import { AlimentosService } from '../../../../models/services/alimentos.service';
 import { AlimentosListaComponent } from "../../alimentos-user/alimentos-lista/alimentos-lista.component";
-import { AlimentosFiltroComponent } from "../../alimentos-user/alimentos-filtro/alimentos-filtro.component";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ComidaService } from '../../../../models/services/comida.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { AlimentosFiltroComponent } from "../../alimentos-user/alimentos-filtro/alimentos-filtro.component";
 
 
 @Component({
   selector: 'app-agregar-alimento-diario-page',
   standalone: true,
-  imports: [AlimentosListaComponent, AlimentosFiltroComponent, CommonModule ,FormsModule],
+  imports: [AlimentosListaComponent, CommonModule, FormsModule, AlimentosFiltroComponent],
   templateUrl: './agregar-alimento-diario-page.component.html',
   styleUrl: './agregar-alimento-diario-page.component.css'
 })

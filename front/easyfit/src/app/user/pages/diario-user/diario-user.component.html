@@ -1,11 +1,11 @@
-<div class="diario-container">
-  
-  <!-- Título y control de fecha en la misma fila -->
-  <div class="d-flex justify-content-between align-items-center flex-wrap mb-4 fecha-header">
-    <h2 class="fw-bold text-white mb-0">Resumen del día</h2>
+<div class="container-page mx-auto max-w-screen-lg px-4">
 
-    <div class="control-fecha-custom d-inline-flex align-items-center px-3 py-2">
-      <span class="fw-semibold me-3 text-dark">Tu diario de comidas para :</span>
+  <!-- Título y control de fecha en la misma fila -->
+  <div class="flex flex-wrap items-center justify-between mb-6 gap-4 fecha-header">
+    <h2 class="titulos">Resumen del día</h2>
+
+    <div class="flex items-center px-4 py-2 bg-white rounded-lg shadow-sm">
+      <span class="text-fecha mr-3">Tu diario de comidas para :</span>
 
       <button (click)="cambiarFecha(-1)" class="btn-fecha-icon">
         <i class="bi bi-chevron-left"></i>
@@ -22,12 +22,12 @@
   </div>
 
   <!-- Resumen nutricional (tarjetas) -->
-  <div class="mb-4">
+  <div class="mb-6">
     <app-resumen-comidas-diario [resumen]="resumenDiario"></app-resumen-comidas-diario>
   </div>
 
   <!-- Lista de comidas -->
-  <div class="lista-comidas d-flex flex-column gap-3">
+  <div class="flex flex-col gap-4">
     @for (comida of arrayComidas ; track $index) {
       <app-comida-diario-card 
         [comida]="comida" 
@@ -37,6 +37,7 @@
   </div>
 
   <!-- Botón añadir comida -->
-  <div class="mt-4 text-center">
-    <button class="btn-crear-comida" (click)="abrirDialogoCrearComida()">+ Añadir comida</button>
-  </div>
+  <div class="mt-6 text-left">
+    <button 
+      class="btn-fuera " (click)="abrirDialogoCrearComida()">+ Añadir comida</button>
+</div>

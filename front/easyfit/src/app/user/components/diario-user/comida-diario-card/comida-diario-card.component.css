@@ -1,0 +1,35 @@
+.card-comida {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  background-color: white;
+}
+
+.text-comida {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--texto-secundario);
+}
+
+.tabla-estilo {
+  margin-bottom: 0;
+}
+
+.tabla-estilo th {
+  border-top: 1px solid #eaeaea;
+  color: var(--texto-secundario);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.tabla-estilo td {
+  color: var(--texto-secundario);
+  font-weight: 400;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.tabla-estilo .text-muted {
+  color: #888 !important;
+  font-style: italic;
+}

@@ -3,10 +3,10 @@ import { DashboardService } from '../../../models/services/dashboard.service';
 import { ObjetivoService } from '../../../models/services/objetivo.service';
 import { ObjetivoResponse } from '../../../models/interfaces/objetivo-response';
 import { ResumenDiario } from '../../../models/interfaces/resumen-diario';
-import { CaloriasCardComponent } from "../../../shared/components/dashboard-user/calorias-card/calorias-card.component";
-import { ProgresoPesoCardComponent } from "../../../shared/components/dashboard-user/progreso-peso-card/progreso-peso-card.component";
+import { CaloriasCardComponent } from "../../components/dashboard-user/calorias-card/calorias-card.component";
+import { ProgresoPesoCardComponent } from "../../components/dashboard-user/progreso-peso-card/progreso-peso-card.component";
 import { HistorialPeso } from '../../../models/interfaces/historial-peso';
-import { ConsumoCaloriasSimplesComponent } from "../../../shared/components/dashboard-user/consumo-cal-card/consumo-cal-card.component";
+import { ConsumoCaloriasSimplesComponent } from "../../components/dashboard-user/consumo-cal-card/consumo-cal-card.component";
 import { AuthService } from '../../../models/services/auth.service';
 
 @Component({
