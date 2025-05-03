@@ -1,29 +1,4 @@
-.filtro {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background-color: #f1f5f9;
-    border-radius: 0.75rem;
-    padding: 0.5rem 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .icono {
-    color: #9ca3af;
-    font-size: 1rem;
-    margin-right: 0.5rem;
-  }
-  
-  input {
-    border: none;
-    background: transparent;
-    outline: none;
-    font-size: 1rem;
-    flex: 1;
-    color: #1f2937;
-    padding-right: 2rem; /* espacio para la X */
-  }
-  
+
   .btn-clear {
     position: absolute;
     right: 1rem;

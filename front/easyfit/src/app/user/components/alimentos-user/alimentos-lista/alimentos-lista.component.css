@@ -3,42 +3,42 @@
     background-color: #ffffff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     padding: 1rem;
-    overflow: visible; /* o simplemente quítalo */
+
   }
   
   table {
     width: 100%;
     border-collapse: collapse;
-    border-spacing: 0 0.5rem; /* espacio entre filas */
+    border-spacing: 0 0.5rem;
     min-width: 1000px;
     table-layout: auto;
   }
   
   thead {
-    background-color: transparent;
     color: #1f2937;
   }
+  
   thead th {
     position: sticky;
     top: 0;
-    background-color: white; /* o el color de tu tabla */
+    background-color: white; 
     z-index: 2;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* sutil sombra */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); 
   }
   
   th {
     text-align: left;
     padding: 0.75rem 1rem;
-    font-size: 0.85rem;
-    font-weight: 800;
-    color: #6b7280;
-
+    color: var(--texto-secundario);
+    font-weight: 700;
+    font-size: 1rem;
   }
   
   td {
     padding: 0.75rem 1rem;
-    font-size: 0.9rem;
-    color: #374151;
+   color: var(--texto-secundario);
+   font-weight: 400;
+    font-size: 0.8rem;
     background-color: #ffffff;
     border-top: 1px solid #e5e7eb;
     border-bottom: 1px solid #e5e7eb;
@@ -66,7 +66,7 @@
   }
 
   
-td, th {
+  td, th {
     padding: 0.75rem 1rem;
     white-space: normal;
     word-break: break-word;
@@ -75,13 +75,6 @@ td, th {
     max-width: 150px; /* Fuerza salto antes de expandir */
     }
   
-  /* td.nombre {
-    white-space: normal;
-    word-wrap: break-word;
-    word-break: break-word;
-    max-width: 180px; 
-    line-height: 1.2;
-  } */
   .mensaje-vacio {
     text-align: center;
     padding: 2rem;

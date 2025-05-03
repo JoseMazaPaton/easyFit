@@ -22,7 +22,7 @@
               <td class="align-middle">{{ usuario.sexo }}</td>
               <td class="align-middle">{{ usuario.fechaRegistro | date: 'dd/MM/yyyy' }}</td>
               <td class="align-middle">
-                <span class="fw-bold" [ngClass]="usuario.suspendida ? 'text-danger' : 'text-success'">
+                <span class="fw-bold" [ngClass]="usuario.suspendida ? 'text-desactivado' : 'text-activo'">
                   {{ usuario.suspendida ? 'Suspendido' : 'Activado' }}
                 </span>
               </td>

@@ -7,11 +7,13 @@
   --color-principal: #0099ff;
   --color-principal-light: #5ce1e6;
   --color-secundario: #7ed957;
-  --color-secundario--light: #c1ff72;
+  --color-secundario-light: #c1ff72;
 
   --texto-principal: #231f20;
   --texto-secundario: #545454;
   --texto-terciario: #a6a6a6;   
+
+  --color-texto-principal: #545454;
 
 }
 
@@ -66,28 +68,38 @@ main {
   background-color: #50d816;
 }
 
+/*Filtro de busqueda */
 
-/* Media queries */
-@media (max-width: 768px) {
-  .card-base {
-    padding: 1rem;
+.filtro {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #f1f5f9;
+    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    width: 500px;
   }
   
-  .table-custom th,
-  .table-custom td {
-    padding: 0.5rem;
-    font-size: 0.85rem;
+  .icono {
+    color: #9ca3af;
+    font-size: 1rem;
+    margin-right: 0.5rem;
   }
   
-  .btn-base {
-    padding: 0.4rem 0.75rem;
-    font-size: 0.9rem;
+  .filtro-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 1rem;
+    flex: 1;
+    color: #1f2937;
+    padding-right: 2rem;
   }
-}
+  
 
+/* Zona de registro */
 
-
-/* Estilos para el contenedor de la sección de registro */
 .titulo-seccion {
   color: var(--color-texto-principal);
   font-weight: bold;
@@ -138,6 +150,7 @@ main {
   color: #0099ff !important;
 }
 
+
 .btn-volver {
   color: #0099ff !important;
   border: 2px solid #0099ff !important;
@@ -151,8 +164,9 @@ main {
   color: white !important;
 }
 
-.error {
+
+.error{
   color: tomato;
   font-size: 80%;
   margin: 5px 0px 10px;
-} 
+}

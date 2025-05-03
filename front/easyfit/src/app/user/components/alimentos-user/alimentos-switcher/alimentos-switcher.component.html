@@ -1,14 +1,12 @@
-<nav class="switcher-tabs">
+<nav class="switcher-tabs mt-4">
     <button
-      class="tab"
-      [class.activo]="modo === 'todos'"
+      class="tab mr-6"
       (click)="cambiarModo('todos')">
       Lista de alimentos
     </button>
   
     <button
       class="tab"
-      [class.activo]="modo === 'favoritos'"
       (click)="cambiarModo('favoritos')">
       Mis alimentos
     </button>

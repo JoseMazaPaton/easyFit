@@ -1,7 +1,7 @@
 
 <div class="container-page">
 
-    <h1 class="titulos ">Lista de alimentos</h1>
+    <h1 class="titulos mb-2">Lista de alimentos</h1>
 
     <app-alimentos-switcher
         [modo]="modoActual"
@@ -20,7 +20,7 @@
     </app-alimentos-lista>
 
     @if (modoActual === 'favoritos') {
-        <button class="btn-add" (click)="abrirFormularioNuevoAlimento()">
+        <button class="btn-fuera mt-3" (click)="abrirFormularioNuevoAlimento()">
           <i class="fas fa-plus"></i> Añadir alimento
         </button>
     }

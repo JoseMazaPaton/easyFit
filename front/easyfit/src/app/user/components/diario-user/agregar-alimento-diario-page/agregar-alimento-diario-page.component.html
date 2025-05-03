@@ -2,12 +2,12 @@
     <div class="row justify-content-center">
       <!-- IZQUIERDA -->
       <div class="col-lg-7 col-md-12 mb-4 lado-izquierdo">
-        <h1 class="text-3xl font-bold text-white mb-5">Añadir alimento a Desayuno</h1>
+        <h1 class="titulos mb-5">Añadir alimento a Desayuno</h1>
   
         <!-- 🔍 Filtro reutilizable -->
         <app-alimentos-filtro (buscar)="onBuscar($event)"></app-alimentos-filtro>
   
-        <!-- 📋 Lista reutilizable -->
+        <!-- Lista reutilizable -->
         <app-alimentos-lista
           [alimentos]="alimentos"
           [modo]="'seleccionar'"
@@ -33,7 +33,7 @@
               <span class="fw-medium">porciones de <b class="text-primary">{{ alimentoSeleccionado.unidadMedida }}</b></span>
             </div>
   
-            <button class="btn btn-success px-4 fw-semibold" (click)="agregarAlimento()">+ Añadir a Desayuno</button>
+            <button class="btn-fuera px-4 mt-1 " (click)="agregarAlimento()">+ Añadir a Desayuno</button>
           </ng-container>
   
           <!-- Mensaje por defecto -->

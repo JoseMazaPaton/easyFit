@@ -22,7 +22,7 @@
 .slider {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #dc3545; /* rojo suspendido */
+  background-color: tomato; 
   transition: .4s;
   border-radius: 25px;
 }
@@ -42,7 +42,7 @@
 
 /* Cuando está activado */
 input:checked + .slider {
-  background-color: #28a745; /* verde activado */
+  background-color: var(--color-secundario); /* verde activado */
 }
 
 /* Movimiento del botón */
