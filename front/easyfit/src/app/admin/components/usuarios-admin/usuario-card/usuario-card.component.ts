@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { IUsuario } from '../../../models/interfaces/IUsuario';
 import { CommonModule } from '@angular/common';
-import { AdminService } from '../../../models/services/admin.service';
 import { UsuarioBotonesComponent } from "../usuario-botones/usuario-botones.component";
+import { IUsuario } from '../../../../models/interfaces/IUsuario';
+import { AdminService } from '../../../../models/services/admin.service';
 
 @Component({
   selector: 'app-usuario-card',

@@ -1,10 +1,10 @@
 <div class="card shadow-sm p-4 rounded-4 h-100 card-total">
-  <h6 class="fw-bold text-dark text-uppercase mb-3">Total de usuarios registrados</h6>
+  <h2 class="titulo mb-3">Estadisticas usuarios </h2>
 
   <!-- Usuarios registrados mes anterior -->
   <p class="mb-1 d-flex align-items-center gap-2">
-    <span class="text-primary fw-bold">{{ resumen?.registradosMesAnterior }}</span>
-    <span class="text-dark">USUARIOS REGISTRADOS EL MES PASADO</span>
+    <span class="numero">{{ resumen?.registradosMesAnterior }}</span>
+    <span class="texto">Usuarios registrados el mes pasado</span>
 
     @if (resumen && resumen.registradosMesAnterior < resumen.mediaRegistros6Meses) {
       <span class="text-danger ms-1">📉</span>
@@ -15,8 +15,8 @@
 
   <!-- Usuarios registrados este mes -->
   <p class="mb-1 d-flex align-items-center gap-2">
-    <span class="text-primary fw-bold">{{ resumen?.registradosEsteMes }}</span>
-    <span class="text-dark">USUARIOS REGISTRADOS ESTE MES</span>
+    <span class="numero">{{ resumen?.registradosEsteMes }}</span>
+    <span class="texto">Usuarios registrados este mes</span>
 
     @if (resumen && resumen.registradosEsteMes < resumen.mediaRegistros6Meses) {
       <span class="text-danger ms-1">📉</span>
@@ -27,15 +27,15 @@
 
   <!-- Media mensual -->
   <p class="mb-1">
-    <span class="text-dark">MEDIA DE REGISTROS AL MES :</span>
-    <span class="fw-bold text-primary">
-      {{ resumen?.mediaRegistros6Meses | number:'1.0-1' }} USUARIOS
+    <span class="numero">
+      {{ resumen?.mediaRegistros6Meses | number:'1.0-1' }} Usuarios -
     </span>
+    <span class="texto">Media de registros al mes</span>
   </p>
 
   <!-- Usuarios activos -->
   <p class="mb-0">
-    <span class="fw-bold text-primary">{{ resumen?.totalUsuariosActivos }}</span>
-    <span class="text-dark">USUARIOS ACTIVOS</span> <span>🔥</span>
+    <span class="numero">{{ resumen?.totalUsuariosActivos }}</span>
+    <span class="texto"> Usuarios activos</span> <span>🔥</span>
   </p>
 </div>

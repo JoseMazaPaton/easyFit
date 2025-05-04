@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IUsuario } from '../../../models/interfaces/IUsuario';
-import { finalize } from 'rxjs';
-import { AdminService } from '../../../models/services/admin.service';
+import { IUsuario } from '../../../../models/interfaces/IUsuario';
+import { AdminService } from '../../../../models/services/admin.service';
 
 @Component({
   selector: 'app-usuario-botones',

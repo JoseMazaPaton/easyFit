@@ -1,9 +1,7 @@
-import { Component, inject, ViewChild } from '@angular/core';
-import { UsuarioFiltroComponent } from "../../components/usuario-filtro/usuario-filtro.component";
-import { UsuarioCardComponent } from "../../components/usuario-card/usuario-card.component";
-import { IUsuario } from '../../../models/interfaces/IUsuario';
-import { AdminService } from '../../../models/services/admin.service';
+import { Component} from '@angular/core';
+import { UsuarioFiltroComponent } from "../../components/usuarios-admin/usuario-filtro/usuario-filtro.component";
 import { NgClass } from '@angular/common';
+import { UsuarioCardComponent } from '../../components/usuarios-admin/usuario-card/usuario-card.component';
 
 @Component({
   selector: 'app-usuarios-admin',

@@ -1,0 +1,47 @@
+/* textos */
+
+th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  color: var(--texto-secundario);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+td {
+  padding: 0.75rem 1rem;
+ color: var(--texto-secundario);
+ font-weight: 400;
+  font-size: 0.8rem;
+  background-color: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+  
+  .text-activo{
+    color: var(--color-secundario);
+  }
+
+  .text-desactivado{
+    color: tomato; 
+  }
+
+  /*Estilos tabla y scroll*/
+
+  .table-responsive::-webkit-scrollbar {
+    width: 10px; /* Más finito */
+  }
+  
+  .table-responsive::-webkit-scrollbar-thumb {
+    background-color: #9e9e9e; 
+    border-radius: 10px; 
+  }
+  
+  .table-responsive::-webkit-scrollbar-track {
+    background: #f8f9fa; 
+  }
+  
+  .table-responsive {
+    scrollbar-width: thin;
+    scrollbar-color: #9e9e9e #f8f9fa; 
+  }

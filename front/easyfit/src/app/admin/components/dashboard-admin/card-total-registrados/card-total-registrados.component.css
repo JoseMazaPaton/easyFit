@@ -1,0 +1,38 @@
+.card-total {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  height: 100%;
+}
+
+.titulo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--texto-principal);
+}
+
+.texto {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--texto-secundario);
+}
+
+.numero {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-principal);
+}
+
+.card-total span.text-danger {
+  font-size: 1rem;
+  color: #dc3545 !important;
+}
+
+.card-total span.text-success {
+  font-size: 1rem;
+  color: #28a745 !important; 
+}
+
+.card-total p:last-child {
+  margin-bottom: 0;
+}

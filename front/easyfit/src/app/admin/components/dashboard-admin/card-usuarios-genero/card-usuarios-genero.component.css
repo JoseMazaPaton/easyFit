@@ -1,0 +1,45 @@
+.card-dashboard {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.chart-container {
+  width: 140px;
+  height: 140px;
+}
+
+.datos-genero span {
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.titulo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--texto-principal);
+}
+
+.texto {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-principal);
+}
+
+.numero {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-principal);
+}
+
+.texto2 {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-principal-light);
+}
+
+.numero2 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-principal-light);
+}

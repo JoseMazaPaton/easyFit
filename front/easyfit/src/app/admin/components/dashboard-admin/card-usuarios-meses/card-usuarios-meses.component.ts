@@ -1,8 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { AdminService } from '../../../models/services/admin.service';
 import { CommonModule } from '@angular/common';
 import { NgChartsModule } from 'ng2-charts';
 import { Chart, registerables } from 'chart.js';
+import { AdminService } from '../../../../models/services/admin.service';
 
 Chart.register(...registerables);
 

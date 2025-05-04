@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AdminService } from '../../../models/services/admin.service';
 import { Chart, registerables } from 'chart.js';
+import { AdminService } from '../../../../models/services/admin.service';
 
 Chart.register(...registerables);
 
@@ -18,7 +18,7 @@ export class CardUsuariosGeneroComponent {
   totalMujeres: number = 0;
 
   constructor(private adminService: AdminService) {
-    Chart.register(...registerables); // ⚠️ MUY IMPORTANTE
+    Chart.register(...registerables); 
   }
 
   ngAfterViewInit(): void {

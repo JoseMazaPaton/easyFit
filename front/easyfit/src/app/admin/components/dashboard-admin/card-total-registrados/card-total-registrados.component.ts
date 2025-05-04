@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AdminService } from '../../../models/services/admin.service';
-import { IUsuarioResumen } from '../../../models/interfaces/IUsuarioResumen';
 import { CommonModule } from '@angular/common';
+import { IUsuarioResumen } from '../../../../models/interfaces/IUsuarioResumen';
+import { AdminService } from '../../../../models/services/admin.service';
 
 @Component({
   selector: 'app-card-total-registrados',

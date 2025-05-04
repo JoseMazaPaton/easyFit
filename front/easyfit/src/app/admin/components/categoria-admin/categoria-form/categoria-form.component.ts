@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Categoria } from '../../../models/interfaces/categoria';
+import { FormGroup, FormBuilder, Validators,ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Categoria } from '../../../../models/interfaces/categoria';
 
 @Component({
   selector: 'app-categoria-form',
@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './categoria-form.component.css'
 })
 export class CategoriaFormComponent {
+  
   @Input() categoria?: Categoria;
   @Output() cerrar = new EventEmitter<void>();
   @Output() eliminarCategoria = new EventEmitter<Categoria>();

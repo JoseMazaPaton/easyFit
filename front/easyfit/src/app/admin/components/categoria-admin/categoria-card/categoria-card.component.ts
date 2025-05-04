@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Categoria } from '../../../models/interfaces/categoria';
-import { CategoriaBotonesComponent } from "../categoria-botones/categoria-botones.component";
+import { Categoria } from '../../../../models/interfaces/categoria';
+import { CategoriaBotonesComponent } from '../categoria-botones/categoria-botones.component';
+
 
 @Component({
   selector: 'app-categoria-card',

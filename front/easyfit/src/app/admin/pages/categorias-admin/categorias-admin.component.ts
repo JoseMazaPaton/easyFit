@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { CategoriaFiltroComponent } from "../../components/categoria-filtro/categoria-filtro.component";
-import { CategoriaCardComponent } from "../../components/categoria-card/categoria-card.component";
-import { CategoriaFormComponent } from "../../components/categoria-form/categoria-form.component";
+import { CategoriaFiltroComponent } from "../../components/categoria-admin/categoria-filtro/categoria-filtro.component";
 import { Categoria } from '../../../models/interfaces/categoria';
 import { CategoriasService } from '../../../models/services/categorias.service';
 import Swal from 'sweetalert2';
+import { CategoriaCardComponent } from '../../components/categoria-admin/categoria-card/categoria-card.component';
+import { CategoriaFormComponent } from '../../components/categoria-admin/categoria-form/categoria-form.component';
 
 @Component({
   selector: 'app-categorias-admin',
