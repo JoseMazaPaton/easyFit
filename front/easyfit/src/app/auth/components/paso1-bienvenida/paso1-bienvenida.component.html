@@ -27,6 +27,9 @@
         <!-- Mensaje de error del email-->
         <p class="error" *ngIf="checkControl('email', 'required')">El email es obligatorio.</p>
         <p class="error" *ngIf="checkControl('email', 'email')">Introduce un email válido.</p>
+        <p class="error" *ngIf="checkControl('email', 'emailOcupado')">
+          Este email ya está registrado. Prueba con otro.
+        </p>
       </div>
 
       <!-- Botones -->

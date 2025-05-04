@@ -1,6 +1,6 @@
 
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { ILoginUsuario } from '../interfaces/ILoginUsuario';
@@ -67,5 +67,11 @@ export class AuthService {
   obtenerRol(): string {
     const usuario = this.obtenerUsuario();
     return usuario?.rol || '';
+  }
+
+  comprobarEmail(email: string): Observable<boolean> {
+    return this.http.get<{ disponible: boolean }>(`${this.baseUrl}/comprobaremail`, {
+      params: { email }
+    }).pipe(map(res => res.disponible));
   }
 }

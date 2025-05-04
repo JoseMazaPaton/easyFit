@@ -170,6 +170,16 @@ public class AuthImplService extends GenericCrudServiceImpl<Usuario,String> impl
 	    }
 	}
 
+	@Override
+	public boolean emailExiste(String email) {
+	    try {
+	        return usuarioRepository.existsByEmail(email);
+	    } catch (Exception e) {
+	        // Puedes registrar el error si quieres hacer seguimiento
+	        throw new RuntimeException("Error al comprobar el email: " + e.getMessage(), e);
+	    }
+	}
+
 
 
 
