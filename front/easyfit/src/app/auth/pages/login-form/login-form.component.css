@@ -9,14 +9,14 @@
 }
 
 .campo-estilo:focus {
-  border-color: #0099ff;
+  border-color: var(--color-principal);
   box-shadow: 0 0 5px rgba(0, 153, 255, 0.3);
 }
 
 /* Botón reutilizable estilo EasyFit */
 .btn-siguiente {
-  background-color: #0099ff;
-  border: 2px solid #0099ff;
+  background-color: var(--color-principal);
+  border: 2px solid var(--color-principal);
   color: white;
   font-weight: 500;
   transition: 0.3s ease;
@@ -25,5 +25,13 @@
 
 .btn-siguiente:hover {
   background-color: white;
-  color: #0099ff;
+  color: var(--color-principal);
+}
+
+
+.titulo-login {
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--color-principal);
+  text-align: center;
 }

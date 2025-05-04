@@ -1,8 +1,16 @@
 <section class="d-flex justify-content-center align-items-center fondo-gradiente" style="min-height: 100vh;">
   <div style="max-width: 420px; width: 100%;" class="px-3">
     <form class="bg-white rounded-4 shadow p-4" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-      <!-- Título -->
-      <h3 class="text-center fw-bold mb-4" style="color: #0099ff;">Inicio de sesión</h3>
+      
+      <!-- Título dinámico -->
+      <h3 class="titulo-login mb-4">{{ esAdmin ? 'Acceso Administrador' : 'Inicio de sesión' }}</h3>
+
+      <!-- Mensaje de error -->
+      @if (mensajeError) {
+        <div class="alert alert-danger text-center small mb-3">
+          {{ mensajeError }}
+        </div>
+      }
 
       <!-- Correo -->
       <div class="mb-3">
@@ -13,7 +21,8 @@
           placeholder="Dirección de email"
           class="form-control campo-estilo"
           required
-          ngModel />
+          ngModel
+          (input)="onInput()" />
       </div>
 
       <!-- Contraseña -->
@@ -25,7 +34,8 @@
           placeholder="Contraseña"
           class="form-control campo-estilo"
           required
-          ngModel />
+          ngModel
+          (input)="onInput()" />
         <a class="d-block text-end small mt-2 text-muted" href="#">¿Olvidaste la contraseña?</a>
       </div>
 
