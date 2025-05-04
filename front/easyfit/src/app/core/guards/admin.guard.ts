@@ -8,6 +8,6 @@ export const adminGuard: CanActivateFn = () => {
 
   if (authService.estaLogueado() && authService.obtenerRol() === 'ADMON') return true;
 
-  router.navigate(['/auth/login']);
+  router.navigate(['']);
   return false;
 };
