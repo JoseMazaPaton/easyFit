@@ -5,13 +5,14 @@ import { IComidaDiariaDto } from '../interfaces/IComidaDiario';
 import { IResumenComida } from '../interfaces/IResumenComida';
 import { IAgregarAlimento } from '../interfaces/IAgregarAlimento';
 import { IAlimentoCantidad } from '../interfaces/IAlimentoCantidad';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComidaService {
 
-  private apiUrl = `http://localhost:9008/comidas`;
+  private apiUrl= `${environment.apiUrl}/comidas`;
 
   private comidasSubject = new BehaviorSubject<IComidaDiariaDto[]>([]);
   public comidas$ = this.comidasSubject.asObservable();

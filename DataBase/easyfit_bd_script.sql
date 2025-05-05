@@ -1,5 +1,3 @@
--- Creación de la base de datos
-CREATE DATABASE IF NOT EXISTS easyfit_db;
 USE easyfit_db;
 
 -- Tabla de roles

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { ILoginUsuario } from '../interfaces/ILoginUsuario';
 import { IRegistroUsuario } from '../interfaces/IRegistroUsuario';
+import { environment } from '../../../environments/environment';
 
 
 
@@ -12,7 +13,8 @@ import { IRegistroUsuario } from '../interfaces/IRegistroUsuario';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:9008/auth'; // ruta del backend
+  
+  private baseUrl = `${environment.apiUrl}/auth`; // ruta del backend
 
   constructor(private http: HttpClient, private router: Router) {}
 

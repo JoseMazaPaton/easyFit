@@ -2,12 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Categoria } from '../interfaces/categoria';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriasService {
-  private apiUrl = 'http://localhost:9008/categorias';
+  
+  private apiUrl = `${environment.apiUrl}/categorias`;
 
   private categoriasSubject = new BehaviorSubject<Categoria[]>([]);
   public categorias$ = this.categoriasSubject.asObservable();

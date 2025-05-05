@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IUsuarioResumen } from '../interfaces/IUsuarioResumen';
 import { IUsuario } from '../interfaces/IUsuario';
-import { Categoria } from '../interfaces/categoria';
-import { IAlimento } from '../interfaces/IAlimento';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,8 @@ import { IAlimento } from '../interfaces/IAlimento';
 export class AdminService {
 
   // Ajusta esto a tu backend real
-  private readonly apiUrl = 'http://localhost:9008/admin/';
+  private readonly apiUrl = `${environment.apiUrl}/admin/`;
+
 
   constructor(private http: HttpClient) {}
 

@@ -4,13 +4,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ResumenDiario } from '../interfaces/resumen-diario';
 import { HistorialPeso } from '../interfaces/historial-peso';
 import { HistorialCalorias } from '../interfaces/historial-calorias';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
 
-  private apiUrl = 'http://localhost:9008/dashboard';
+  private apiUrl = `${environment.apiUrl}/dashboard`;
 
   constructor(private http: HttpClient) {}
 
