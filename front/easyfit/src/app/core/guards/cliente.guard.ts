@@ -6,7 +6,7 @@ export const clienteGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (authService.estaLogueado() && authService.obtenerRol() === 'CLIENTE') return true;
+  if (authService.estaLogueado() && authService.obtenerRol() === 'ROL_USUARIO') return true;
 
   router.navigate(['']);
   return false;
