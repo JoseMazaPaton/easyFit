@@ -51,10 +51,12 @@ export class DiarioUserComponent {
 
   // Obtenemos el valor de calorías objetivo del usuario desde el backend
   obtenerResumenDiario(): void {    
-    this.http.get<any>(`http://localhost:9008/dashboard/resumendiario`).subscribe({
+    this.dashboardService.resumenDiario$.subscribe({
       next: (data) => {
         // Solo obtenemos el objetivo de calorías del backend
-        this.resumenDiario.kcalObjetivo = data.kcalObjetivo;
+        if (data) {
+          this.resumenDiario.kcalObjetivo = data.kcalObjetivo;
+        }
         
         // El resto lo calculamos a partir de las comidas del día seleccionado
         this.calcularResumenDiarioCompleto();
