@@ -45,12 +45,10 @@ export class LoginFormComponent {
     }
 
     const { email, password } = loginForm.value;
-    console.log('Intentando login con:', email);
 
     this.authService.login(email, password).subscribe({
       next: (response) => {
-        console.log('Respuesta login:', response);
-        console.log('Rol recibido:', response.rol);
+
         
         // Normalizar rol (asegurándonos que no es undefined)
         const rol = response.rol ? response.rol.toUpperCase() : '';
@@ -60,14 +58,12 @@ export class LoginFormComponent {
         if (this.esAdmin && rol !== 'ROL_ADMIN') {
           this.mensajeError = 'Usuario o contraseña incorrectos.';
           loginForm.reset();
-          console.log('Acceso denegado: usuario normal intentando acceder como admin');
           return;
         }
 
         if (!this.esAdmin && rol === 'ROL_ADMIN') {
           this.mensajeError = 'Usuario o contraseña incorrectos.';
           loginForm.reset();
-          console.log('Acceso denegado: admin intentando acceder como usuario normal');
           return;
         }
 
@@ -77,22 +73,12 @@ export class LoginFormComponent {
           nombre: response.nombre,
           rol: response.rol
         });
-        console.log('Usuario y token guardados');
-
-        // Verificar qué valor de rol se está recibiendo para diagnosticar el problema
-        console.log('Redirigiendo según rol:', rol);
 
         // Redirigir según rol - Haciendo la comparación más flexible
         if (rol.includes('ADMIN')) {
-          console.log('Redirigiendo a admin dashboard');
           this.router.navigate(['/admin/dashboard'])
-            .then(success => console.log('Navegación completada:', success))
-            .catch(error => console.error('Error en navegación:', error));
         } else {
-          console.log('Redirigiendo a usuario dashboard');
           this.router.navigate(['/usuario/dashboard'])
-            .then(success => console.log('Navegación completada:', success))
-            .catch(error => console.error('Error en navegación:', error));
         }
       },
       error: (err) => {
