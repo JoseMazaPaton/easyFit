@@ -4,7 +4,7 @@ on:
   push:
     branches: [master]
     paths:
-      - 'front/FullJobApp/**'
+      - 'front/easyfit/**'
 
 jobs:
   build-and-deploy:
