@@ -30,6 +30,7 @@ export class LoginFormComponent {
       .map((segment: UrlSegment) => segment.path);
 
     this.esAdmin = rutaActual.includes('admin');
+    console.log('Es Admin:', this.esAdmin);
   }
 
   onInput(): void {
@@ -44,21 +45,29 @@ export class LoginFormComponent {
     }
 
     const { email, password } = loginForm.value;
+    console.log('Intentando login con:', email);
 
     this.authService.login(email, password).subscribe({
       next: (response) => {
-        const rol = response.rol?.toUpperCase(); // Normalizamos por si acaso
+        console.log('Respuesta login:', response);
+        console.log('Rol recibido:', response.rol);
+        
+        // Normalizar rol (asegurándonos que no es undefined)
+        const rol = response.rol ? response.rol.toUpperCase() : '';
+        console.log('Rol normalizado:', rol);
 
         // Usuario intenta acceder por ruta que no le corresponde
         if (this.esAdmin && rol !== 'ROL_ADMIN') {
           this.mensajeError = 'Usuario o contraseña incorrectos.';
           loginForm.reset();
+          console.log('Acceso denegado: usuario normal intentando acceder como admin');
           return;
         }
 
         if (!this.esAdmin && rol === 'ROL_ADMIN') {
           this.mensajeError = 'Usuario o contraseña incorrectos.';
           loginForm.reset();
+          console.log('Acceso denegado: admin intentando acceder como usuario normal');
           return;
         }
 
@@ -68,15 +77,26 @@ export class LoginFormComponent {
           nombre: response.nombre,
           rol: response.rol
         });
+        console.log('Usuario y token guardados');
 
-        // Redirigir según rol
-        if (rol === 'ROL_ADMIN') {
-          this.router.navigate(['/admin/dashboard']); 
+        // Verificar qué valor de rol se está recibiendo para diagnosticar el problema
+        console.log('Redirigiendo según rol:', rol);
+
+        // Redirigir según rol - Haciendo la comparación más flexible
+        if (rol.includes('ADMIN')) {
+          console.log('Redirigiendo a admin dashboard');
+          this.router.navigate(['/admin/dashboard'])
+            .then(success => console.log('Navegación completada:', success))
+            .catch(error => console.error('Error en navegación:', error));
         } else {
-          this.router.navigate(['/usuario/dashboard']);
+          console.log('Redirigiendo a usuario dashboard');
+          this.router.navigate(['/usuario/dashboard'])
+            .then(success => console.log('Navegación completada:', success))
+            .catch(error => console.error('Error en navegación:', error));
         }
       },
-      error: () => {
+      error: (err) => {
+        console.error('Error de login:', err);
         this.mensajeError = 'Usuario o contraseña incorrectos.';
         loginForm.reset();
       }
