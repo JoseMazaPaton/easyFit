@@ -13,7 +13,7 @@
   box-shadow: 0 0 5px rgba(0, 153, 255, 0.3);
 }
 
-/* Botón reutilizable estilo EasyFit */
+
 .btn-siguiente {
   background-color: var(--color-principal);
   border: 2px solid var(--color-principal);
