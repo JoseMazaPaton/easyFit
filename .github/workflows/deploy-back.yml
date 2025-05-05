@@ -28,14 +28,14 @@ jobs:
     - name: Añadir VPS al known_hosts
       run: |
         mkdir -p ~/.ssh
-        ssh-keyscan -H 51.255.50.181 >> ~/.ssh/known_hosts
+        ssh-keyscan -H 51.178.24.87 >> ~/.ssh/known_hosts
 
     - name: Desplegar WAR como ROOT en Tomcat del VPS
       run: |
         echo "$SSH_KEY" > private_key && chmod 600 private_key
 
         # Subir y renombrar el WAR a ROOT.war
-        scp -i private_key target/easyfit.war ubuntu@51.255.50.181:/tmp/ROOT.war
+        scp -i private_key target/easyfit.war ubuntu@51.178.24.87:/tmp/ROOT.war
 
         # Reemplazar el WAR actual y reiniciar Tomcat
         ssh -i private_key ubuntu@51.178.24.87 '

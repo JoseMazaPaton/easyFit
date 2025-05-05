@@ -37,7 +37,7 @@ jobs:
         ssh-keyscan 51.255.50.181 >> ~/.ssh/known_hosts
 
         # Subir los archivos generados al VPS
-        rsync -avz --include=".*" -e "ssh -i private_key" ./dist/easyfit/browser/ ubuntu@51.255.50.181:/tmp/angular_dist
+        rsync -avz --include=".*" -e "ssh -i private_key" ./dist/easyfit/browser/ ubuntu@51.178.24.87:/tmp/angular_dist
 
         # Mover los archivos a Apache (INCLUYENDO .htaccess)
         ssh -i private_key ubuntu@51.178.24.87 '
