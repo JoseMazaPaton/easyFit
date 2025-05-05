@@ -5,6 +5,7 @@ import { RegistroService } from '../../../models/services/registro.service';
 import { CommonModule } from '@angular/common';
 import { catchError, map, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../../models/services/auth.service';
 
 @Component({
   selector: 'app-paso1-bienvenida',
@@ -17,11 +18,11 @@ export class Paso1BienvenidaComponent {
 
   
   formPaso1!: FormGroup;
-  authService: any;
 
   constructor(
     private fb: FormBuilder, 
     private registroService: RegistroService, 
+    private authService: AuthService, 
     private router: Router,
     private http: HttpClient)
   {}
@@ -55,8 +56,8 @@ export class Paso1BienvenidaComponent {
       const email = control.value;
       if (!email) return of(null);
   
-      return this.http.get<{ disponible: boolean }>(`http://localhost:9008/auth/comprobaremail?email=${email}`).pipe(
-        map(res => res.disponible ? null : { emailOcupado: true }),
+      return this.authService.comprobarEmail(email).pipe(
+        map(res => res ? null : { emailOcupado: true }),
         catchError(() => of(null)) // no bloquea si falla
       );
     };

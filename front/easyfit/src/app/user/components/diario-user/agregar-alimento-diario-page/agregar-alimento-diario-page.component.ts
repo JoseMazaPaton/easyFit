@@ -42,15 +42,18 @@ export class AgregarAlimentoDiarioPageComponent {
     this.route.queryParams.subscribe(query => {
       this.fechaSeleccionada = query['fecha'] || '';
     });
+
+    
   }
 
-  // Buscar alimentos con texto
-  onBuscar(texto: string): void {
-    this.alimentosService.getAlimentos(texto).subscribe({
-      next: (res) => this.alimentos = res,
-      error: () => this.alimentos = []
-    });
-  }
+    // Buscar alimentos con texto
+    onBuscar(texto: string): void {
+      this.alimentosService.getAlimentos(texto).subscribe({
+        next: (res) => this.alimentos = res,
+        error: () => this.alimentos = []
+      });
+    }
+  
 
   // Guardamos el alimento elegido
   seleccionarAlimento(alimento: Alimento): void {
