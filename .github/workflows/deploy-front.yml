@@ -2,7 +2,7 @@ name: Deploy Frontend
 
 on:
   push:
-    branches: [main]
+    branches: [master]
     paths:
       - 'front/FullJobApp/**'
 
@@ -34,7 +34,7 @@ jobs:
 
         # Añadir la clave pública del VPS al known_hosts
         mkdir -p ~/.ssh
-        ssh-keyscan 51.255.50.181 >> ~/.ssh/known_hosts
+        ssh-keyscan 51.178.24.87 >> ~/.ssh/known_hosts
 
         # Subir los archivos generados al VPS
         rsync -avz --include=".*" -e "ssh -i private_key" ./dist/easyfit/browser/ ubuntu@51.178.24.87:/tmp/angular_dist
