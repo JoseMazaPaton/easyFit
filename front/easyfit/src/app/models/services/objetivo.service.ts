@@ -14,7 +14,7 @@ export class ObjetivoService {
   constructor(private http: HttpClient) { }
 
   /**
-   * Obtiene los objetivos del usuario (peso, actividad, kcal, macros, etc.)
+   * Obtiene los objetivos del usuario 
    */
   getObjetivosUsuario(): Observable<ObjetivoResponse> {
     return this.http.get<ObjetivoResponse>(`${this.apiUrl}/objetivos/misobjetivos`);
