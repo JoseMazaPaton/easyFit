@@ -71,9 +71,9 @@ export class LoginFormComponent {
 
         // Redirigir según rol
         if (rol === 'ROL_ADMIN') {
-          this.router.navigate(['/admin']); 
+          this.router.navigate(['/admin/dashboard']); 
         } else {
-          this.router.navigate(['/usuario']);
+          this.router.navigate(['/usuario/dashboard']);
         }
       },
       error: () => {
