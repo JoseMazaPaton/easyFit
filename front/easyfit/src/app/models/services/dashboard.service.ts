@@ -23,7 +23,6 @@ export class DashboardService {
     this.http.get<ResumenDiario>(`${this.apiUrl}/resumendiario`).subscribe({
       next: (data) => this.resumenDiarioSubject.next(data),
       error: (err) => {
-        console.error('[Resumen Diario] Error:', err);
         this.resumenDiarioSubject.next(null);
       }
     });
