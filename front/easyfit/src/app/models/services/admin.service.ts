@@ -10,7 +10,6 @@ import { environment } from '../../../environments/environment';
 })
 export class AdminService {
 
-  // Ajusta esto a tu backend real
   private readonly apiUrl = `${environment.apiUrl}/admin/`;
 
 
