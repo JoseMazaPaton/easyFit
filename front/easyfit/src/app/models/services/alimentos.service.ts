@@ -24,6 +24,12 @@ export class AlimentosService {
     return this.http.get<Alimento[]>(this.apiUrl, { params });
   }
 
+
+  /**
+   * Prueba despliegue
+   */
+
+
   /**
    * Obtener los alimentos creados por el usuario.
    */
