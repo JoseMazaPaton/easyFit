@@ -10,33 +10,14 @@ label {
   color: var(--texto-secundario);
 }
 
-.campo, .campo-doble {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.campo-doble {
-  flex-direction: row;
-  gap: 1rem;
-}
-
-.campo-doble .campo {
-  flex: 1;
-}
-
-input, select {
+input,
+select {
   text-align: center;
   padding: 0.5rem;
   border: 1px solid #d1d5db;
   border-radius: 0.5rem;
   background-color: rgb(237, 236, 236);
   color: var(--texto-secundario);
-}
-
-.acciones {
-  display: flex;
-  justify-content: flex-end;
 }
 
 .pesos-inputs {
@@ -53,24 +34,21 @@ input, select {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 350px;
+  gap: 0.75rem;
+  box-sizing: border-box;
 }
 
-.campo-card-objetivo {
-  background-color: #fff;
-  color: #111;
-  border-radius: 0.75rem;
-  padding: 1rem 1.25rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+.select-wrapper {
+  width: 100%;
 }
+
 
 .select-wrapper-objetivo {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  width: 150px;
+  width: 100%;
 }
 
 .input-unidad {
@@ -84,7 +62,6 @@ input, select {
   width: 60px;
   border-radius: 0.5rem;
   color: var(--texto-secundario);
-
 }
 
 .input-unidad span {
@@ -97,4 +74,49 @@ input, select {
   align-items: center;
   gap: 0.5rem;
   min-width: 100px;
+}
+
+@media (max-width: 767.98px) {
+  .campo-card {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .pesos-inputs {
+    display: flex;
+    flex-direction: column; /* ✅ fuerza vertical */
+    gap: 0.1rem;
+    width: 100%;
+  }
+  .campo-card label {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .campo-card .input-con-check,
+  .campo-card .select-wrapper {
+    flex-grow: 1;
+    max-width: 100%;
+  }
+
+  .campo-card input,
+  .campo-card select {
+    width: 100%;
+  }
+}
+
+.campo-card label {
+  margin: 0;
+  flex-shrink: 0;
+  width: 50%;
+}
+
+.campo-card .input-con-check,
+.campo-card .select-wrapper {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
 }

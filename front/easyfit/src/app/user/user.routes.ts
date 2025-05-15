@@ -15,6 +15,7 @@ export const userRoutes: Routes = [
           import('./pages/dashboard-user/dashboard-user.component').then(
             m => m.DashboardUserComponent
           ),
+        data: { animation: 'DashboardPage' } // 👈 aquí
       },
       {
         path: 'diario',
@@ -22,6 +23,7 @@ export const userRoutes: Routes = [
           import('./pages/diario-user/diario-user.component').then(
             m => m.DiarioUserComponent
           ),
+        data: { animation: 'DiarioPage' } // 👈 aquí
       },
       {
         path: 'diario/alimento/:idComida',
@@ -29,6 +31,7 @@ export const userRoutes: Routes = [
           import('./components/diario-user/agregar-alimento-diario-page/agregar-alimento-diario-page.component').then(
             m => m.AgregarAlimentoDiarioPageComponent
           ),
+        data: { animation: 'AgregarAlimentoPage' } // opcional, si quieres
       },
       {
         path: 'alimentos',
@@ -36,6 +39,7 @@ export const userRoutes: Routes = [
           import('./pages/alimentos-user/alimentos-user.component').then(
             m => m.AlimentosUserComponent
           ),
+        data: { animation: 'AlimentosPage' }
       },
       {
         path: 'objetivos',
@@ -43,6 +47,7 @@ export const userRoutes: Routes = [
           import('./pages/objetivos-user/objetivos-user.component').then(
             m => m.ObjetivosUserComponent
           ),
+        data: { animation: 'ObjetivosPage' }
       },
       {
         path: '',

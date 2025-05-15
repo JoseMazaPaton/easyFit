@@ -111,3 +111,34 @@ canvas {
   text-align: center;
 }
 
+@media (max-width: 767px) {
+  .card-kcal {
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .donut-wrapper {
+    width: 100px;
+    height: 100px;
+  }
+
+  .donut-value {
+    font-size: 1.3rem;
+  }
+
+  .kcal-info {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .dato {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dato strong {
+    margin-left: 0;
+    margin-top: 4px;
+  }
+}

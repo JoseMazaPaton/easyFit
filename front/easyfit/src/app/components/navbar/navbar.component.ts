@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { AuthService } from '../../models/services/auth.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ILoginUsuario } from '../../models/interfaces/ILoginUsuario';
@@ -13,7 +13,9 @@ import { ILoginUsuario } from '../../models/interfaces/ILoginUsuario';
 
 export class NavbarComponent {
 
-  private readonly authService: AuthService = inject(AuthService);
+   private readonly authService: AuthService = inject(AuthService);
+
+  @Output() linkClicked = new EventEmitter<void>(); // 👈 Añadir esto
 
   role: string = '';
   usuario!: ILoginUsuario;
@@ -25,5 +27,10 @@ export class NavbarComponent {
 
   logOut(): void {
     this.authService.logout();
+  }
+
+  // 👇 Método para emitir evento desde los enlaces
+  onNavLinkClick() {
+    this.linkClicked.emit();
   }
 }

@@ -8,31 +8,31 @@
     <!-- Zona de navegación -->
     <nav class="d-flex flex-column gap-3">
       @if (role === 'ROL_ADMIN') {
-        <a routerLink="/admin/dashboard" routerLinkActive="activo" class="nav-link-candidato">
+        <a routerLink="/admin/dashboard" (click)="onNavLinkClick()" routerLinkActive="activo" class="nav-link-candidato">
           <i class="fa-solid fa-chart-line me-2"></i> Dashboard
         </a>
-        <a routerLink="/admin/usuarios" routerLinkActive="activo" class="nav-link-candidato">
+        <a routerLink="/admin/usuarios" (click)="onNavLinkClick()" routerLinkActive="activo" class="nav-link-candidato">
           <i class="fa-solid fa-users me-2"></i> Gestión Usuarios
         </a>
-        <a routerLink="/admin/alimentos" routerLinkActive="activo" class="nav-link-candidato">
+        <a routerLink="/admin/alimentos" (click)="onNavLinkClick()" routerLinkActive="activo" class="nav-link-candidato">
           <i class="fa-solid fa-apple-whole me-2"></i> Gestión Alimentos
         </a>
-        <a routerLink="/admin/categorias" routerLinkActive="activo" class="nav-link-candidato">
+        <a routerLink="/admin/categorias" (click)="onNavLinkClick()" routerLinkActive="activo" class="nav-link-candidato">
           <i class="fa-solid fa-tags me-2"></i> Gestión Categorías
         </a>
       }
 
       @if (role === 'ROL_USUARIO') {
-        <a routerLink="/usuario/dashboard" routerLinkActive="activo" class="nav-link-candidato">
+        <a routerLink="/usuario/dashboard" (click)="onNavLinkClick()" routerLinkActive="activo" class="nav-link-candidato">
           <i class="fa-solid fa-chart-pie me-2"></i> Dashboard
         </a>
-        <a routerLink="/usuario/diario" routerLinkActive="activo" class="nav-link-candidato">
+        <a routerLink="/usuario/diario" (click)="onNavLinkClick()" routerLinkActive="activo" class="nav-link-candidato">
           <i class="fa-solid fa-calendar-days me-2"></i> Diario
         </a>
-        <a routerLink="/usuario/alimentos" routerLinkActive="activo" class="nav-link-candidato">
+        <a routerLink="/usuario/alimentos" (click)="onNavLinkClick()" routerLinkActive="activo" class="nav-link-candidato">
           <i class="fa-solid fa-bowl-food me-2"></i> Lista de Alimentos
         </a>
-        <a routerLink="/usuario/objetivos" routerLinkActive="activo" class="nav-link-candidato">
+        <a routerLink="/usuario/objetivos" (click)="onNavLinkClick()" routerLinkActive="activo" class="nav-link-candidato">
           <i class="fa-solid fa-bullseye me-2"></i> Objetivos
         </a>
       }

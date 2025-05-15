@@ -31,3 +31,21 @@
   background-color: #0099ff;
   color: white;
 }
+
+.botones-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+@media (max-width: 576px) {
+  .botones-wrapper {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .botones-wrapper .btn-custom {
+    width: 100%; /* Opcional: que ocupen el ancho completo */
+    margin-right: 0 !important; /* Anula el me-2 */
+  }
+}

@@ -33,3 +33,33 @@
   color: #888 !important;
   font-style: italic;
 }
+
+@media (max-width: 576px) {
+  .card-comida {
+    padding: 1.25rem;
+  }
+
+  .text-comida {
+    font-size: 1rem;
+  }
+
+  .tabla-estilo th,
+  .tabla-estilo td {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    white-space: nowrap; /* evita que se partan las celdas */
+  }
+
+  .table-responsive {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+  }
+
+  .tabla-estilo thead th {
+    font-size: 0.85rem;
+  }
+
+  .tabla-estilo td:last-child {
+    min-width: 100px; /* asegura espacio para botones */
+  }
+}

@@ -136,3 +136,54 @@
     padding: 0.4rem 0.5rem;
   }
 }
+
+@media (max-width: 576px) {
+  .resumen-textos {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .resumen-box {
+    padding: 1.25rem;
+  }
+
+  .resumen-valor {
+    font-size: 1.4rem;
+  }
+
+  .resumen-valor.operator {
+    font-size: 1.6rem;
+  }
+
+  .resumen-label {
+    font-size: 0.75rem;
+  }
+
+  .alerta-exceso {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .tabla-macros {
+    font-size: 0.8rem;
+  }
+
+  .tabla-macros thead th,
+  .tabla-macros tbody td,
+  .tabla-macros tbody th {
+    padding: 0.3rem 0.4rem;
+  }
+
+  .tabla-macros tbody tr:first-child td {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .col-12.mb-3 {
+    margin-bottom: 1rem !important;
+  }
+}

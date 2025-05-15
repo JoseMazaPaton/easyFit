@@ -63,26 +63,34 @@
   
   /* NUEVO: Contenedor general con fondo blanco y posición relativa */
 .formulario-wrapper {
+  position: relative;
   background: white;
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1); /* solo una sombra */
-  position: relative;
-  min-width: 400px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
 }
   
   /* NUEVO: Botón flotante de cerrar (❌) */
-  .modal-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.25rem;
-    color: #6b7280;
-    cursor: pointer;
-    transition: color 0.2s ease;
-  }
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1.5rem;
+  color: #6b7280;
+  cursor: pointer;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
   
   .modal-close:hover {
     color: #0099ff;
@@ -121,4 +129,33 @@ label::after {
   color: #ef4444;
   margin-left: 0.25rem;
   font-weight: bold;
+}
+@media (max-width: 576px) {
+  .formulario-wrapper {
+    min-width: unset;
+    width: 90%;
+    padding: 1rem;
+    border-radius: 0.75rem;
+  }
+
+  .campo-doble {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .acciones {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+
+  .modal-close {
+  display: flex;
+  justify-content: center;
+}
+
+  button {
+    width: 100%;
+    text-align: center;
+  }
 }

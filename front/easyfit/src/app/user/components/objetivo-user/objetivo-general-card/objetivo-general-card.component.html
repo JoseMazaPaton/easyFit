@@ -36,16 +36,16 @@
 
   <!-- Objetivo general -->
   <form [formGroup]="formObjetivo">
-    <div class="campo-card-objetivo">
-      <label for="objetivoUsuario">Cambiar objetivo</label>
-      <div class="select-wrapper-objetivo">
-        <select formControlName="objetivoUsuario">
-          <option value="">Seleccione...</option>
-          @for (opcion of opcionesObjetivo; track opcion) {
-            <option [value]="opcion">{{ opcion }}</option>
-          }
-        </select>
-      </div>
+  <div class="campo-card">
+    <label for="objetivoUsuario">Cambiar objetivo</label>
+    <div class="select-wrapper">
+      <select formControlName="objetivoUsuario">
+        <option value="">Seleccione...</option>
+        @for (opcion of opcionesObjetivo; track opcion) {
+          <option [value]="opcion">{{ opcion }}</option>
+        }
+      </select>
     </div>
-  </form>
+  </div>
+</form>
 </div>

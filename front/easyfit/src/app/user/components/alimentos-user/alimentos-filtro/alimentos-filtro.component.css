@@ -8,4 +8,19 @@
     font-size: 1rem;
     cursor: pointer;
   }
-  
+  @media (max-width: 576px) {
+  .filtro {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .filtro-input {
+    font-size: 0.9rem;
+    padding: 0.5rem 2.25rem 0.5rem 2rem;
+  }
+
+  .icono,
+  .btn-clear {
+    font-size: 0.9rem;
+  }
+}

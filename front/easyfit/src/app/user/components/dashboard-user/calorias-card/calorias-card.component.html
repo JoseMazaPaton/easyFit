@@ -1,9 +1,9 @@
-<div class="card-kcal d-flex justify-content-between align-items-center">
-  <div class="lado-izquierdo mr-3">
+<div class="card-kcal flex-column flex-md-row d-flex justify-content-between align-items-center gap-4 gap-md-0">
+  <div class="lado-izquierdo me-md-3 text-center text-md-start">
     <div class="titulo-kcal">Calorías</div>
     <div class="subtitulo-kcal mb-4">Restantes = Objetivo - Consumidas</div>
 
-    <div class="donut-wrapper mt-2">
+    <div class="donut-wrapper mt-2 mx-auto mx-md-0">
       <canvas #donutChart></canvas>
       <div class="donut-label">
         <span class="donut-value">{{ resumen?.kcalRestantes }}</span>
@@ -12,13 +12,13 @@
     </div>
   </div>
 
-  <div class="kcal-info mr-5 mt-4 ">
-    <div class="dato objetivo">
+  <div class="kcal-info text-center text-md-start mt-3 mt-md-4">
+    <div class="dato objetivo mb-3">
       <i class="bi bi-flag-fill"></i>
       <span>Objetivo</span>
       <strong>{{ resumen?.kcalObjetivo }}Kcal</strong>
     </div>
-    <div class="dato consumidas mt-4">
+    <div class="dato consumidas">
       <i class="bi bi-fire"></i>
       <span>Consumidas</span>
       <strong>{{ resumen?.kcalConsumidas }}Kcal</strong>
