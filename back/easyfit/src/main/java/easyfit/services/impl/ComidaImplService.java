@@ -145,6 +145,25 @@ public class ComidaImplService extends GenericCrudServiceImpl<Comida, Integer> i
         
         comida.setUsuario(usuario);
         
+        // Verificar si ya existe una comida con ese orden para esa fecha y usuario
+        // y encontrar un orden disponible
+        List<Comida> comidasExistentes = comidaRepository.findByFechaAndUsuarioEmail(comida.getFecha(), usuario.getEmail());
+        
+        // Verificar si el orden ya está ocupado
+        boolean ordenOcupado = comidasExistentes.stream()
+                .anyMatch(c -> c.getOrden() == comida.getOrden());
+        
+        if (ordenOcupado) {
+            // Encontrar el siguiente orden disponible
+            int maxOrden = comidasExistentes.stream()
+                    .mapToInt(Comida::getOrden)
+                    .max()
+                    .orElse(0);
+            
+            // Asignar el siguiente orden disponible
+            comida.setOrden(maxOrden + 1);
+        }
+        
         return comidaRepository.save(comida);
     }
     
@@ -253,16 +272,18 @@ public class ComidaImplService extends GenericCrudServiceImpl<Comida, Integer> i
 	        totalGrasas += alimento.getGrasas() * factor;
 	    }
 	    
-	    // Actualizar consumo diario
+	    // Actualizar consumo diario si existe
 	    ConsumoDiario consumo = consumoDiarioRepository.findByFechaAndUsuarioEmail(comida.getFecha(), usuario.getEmail())
-	        .orElseThrow(() -> new IllegalStateException("Registro de consumo diario no encontrado"));
+	        .orElse(null);
 	    
-	    consumo.setKcalConsumidas((int) Math.max(0, consumo.getKcalConsumidas() - totalKcal));
-	    consumo.setProteinas(Math.max(0, consumo.getProteinas() - totalProteinas));
-	    consumo.setCarbohidratos(Math.max(0, consumo.getCarbohidratos() - totalCarbohidratos));
-	    consumo.setGrasas(Math.max(0, consumo.getGrasas() - totalGrasas));
-	    
-	    consumoDiarioRepository.save(consumo);
+	    if (consumo != null) {
+	        consumo.setKcalConsumidas((int) Math.max(0, consumo.getKcalConsumidas() - totalKcal));
+	        consumo.setProteinas(Math.max(0, consumo.getProteinas() - totalProteinas));
+	        consumo.setCarbohidratos(Math.max(0, consumo.getCarbohidratos() - totalCarbohidratos));
+	        consumo.setGrasas(Math.max(0, consumo.getGrasas() - totalGrasas));
+	        
+	        consumoDiarioRepository.save(consumo);
+	    }
 	    
 	    // Eliminar alimentos asociados y la comida
 	    comidaAlimentoRepository.deleteAll(alimentos);
