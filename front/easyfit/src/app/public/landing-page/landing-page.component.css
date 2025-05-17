@@ -1,0 +1,148 @@
+/* Variables CSS para consistencia en todo el diseño */
+:root {
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+}
+
+/* Estilos generales responsive */
+section {
+  overflow-x: hidden;
+}
+
+.container {
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+/* Cambiar el orden en dispositivos móviles - imagen debajo del texto */
+@media (max-width: 767.98px) {
+  .row.flex-column-reverse {
+    flex-direction: column !important;
+  }
+  
+  /* Asegurar que la imagen aparezca debajo del texto */
+  .row > div:first-child {
+    order: 1;
+  }
+  
+  .row > div:last-child {
+    order: 2;
+    margin-top: 1.5rem;
+  }
+}
+
+/* Ajustes para la sección Hero en dispositivos móviles */
+@media (max-width: 768px) {
+  .py-5 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  h1.display-5 {
+    font-size: calc(1.375rem + 1.5vw);
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .fs-5 {
+    font-size: 1rem !important;
+  }
+
+  .btn-lg {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.25rem !important;
+  }
+  
+  /* Mejora espaciado en móviles */
+  .g-4 {
+    gap: 1rem !important;
+  }
+  
+  /* Asegura que la imagen no sea demasiado grande en móviles */
+  img.img-fluid {
+    max-width: 100% !important;
+  }
+}
+
+/* Ajustes para la sección de beneficios en móviles */
+@media (max-width: 768px) {
+  .mb-5 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .row-cols-1 .col {
+    margin-bottom: 1.5rem;
+  }
+  
+  .px-4 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  h1.display-5 {
+    font-size: 1.75rem;
+  }
+  
+  h2.fw-bold {
+    font-size: 1.5rem;
+  }
+  
+  .p-3 {
+    padding: 0.75rem !important;
+  }
+  
+  /* Ajusta los márgenes y padding para un mejor uso del espacio */
+  .container {
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+  }
+  
+  /* Ajusta el espaciado entre elementos */
+  .g-5 {
+    gap: 1rem !important;
+  }
+}
+
+/* Mejoras para la visualización de imágenes */
+@media (max-width: 768px) {
+  /* Ajusta el tamaño y alineación de la imagen principal */
+  .col-md-6 img {
+    margin: 0 auto;
+    max-height: 300px;
+  }
+  
+  /* Ajusta el tamaño de los iconos en sección de beneficios */
+  .col img[style*="width: 64px"] {
+    width: 56px !important;
+    height: 56px !important;
+  }
+}
+
+/* Mejora la navegación en dispositivos móviles */
+@media (max-width: 768px) {
+  nav.bg-transparent {
+    padding: 0.5rem 0;
+  }
+}
+
+/* Mejora la experiencia táctil en dispositivos móviles */
+@media (max-width: 768px) {
+  .btn {
+    min-height: 44px; /* Altura mínima para elementos táctiles */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Optimiza el footer para móviles */
+@media (max-width: 768px) {
+  app-footer-landing {
+    padding-top: 1rem;
+  }
+}

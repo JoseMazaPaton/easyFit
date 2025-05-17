@@ -13,3 +13,44 @@
     color: #3f3f3f;
   }
   
+/* Estilos responsive para el footer */
+@media (max-width: 768px) {
+  .footer-link {
+    font-size: 0.9rem;
+  }
+  
+  /* Mejora de espaciado en móviles */
+  .container {
+    gap: 1.5rem !important;
+  }
+  
+  /* Mejora iconos sociales en móvil */
+  .fa-xl {
+    font-size: 1.25em;
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 576px) {
+  /* Reorganiza enlaces de footer en móviles pequeños */
+  .d-flex.gap-4 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem 1rem !important;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .footer-link {
+    font-size: 0.85rem;
+    display: block;
+    padding: 0.25rem 0;
+  }
+  
+  .py-4 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+}
+  
