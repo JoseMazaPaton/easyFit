@@ -1,4 +1,2 @@
-
- specstory/
 .cursorindexingignore
-
+.specstory/history/
